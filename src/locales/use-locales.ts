@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { allLangs, defaultLang } from "./config-lang";
 import { localStorageGetItem } from "@/utils/storage-available";
 import { useSettingsContext } from "@/components/settings";
-
+import i18n from "./i18n";
 // ----------------------------------------------------------------------
 
 export function useLocales() {
@@ -23,7 +23,7 @@ export function useLocales() {
 // ----------------------------------------------------------------------
 
 export function useTranslate() {
-  const { t, i18n, ready } = useTranslation();
+  const { t, ready } = useTranslation();
 
   const settings = useSettingsContext();
 
@@ -32,7 +32,7 @@ export function useTranslate() {
       i18n.changeLanguage(newlang);
       settings.onChangeDirectionByLang(newlang);
     },
-    [i18n, settings]
+    [settings]
   );
 
   return {

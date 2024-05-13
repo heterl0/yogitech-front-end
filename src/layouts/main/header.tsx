@@ -1,3 +1,5 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
@@ -22,15 +24,28 @@ import NavMobile from "./nav/mobile";
 import NavDesktop from "./nav/desktop";
 import { HEADER } from "../config-layout";
 import { navConfig } from "./config-navigation";
+import { useLocales, useTranslate } from "@/locales";
+import Iconify from "@/components/iconify";
+import { useMemo } from "react";
 
 // ----------------------------------------------------------------------
 
 export default function Header() {
   const theme = useTheme();
+  const { onChangeLang } = useTranslate();
 
+  const { allLangs, currentLang } = useLocales();
+  console.log(allLangs);
+  console.log(currentLang);
   const mdUp = useResponsive("up", "md");
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
+  const targetLang = useMemo(() => {
+    const targetLang = allLangs.filter(
+      (item) => item.value !== currentLang.value
+    )[0];
+    return targetLang;
+  }, [allLangs, currentLang.value]);
 
   return (
     <AppBar>
@@ -86,7 +101,17 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
 
           {mdUp && <NavDesktop data={navConfig} />}
-
+          <Stack
+            alignItems="center"
+            direction={{ xs: "row", md: "row-reverse" }}
+          >
+            <Iconify
+              onClick={() => onChangeLang(targetLang.value)}
+              icon={targetLang.icon}
+              height={24}
+              sx={{ mr: 3 }}
+            />
+          </Stack>
           <Stack
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
@@ -95,9 +120,9 @@ export default function Header() {
               variant="contained"
               target="_blank"
               rel="noopener"
-              href={paths.minimalUI}
+              href={"/"}
             >
-              Purchase Now
+              Download
             </Button>
 
             {!mdUp && <NavMobile data={navConfig} />}
