@@ -1,3 +1,24 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next", "plugin:@typescript-eslint/recommended", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "@arthurgeron/react-usememo", "prettier"],
+  "root": true,
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "tabWidth": 2,
+        "semi": true,
+        "endOfLine": "auto",
+        "singleQuote": false,
+        "trailingComma": "es5"
+      }
+    ],
+    // "@typescript-eslint/ban-types": "off",
+    // "@typescript-eslint/no-namespace": "off",
+    "array-callback-return": "error",
+    "eqeqeq": "error",
+    "no-alert": "error",
+    "no-return-assign": "error"
+  }
 }

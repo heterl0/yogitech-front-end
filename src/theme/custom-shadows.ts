@@ -1,6 +1,15 @@
-import { alpha } from '@mui/material/styles';
+import { alpha } from "@mui/material/styles";
 
-import { grey, info, error, common, primary, success, warning, secondary } from './palette';
+import {
+  grey,
+  info,
+  error,
+  common,
+  primary,
+  success,
+  warning,
+  secondary,
+} from "./palette";
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +34,7 @@ interface CustomShadows {
   dropdown: string;
 }
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Theme {
     customShadows: CustomShadows;
   }
@@ -36,8 +45,8 @@ declare module '@mui/material/styles' {
 
 // ----------------------------------------------------------------------
 
-export function customShadows(mode: 'light' | 'dark') {
-  const color = mode === 'light' ? grey[500] : common.black;
+export function customShadows(mode: "light" | "dark") {
+  const color = mode === "light" ? grey[500] : common.black;
 
   const transparent = alpha(color, 0.16);
 

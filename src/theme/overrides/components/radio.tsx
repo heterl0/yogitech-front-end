@@ -1,5 +1,5 @@
-import { Theme } from '@mui/material/styles';
-import { RadioProps, radioClasses } from '@mui/material/Radio';
+import { Theme } from "@mui/material/styles";
+import { RadioProps, radioClasses } from "@mui/material/Radio";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ export function radio(theme: Theme) {
 
           return {
             padding: theme.spacing(1),
-            ...(color === 'default' && {
+            ...(color === "default" && {
               [`&.${radioClasses.checked}`]: {
                 color: theme.palette.text.primary,
               },

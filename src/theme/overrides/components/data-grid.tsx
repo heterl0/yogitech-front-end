@@ -1,14 +1,14 @@
-import { listClasses } from '@mui/material/List';
-import { paperClasses } from '@mui/material/Paper';
-import { Theme, alpha } from '@mui/material/styles';
-import { buttonClasses } from '@mui/material/Button';
-import { iconButtonClasses } from '@mui/material/IconButton';
-import { inputLabelClasses } from '@mui/material/InputLabel';
-import { formControlClasses } from '@mui/material/FormControl';
-import { listItemIconClasses } from '@mui/material/ListItemIcon';
-import { circularProgressClasses } from '@mui/material/CircularProgress';
+import { listClasses } from "@mui/material/List";
+import { paperClasses } from "@mui/material/Paper";
+import { Theme, alpha } from "@mui/material/styles";
+import { buttonClasses } from "@mui/material/Button";
+import { iconButtonClasses } from "@mui/material/IconButton";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import { formControlClasses } from "@mui/material/FormControl";
+import { listItemIconClasses } from "@mui/material/ListItemIcon";
+import { circularProgressClasses } from "@mui/material/CircularProgress";
 
-import { paper } from '../../css';
+import { paper } from "../../css";
 
 // ----------------------------------------------------------------------
 
@@ -19,8 +19,8 @@ export function dataGrid(theme: Theme) {
     MuiDataGrid: {
       styleOverrides: {
         root: {
-          '--unstable_DataGrid-radius': 0,
-          '--unstable_DataGrid-headWeight': theme.typography.fontWeightSemiBold,
+          "--unstable_DataGrid-radius": 0,
+          "--unstable_DataGrid-headWeight": theme.typography.fontWeightSemiBold,
           borderWidth: 0,
         },
         withBorderColor: {
@@ -34,7 +34,7 @@ export function dataGrid(theme: Theme) {
           fontSize: 14,
           color: theme.palette.text.secondary,
           backgroundColor: theme.palette.background.neutral,
-          '&--sorted': {
+          "&--sorted": {
             color: theme.palette.text.primary,
           },
         },
@@ -44,8 +44,8 @@ export function dataGrid(theme: Theme) {
         // Row, Cell
         cell: {
           borderBottom: `1px dashed`,
-          '&--editing': {
-            boxShadow: 'none !important',
+          "&--editing": {
+            boxShadow: "none !important",
             backgroundColor: `${alpha(theme.palette.primary.main, 0.08)} !important`,
           },
         },
@@ -56,9 +56,9 @@ export function dataGrid(theme: Theme) {
         },
         toolbarQuickFilter: {
           padding: 0,
-          width: '100%',
-          [theme.breakpoints.up('md')]: {
-            width: 'unset',
+          width: "100%",
+          [theme.breakpoints.up("md")]: {
+            width: "unset",
           },
         },
         // Paper
@@ -94,12 +94,12 @@ export function dataGrid(theme: Theme) {
         },
         // Footer
         footerContainer: {
-          minHeight: 'auto',
+          minHeight: "auto",
           borderTop: `1px dashed`,
         },
         selectedRowCount: {
-          display: 'none',
-          whiteSpace: 'nowrap',
+          display: "none",
+          whiteSpace: "nowrap",
         },
         overlay: {
           [`& .${circularProgressClasses.root}`]: {
@@ -117,33 +117,33 @@ export function dataGrid(theme: Theme) {
           margin: theme.spacing(0.5, 0),
         },
         panelFooter: {
-          display: 'none',
+          display: "none",
           gap: theme.spacing(1),
           padding: theme.spacing(2),
-          justifyContent: 'flex-end',
+          justifyContent: "flex-end",
           borderTop: `dashed 1px ${theme.palette.divider}`,
           [`& .${buttonClasses.root}`]: {
             padding: theme.spacing(0.5, 1.5),
-            '&:first-of-type': {
+            "&:first-of-type": {
               border: `solid 1px ${alpha(theme.palette.grey[500], 0.24)}`,
             },
-            '&:last-of-type': {
+            "&:last-of-type": {
               color: theme.palette.background.paper,
               backgroundColor: theme.palette.text.primary,
             },
           },
         },
         filterForm: {
-          alignItems: 'center',
+          alignItems: "center",
           gap: theme.spacing(1.5),
           padding: theme.spacing(1),
         },
         filterFormValueInput: {
           [`& .${formControlClasses.root}`]: {
-            width: '100%',
+            width: "100%",
           },
           [`& .${inputLabelClasses.root}`]: {
-            transform: 'translate(14px, -9px) scale(0.75)',
+            transform: "translate(14px, -9px) scale(0.75)",
           },
         },
       },

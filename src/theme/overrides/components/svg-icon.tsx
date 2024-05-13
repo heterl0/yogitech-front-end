@@ -1,4 +1,5 @@
-import { Theme } from '@mui/material/styles';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Theme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +10,7 @@ export function svgIcon(theme: Theme) {
         fontSizeLarge: {
           width: 32,
           height: 32,
-          fontSize: 'inherit',
+          fontSize: "inherit",
         },
       },
     },

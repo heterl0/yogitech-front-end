@@ -1,10 +1,10 @@
-import { Theme, alpha } from '@mui/material/styles';
-import { SwitchProps, switchClasses } from '@mui/material/Switch';
+import { Theme, alpha } from "@mui/material/styles";
+import { SwitchProps, switchClasses } from "@mui/material/Switch";
 
 // ----------------------------------------------------------------------
 
 export function switches(theme: Theme) {
-  const lightMode = theme.palette.mode === 'light';
+  const lightMode = theme.palette.mode === "light";
 
   const rootStyles = (ownerState: SwitchProps) => {
     const { color } = ownerState;
@@ -12,11 +12,11 @@ export function switches(theme: Theme) {
     return {
       width: 58,
       height: 38,
-      padding: '9px 13px 9px 12px',
+      padding: "9px 13px 9px 12px",
       [`& .${switchClasses.thumb}`]: {
         width: 14,
         height: 14,
-        boxShadow: 'none',
+        boxShadow: "none",
         color: theme.palette.common.white,
       },
       [`& .${switchClasses.track}`]: {
@@ -28,16 +28,16 @@ export function switches(theme: Theme) {
         left: 3,
         padding: 12,
         [`&.${switchClasses.checked}`]: {
-          transform: 'translateX(13px)',
+          transform: "translateX(13px)",
           [`& .${switchClasses.thumb}`]: {
-            ...(color === 'default' &&
+            ...(color === "default" &&
               !lightMode && {
                 color: theme.palette.grey[800],
               }),
           },
           [`&+.${switchClasses.track}`]: {
             opacity: 1,
-            ...(color === 'default' && {
+            ...(color === "default" && {
               backgroundColor: theme.palette.text.primary,
             }),
           },
@@ -53,7 +53,7 @@ export function switches(theme: Theme) {
       },
       // Small
       [`&.${switchClasses.sizeSmall}`]: {
-        padding: '4px 8px 4px 7px',
+        padding: "4px 8px 4px 7px",
         width: 40,
         height: 24,
         [`& .${switchClasses.thumb}`]: {
@@ -63,7 +63,7 @@ export function switches(theme: Theme) {
         [`& .${switchClasses.switchBase}`]: {
           padding: 7,
           [`&.${switchClasses.checked}`]: {
-            transform: 'translateX(9px)',
+            transform: "translateX(9px)",
           },
         },
       },
@@ -73,7 +73,8 @@ export function switches(theme: Theme) {
   return {
     MuiSwitch: {
       styleOverrides: {
-        root: ({ ownerState }: { ownerState: SwitchProps }) => rootStyles(ownerState),
+        root: ({ ownerState }: { ownerState: SwitchProps }) =>
+          rootStyles(ownerState),
       },
     },
   };

@@ -1,5 +1,9 @@
-import { Theme } from '@mui/material/styles';
-import { LoadingButtonProps, loadingButtonClasses } from '@mui/lab/LoadingButton';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Theme } from "@mui/material/styles";
+import {
+  LoadingButtonProps,
+  loadingButtonClasses,
+} from "@mui/lab/LoadingButton";
 
 // ----------------------------------------------------------------------
 
@@ -8,14 +12,14 @@ export function loadingButton(theme: Theme) {
     MuiLoadingButton: {
       styleOverrides: {
         root: ({ ownerState }: { ownerState: LoadingButtonProps }) => ({
-          ...(ownerState.variant === 'soft' && {
+          ...(ownerState.variant === "soft" && {
             [`& .${loadingButtonClasses.loadingIndicatorStart}`]: {
               left: 10,
             },
             [`& .${loadingButtonClasses.loadingIndicatorEnd}`]: {
               right: 14,
             },
-            ...(ownerState.size === 'small' && {
+            ...(ownerState.size === "small" && {
               [`& .${loadingButtonClasses.loadingIndicatorStart}`]: {
                 left: 10,
               },

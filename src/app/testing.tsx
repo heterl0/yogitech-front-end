@@ -1,7 +1,7 @@
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
- 
-export default function Testing() {
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { memo } from "react";
+function Testing() {
   return (
     <Stack spacing={1} alignItems="center">
       <Button variant="contained">Button</Button>
@@ -29,3 +29,5 @@ export default function Testing() {
     </Stack>
   );
 }
+
+export default memo(Testing);

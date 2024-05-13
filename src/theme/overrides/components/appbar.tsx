@@ -1,4 +1,5 @@
-import { Theme } from '@mui/material/styles';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Theme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -7,7 +8,7 @@ export function appBar(theme: Theme) {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
