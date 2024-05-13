@@ -50,5 +50,10 @@
   "upgrade_to_pro": "Upgrade to Pro",
   "demo": {
     "title": "English"
+  },
+  "header": {
+    "home": "Home",
+    "about_us": "About Us",
+    "download": "Download"
   }
 }

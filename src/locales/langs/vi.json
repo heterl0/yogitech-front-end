@@ -50,5 +50,10 @@
   "upgrade_to_pro": "Nâng cấp lên phiên bản Pro",
   "demo": {
     "title": "Vietnamese"
+  },
+  "header": {
+    "home": "Trang chủ",
+    "about_us": "Về chúng tôi",
+    "download": "Tải xuống"
   }
 }

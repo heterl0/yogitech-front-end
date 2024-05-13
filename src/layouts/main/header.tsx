@@ -32,8 +32,7 @@ import { useMemo } from "react";
 
 export default function Header() {
   const theme = useTheme();
-  const { onChangeLang } = useTranslate();
-
+  const { t, onChangeLang } = useTranslate();
   const { allLangs, currentLang } = useLocales();
   console.log(allLangs);
   console.log(currentLang);
@@ -100,7 +99,7 @@ export default function Header() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {mdUp && <NavDesktop data={navConfig} />}
+          {mdUp && <NavDesktop data={navConfig()} />}
           <Stack
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
@@ -122,10 +121,10 @@ export default function Header() {
               rel="noopener"
               href={"/"}
             >
-              Download
+              {t("header.download")}
             </Button>
 
-            {!mdUp && <NavMobile data={navConfig} />}
+            {!mdUp && <NavMobile data={navConfig()} />}
           </Stack>
         </Container>
       </Toolbar>
