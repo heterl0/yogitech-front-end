@@ -1,3 +1,5 @@
+import { paramCase } from "@/utils/change-case";
+
 // ----------------------------------------------------------------------
 
 const ROOTS = {
@@ -32,6 +34,13 @@ export const paths = {
     root: `/product`,
     checkout: `/product/checkout`,
     details: (id: string) => `/product/${id}`,
+  },
+  // AUTH
+  auth: {
+    jwt: {
+      login: `${ROOTS.AUTH}/jwt/login`,
+      register: `${ROOTS.AUTH}/jwt/register`,
+    },
   },
   // DASHBOARD
   dashboard: {
@@ -71,6 +80,17 @@ export const paths = {
       new: `${ROOTS.DASHBOARD}/invoice/new`,
       details: (id: string) => `${ROOTS.DASHBOARD}/invoice/${id}`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/invoice/${id}/edit`,
+    },
+    post: {
+      root: `${ROOTS.DASHBOARD}/post`,
+      new: `${ROOTS.DASHBOARD}/post/new`,
+      details: (title: string) => `${ROOTS.DASHBOARD}/post/${paramCase(title)}`,
+      edit: (title: string) =>
+        `${ROOTS.DASHBOARD}/post/${paramCase(title)}/edit`,
+      //   demo: {
+      //     details: `${ROOTS.DASHBOARD}/post/${paramCase(MOCK_TITLE)}`,
+      //     edit: `${ROOTS.DASHBOARD}/post/${paramCase(MOCK_TITLE)}/edit`,
+      //   },
     },
     order: {
       root: `${ROOTS.DASHBOARD}/order`,
