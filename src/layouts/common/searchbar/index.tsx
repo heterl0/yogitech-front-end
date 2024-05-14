@@ -92,7 +92,6 @@ function Searchbar() {
             const { title, path } = item;
 
             const partsTitle = parse(title, match(title, searchQuery));
-
             const partsPath = parse(path, match(path, searchQuery));
 
             return (
