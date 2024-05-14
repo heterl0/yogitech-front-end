@@ -10,7 +10,7 @@ import MainLayout from "@/layouts/main";
 import ScrollProgress from "@/components/scroll-progress";
 
 import HomeHero from "../home-hero";
-// import HomeMinimal from "../home-minimal";
+import HomeMinimal from "../home-minimal";
 // import HomePricing from "../home-pricing";
 // import HomeDarkMode from "../home-dark-mode";
 // import HomeLookingFor from "../home-looking-for";
@@ -58,7 +58,7 @@ export default function HomeView() {
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
       <HomeHero />
-      {/* <Box
+      <Box
         sx={{
           overflow: "hidden",
           position: "relative",
@@ -67,7 +67,7 @@ export default function HomeView() {
       >
         <HomeMinimal />
 
-        <HomeHugePackElements />
+        {/* <HomeHugePackElements />
 
         <Box sx={{ position: "relative" }}>
           <StyledPolygon />
@@ -85,8 +85,8 @@ export default function HomeView() {
 
         <HomeLookingFor />
 
-        <HomeAdvertisement />
-      </Box> */}
+        <HomeAdvertisement /> */}
+      </Box>
     </MainLayout>
   );
 }

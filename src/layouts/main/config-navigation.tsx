@@ -1,22 +1,22 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import Iconify from "@/components/iconify";
-import { useTranslate } from "@/locales";
+// import Iconify from "@/components/iconify";
+// import { useTranslate } from "@/locales";
 
 // ----------------------------------------------------------------------
 
 export const navConfig = () => {
-  const { t } = useTranslate();
+  // const { t } = useTranslate();
   return [
-    {
-      title: t("header.home"),
-      icon: <Iconify icon="solar:home-2-bold-duotone" />,
-      path: "/",
-    },
-    {
-      title: t("header.about_us"),
-      icon: <Iconify icon="solar:atom-bold-duotone" />,
-      path: "/",
-    },
+    // {
+    //   title: t("header.home"),
+    //   icon: <Iconify icon="solar:home-2-bold-duotone" />,
+    //   path: "/",
+    // },
+    // {
+    //   title: t("header.about_us"),
+    //   icon: <Iconify icon="solar:atom-bold-duotone" />,
+    //   path: "/",
+    // },
     // {
     //   title: "Pages",
     //   path: "/pages",

@@ -2,9 +2,7 @@ import { m, useScroll } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
 
 import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -175,6 +173,7 @@ export default function HomeHero() {
     <Stack
       alignItems="center"
       justifyContent="center"
+      gap={2}
       sx={{
         height: 1,
         mx: "auto",
@@ -219,29 +218,7 @@ export default function HomeHero() {
       </m.div>
 
       <m.div variants={varFade().in}>
-        <Stack
-          spacing={0.75}
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ my: 3 }}
-        >
-          <Rating readOnly value={4.95} precision={0.1} max={5} />
-          <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            <Box component="strong" sx={{ mr: 0.5, color: "text.primary" }}>
-              4.96/5
-            </Box>
-            (99+ reviews)
-          </Typography>
-        </Stack>
-      </m.div>
-
-      <m.div variants={varFade().in}>
-        <Stack
-          spacing={1.5}
-          direction={{ xs: "column-reverse", sm: "row" }}
-          sx={{ mb: 5 }}
-        >
+        <Stack spacing={1.5} direction={{ xs: "column-reverse", sm: "row" }}>
           <Stack alignItems="center" spacing={2}>
             <Button
               component={RouterLink}
@@ -251,65 +228,11 @@ export default function HomeHero() {
               variant="contained"
               startIcon={<Iconify icon="eva:flash-fill" width={24} />}
             >
-              Live Preview
+              Download
             </Button>
-
-            <Link
-              color="inherit"
-              variant="caption"
-              target="_blank"
-              rel="noopener"
-              href={paths.freeUI}
-              sx={{
-                textDecoration: "underline",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
-            >
-              <Iconify
-                icon="eva:external-link-fill"
-                width={16}
-                sx={{ mr: 0.5 }}
-              />
-              Get Free Version
-            </Link>
           </Stack>
-
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            startIcon={<Iconify icon="eva:external-link-fill" width={24} />}
-            target="_blank"
-            rel="noopener"
-            href={paths.figma}
-            sx={{ borderColor: "text.primary" }}
-          >
-            Design Preview
-          </Button>
         </Stack>
       </m.div>
-
-      <Stack spacing={3} sx={{ textAlign: "center" }}>
-        <m.div variants={varFade().in}>
-          <Typography variant="overline" sx={{ opacity: 0.48 }}>
-            Available For
-          </Typography>
-        </m.div>
-
-        <Stack spacing={2} direction="row" justifyContent="center">
-          {["js", "ts", "figma", "nextjs", "vite"].map((icon) => (
-            <m.div key={icon} variants={varFade().in}>
-              <Box
-                component="img"
-                alt={icon}
-                src={`/assets/icons/platforms/ic_${icon}.svg`}
-                sx={{ width: 24, height: 24 }}
-              />
-            </m.div>
-          ))}
-        </Stack>
-      </Stack>
     </Stack>
   );
 

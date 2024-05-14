@@ -20,7 +20,7 @@ import { bgBlur } from "@/theme/css";
 import Logo from "@/components/logo";
 import Label from "@/components/label";
 
-import NavMobile from "./nav/mobile";
+// import NavMobile from "./nav/mobile";
 import NavDesktop from "./nav/desktop";
 import { HEADER } from "../config-layout";
 import { navConfig } from "./config-navigation";
@@ -34,8 +34,6 @@ export default function Header() {
   const theme = useTheme();
   const { t, onChangeLang } = useTranslate();
   const { allLangs, currentLang } = useLocales();
-  console.log(allLangs);
-  console.log(currentLang);
   const mdUp = useResponsive("up", "md");
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
@@ -103,11 +101,13 @@ export default function Header() {
           <Stack
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
+            className="cursor-pointer"
           >
             <Iconify
               onClick={() => onChangeLang(targetLang.value)}
               icon={targetLang.icon}
               height={24}
+              className="cursor-pointer"
               sx={{ mr: 3 }}
             />
           </Stack>
@@ -124,7 +124,7 @@ export default function Header() {
               {t("header.download")}
             </Button>
 
-            {!mdUp && <NavMobile data={navConfig()} />}
+            {/* {!mdUp &&  <NavMobile data={navConfig()} />} */}
           </Stack>
         </Container>
       </Toolbar>
