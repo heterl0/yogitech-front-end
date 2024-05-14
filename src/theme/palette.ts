@@ -40,56 +40,56 @@ export const grey = {
 };
 
 export const primary = {
-  lighter: "#C8FAD6",
-  light: "#5BE49B",
-  main: "#00A76F",
-  dark: "#007867",
-  darker: "#004B50",
+  darker: "#0c2b63",
+  dark: "#205795",
+  main: "#4095d0",
+  light: "#8cd3f0",
+  lighter: "#d9f6fc",
   contrastText: "#FFFFFF",
 };
 
 export const secondary = {
-  lighter: "#EFD6FF",
-  light: "#C684FF",
-  main: "#8E33FF",
-  dark: "#5119B7",
-  darker: "#27097A",
+  lighter: "#e7e8fb",
+  light: "#b3b4ec",
+  main: "#7374c0",
+  dark: "#393a8a",
+  darker: "#16165c",
   contrastText: "#FFFFFF",
 };
 
 export const info = {
-  lighter: "#CAFDF5",
-  light: "#61F3F3",
-  main: "#00B8D9",
-  dark: "#006C9C",
-  darker: "#003768",
+  lighter: "#d8fef9",
+  light: "#8af7f9",
+  main: "#3dcfed",
+  dark: "#1e7daa",
+  darker: "#0b4171",
   contrastText: "#FFFFFF",
 };
 
 export const success = {
-  lighter: "#D3FCD2",
-  light: "#77ED8B",
-  main: "#22C55E",
-  dark: "#118D57",
-  darker: "#065E49",
+  lighter: "#eafbd5",
+  light: "#acec7e",
+  main: "#56c12c",
+  dark: "#278a16",
+  darker: "#095c08",
   contrastText: "#ffffff",
 };
 
 export const warning = {
-  lighter: "#FFF5CC",
-  light: "#FFD666",
-  main: "#FFAB00",
-  dark: "#B76E00",
-  darker: "#7A4100",
+  lighter: "#fef4d3",
+  light: "#fed37c",
+  main: "#fca325",
+  dark: "#b56412",
+  darker: "#783607",
   contrastText: grey[800],
 };
 
 export const error = {
-  lighter: "#FFE9D5",
-  light: "#FFAC82",
-  main: "#FF5630",
-  dark: "#B71D18",
-  darker: "#7A0916",
+  lighter: "#ffe7d8",
+  light: "#ffa68b",
+  main: "#ff4c3f",
+  dark: "#b71f2e",
+  darker: "#7a0c29",
   contrastText: "#FFFFFF",
 };
 
