@@ -1,4 +1,4 @@
-import { Barlow, Public_Sans } from "next/font/google";
+import { Readex_Pro, Barlow } from "next/font/google";
 
 // ----------------------------------------------------------------------
 
@@ -39,8 +39,8 @@ declare module "@mui/material/styles" {
   }
 }
 
-export const primaryFont = Public_Sans({
-  weight: ["400", "500", "600", "700", "800", "900"],
+export const primaryFont = Readex_Pro({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
   fallback: ["Helvetica", "Arial", "sans-serif"],
