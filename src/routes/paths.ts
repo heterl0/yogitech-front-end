@@ -9,6 +9,7 @@ const ROOTS = {
 // ----------------------------------------------------------------------
 
 export const paths = {
+  download: "/download",
   comingSoon: "/coming-soon",
   maintenance: "/maintenance",
   pricing: "/pricing",

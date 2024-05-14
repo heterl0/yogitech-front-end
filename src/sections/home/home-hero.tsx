@@ -198,6 +198,7 @@ export default function HomeHero() {
 
       <m.div variants={varFade().in}>
         <StyledTextGradient
+          className="!leading-[5.5rem] md:!leading-[7rem]"
           animate={{ backgroundPosition: "200% center" }}
           transition={{
             repeatType: "reverse",
@@ -222,8 +223,8 @@ export default function HomeHero() {
           <Stack alignItems="center" spacing={2}>
             <Button
               component={RouterLink}
-              href={paths.dashboard.root}
-              color="inherit"
+              href={paths.download}
+              color="primary"
               size="large"
               variant="contained"
               startIcon={<Iconify icon="eva:flash-fill" width={24} />}

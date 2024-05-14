@@ -117,9 +117,9 @@ export default function Header() {
           >
             <Button
               variant="contained"
-              target="_blank"
               rel="noopener"
-              href={"/"}
+              href={paths.download}
+              color="primary"
             >
               {t("header.download")}
             </Button>
