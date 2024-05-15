@@ -29,6 +29,7 @@
     "i18next": "23.7.8",
     "i18next-browser-languagedetector": "7.2.0",
     "lodash": "^4.17.21",
+    "mapbox-gl": "^3.3.0",
     "mui-one-time-password-input": "^2.0.2",
     "next": "14.2.3",
     "notistack": "^3.0.1",
@@ -44,6 +45,8 @@
     "react-quill": "^2.0.0",
     "react-slick": "^0.29.0",
     "simplebar-react": "^3.2.4",
+    "slick-carousel": "^1.8.1",
+    "yet-another-react-lightbox": "^3.18.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
