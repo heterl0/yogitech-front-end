@@ -60,36 +60,36 @@ export function useNavData() {
       {
         subheader: t("overview"),
         items: [
-          {
-            title: t("app"),
-            path: paths.dashboard.root,
-            icon: ICONS.dashboard,
-          },
-          {
-            title: t("ecommerce"),
-            path: paths.dashboard.general.ecommerce,
-            icon: ICONS.ecommerce,
-          },
+          // {
+          //   title: t("app"),
+          //   path: paths.dashboard.root,
+          //   icon: ICONS.dashboard,
+          // },
+          // {
+          //   title: t("ecommerce"),
+          //   path: paths.dashboard.general.ecommerce,
+          //   icon: ICONS.ecommerce,
+          // },
           {
             title: t("analytics"),
             path: paths.dashboard.general.analytics,
             icon: ICONS.analytics,
           },
-          {
-            title: t("banking"),
-            path: paths.dashboard.general.banking,
-            icon: ICONS.banking,
-          },
-          {
-            title: t("booking"),
-            path: paths.dashboard.general.booking,
-            icon: ICONS.booking,
-          },
-          {
-            title: t("file"),
-            path: paths.dashboard.general.file,
-            icon: ICONS.file,
-          },
+          // {
+          //   title: t("banking"),
+          //   path: paths.dashboard.general.banking,
+          //   icon: ICONS.banking,
+          // },
+          // {
+          //   title: t("booking"),
+          //   path: paths.dashboard.general.booking,
+          //   icon: ICONS.booking,
+          // },
+          // {
+          //   title: t("file"),
+          //   path: paths.dashboard.general.file,
+          //   icon: ICONS.file,
+          // },
         ],
       },
 
@@ -113,40 +113,40 @@ export function useNavData() {
           },
 
           // PRODUCT
-          {
-            title: t("product"),
-            path: paths.dashboard.product.root,
-            icon: ICONS.product,
-            children: [
-              { title: t("list"), path: paths.dashboard.product.root },
-              {
-                title: t("details"),
-              },
-              { title: t("create"), path: paths.dashboard.product.new },
-            ],
-          },
+          // {
+          //   title: t("product"),
+          //   path: paths.dashboard.product.root,
+          //   icon: ICONS.product,
+          //   children: [
+          //     { title: t("list"), path: paths.dashboard.product.root },
+          //     {
+          //       title: t("details"),
+          //     },
+          //     { title: t("create"), path: paths.dashboard.product.new },
+          //   ],
+          // },
 
           // ORDER
-          {
-            title: t("order"),
-            path: paths.dashboard.order.root,
-            icon: ICONS.order,
-            children: [{ title: t("list"), path: paths.dashboard.order.root }],
-          },
+          // {
+          //   title: t("order"),
+          //   path: paths.dashboard.order.root,
+          //   icon: ICONS.order,
+          //   children: [{ title: t("list"), path: paths.dashboard.order.root }],
+          // },
 
           // INVOICE
-          {
-            title: t("invoice"),
-            path: paths.dashboard.invoice.root,
-            icon: ICONS.invoice,
-            children: [
-              { title: t("list"), path: paths.dashboard.invoice.root },
-              {
-                title: t("details"),
-              },
-              { title: t("create"), path: paths.dashboard.invoice.new },
-            ],
-          },
+          // {
+          //   title: t("invoice"),
+          //   path: paths.dashboard.invoice.root,
+          //   icon: ICONS.invoice,
+          //   children: [
+          //     { title: t("list"), path: paths.dashboard.invoice.root },
+          //     {
+          //       title: t("details"),
+          //     },
+          //     { title: t("create"), path: paths.dashboard.invoice.new },
+          //   ],
+          // },
 
           // BLOG
           {
@@ -160,62 +160,62 @@ export function useNavData() {
           },
 
           // JOB
-          {
-            title: t("job"),
-            path: paths.dashboard.job.root,
-            icon: ICONS.job,
-            children: [
-              { title: t("list"), path: paths.dashboard.job.root },
-              { title: t("create"), path: paths.dashboard.job.new },
-            ],
-          },
+          // {
+          //   title: t("job"),
+          //   path: paths.dashboard.job.root,
+          //   icon: ICONS.job,
+          //   children: [
+          //     { title: t("list"), path: paths.dashboard.job.root },
+          //     { title: t("create"), path: paths.dashboard.job.new },
+          //   ],
+          // },
 
           // TOUR
-          {
-            title: t("tour"),
-            path: paths.dashboard.tour.root,
-            icon: ICONS.tour,
-            children: [
-              { title: t("list"), path: paths.dashboard.tour.root },
-              { title: t("create"), path: paths.dashboard.tour.new },
-            ],
-          },
+          // {
+          //   title: t("tour"),
+          //   path: paths.dashboard.tour.root,
+          //   icon: ICONS.tour,
+          //   children: [
+          //     { title: t("list"), path: paths.dashboard.tour.root },
+          //     { title: t("create"), path: paths.dashboard.tour.new },
+          //   ],
+          // },
 
           // FILE MANAGER
-          {
-            title: t("file_manager"),
-            path: paths.dashboard.fileManager,
-            icon: ICONS.folder,
-          },
+          // {
+          //   title: t("file_manager"),
+          //   path: paths.dashboard.fileManager,
+          //   icon: ICONS.folder,
+          // },
 
           // MAIL
-          {
-            title: t("mail"),
-            path: paths.dashboard.mail,
-            icon: ICONS.mail,
-            info: <Label color="error">+32</Label>,
-          },
+          // {
+          //   title: t("mail"),
+          //   path: paths.dashboard.mail,
+          //   icon: ICONS.mail,
+          //   info: <Label color="error">+32</Label>,
+          // },
 
           // CHAT
-          {
-            title: t("chat"),
-            path: paths.dashboard.chat,
-            icon: ICONS.chat,
-          },
+          // {
+          //   title: t("chat"),
+          //   path: paths.dashboard.chat,
+          //   icon: ICONS.chat,
+          // },
 
           // CALENDAR
-          {
-            title: t("calendar"),
-            path: paths.dashboard.calendar,
-            icon: ICONS.calendar,
-          },
+          // {
+          //   title: t("calendar"),
+          //   path: paths.dashboard.calendar,
+          //   icon: ICONS.calendar,
+          // },
 
           // KANBAN
-          {
-            title: t("kanban"),
-            path: paths.dashboard.kanban,
-            icon: ICONS.kanban,
-          },
+          // {
+          //   title: t("kanban"),
+          //   path: paths.dashboard.kanban,
+          //   icon: ICONS.kanban,
+          // },
         ],
       },
 
