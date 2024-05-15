@@ -41,6 +41,7 @@ export default function AnalyticsTrafficBySite({
           <Paper
             key={site.label}
             variant="outlined"
+            className="flex flex-col items-center"
             sx={{ py: 2.5, textAlign: "center" }}
           >
             <Iconify
