@@ -51,15 +51,13 @@ export default function DownloadView() {
   const { scrollYProgress } = useScroll();
 
   return (
-    <MainLayout>
+    <MainLayout isBlurFromStart={true}>
       <ScrollProgress scrollYProgress={scrollYProgress} />
       <Box
         sx={{
-          minHeight: "calc(100vh - 60px)", // Adjust according to the actual header height
+          // minHeight: "calc(100vh - 60px)", // Adjust according to the actual header height
           backgroundColor: "white",
           overflow: "auto",
-          marginTop: -10,
-          paddingTop: 12,
         }}
       >
         <DownloadAdvertisement />

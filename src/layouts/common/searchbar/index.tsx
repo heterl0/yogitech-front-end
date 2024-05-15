@@ -90,7 +90,6 @@ function Searchbar() {
         <List key={group || index} disablePadding>
           {data[group].map((item) => {
             const { title, path } = item;
-
             const partsTitle = parse(title, match(title, searchQuery));
             const partsPath = parse(path, match(path, searchQuery));
 

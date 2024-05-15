@@ -30,7 +30,11 @@ import { useMemo } from "react";
 
 // ----------------------------------------------------------------------
 
-export default function Header() {
+type Props = {
+  isBlurFromStart?: boolean;
+};
+
+export default function Header({ isBlurFromStart = false }: Props) {
   const theme = useTheme();
   const { t, onChangeLang } = useTranslate();
   const { allLangs, currentLang } = useLocales();
@@ -57,7 +61,7 @@ export default function Header() {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
           }),
-          ...(offsetTop && {
+          ...((offsetTop || isBlurFromStart) && {
             ...bgBlur({
               color: theme.palette.background.default,
             }),
