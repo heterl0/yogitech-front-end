@@ -75,7 +75,7 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
 
 // ----------------------------------------------------------------------
 
-const STORAGE_KEY = "accessToken";
+const STORAGE_KEY = "access";
 
 type Props = {
   children: React.ReactNode;
@@ -86,10 +86,10 @@ export function AuthProvider({ children }: Props) {
 
   const initialize = useCallback(async () => {
     try {
-      const accessToken = sessionStorage.getItem(STORAGE_KEY);
+      const access = sessionStorage.getItem(STORAGE_KEY);
 
-      if (accessToken && isValidToken(accessToken)) {
-        setSession(accessToken);
+      if (access && isValidToken(access)) {
+        setSession(access);
 
         const res = await axios.get(endpoints.auth.me);
 
@@ -100,7 +100,7 @@ export function AuthProvider({ children }: Props) {
           payload: {
             user: {
               ...user,
-              accessToken,
+              access,
             },
           },
         });
@@ -136,16 +136,24 @@ export function AuthProvider({ children }: Props) {
 
     const res = await axios.post(endpoints.auth.login, data);
 
-    const { accessToken, user } = res.data;
+    const { access } = res.data;
+    const resUser = await axios.get(endpoints.auth.me, {
+      headers: {
+        Authorization: `JWT ${access}`,
+      },
+    });
 
-    setSession(accessToken);
+    const user = resUser.data;
+
+    setSession(access);
+    // setSession(refresh);
 
     dispatch({
       type: Types.LOGIN,
       payload: {
         user: {
           ...user,
-          accessToken,
+          access,
         },
       },
     });
@@ -168,16 +176,16 @@ export function AuthProvider({ children }: Props) {
 
       const res = await axios.post(endpoints.auth.register, data);
 
-      const { accessToken, user } = res.data;
+      const { access, user } = res.data;
 
-      sessionStorage.setItem(STORAGE_KEY, accessToken);
+      sessionStorage.setItem(STORAGE_KEY, access);
 
       dispatch({
         type: Types.REGISTER,
         payload: {
           user: {
             ...user,
-            accessToken,
+            access,
           },
         },
       });

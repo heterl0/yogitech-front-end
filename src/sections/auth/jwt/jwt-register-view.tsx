@@ -42,19 +42,30 @@ export default function JwtRegisterView() {
   const password = useBoolean();
 
   const RegisterSchema = Yup.object().shape({
-    firstName: Yup.string().required("First name required"),
-    lastName: Yup.string().required("Last name required"),
+    username: Yup.string().required("Username is required"),
     email: Yup.string()
       .required("Email is required")
       .email("Email must be a valid email address"),
-    password: Yup.string().required("Password is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters long"),
+    re_password: Yup.string()
+      .oneOf([Yup.ref("password")], "Passwords must match")
+      .required("Re-entering password is required"),
+    phone: Yup.string()
+      .required("Phone number is required")
+      .matches(
+        /^(\+\d{1,3}[- ]?)?\d{10}$/,
+        "Phone number must be a valid phone number"
+      ),
   });
 
   const defaultValues = {
-    firstName: "",
-    lastName: "",
+    username: "",
+    phone: "",
     email: "",
     password: "",
+    re_password: "",
   };
 
   const methods = useForm({
@@ -73,8 +84,9 @@ export default function JwtRegisterView() {
       await register?.(
         data.email,
         data.password,
-        data.firstName,
-        data.lastName
+        data.phone,
+        data.username,
+        data.re_password
       );
 
       router.push(returnTo || PATH_AFTER_LOGIN);
@@ -127,16 +139,33 @@ export default function JwtRegisterView() {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-        <RHFTextField name="firstName" label="First name" />
-        <RHFTextField name="lastName" label="Last name" />
-      </Stack>
+      <RHFTextField name="username" label="Username" />
 
       <RHFTextField name="email" label="Email address" />
+      <RHFTextField name="phone" label="Phone" />
 
       <RHFTextField
         name="password"
         label="Password"
+        type={password.value ? "text" : "password"}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={password.onToggle} edge="end">
+                <Iconify
+                  icon={
+                    password.value ? "solar:eye-bold" : "solar:eye-closed-bold"
+                  }
+                />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <RHFTextField
+        name="re_password"
+        label="Re-password"
         type={password.value ? "text" : "password"}
         InputProps={{
           endAdornment: (

@@ -65,8 +65,9 @@ export type JWTContextType = CanRemove & {
   register: (
     email: string,
     password: string,
-    firstName: string,
-    lastName: string
+    username: string,
+    phone: string,
+    re_password: string
   ) => Promise<void>;
   logout: () => Promise<void>;
 };
