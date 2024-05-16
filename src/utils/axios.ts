@@ -36,9 +36,10 @@ export const endpoints = {
     // me: "/api/auth/me",
     // login: "/api/auth/login",
     // register: "/api/auth/register",
-    me: "/auth/users/me/",
-    login: "/auth/jwt/create/",
-    register: "/auth/users/",
+    me: "/api/v1/users/me/",
+    login: "/api/v1/auth/login/",
+    register: "/api/v1/users/",
+    activate: "/api/v1/users/activation/",
   },
   mail: {
     list: "/api/mail/list",

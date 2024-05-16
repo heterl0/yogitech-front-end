@@ -139,7 +139,7 @@ export function AuthProvider({ children }: Props) {
     const { access } = res.data;
     const resUser = await axios.get(endpoints.auth.me, {
       headers: {
-        Authorization: `JWT ${access}`,
+        Authorization: `Bearer ${access}`,
       },
     });
 
@@ -163,15 +163,15 @@ export function AuthProvider({ children }: Props) {
   const register = useCallback(
     async (
       email: string,
+      username: string,
       password: string,
-      firstName: string,
-      lastName: string
+      re_password: string
     ) => {
       const data = {
         email,
+        username,
         password,
-        firstName,
-        lastName,
+        re_password,
       };
 
       const res = await axios.post(endpoints.auth.register, data);

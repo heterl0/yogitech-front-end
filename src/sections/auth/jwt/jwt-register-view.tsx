@@ -52,12 +52,6 @@ export default function JwtRegisterView() {
     re_password: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
       .required("Re-entering password is required"),
-    phone: Yup.string()
-      .required("Phone number is required")
-      .matches(
-        /^(\+\d{1,3}[- ]?)?\d{10}$/,
-        "Phone number must be a valid phone number"
-      ),
   });
 
   const defaultValues = {
@@ -83,9 +77,8 @@ export default function JwtRegisterView() {
     try {
       await register?.(
         data.email,
-        data.password,
-        data.phone,
         data.username,
+        data.password,
         data.re_password
       );
 
@@ -142,7 +135,6 @@ export default function JwtRegisterView() {
       <RHFTextField name="username" label="Username" />
 
       <RHFTextField name="email" label="Email address" />
-      <RHFTextField name="phone" label="Phone" />
 
       <RHFTextField
         name="password"

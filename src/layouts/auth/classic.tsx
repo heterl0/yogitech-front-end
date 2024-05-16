@@ -80,7 +80,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
         mx: "auto",
         maxWidth: 480,
         px: { xs: 2, md: 8 },
-        pt: { xs: 3, md: 5 },
+        pt: { xs: 5, md: 15 },
         pb: { xs: 15, md: 0 },
       }}
     >
