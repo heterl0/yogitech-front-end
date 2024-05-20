@@ -19,6 +19,7 @@ import { AuthUserType, ActionMapType, AuthStateType } from "../../types";
 enum Types {
   INITIAL = "INITIAL",
   LOGIN = "LOGIN",
+  LOGINGOOGLE = "LOGINGOOGLE",
   REGISTER = "REGISTER",
   LOGOUT = "LOGOUT",
 }
@@ -28,6 +29,9 @@ type Payload = {
     user: AuthUserType;
   };
   [Types.LOGIN]: {
+    user: AuthUserType;
+  };
+  [Types.LOGINGOOGLE]: {
     user: AuthUserType;
   };
   [Types.REGISTER]: {
@@ -58,6 +62,12 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
       user: action.payload.user,
     };
   }
+  if (action.type === Types.LOGINGOOGLE) {
+    return {
+      ...state,
+      user: action.payload.user,
+    };
+  }
   if (action.type === Types.REGISTER) {
     return {
       ...state,
@@ -79,6 +89,11 @@ const STORAGE_KEY = "access";
 
 type Props = {
   children: React.ReactNode;
+};
+
+type Token = {
+  access: string;
+  refresh: string;
 };
 
 export function AuthProvider({ children }: Props) {
@@ -137,6 +152,37 @@ export function AuthProvider({ children }: Props) {
     const res = await axios.post(endpoints.auth.login, data);
 
     const { access } = res.data;
+    const resUser = await axios.get(endpoints.auth.me, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    });
+
+    const user = resUser.data;
+
+    setSession(access);
+    // setSession(refresh);
+
+    dispatch({
+      type: Types.LOGINGOOGLE,
+      payload: {
+        user: {
+          ...user,
+          access,
+        },
+      },
+    });
+  }, []);
+
+  const loginWithGoogle = useCallback(async (auth_token: string) => {
+    const data = {
+      auth_token,
+    };
+
+    const res = await axios.post(endpoints.auth.google, data);
+
+    const tokens = res.data.tokens as Token;
+    const access = tokens.access;
     const resUser = await axios.get(endpoints.auth.me, {
       headers: {
         Authorization: `Bearer ${access}`,
@@ -215,11 +261,12 @@ export function AuthProvider({ children }: Props) {
       authenticated: status === "authenticated",
       unauthenticated: status === "unauthenticated",
       //
+      loginWithGoogle,
       login,
       register,
       logout,
     }),
-    [login, logout, register, state.user, status]
+    [login, loginWithGoogle, logout, register, state.user, status]
   );
 
   return (

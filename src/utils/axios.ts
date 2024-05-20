@@ -40,6 +40,7 @@ export const endpoints = {
     login: "/api/v1/auth/login/",
     register: "/api/v1/users/",
     activate: "/api/v1/users/activation/",
+    google: "/api/v1/auth/google/",
   },
   mail: {
     list: "/api/mail/list",

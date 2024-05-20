@@ -1,5 +1,5 @@
-import { paramCase } from "@/utils/change-case";
-import axios, { endpoints } from "@/utils/axios";
+// import { paramCase } from "@/utils/change-case";
+// import axios, { endpoints } from "@/utils/axios";
 
 import { PostEditView } from "@/sections/blog/view";
 
@@ -21,10 +21,10 @@ export default function PostEditPage({ params }: Props) {
   return <PostEditView title={title} />;
 }
 
-export async function generateStaticParams() {
-  const res = await axios.get(endpoints.post.list);
+// export async function generateStaticParams() {
+//   const res = await axios.get(endpoints.post.list);
 
-  return res.data.posts.map((post: { title: string }) => ({
-    title: paramCase(post.title),
-  }));
-}
+//   return res.data.posts.map((post: { title: string }) => ({
+//     title: paramCase(post.title),
+//   }));
+// }
