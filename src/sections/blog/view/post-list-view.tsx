@@ -22,17 +22,12 @@ import Iconify from "@/components/iconify";
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
-import { IPostItem, IPostFilters, IPostFilterValue } from "@/types/blog";
+import { IBlog, ActiveStatus } from "@/types/blog";
 
 import PostSort from "../post-sort";
 import PostSearch from "../post-search";
 import PostListHorizontal from "../post-list-horizontal";
-
-// ----------------------------------------------------------------------
-
-const defaultFilters: IPostFilters = {
-  publish: "all",
-};
+// import { flatMap } from "lodash";
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +36,7 @@ export default function PostListView() {
 
   const [sortBy, setSortBy] = useState("latest");
 
-  const [filters, setFilters] = useState(defaultFilters);
+  const [filter, setFilter] = useState(-1);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -53,7 +48,7 @@ export default function PostListView() {
 
   const dataFiltered = applyFilter({
     inputData: posts,
-    filters,
+    filter,
     sortBy,
   });
 
@@ -61,22 +56,15 @@ export default function PostListView() {
     setSortBy(newValue);
   }, []);
 
-  const handleFilters = useCallback((name: string, value: IPostFilterValue) => {
-    setFilters((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }, []);
-
   const handleSearch = useCallback((inputValue: string) => {
     setSearchQuery(inputValue);
   }, []);
 
   const handleFilterPublish = useCallback(
-    (event: React.SyntheticEvent, newValue: string) => {
-      handleFilters("publish", newValue);
+    (event: React.SyntheticEvent, newValue: number) => {
+      setFilter(newValue);
     },
-    [handleFilters]
+    []
   );
 
   return (
@@ -136,33 +124,34 @@ export default function PostListView() {
       </Stack>
 
       <Tabs
-        value={filters.publish}
+        value={filter}
         onChange={handleFilterPublish}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
       >
-        {["all", "published", "draft"].map((tab) => (
+        {[-1, 0, 1].map((tab) => (
           <Tab
             key={tab}
             iconPosition="end"
             value={tab}
-            label={tab}
+            label={tab === -1 ? "All" : tab === 0 ? "Draft" : "Published"}
             icon={
               <Label
-                variant={
-                  ((tab === "all" || tab === filters.publish) && "filled") ||
-                  "soft"
-                }
-                color={(tab === "published" && "info") || "default"}
+                variant={((tab === -1 || filter === tab) && "filled") || "soft"}
+                color={(tab === 1 && "info") || "default"}
               >
-                {tab === "all" && posts.length}
+                {tab === -1 && posts.length}
 
-                {tab === "published" &&
-                  posts.filter((post) => post.publish === "published").length}
+                {tab === 1 &&
+                  posts.filter(
+                    (post) => post.active_status === ActiveStatus.Active
+                  ).length}
 
-                {tab === "draft" &&
-                  posts.filter((post) => post.publish === "draft").length}
+                {tab === 0 &&
+                  posts.filter(
+                    (post) => post.active_status === ActiveStatus.Disable
+                  ).length}
               </Label>
             }
             sx={{ textTransform: "capitalize" }}
@@ -179,29 +168,52 @@ export default function PostListView() {
 
 const applyFilter = ({
   inputData,
-  filters,
+  filter,
   sortBy,
 }: {
-  inputData: IPostItem[];
-  filters: IPostFilters;
+  inputData: IBlog[];
+  filter: number;
   sortBy: string;
 }) => {
-  const { publish } = filters;
-
   if (sortBy === "latest") {
-    inputData = orderBy(inputData, ["createdAt"], ["desc"]);
+    inputData = orderBy(inputData, ["created_at"], ["desc"]);
   }
 
   if (sortBy === "oldest") {
-    inputData = orderBy(inputData, ["createdAt"], ["asc"]);
+    inputData = orderBy(inputData, ["created_at"], ["asc"]);
   }
 
   if (sortBy === "popular") {
-    inputData = orderBy(inputData, ["totalViews"], ["desc"]);
+    interface IBlogWithSumVote extends IBlog {
+      sumVote: number;
+    }
+
+    const calculateSumVotes = (votes: { vote_value: number }[]) => {
+      return votes.reduce((sum, vote) => sum + vote.vote_value, 0);
+    };
+
+    const addSumVotesToBlogs = (blogs: IBlog[]): IBlogWithSumVote[] => {
+      return blogs.map((blog) => ({
+        ...blog,
+        sumVote: calculateSumVotes(blog.votes),
+      }));
+    };
+    const blogsWithSumVotes = addSumVotesToBlogs(inputData);
+
+    // Sort by sumVote in descending order
+    const sortedBlogsWithSumVotes = orderBy(
+      blogsWithSumVotes,
+      ["sumVote"],
+      ["desc"]
+    );
+
+    // Strip out the sumVote property to return the array as IBlog[]
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    inputData = sortedBlogsWithSumVotes.map(({ sumVote, ...blog }) => blog);
   }
 
-  if (publish !== "all") {
-    inputData = inputData.filter((post) => post.publish === publish);
+  if (filter !== -1) {
+    inputData = inputData.filter((post) => post.active_status === filter);
   }
 
   return inputData;

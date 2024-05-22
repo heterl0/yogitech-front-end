@@ -156,7 +156,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
             },
           }
         );
-        if (response.status === HttpStatusCode.Ok) {
+        if (response.status === HttpStatusCode.Created) {
           enqueueSnackbar("Create success!");
         } else {
           enqueueSnackbar("Create fail!");

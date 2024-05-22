@@ -85,3 +85,8 @@ export type IBlog = {
   updated_at: string;
   active_status: number;
 };
+
+export enum ActiveStatus {
+  Active = 1,
+  Disable = 0,
+}

@@ -15,7 +15,7 @@ export function useGetPosts() {
 
   const memoizedValue = useMemo(
     () => ({
-      posts: (data as IPostItem[]) || [],
+      posts: (data as IBlog[]) || [],
       postsLoading: isLoading,
       postsError: error,
       postsValidating: isValidating,
