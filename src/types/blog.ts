@@ -44,7 +44,7 @@ export type IPostItem = {
   tags: string[];
   publish: string;
   content: string;
-  coverUrl: string;
+  image_url: string;
   metaTitle: string;
   totalViews: number;
   totalShares: number;
@@ -63,4 +63,25 @@ export type IPostItem = {
     name: string;
     avatarUrl: string;
   };
+};
+
+export type IBlogVote = {
+  id: number;
+  user: string;
+  blog: string;
+  vote_value: number;
+};
+
+export type IBlog = {
+  id: number;
+  owner: string;
+  title: string;
+  description: string;
+  image_url: string;
+  content: string;
+  benefit: string;
+  votes: IBlogVote[];
+  created_at: string;
+  updated_at: string;
+  active_status: number;
 };

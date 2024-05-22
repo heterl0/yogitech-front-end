@@ -13,7 +13,7 @@ import { RouterLink } from "@/routes/components";
 import { useResponsive } from "@/hooks/use-responsive";
 
 import { fDate } from "@/utils/format-time";
-import { fShortenNumber } from "@/utils/format-number";
+// import { fShortenNumber } from "@/utils/format-number";
 
 import Label from "@/components/label";
 import Image from "@/components/image";
@@ -21,12 +21,13 @@ import Iconify from "@/components/iconify";
 import TextMaxLine from "@/components/text-max-line";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
 
-import { IPostItem } from "@/types/blog";
+import { IBlog } from "@/types/blog";
+import { useMemo } from "react";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: IPostItem;
+  post: IBlog;
 };
 
 export default function PostItemHorizontal({ post }: Props) {
@@ -37,24 +38,39 @@ export default function PostItemHorizontal({ post }: Props) {
   const smUp = useResponsive("up", "sm");
 
   const {
+    id,
     title,
-    author,
-    publish,
-    coverUrl,
-    createdAt,
-    totalViews,
-    totalShares,
-    totalComments,
+    image_url,
     description,
+    active_status,
+    created_at,
+    owner,
+    votes,
   } = post;
+
+  const vote: { down: number; up: number } = useMemo(() => {
+    const vote: { down: number; up: number } = { down: 0, up: 0 };
+    votes.forEach((item) => {
+      item.vote_value === 1
+        ? (vote.up = vote.up + 1)
+        : (vote.down = vote.down + 1);
+    });
+    return vote;
+  }, [votes]);
 
   return (
     <>
-      <Stack component={Card} direction="row">
+      <Stack
+        component={Card}
+        direction="row"
+        justifyContent="space-between"
+        width={"100%"}
+      >
         <Stack
           sx={{
             p: (theme) => theme.spacing(3, 3, 2, 3),
           }}
+          width={"100%"}
         >
           <Stack
             direction="row"
@@ -64,16 +80,16 @@ export default function PostItemHorizontal({ post }: Props) {
           >
             <Label
               variant="soft"
-              color={(publish === "published" && "info") || "default"}
+              color={(active_status === 1 && "info") || "default"}
             >
-              {publish}
+              {active_status === 1 ? "published" : "draft"}
             </Label>
 
             <Box
               component="span"
               sx={{ typography: "caption", color: "text.disabled" }}
             >
-              {fDate(createdAt)}
+              {fDate(created_at)}
             </Box>
           </Stack>
 
@@ -113,22 +129,17 @@ export default function PostItemHorizontal({ post }: Props) {
               }}
             >
               <Stack direction="row" alignItems="center">
+                <Iconify icon="solar:like-bold" width={16} sx={{ mr: 0.5 }} />
+                {vote.up}
+              </Stack>
+
+              <Stack direction="row" alignItems="center">
                 <Iconify
-                  icon="eva:message-circle-fill"
+                  icon="solar:dislike-bold"
                   width={16}
                   sx={{ mr: 0.5 }}
                 />
-                {fShortenNumber(totalComments)}
-              </Stack>
-
-              <Stack direction="row" alignItems="center">
-                <Iconify icon="solar:eye-bold" width={16} sx={{ mr: 0.5 }} />
-                {fShortenNumber(totalViews)}
-              </Stack>
-
-              <Stack direction="row" alignItems="center">
-                <Iconify icon="solar:share-bold" width={16} sx={{ mr: 0.5 }} />
-                {fShortenNumber(totalShares)}
+                {vote.down}
               </Stack>
             </Stack>
           </Stack>
@@ -145,13 +156,13 @@ export default function PostItemHorizontal({ post }: Props) {
             }}
           >
             <Avatar
-              alt={author.name}
-              src={author.avatarUrl}
+              alt={owner}
+              src={`https://api.dicebear.com/8.x/initials/svg?seed=${owner}`}
               sx={{ position: "absolute", top: 16, right: 16, zIndex: 9 }}
             />
             <Image
               alt={title}
-              src={coverUrl}
+              src={image_url}
               sx={{ height: 1, borderRadius: 1.5 }}
             />
           </Box>
@@ -167,7 +178,7 @@ export default function PostItemHorizontal({ post }: Props) {
         <MenuItem
           onClick={() => {
             popover.onClose();
-            router.push(paths.dashboard.post.details(title));
+            router.push(paths.dashboard.post.details(id + ""));
           }}
         >
           <Iconify icon="solar:eye-bold" />
@@ -177,7 +188,7 @@ export default function PostItemHorizontal({ post }: Props) {
         <MenuItem
           onClick={() => {
             popover.onClose();
-            router.push(paths.dashboard.post.edit(title));
+            router.push(paths.dashboard.post.edit(id + ""));
           }}
         >
           <Iconify icon="solar:pen-bold" />

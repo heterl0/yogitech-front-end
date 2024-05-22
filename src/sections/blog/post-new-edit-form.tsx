@@ -2,7 +2,7 @@
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMemo, useEffect, useCallback } from "react";
+import { useMemo, useEffect, useCallback, useState, ChangeEvent } from "react";
 
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
@@ -16,7 +16,6 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { paths } from "@/routes/paths";
-import { useRouter } from "@/routes/hooks";
 
 import { useBoolean } from "@/hooks/use-boolean";
 import { useResponsive } from "@/hooks/use-responsive";
@@ -32,19 +31,30 @@ import FormProvider, {
   RHFAutocomplete,
 } from "@/components/hook-form";
 
-import { IPostItem } from "@/types/blog";
+import { IBlog } from "@/types/blog";
 
 import PostDetailsPreview from "./post-details-preview";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { useRouter } from "next/navigation";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  currentPost?: IPostItem;
+  currentPost?: IBlog;
 };
 
 export default function PostNewEditForm({ currentPost }: Props) {
   const router = useRouter();
+  const [active, setActive] = useState(
+    currentPost?.active_status === 1 ? true : false
+  ); // Default checked
 
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    checked: boolean
+  ) => {
+    setActive(checked);
+  };
   const mdUp = useResponsive("up", "md");
 
   const { enqueueSnackbar } = useSnackbar();
@@ -55,12 +65,10 @@ export default function PostNewEditForm({ currentPost }: Props) {
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
     content: Yup.string().required("Content is required"),
-    coverUrl: Yup.mixed<any>().nullable().required("Cover is required"),
-    tags: Yup.array().min(2, "Must have at least 2 tags"),
-    metaKeywords: Yup.array().min(1, "Meta keywords is required"),
+    imageUrl: Yup.mixed<any>().nullable().required("Cover is required"),
+    benefit: Yup.array().min(1, "Must have at least 1 tag"),
+    active: Yup.string(),
     // not required
-    metaTitle: Yup.string(),
-    metaDescription: Yup.string(),
   });
 
   const defaultValues = useMemo(
@@ -68,11 +76,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
       title: currentPost?.title || "",
       description: currentPost?.description || "",
       content: currentPost?.content || "",
-      coverUrl: currentPost?.coverUrl || null,
-      tags: currentPost?.tags || [],
-      metaKeywords: currentPost?.metaKeywords || [],
-      metaTitle: currentPost?.metaTitle || "",
-      metaDescription: currentPost?.metaDescription || "",
+      imageUrl: currentPost?.image_url || null,
+      benefit: [],
+      active: currentPost?.active_status + "" || "",
     }),
     [currentPost]
   );
@@ -100,12 +106,28 @@ export default function PostNewEditForm({ currentPost }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      preview.onFalse();
+      const access = sessionStorage.getItem("access");
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("description", data.description);
+      formData.append("image", data.imageUrl); // Append the image file
+      formData.append("content", data.content);
+      formData.append("benefit", JSON.stringify(data.benefit));
+      formData.append("active_status", active ? "1" : "0");
+      const response = await axiosInstance.post(
+        endpoints.post.create,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${access}`,
+          },
+        }
+      );
+      // preview.onFalse();
       enqueueSnackbar(currentPost ? "Update success!" : "Create success!");
       router.push(paths.dashboard.post.root);
-      console.info("DATA", data);
+      console.info("DATA", response);
     } catch (error) {
       console.error(error);
     }
@@ -120,14 +142,14 @@ export default function PostNewEditForm({ currentPost }: Props) {
       });
 
       if (file) {
-        setValue("coverUrl", newFile, { shouldValidate: true });
+        setValue("imageUrl", newFile, { shouldValidate: true });
       }
     },
     [setValue]
   );
 
   const handleRemoveFile = useCallback(() => {
-    setValue("coverUrl", null);
+    setValue("imageUrl", null);
   }, [setValue]);
 
   const renderDetails = (
@@ -196,9 +218,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <RHFAutocomplete
-              name="tags"
-              label="Tags"
-              placeholder="+ Tags"
+              name="benefit"
+              label="Benefits"
+              placeholder="+ Benefits"
               multiple
               freeSolo
               options={_tags.map((option) => option)}
@@ -220,49 +242,6 @@ export default function PostNewEditForm({ currentPost }: Props) {
                   />
                 ))
               }
-            />
-
-            <RHFTextField name="metaTitle" label="Meta title" />
-
-            <RHFTextField
-              name="metaDescription"
-              label="Meta description"
-              fullWidth
-              multiline
-              rows={3}
-            />
-
-            <RHFAutocomplete
-              name="metaKeywords"
-              label="Meta keywords"
-              placeholder="+ Keywords"
-              multiple
-              freeSolo
-              disableCloseOnSelect
-              options={_tags.map((option) => option)}
-              getOptionLabel={(option) => option}
-              renderOption={(props, option) => (
-                <li {...props} key={option}>
-                  {option}
-                </li>
-              )}
-              renderTags={(selected, getTagProps) =>
-                selected.map((option, index) => (
-                  <Chip
-                    {...getTagProps({ index })}
-                    key={option}
-                    label={option}
-                    size="small"
-                    color="info"
-                    variant="soft"
-                  />
-                ))
-              }
-            />
-
-            <FormControlLabel
-              control={<Switch defaultChecked />}
-              label="Enable comments"
             />
           </Stack>
         </Card>
@@ -275,8 +254,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
       {mdUp && <Grid md={4} />}
       <Grid xs={12} md={8} sx={{ display: "flex", alignItems: "center" }}>
         <FormControlLabel
-          control={<Switch defaultChecked />}
+          control={<Switch checked={active} onChange={handleChange} />}
           label="Publish"
+          name="active"
           sx={{ flexGrow: 1, pl: 3 }}
         />
 
@@ -317,9 +297,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
         content={values.content}
         description={values.description}
         coverUrl={
-          typeof values.coverUrl === "string"
-            ? values.coverUrl
-            : `${(values.coverUrl as CustomFile)?.preview}`
+          typeof values.imageUrl === "string"
+            ? values.imageUrl
+            : `${(values.imageUrl as CustomFile)?.preview}`
         }
         //
         open={preview.value}

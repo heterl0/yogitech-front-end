@@ -48,8 +48,11 @@ export const endpoints = {
     labels: "/api/mail/labels",
   },
   post: {
-    list: "/api/post/list",
-    details: "/api/post/details",
+    list: "/api/v1/blogs/",
+    create: "/api/v1/blogs/",
+    update: "/api/v1/blogs/",
+    delete: "/api/v1/blogs/",
+    details: "/api/v1/blogs/",
     latest: "/api/post/latest",
     search: "/api/post/search",
   },
