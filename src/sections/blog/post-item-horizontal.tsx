@@ -73,7 +73,7 @@ export default function PostItemHorizontal({ post }: Props) {
 
   const handleDelete = useCallback(async () => {
     const response = await axiosInstance.delete(
-      `${endpoints.post.update}${id}/`
+      `${endpoints.post.delete}${id}/`
     );
 
     if (response.status === HttpStatusCode.NoContent) {
