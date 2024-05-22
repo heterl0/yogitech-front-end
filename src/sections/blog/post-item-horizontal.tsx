@@ -22,7 +22,16 @@ import TextMaxLine from "@/components/text-max-line";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
 
 import { IBlog } from "@/types/blog";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import { useBoolean } from "@/hooks/use-boolean";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { useSnackbar } from "notistack";
+import { HttpStatusCode } from "axios";
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +45,10 @@ export default function PostItemHorizontal({ post }: Props) {
   const router = useRouter();
 
   const smUp = useResponsive("up", "sm");
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const dialog = useBoolean();
 
   const {
     id,
@@ -57,6 +70,19 @@ export default function PostItemHorizontal({ post }: Props) {
     });
     return vote;
   }, [votes]);
+
+  const handleDelete = useCallback(async () => {
+    const response = await axiosInstance.delete(
+      `${endpoints.post.update}${id}/`
+    );
+
+    if (response.status === HttpStatusCode.NoContent) {
+      enqueueSnackbar("Delete success!");
+    } else {
+      enqueueSnackbar("Delete fail!");
+    }
+    router.push(paths.dashboard.post.root);
+  }, []);
 
   return (
     <>
@@ -198,6 +224,7 @@ export default function PostItemHorizontal({ post }: Props) {
         <MenuItem
           onClick={() => {
             popover.onClose();
+            dialog.onTrue();
           }}
           sx={{ color: "error.main" }}
         >
@@ -205,6 +232,29 @@ export default function PostItemHorizontal({ post }: Props) {
           Delete
         </MenuItem>
       </CustomPopover>
+      <Dialog open={dialog.value} onClose={dialog.onFalse}>
+        <DialogTitle
+          color={"error"}
+        >{`Do you want to delete this blog?`}</DialogTitle>
+
+        <DialogContent sx={{ color: "text.secondary" }}>
+          This action can not undo, do you really want to delete this blog?
+        </DialogContent>
+
+        <DialogActions>
+          <Button variant="outlined" onClick={dialog.onFalse}>
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleDelete}
+            autoFocus
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
