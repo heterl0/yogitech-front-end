@@ -3,7 +3,7 @@ import { useMemo } from "react";
 
 import { fetcher, endpoints } from "@/utils/axios";
 
-import { IPostItem } from "@/types/blog";
+import { IBlog, IPostItem } from "@/types/blog";
 
 // ----------------------------------------------------------------------
 
@@ -29,19 +29,19 @@ export function useGetPosts() {
 
 // ----------------------------------------------------------------------
 
-export function useGetPost(title: string) {
-  const URL = title ? [endpoints.post.details, { params: { title } }] : "";
+export function useGetPost(id: string) {
+  const URL = id ? [`${endpoints.post.details}${id}/`] : "";
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
-      post: data?.post as IPostItem,
+      post: data as IBlog,
       postLoading: isLoading,
       postError: error,
       postValidating: isValidating,
     }),
-    [data?.post, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating]
   );
 
   return memoizedValue;

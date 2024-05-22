@@ -14,14 +14,10 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
 import { paths } from "@/routes/paths";
-
 import { useBoolean } from "@/hooks/use-boolean";
 import { useResponsive } from "@/hooks/use-responsive";
-
-import { _tags } from "@/_mock";
-
+// import { _tags } from "@/_mock";
 import { CustomFile } from "@/components/upload";
 import { useSnackbar } from "@/components/snackbar";
 import FormProvider, {
@@ -36,6 +32,7 @@ import { IBlog } from "@/types/blog";
 import PostDetailsPreview from "./post-details-preview";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { useRouter } from "next/navigation";
+import { HttpStatusCode } from "axios";
 
 // ----------------------------------------------------------------------
 
@@ -43,12 +40,26 @@ type Props = {
   currentPost?: IBlog;
 };
 
+export const benefits = [
+  "Fitness",
+  "Nature",
+  "Health",
+  "Happy",
+  "Sports",
+  "Health",
+  "Mood",
+  "Motivation",
+];
+
 export default function PostNewEditForm({ currentPost }: Props) {
   const router = useRouter();
-  const [active, setActive] = useState(
-    currentPost?.active_status === 1 ? true : false
-  ); // Default checked
+  const [active, setActive] = useState(false); // Default checked
 
+  useEffect(() => {
+    if (currentPost) {
+      setActive(currentPost.active_status === 1 ? true : false);
+    }
+  }, [currentPost]);
   const handleChange = (
     event: ChangeEvent<HTMLInputElement>,
     checked: boolean
@@ -77,7 +88,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
       description: currentPost?.description || "",
       content: currentPost?.content || "",
       imageUrl: currentPost?.image_url || null,
-      benefit: [],
+      benefit: currentPost?.benefit
+        ? (JSON.parse(currentPost.benefit) as [])
+        : [],
       active: currentPost?.active_status + "" || "",
     }),
     [currentPost]
@@ -110,24 +123,47 @@ export default function PostNewEditForm({ currentPost }: Props) {
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("description", data.description);
-      formData.append("image", data.imageUrl); // Append the image file
+      if (data.imageUrl !== currentPost?.image_url) {
+        formData.append("image", data.imageUrl); // Append the image file
+      }
       formData.append("content", data.content);
       formData.append("benefit", JSON.stringify(data.benefit));
       formData.append("active_status", active ? "1" : "0");
-      const response = await axiosInstance.post(
-        endpoints.post.create,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${access}`,
-          },
+      if (currentPost) {
+        const response = await axiosInstance.patch(
+          `${endpoints.post.update}${currentPost.id}/`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${access}`,
+            },
+          }
+        );
+        if (response.status === HttpStatusCode.Ok) {
+          enqueueSnackbar("Update success!");
+        } else {
+          enqueueSnackbar("Update fail!");
         }
-      );
-      // preview.onFalse();
-      enqueueSnackbar(currentPost ? "Update success!" : "Create success!");
+      } else {
+        const response = await axiosInstance.post(
+          endpoints.post.create,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${access}`,
+            },
+          }
+        );
+        if (response.status === HttpStatusCode.Ok) {
+          enqueueSnackbar("Create success!");
+        } else {
+          enqueueSnackbar("Create fail!");
+        }
+      }
+      preview.onFalse();
       router.push(paths.dashboard.post.root);
-      console.info("DATA", response);
     } catch (error) {
       console.error(error);
     }
@@ -187,7 +223,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
             <Stack spacing={1.5}>
               <Typography variant="subtitle2">Cover</Typography>
               <RHFUpload
-                name="coverUrl"
+                name="imageUrl"
                 maxSize={3145728}
                 onDrop={handleDrop}
                 onDelete={handleRemoveFile}
@@ -223,7 +259,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
               placeholder="+ Benefits"
               multiple
               freeSolo
-              options={_tags.map((option) => option)}
+              options={benefits.map((option) => option)}
               getOptionLabel={(option) => option}
               renderOption={(props, option) => (
                 <li {...props} key={option}>

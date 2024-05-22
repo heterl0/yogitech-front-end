@@ -14,13 +14,13 @@ import PostNewEditForm from "../post-new-edit-form";
 // ----------------------------------------------------------------------
 
 type Props = {
-  title: string;
+  id: string;
 };
 
-export default function PostEditView({ title }: Props) {
+export default function PostEditView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const { post: currentPost } = useGetPost(title);
+  const { post: currentPost } = useGetPost(id);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
