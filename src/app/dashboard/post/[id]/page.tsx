@@ -11,13 +11,13 @@ export const metadata = {
 
 type Props = {
   params: {
-    title: string;
+    id: string;
   };
 };
 
 export default function PostDetailsPage({ params }: Props) {
-  const { title } = params;
-  return <PostDetailsView title={title} />;
+  const { id } = params;
+  return <PostDetailsView id={id} />;
 }
 
 // export async function generateStaticParams() {

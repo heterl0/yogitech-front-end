@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 import Iconify from "@/components/iconify";
 
-import { IPostItem } from "@/types/blog";
+import { IBlog } from "@/types/blog";
 
 import PostItem from "./post-item";
 import { PostItemSkeleton } from "./post-skeleton";
@@ -12,7 +12,7 @@ import { PostItemSkeleton } from "./post-skeleton";
 // ----------------------------------------------------------------------
 
 type Props = {
-  posts: IPostItem[];
+  posts: IBlog[];
   loading?: boolean;
   disabledIndex?: boolean;
 };

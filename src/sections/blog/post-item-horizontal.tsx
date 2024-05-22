@@ -97,7 +97,7 @@ export default function PostItemHorizontal({ post }: Props) {
             <Link
               color="inherit"
               component={RouterLink}
-              href={paths.dashboard.post.details(title)}
+              href={paths.dashboard.post.details(id + "")}
             >
               <TextMaxLine variant="subtitle2" line={2}>
                 {title}

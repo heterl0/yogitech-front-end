@@ -13,13 +13,13 @@ import { useRouter } from "@/routes/hooks";
 import Iconify from "@/components/iconify";
 import SearchNotFound from "@/components/search-not-found";
 
-import { IPostItem } from "@/types/blog";
+import { IBlog } from "@/types/blog";
 
 // ----------------------------------------------------------------------
 
 type Props = {
   query: string;
-  results: IPostItem[];
+  results: IBlog[];
   onSearch: (inputValue: string) => void;
   hrefItem: (title: string) => string;
   loading?: boolean;
@@ -35,7 +35,8 @@ export default function PostSearch({
   const router = useRouter();
 
   const handleClick = (title: string) => {
-    router.push(hrefItem(title));
+    const blogs = results.filter((item) => item.title === title);
+    router.push(hrefItem(blogs[0].id + ""));
   };
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -107,7 +108,7 @@ export default function PostSearch({
             <Avatar
               key={post.id}
               alt={post.title}
-              src={post.coverUrl}
+              src={post.image_url}
               variant="rounded"
               sx={{
                 width: 48,

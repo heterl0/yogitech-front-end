@@ -113,7 +113,7 @@ export default function PostListView() {
           results={searchResults}
           onSearch={handleSearch}
           loading={searchLoading}
-          hrefItem={(title: string) => paths.dashboard.post.details(title)}
+          hrefItem={(id: string) => paths.dashboard.post.details(id)}
         />
 
         <PostSort

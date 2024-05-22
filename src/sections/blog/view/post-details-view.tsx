@@ -1,23 +1,16 @@
 /* eslint-disable react/no-children-prop */
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
-import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
-
-import { fShortenNumber } from "@/utils/format-number";
 
 import { useGetPost } from "@/api/blog";
 import { POST_PUBLISH_OPTIONS } from "@/_mock";
@@ -27,30 +20,47 @@ import Markdown from "@/components/markdown";
 import EmptyContent from "@/components/empty-content";
 
 import PostDetailsHero from "../post-details-hero";
-import PostCommentList from "../post-comment-list";
-import PostCommentForm from "../post-comment-form";
+// import PostCommentList from "../post-comment-list";
 import { PostDetailsSkeleton } from "../post-skeleton";
 import PostDetailsToolbar from "../post-details-toolbar";
+import axiosInstance, { endpoints } from "@/utils/axios";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  title: string;
+  id: string;
 };
 
-export default function PostDetailsView({ title }: Props) {
-  const [publish, setPublish] = useState("");
+export default function PostDetailsView({ id }: Props) {
+  const [publish, setPublish] = useState(0);
 
-  const { post, postLoading, postError } = useGetPost(title);
+  const { post, postLoading, postError } = useGetPost(id);
 
-  const handleChangePublish = useCallback((newValue: string) => {
-    setPublish(newValue);
-  }, []);
+  const handleChangePublish = useCallback(
+    async (newValue: number) => {
+      setPublish(newValue);
+      const formData = new FormData();
+      formData.append("active_status", newValue + "");
+      await axiosInstance.patch(`${endpoints.post.update}${id}/`, formData);
+    },
+    [id]
+  );
 
   useEffect(() => {
     if (post) {
-      setPublish(post?.publish);
+      setPublish(post?.active_status);
     }
+  }, [post]);
+
+  const vote: { down: number; up: number } = useMemo(() => {
+    const vote: { down: number; up: number } = { down: 0, up: 0 };
+    if (post)
+      post.votes.forEach((item) => {
+        item.vote_value === 1
+          ? (vote.up = vote.up + 1)
+          : (vote.down = vote.down + 1);
+      });
+    return vote;
   }, [post]);
 
   const renderSkeleton = <PostDetailsSkeleton />;
@@ -79,15 +89,15 @@ export default function PostDetailsView({ title }: Props) {
     <>
       <PostDetailsToolbar
         backLink={paths.dashboard.post.root}
-        editLink={paths.dashboard.post.edit(`${post?.title}`)}
+        editLink={paths.dashboard.post.edit(`${post?.id + ""}`)}
         liveLink={"#"}
         // liveLink={paths.post.details(`${post?.title}`)}
-        publish={publish || ""}
+        publish={publish}
         onChangePublish={handleChangePublish}
         publishOptions={POST_PUBLISH_OPTIONS}
       />
 
-      <PostDetailsHero title={post.title} coverUrl={post.coverUrl} />
+      <PostDetailsHero title={post.title} coverUrl={post.image_url} />
 
       <Stack
         sx={{
@@ -111,58 +121,32 @@ export default function PostDetailsView({ title }: Props) {
           }}
         >
           <Stack direction="row" flexWrap="wrap" spacing={1}>
-            {post.tags.map((tag) => (
+            {JSON.parse(post.benefit).map((tag: string) => (
               <Chip key={tag} label={tag} variant="soft" />
             ))}
           </Stack>
+        </Stack>
+        <Stack
+          spacing={1.5}
+          flexGrow={1}
+          direction="row"
+          flexWrap="wrap"
+          justifyContent="flex-end"
+          sx={{
+            typography: "caption",
+            color: "text.disabled",
+          }}
+        >
+          <Stack direction="row" alignItems="center">
+            <Iconify icon="solar:like-bold" width={16} sx={{ mr: 0.5 }} />
+            {vote.up}
+          </Stack>
 
           <Stack direction="row" alignItems="center">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  defaultChecked
-                  size="small"
-                  color="error"
-                  icon={<Iconify icon="solar:heart-bold" />}
-                  checkedIcon={<Iconify icon="solar:heart-bold" />}
-                />
-              }
-              label={fShortenNumber(post.totalFavorites)}
-              sx={{ mr: 1 }}
-            />
-
-            <AvatarGroup
-              sx={{
-                [`& .${avatarGroupClasses.avatar}`]: {
-                  width: 32,
-                  height: 32,
-                },
-              }}
-            >
-              {post.favoritePerson.map((person) => (
-                <Avatar
-                  key={person.name}
-                  alt={person.name}
-                  src={person.avatarUrl}
-                />
-              ))}
-            </AvatarGroup>
+            <Iconify icon="solar:dislike-bold" width={16} sx={{ mr: 0.5 }} />
+            {vote.down}
           </Stack>
         </Stack>
-
-        <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-          <Typography variant="h4">Comments</Typography>
-
-          <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
-            ({post.comments.length})
-          </Typography>
-        </Stack>
-
-        <PostCommentForm />
-
-        <Divider sx={{ mt: 5, mb: 2 }} />
-
-        <PostCommentList comments={post.comments} />
       </Stack>
     </>
   );

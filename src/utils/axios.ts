@@ -53,8 +53,8 @@ export const endpoints = {
     update: "/api/v1/blogs/",
     delete: "/api/v1/blogs/",
     details: "/api/v1/blogs/",
-    latest: "/api/post/latest",
-    search: "/api/post/search",
+    latest: "/api/v1/blogs/",
+    search: "/api/v1/blogs/",
   },
   product: {
     list: "/api/product/list",

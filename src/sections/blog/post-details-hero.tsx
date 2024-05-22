@@ -2,20 +2,13 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
-import SpeedDial from "@mui/material/SpeedDial";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import { alpha, useTheme } from "@mui/material/styles";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-
-import { useResponsive } from "@/hooks/use-responsive";
 
 import { fDate } from "@/utils/format-time";
 
-import { _socials } from "@/_mock";
 import { bgGradient } from "@/theme/css";
-
-import Iconify from "@/components/iconify";
 
 import { IPostHero } from "@/types/blog";
 
@@ -28,8 +21,6 @@ export default function PostDetailsHero({
   createdAt,
 }: IPostHero) {
   const theme = useTheme();
-
-  const smUp = useResponsive("up", "sm");
 
   return (
     <Box
@@ -93,30 +84,6 @@ export default function PostDetailsHero({
               />
             </Stack>
           )}
-
-          <SpeedDial
-            direction={smUp ? "left" : "up"}
-            ariaLabel="Share post"
-            icon={<Iconify icon="solar:share-bold" />}
-            FabProps={{ size: "medium" }}
-            sx={{
-              position: "absolute",
-              bottom: { xs: 32, md: 64 },
-              right: { xs: 16, md: 24 },
-            }}
-          >
-            {_socials.map((action) => (
-              <SpeedDialAction
-                key={action.name}
-                icon={
-                  <Iconify icon={action.icon} sx={{ color: action.color }} />
-                }
-                tooltipTitle={action.name}
-                tooltipPlacement="top"
-                FabProps={{ color: "default" }}
-              />
-            ))}
-          </SpeedDial>
         </Stack>
       </Container>
     </Box>

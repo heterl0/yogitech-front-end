@@ -17,10 +17,10 @@ type Props = StackProps & {
   backLink: string;
   editLink: string;
   liveLink: string;
-  publish: string;
-  onChangePublish: (newValue: string) => void;
+  publish: number;
+  onChangePublish: (newValue: number) => void;
   publishOptions: {
-    value: string;
+    value: number;
     label: string;
   }[];
 };
@@ -58,7 +58,7 @@ export default function PostDetailsToolbar({
 
         <Box sx={{ flexGrow: 1 }} />
 
-        {publish === "published" && (
+        {publish === 1 && (
           <Tooltip title="Go Live">
             <IconButton component={RouterLink} href={liveLink}>
               <Iconify icon="eva:external-link-fill" />
@@ -73,15 +73,15 @@ export default function PostDetailsToolbar({
         </Tooltip>
 
         <LoadingButton
-          color="inherit"
+          color={publish === 1 ? "primary" : "inherit"}
           variant="contained"
-          loading={!publish}
+          loading={false}
           loadingIndicator="Loading…"
           endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
           onClick={popover.onOpen}
           sx={{ textTransform: "capitalize" }}
         >
-          {publish}
+          Change Status
         </LoadingButton>
       </Stack>
 
@@ -100,12 +100,8 @@ export default function PostDetailsToolbar({
               onChangePublish(option.value);
             }}
           >
-            {option.value === "published" && (
-              <Iconify icon="eva:cloud-upload-fill" />
-            )}
-            {option.value === "draft" && (
-              <Iconify icon="solar:file-text-bold" />
-            )}
+            {option.value === 1 && <Iconify icon="eva:cloud-upload-fill" />}
+            {option.value === 0 && <Iconify icon="solar:file-text-bold" />}
             {option.label}
           </MenuItem>
         ))}

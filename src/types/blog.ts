@@ -68,6 +68,7 @@ export type IPostItem = {
 export type IBlogVote = {
   id: number;
   user: string;
+  user_id: number;
   blog: string;
   vote_value: number;
 };

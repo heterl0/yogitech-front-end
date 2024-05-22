@@ -3,7 +3,7 @@ import { useMemo } from "react";
 
 import { fetcher, endpoints } from "@/utils/axios";
 
-import { IBlog, IPostItem } from "@/types/blog";
+import { IBlog } from "@/types/blog";
 
 // ----------------------------------------------------------------------
 
@@ -56,13 +56,13 @@ export function useGetLatestPosts(title: string) {
 
   const memoizedValue = useMemo(
     () => ({
-      latestPosts: (data?.latestPosts as IPostItem[]) || [],
+      latestPosts: (data as IBlog[]) || [],
       latestPostsLoading: isLoading,
       latestPostsError: error,
       latestPostsValidating: isValidating,
       latestPostsEmpty: !isLoading && !data?.latestPosts.length,
     }),
-    [data?.latestPosts, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating]
   );
 
   return memoizedValue;
@@ -79,13 +79,13 @@ export function useSearchPosts(query: string) {
 
   const memoizedValue = useMemo(
     () => ({
-      searchResults: (data?.results as IPostItem[]) || [],
+      searchResults: (data as IBlog[]) || [],
       searchLoading: isLoading,
       searchError: error,
       searchValidating: isValidating,
-      searchEmpty: !isLoading && !data?.results.length,
+      searchEmpty: !isLoading && !data?.length,
     }),
-    [data?.results, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating]
   );
 
   return memoizedValue;

@@ -21,12 +21,13 @@ import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 import TextMaxLine from "@/components/text-max-line";
 
-import { IPostItem } from "@/types/blog";
+import { IBlog } from "@/types/blog";
+import { useMemo } from "react";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: IPostItem;
+  post: IBlog;
   index?: number;
 };
 
@@ -35,15 +36,17 @@ export default function PostItem({ post, index }: Props) {
 
   const mdUp = useResponsive("up", "md");
 
-  const {
-    coverUrl,
-    title,
-    totalViews,
-    totalComments,
-    totalShares,
-    author,
-    createdAt,
-  } = post;
+  const { owner, title, image_url, created_at, votes } = post;
+
+  const vote: { down: number; up: number } = useMemo(() => {
+    const vote: { down: number; up: number } = { down: 0, up: 0 };
+    votes.forEach((item) => {
+      item.vote_value === 1
+        ? (vote.up = vote.up + 1)
+        : (vote.down = vote.down + 1);
+    });
+    return vote;
+  }, [votes]);
 
   const latestPost = index === 0 || index === 1 || index === 2;
 
@@ -51,8 +54,8 @@ export default function PostItem({ post, index }: Props) {
     return (
       <Card>
         <Avatar
-          alt={author.name}
-          src={author.avatarUrl}
+          alt={owner}
+          src={`https://api.dicebear.com/8.x/initials/svg?seed=${owner}`}
           sx={{
             top: 24,
             left: 24,
@@ -63,16 +66,14 @@ export default function PostItem({ post, index }: Props) {
 
         <PostContent
           title={title}
-          createdAt={createdAt}
-          totalViews={totalViews}
-          totalShares={totalShares}
-          totalComments={totalComments}
+          createdAt={created_at}
+          vote={vote}
           index={index}
         />
 
         <Image
           alt={title}
-          src={coverUrl}
+          src={image_url}
           overlay={alpha(theme.palette.grey[900], 0.48)}
           sx={{
             width: 1,
@@ -98,8 +99,8 @@ export default function PostItem({ post, index }: Props) {
         />
 
         <Avatar
-          alt={author.name}
-          src={author.avatarUrl}
+          alt={owner}
+          src={`https://api.dicebear.com/8.x/initials/svg?seed=${owner}`}
           sx={{
             left: 24,
             zIndex: 9,
@@ -108,16 +109,10 @@ export default function PostItem({ post, index }: Props) {
           }}
         />
 
-        <Image alt={title} src={coverUrl} ratio="4/3" />
+        <Image alt={title} src={image_url} ratio="4/3" />
       </Box>
 
-      <PostContent
-        title={title}
-        totalViews={totalViews}
-        totalComments={totalComments}
-        totalShares={totalShares}
-        createdAt={createdAt}
-      />
+      <PostContent title={title} vote={vote} createdAt={created_at} />
     </Card>
   );
 }
@@ -127,18 +122,17 @@ export default function PostItem({ post, index }: Props) {
 type PostContentProps = {
   title: string;
   index?: number;
-  totalViews: number;
-  totalShares: number;
-  totalComments: number;
+  vote: {
+    up: number;
+    down: number;
+  };
   createdAt: Date | string | number;
 };
 
 export function PostContent({
   title,
   createdAt,
-  totalViews,
-  totalShares,
-  totalComments,
+  vote,
   index,
 }: PostContentProps) {
   const mdUp = useResponsive("up", "md");
@@ -203,18 +197,13 @@ export function PostContent({
         }}
       >
         <Stack direction="row" alignItems="center">
-          <Iconify icon="eva:message-circle-fill" width={16} sx={{ mr: 0.5 }} />
-          {fShortenNumber(totalComments)}
+          <Iconify icon="solar:like-bold" width={16} sx={{ mr: 0.5 }} />
+          {fShortenNumber(vote.up)}
         </Stack>
 
         <Stack direction="row" alignItems="center">
-          <Iconify icon="solar:eye-bold" width={16} sx={{ mr: 0.5 }} />
-          {fShortenNumber(totalViews)}
-        </Stack>
-
-        <Stack direction="row" alignItems="center">
-          <Iconify icon="solar:share-bold" width={16} sx={{ mr: 0.5 }} />
-          {fShortenNumber(totalShares)}
+          <Iconify icon="solar:dislike-bold" width={16} sx={{ mr: 0.5 }} />
+          {fShortenNumber(vote.down)}
         </Stack>
       </Stack>
     </CardContent>
