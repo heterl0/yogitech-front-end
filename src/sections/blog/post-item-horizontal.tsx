@@ -78,11 +78,13 @@ export default function PostItemHorizontal({ post }: Props) {
 
     if (response.status === HttpStatusCode.NoContent) {
       enqueueSnackbar("Delete success!");
+      dialog.onFalse();
     } else {
       enqueueSnackbar("Delete fail!");
+      dialog.onFalse();
     }
     router.push(paths.dashboard.post.root);
-  }, []);
+  }, [dialog, enqueueSnackbar, id, router]);
 
   return (
     <>

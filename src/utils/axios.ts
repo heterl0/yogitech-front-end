@@ -56,6 +56,9 @@ export const endpoints = {
     latest: "/api/v1/blogs/",
     search: "/api/v1/blogs/",
   },
+  account: {
+    list: "/api/v1/users/",
+  },
   product: {
     list: "/api/product/list",
     details: "/api/product/details",

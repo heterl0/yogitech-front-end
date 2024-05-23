@@ -135,3 +135,5 @@ export type IUserAccountChangePassword = {
   newPassword: string;
   confirmNewPassword: string;
 };
+
+export type IAccount = {};

@@ -111,6 +111,11 @@ export function useNavData() {
               { title: t("account"), path: paths.dashboard.user.account },
             ],
           },
+          {
+            title: t("account"),
+            path: paths.dashboard.account.root,
+            icon: ICONS.user,
+          },
 
           // PRODUCT
           // {

@@ -69,6 +69,9 @@ export const paths = {
       account: `${ROOTS.DASHBOARD}/user/account`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/user/${id}/edit`,
     },
+    account: {
+      root: `${ROOTS.DASHBOARD}/account`,
+    },
     product: {
       root: `${ROOTS.DASHBOARD}/product`,
       new: `${ROOTS.DASHBOARD}/product/new`,
