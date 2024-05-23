@@ -83,17 +83,21 @@ export default function JwtLoginView() {
     <Stack spacing={2} sx={{ mb: 5 }}>
       <Typography variant="h4">Sign in to Minimal</Typography>
 
-      <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2">New user?</Typography>
+      {(process.env.ALLOW_TO_REGISTER
+        ? JSON.parse(process.env.ALLOW_TO_REGISTER)
+        : false) && (
+        <Stack direction="row" spacing={0.5}>
+          <Typography variant="body2">New user?</Typography>
 
-        <Link
-          component={RouterLink}
-          href={paths.auth.jwt.register}
-          variant="subtitle2"
-        >
-          Create an account
-        </Link>
-      </Stack>
+          <Link
+            component={RouterLink}
+            href={paths.auth.jwt.register}
+            variant="subtitle2"
+          >
+            Create an account
+          </Link>
+        </Stack>
+      )}
     </Stack>
   );
 
@@ -172,7 +176,9 @@ export default function JwtLoginView() {
               : ""
           }
         >
-          <GoogleLoginButton />
+          {(process.env.ALLOW_TO_LOGIN_WITH_GOOGLE
+            ? JSON.parse(process.env.ALLOW_TO_LOGIN_WITH_GOOGLE)
+            : false) && <GoogleLoginButton />}
         </GoogleOAuthProvider>
       </div>
     </>

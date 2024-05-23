@@ -25,6 +25,7 @@ import { PATH_AFTER_LOGIN } from "@/config-global";
 
 import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
+import { notFound } from "next/navigation";
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,10 @@ export default function JwtRegisterView() {
   const { register } = useAuthContext();
 
   const router = useRouter();
+
+  const allowRegister = process.env.ALLOW_TO_REGISTER
+    ? JSON.parse(process.env.ALLOW_TO_REGISTER)
+    : false;
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -186,6 +191,10 @@ export default function JwtRegisterView() {
       </LoadingButton>
     </Stack>
   );
+
+  if (!allowRegister) {
+    return notFound();
+  }
 
   return (
     <>
