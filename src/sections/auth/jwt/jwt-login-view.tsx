@@ -27,6 +27,7 @@ import { PATH_AFTER_LOGIN } from "@/config-global";
 import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
 import GoogleLoginButton from "../google-login-button";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // ----------------------------------------------------------------------
 
@@ -146,9 +147,14 @@ export default function JwtLoginView() {
       <div className="flex flex-col justify-center gap-2">
         <div>
           {renderHead}
-          <Alert severity="info" sx={{ mb: 3 }}>
+          {/* <Alert severity="info" sx={{ mb: 3 }}>
             Use email : <strong>demo@minimals.cc</strong> / password :
             <strong> demo1234</strong>
+          </Alert> */}
+
+          <Alert severity="info" sx={{ mb: 3 }}>
+            Only <strong>Administrator</strong> can log in to
+            <strong> Website.</strong>
           </Alert>
           {!!errorMsg && (
             <Alert severity="error" sx={{ mb: 3 }}>
@@ -159,7 +165,15 @@ export default function JwtLoginView() {
             {renderForm}
           </FormProvider>
         </div>
-        <GoogleLoginButton />
+        <GoogleOAuthProvider
+          clientId={
+            process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+              ? process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+              : ""
+          }
+        >
+          <GoogleLoginButton />
+        </GoogleOAuthProvider>
       </div>
     </>
   );

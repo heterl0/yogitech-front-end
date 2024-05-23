@@ -1,17 +1,13 @@
 "use client";
 import { useAuthContext } from "@/auth/hooks";
 import { PATH_AFTER_LOGIN } from "@/config-global";
-import {
-  GoogleOAuthProvider,
-  GoogleLogin,
-  CredentialResponse,
-} from "@react-oauth/google";
+import { Button } from "@mui/material";
+import { CredentialResponse, useGoogleLogin } from "@react-oauth/google";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function GoogleLoginButton() {
   const { loginWithGoogle } = useAuthContext();
   const router = useRouter();
-
   const searchParams = useSearchParams();
 
   const returnTo = searchParams.get("returnTo");
@@ -29,18 +25,8 @@ export default function GoogleLoginButton() {
     }
   };
 
-  return (
-    <GoogleOAuthProvider
-      clientId={
-        process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
-          ? process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
-          : ""
-      }
-    >
-      <GoogleLogin
-        onSuccess={handleGoogleLoginSuccess}
-        onError={() => console.log("Login Failed")}
-      />
-    </GoogleOAuthProvider>
-  );
+  const login = useGoogleLogin({
+    onSuccess: () => handleGoogleLoginSuccess,
+  });
+  return <Button onClick={() => login()}>Login with Google</Button>;
 }
