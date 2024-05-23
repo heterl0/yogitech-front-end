@@ -45,6 +45,7 @@ export default function JwtRegisterView() {
   const returnTo = searchParams.get("returnTo");
 
   const password = useBoolean();
+  const rePassword = useBoolean();
 
   const RegisterSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -163,14 +164,16 @@ export default function JwtRegisterView() {
       <RHFTextField
         name="re_password"
         label="Re-password"
-        type={password.value ? "text" : "password"}
+        type={rePassword.value ? "text" : "password"}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
+              <IconButton onClick={rePassword.onToggle} edge="end">
                 <Iconify
                   icon={
-                    password.value ? "solar:eye-bold" : "solar:eye-closed-bold"
+                    rePassword.value
+                      ? "solar:eye-bold"
+                      : "solar:eye-closed-bold"
                   }
                 />
               </IconButton>
