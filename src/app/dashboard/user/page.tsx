@@ -1,11 +1,11 @@
-import { UserProfileView } from "@/sections/user/view";
+import { UserCardsView } from "@/sections/user/view";
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: "Dashboard: User Profile",
+  title: "Dashboard: User Cards",
 };
 
-export default function UserProfilePage() {
-  return <UserProfileView />;
+export default function UserCardsPage() {
+  return <UserCardsView />;
 }

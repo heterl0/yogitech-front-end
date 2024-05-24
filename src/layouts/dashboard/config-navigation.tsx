@@ -27,6 +27,7 @@ const ICONS = {
   chat: icon("ic_chat"),
   mail: icon("ic_mail"),
   user: icon("ic_user"),
+  userGroup: icon("ic_user_group"),
   file: icon("ic_file"),
   lock: icon("ic_lock"),
   tour: icon("ic_tour"),
@@ -102,14 +103,14 @@ export function useNavData() {
           {
             title: t("user"),
             path: paths.dashboard.user.root,
-            icon: ICONS.user,
-            children: [
-              { title: t("profile"), path: paths.dashboard.user.root },
-              { title: t("cards"), path: paths.dashboard.user.cards },
-              { title: t("list"), path: paths.dashboard.user.list },
-              { title: t("create"), path: paths.dashboard.user.new },
-              { title: t("account"), path: paths.dashboard.user.account },
-            ],
+            icon: ICONS.userGroup,
+            // children: [
+            //   { title: t("profile"), path: paths.dashboard.user.root },
+            //   { title: t("cards"), path: paths.dashboard.user.cards },
+            //   { title: t("list"), path: paths.dashboard.user.list },
+            //   { title: t("create"), path: paths.dashboard.user.new },
+            //   { title: t("account"), path: paths.dashboard.user.account },
+            // ],
           },
           {
             title: t("account"),
