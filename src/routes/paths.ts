@@ -72,6 +72,8 @@ export const paths = {
     },
     account: {
       root: `${ROOTS.DASHBOARD}/account`,
+      new: `${ROOTS.DASHBOARD}/account/new`,
+      edit: (id: number) => `${ROOTS.DASHBOARD}/user/${id}/edit`,
     },
     product: {
       root: `${ROOTS.DASHBOARD}/product`,

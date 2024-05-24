@@ -155,7 +155,7 @@ export default function AccountListView() {
 
   const handleEditRow = useCallback(
     (id: number) => {
-      router.push(paths.dashboard.user.edit(id));
+      router.push(paths.dashboard.account.edit(id));
     },
     [router]
   );
@@ -174,13 +174,13 @@ export default function AccountListView() {
           heading="List"
           links={[
             { name: "Dashboard", href: paths.dashboard.root },
-            { name: "User", href: paths.dashboard.user.root },
+            { name: "Account", href: paths.dashboard.account.root },
             { name: "List" },
           ]}
           action={
             <Button
               component={RouterLink}
-              href={paths.dashboard.user.new}
+              href={paths.dashboard.account.new}
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
