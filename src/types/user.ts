@@ -136,4 +136,14 @@ export type IUserAccountChangePassword = {
   confirmNewPassword: string;
 };
 
-export type IAccount = {};
+export type IAccount = {
+  id: number;
+  username: string;
+  email: string;
+  phone: string;
+  is_active: number;
+  is_staff: number;
+  is_premium: number;
+  active_status: number;
+  auth_provider: string;
+};

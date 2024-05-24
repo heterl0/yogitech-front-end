@@ -1,4 +1,4 @@
-import { UserListView } from "@/sections/user/view";
+import AccountListView from "@/sections/account/account-list-view";
 
 // ----------------------------------------------------------------------
 
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function UserListPage() {
-  return <UserListView />;
+  return <AccountListView />;
 }

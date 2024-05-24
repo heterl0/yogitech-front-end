@@ -13,24 +13,24 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 
-import { countries } from "@/assets/data";
+// import { countries } from "@/assets/data";
 import { USER_STATUS_OPTIONS } from "@/_mock";
 
 import { useSnackbar } from "@/components/snackbar";
 import FormProvider, {
   RHFSelect,
   RHFTextField,
-  RHFAutocomplete,
+  // RHFAutocomplete,
 } from "@/components/hook-form";
 
-import { IUserItem } from "@/types/user";
+import { IAccount } from "@/types/user";
 
 // ----------------------------------------------------------------------
 
 type Props = {
   open: boolean;
   onClose: VoidFunction;
-  currentUser?: IUserItem;
+  currentUser?: IAccount;
 };
 
 export default function UserQuickEditForm({
@@ -40,39 +40,40 @@ export default function UserQuickEditForm({
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
+  const NewAccountSchema = Yup.object().shape({
+    username: Yup.string().required("Name is required"),
     email: Yup.string()
       .required("Email is required")
       .email("Email must be a valid email address"),
-    phoneNumber: Yup.string().required("Phone number is required"),
-    address: Yup.string().required("Address is required"),
-    country: Yup.string().required("Country is required"),
-    company: Yup.string().required("Company is required"),
-    state: Yup.string().required("State is required"),
-    city: Yup.string().required("City is required"),
+    phone: Yup.string().required("Phone number is required"),
+    status: Yup.string().required("Status is required"),
     role: Yup.string().required("Role is required"),
+    provider: Yup.string().required("Provider is required"),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || "",
+      username: currentUser?.username || "",
       email: currentUser?.email || "",
-      phoneNumber: currentUser?.phoneNumber || "",
-      address: currentUser?.address || "",
-      country: currentUser?.country || "",
-      state: currentUser?.state || "",
-      city: currentUser?.city || "",
-      zipCode: currentUser?.zipCode || "",
-      status: currentUser?.status,
-      company: currentUser?.company || "",
-      role: currentUser?.role || "",
+      phone: currentUser?.phone || "",
+      status:
+        currentUser?.active_status === 0
+          ? "banned"
+          : currentUser?.is_active === 0
+            ? "pending"
+            : "active",
+      role: currentUser?.is_staff
+        ? "Admin"
+        : currentUser?.is_premium
+          ? "Premium User"
+          : "User",
+      provider: currentUser?.auth_provider || "",
     }),
     [currentUser]
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewAccountSchema),
     defaultValues,
   });
 
@@ -121,6 +122,9 @@ export default function UserQuickEditForm({
               sm: "repeat(2, 1fr)",
             }}
           >
+            <RHFTextField name="username" disabled label="Username" />
+            <RHFTextField name="email" disabled label="Email Address" />
+
             <RHFSelect name="status" label="Status">
               {USER_STATUS_OPTIONS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
@@ -129,13 +133,9 @@ export default function UserQuickEditForm({
               ))}
             </RHFSelect>
 
-            <Box sx={{ display: { xs: "none", sm: "block" } }} />
+            <RHFTextField name="phone" label="Phone Number" />
 
-            <RHFTextField name="name" label="Full Name" />
-            <RHFTextField name="email" label="Email Address" />
-            <RHFTextField name="phoneNumber" label="Phone Number" />
-
-            <RHFAutocomplete
+            {/* <RHFAutocomplete
               name="country"
               type="country"
               label="Country"
@@ -143,14 +143,21 @@ export default function UserQuickEditForm({
               fullWidth
               options={countries.map((option) => option.label)}
               getOptionLabel={(option) => option}
-            />
-
-            <RHFTextField name="state" label="State/Region" />
-            <RHFTextField name="city" label="City" />
-            <RHFTextField name="address" label="Address" />
-            <RHFTextField name="zipCode" label="Zip/Code" />
-            <RHFTextField name="company" label="Company" />
-            <RHFTextField name="role" label="Role" />
+            /> */}
+            <RHFSelect name="role" label="Role">
+              {["Admin", "Premium User", "User"].map((role) => (
+                <MenuItem key={role} value={role}>
+                  {role}
+                </MenuItem>
+              ))}
+            </RHFSelect>
+            <RHFSelect name="provider" label="Provider">
+              {["Email", "Google"].map((value) => (
+                <MenuItem key={value} value={value.toLowerCase()}>
+                  {value}
+                </MenuItem>
+              ))}
+            </RHFSelect>
           </Box>
         </DialogContent>
 

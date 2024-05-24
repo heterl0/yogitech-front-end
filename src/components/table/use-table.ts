@@ -10,7 +10,7 @@ export type UseTableProps = {
   defaultDense?: boolean;
   defaultOrder?: "asc" | "desc";
   defaultOrderBy?: string;
-  defaultSelected?: string[];
+  defaultSelected?: number[];
   defaultRowsPerPage?: number;
   defaultCurrentPage?: number;
 };
@@ -30,7 +30,7 @@ export default function useTable(props?: UseTableProps): ReturnType {
     props?.defaultOrder || "asc"
   );
 
-  const [selected, setSelected] = useState<string[]>(
+  const [selected, setSelected] = useState<number[]>(
     props?.defaultSelected || []
   );
 
@@ -46,7 +46,7 @@ export default function useTable(props?: UseTableProps): ReturnType {
   );
 
   const onSelectRow = useCallback(
-    (inputValue: string) => {
+    (inputValue: number) => {
       const newSelected = selected.includes(inputValue)
         ? selected.filter((value) => value !== inputValue)
         : [...selected, inputValue];
@@ -72,7 +72,7 @@ export default function useTable(props?: UseTableProps): ReturnType {
   );
 
   const onSelectAllRows = useCallback(
-    (checked: boolean, inputValue: string[]) => {
+    (checked: boolean, inputValue: number[]) => {
       if (checked) {
         setSelected(inputValue);
         return;

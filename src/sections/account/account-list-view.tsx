@@ -22,7 +22,7 @@ import { RouterLink } from "@/routes/components";
 
 import { useBoolean } from "@/hooks/use-boolean";
 
-import { _roles, _userList, USER_STATUS_OPTIONS } from "@/_mock";
+import { _accountReal, _yogitechRole, USER_STATUS_OPTIONS } from "@/_mock";
 
 import Label from "@/components/label";
 import Iconify from "@/components/iconify";
@@ -43,7 +43,7 @@ import {
 } from "@/components/table";
 
 import {
-  IUserItem,
+  IAccount,
   IUserTableFilters,
   IUserTableFilterValue,
 } from "@/types/user";
@@ -56,11 +56,11 @@ import UserTableRow from "../user/user-table-row";
 const STATUS_OPTIONS = [{ value: "all", label: "All" }, ...USER_STATUS_OPTIONS];
 
 const TABLE_HEAD = [
-  { id: "name", label: "Name" },
+  { id: "username", label: "Username" },
   { id: "phoneNumber", label: "Phone Number", width: 180 },
-  { id: "company", label: "Company", width: 220 },
+  { id: "status", label: "Status", width: 220 },
   { id: "role", label: "Role", width: 180 },
-  { id: "status", label: "Status", width: 100 },
+  { id: "auth_provider", label: "Provider", width: 100 },
   { id: "", width: 88 },
 ];
 
@@ -72,7 +72,7 @@ const defaultFilters: IUserTableFilters = {
 
 // ----------------------------------------------------------------------
 
-export default function UserListView() {
+export default function AccountListView() {
   const { enqueueSnackbar } = useSnackbar();
 
   const table = useTable();
@@ -83,7 +83,7 @@ export default function UserListView() {
 
   const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState<IUserItem[]>(_userList);
+  const [tableData, setTableData] = useState<IAccount[]>(_accountReal);
 
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -120,7 +120,7 @@ export default function UserListView() {
   }, []);
 
   const handleDeleteRow = useCallback(
-    (id: string) => {
+    (id: number) => {
       const deleteRow = tableData.filter((row) => row.id !== id);
 
       enqueueSnackbar("Delete success!");
@@ -154,7 +154,7 @@ export default function UserListView() {
   ]);
 
   const handleEditRow = useCallback(
-    (id: string) => {
+    (id: number) => {
       router.push(paths.dashboard.user.edit(id));
     },
     [router]
@@ -222,11 +222,19 @@ export default function UserListView() {
                       "default"
                     }
                   >
-                    {["active", "pending", "banned", "rejected"].includes(
-                      tab.value
-                    )
-                      ? tableData.filter((user) => user.status === tab.value)
-                          .length
+                    {["active", "pending", "banned"].includes(tab.value)
+                      ? tab.value === "active"
+                        ? tableData.filter(
+                            (user) =>
+                              user.is_active === 1 && user.active_status === 1
+                          ).length
+                        : tab.value === "pending"
+                          ? tableData.filter(
+                              (user) =>
+                                user.is_active === 0 && user.active_status === 1
+                            ).length
+                          : tableData.filter((user) => user.active_status === 0)
+                              .length
                       : tableData.length}
                   </Label>
                 }
@@ -238,7 +246,7 @@ export default function UserListView() {
             filters={filters}
             onFilters={handleFilters}
             //
-            roleOptions={_roles}
+            roleOptions={_yogitechRole}
           />
 
           {canReset && (
@@ -372,7 +380,7 @@ function applyFilter({
   comparator,
   filters,
 }: {
-  inputData: IUserItem[];
+  inputData: IAccount[];
   comparator: (a: any, b: any) => number;
   filters: IUserTableFilters;
 }) {
@@ -390,16 +398,32 @@ function applyFilter({
 
   if (name) {
     inputData = inputData.filter(
-      (user) => user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1
+      (user) => user.username.toLowerCase().indexOf(name.toLowerCase()) !== -1
     );
   }
 
   if (status !== "all") {
-    inputData = inputData.filter((user) => user.status === status);
+    if (status === "pending") {
+      inputData = inputData.filter(
+        (account) => account.is_active === 0 && account.active_status === 1
+      );
+    }
+    if (status === "active") {
+      inputData = inputData.filter(
+        (account) => account.is_active === 1 && account.active_status === 1
+      );
+    }
+
+    if (status === "banned") {
+      inputData = inputData.filter((account) => account.active_status === 0);
+    }
   }
 
   if (role.length) {
-    inputData = inputData.filter((user) => role.includes(user.role));
+    const roles = inputData.map((user) =>
+      user.is_staff ? "Admin" : user.is_premium ? "Premium User" : "User"
+    );
+    inputData = inputData.filter((user, index) => role.includes(roles[index]));
   }
 
   return inputData;

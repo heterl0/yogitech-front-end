@@ -8,7 +8,7 @@ export const USER_STATUS_OPTIONS = [
   { value: "active", label: "Active" },
   { value: "pending", label: "Pending" },
   { value: "banned", label: "Banned" },
-  { value: "rejected", label: "Rejected" },
+  // { value: "rejected", label: "Rejected" },
 ];
 
 export const _userAbout = {
@@ -161,4 +161,16 @@ export const _userList = [...Array(20)].map((_, index) => ({
     (index % 3 && "banned") ||
     (index % 4 && "rejected") ||
     "active",
+}));
+
+export const _accountReal = [...Array(20)].map((_, index) => ({
+  id: index,
+  username: _mock.firstName(index),
+  email: _mock.email(index),
+  phone: _mock.phoneNumber(index),
+  is_active: _mock.boolean(index) ? 1 : 0,
+  is_staff: _mock.boolean(index + 1) ? 1 : 0,
+  is_premium: _mock.boolean(index + 2) ? 1 : 0,
+  active_status: _mock.boolean(index + 4) ? 1 : 0,
+  auth_provider: _mock.boolean(index + 3) ? "email" : "google",
 }));

@@ -15,7 +15,7 @@ import Iconify from "@/components/iconify";
 import { ConfirmDialog } from "@/components/custom-dialog";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
 
-import { IUserItem } from "@/types/user";
+import { IAccount } from "@/types/user";
 
 import UserQuickEditForm from "./user-quick-edit-form";
 
@@ -24,7 +24,7 @@ import UserQuickEditForm from "./user-quick-edit-form";
 type Props = {
   selected: boolean;
   onEditRow: VoidFunction;
-  row: IUserItem;
+  row: IAccount;
   onSelectRow: VoidFunction;
   onDeleteRow: VoidFunction;
 };
@@ -36,7 +36,20 @@ export default function UserTableRow({
   onSelectRow,
   onDeleteRow,
 }: Props) {
-  const { name, avatarUrl, company, role, status, email, phoneNumber } = row;
+  const {
+    username,
+    is_premium,
+    active_status,
+    is_active,
+    is_staff,
+    email,
+    phone,
+    auth_provider,
+  } = row;
+
+  const role = is_staff ? "Admin" : is_premium ? "Premium User" : "User";
+  const status =
+    active_status === 0 ? "banned" : is_active === 1 ? "active" : "pending";
 
   const confirm = useBoolean();
 
@@ -52,10 +65,10 @@ export default function UserTableRow({
         </TableCell>
 
         <TableCell sx={{ display: "flex", alignItems: "center" }}>
-          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+          <Avatar alt={username} sx={{ mr: 2 }} />
 
           <ListItemText
-            primary={name}
+            primary={username}
             secondary={email}
             primaryTypographyProps={{ typography: "body2" }}
             secondaryTypographyProps={{
@@ -65,11 +78,7 @@ export default function UserTableRow({
           />
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: "nowrap" }}>{phoneNumber}</TableCell>
-
-        <TableCell sx={{ whiteSpace: "nowrap" }}>{company}</TableCell>
-
-        <TableCell sx={{ whiteSpace: "nowrap" }}>{role}</TableCell>
+        <TableCell sx={{ whiteSpace: "nowrap" }}>{phone}</TableCell>
 
         <TableCell>
           <Label
@@ -84,6 +93,10 @@ export default function UserTableRow({
             {status}
           </Label>
         </TableCell>
+
+        <TableCell sx={{ whiteSpace: "nowrap" }}>{role}</TableCell>
+
+        <TableCell sx={{ whiteSpace: "nowrap" }}>{auth_provider}</TableCell>
 
         <TableCell align="right" sx={{ px: 1, whiteSpace: "nowrap" }}>
           <Tooltip title="Quick Edit" placement="top" arrow>

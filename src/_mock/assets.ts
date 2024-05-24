@@ -269,6 +269,9 @@ export const _roles = [
 ];
 
 // ----------------------------------------------------------------------
+export const _yogitechRole = ["Admin", "User", "Premium User"];
+
+// ----------------------------------------------------------------------
 
 export const _postTitles = [
   "10 Essential Tips for Healthy Living",
