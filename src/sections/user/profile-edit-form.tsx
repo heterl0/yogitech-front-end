@@ -136,9 +136,9 @@ export default function ProfileEditForm({ currentProfile }: Props) {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Grid container spacing={3} gap={1} className="!flex-nowrap">
+      <Grid container spacing={3} gap={3} className="!flex-nowrap">
         <Grid xs={12} md={4}>
-          <Card sx={{ p: 3, pt: 4 }}>
+          <Card sx={{ pb: 5, pt: 10, px: 3 }} className="flex flex-col gap-10">
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
                 name="avatar"
@@ -161,66 +161,64 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                 }
               />
             </Box>
-            <Grid container spacing={3} sx={{ p: 4 }}>
-              <Grid xs={6} justifyContent={"center"} alignItems={"center"}>
+            <Typography
+              variant="h6"
+              sx={{ color: "text.secondary", textAlign: "center" }}
+            >
+              {currentProfile?.exp} EXP
+            </Typography>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              paddingX={3}
+              paddingY={2}
+            >
+              <Stack direction={"column"} gap={0.5} width={1 / 3}>
                 <Typography
-                  variant="subtitle2"
-                  sx={{ mb: 0.5, textAlign: "center" }}
-                >
-                  Experience Point
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ color: "text.secondary", textAlign: "center" }}
-                >
-                  {currentProfile?.exp}
-                </Typography>
-              </Grid>
-              <Grid xs={6} justifyContent={"center"} alignItems={"center"}>
-                <Typography
-                  variant="subtitle2"
+                  variant="caption"
                   sx={{ mb: 0.5, textAlign: "center" }}
                 >
                   Point
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant="subtitle1"
                   sx={{ color: "text.secondary", textAlign: "center" }}
                 >
                   {currentProfile?.point}
                 </Typography>
-              </Grid>
-              <Grid xs={6} justifyContent={"center"} alignItems={"center"}>
+              </Stack>
+              <Stack direction={"column"} gap={0.5} width={1 / 3}>
                 <Typography
-                  variant="subtitle2"
+                  variant="caption"
                   sx={{ mb: 0.5, textAlign: "center" }}
                 >
                   Streak
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant="subtitle1"
                   sx={{ color: "text.secondary", textAlign: "center" }}
                 >
                   {currentProfile?.streak}
                 </Typography>
-              </Grid>
-              <Grid xs={6} justifyContent={"center"} alignItems={"center"}>
+              </Stack>
+              <Stack direction={"column"} gap={0.5} width={1 / 3}>
                 <Typography
-                  variant="subtitle2"
+                  variant="caption"
                   sx={{ mb: 0.5, textAlign: "center" }}
                 >
                   BMI
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant="subtitle1"
                   sx={{ color: "text.secondary", textAlign: "center" }}
                 >
                   <Label color={BmiScore(bmi).color}>
                     {fShortenNumber(bmi) || 0}
                   </Label>
                 </Typography>
-              </Grid>
-            </Grid>
+              </Stack>
+            </Stack>
           </Card>
         </Grid>
 
