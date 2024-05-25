@@ -1,24 +1,20 @@
 "use client";
 
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
 import { paths } from "@/routes/paths";
-import { RouterLink } from "@/routes/components";
 
-import { _userCards } from "@/_mock";
-
-import Iconify from "@/components/iconify";
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
 import UserCardList from "../user-card-list";
+import { useGetUserProfiles } from "@/api/user_profile";
 
 // ----------------------------------------------------------------------
 
 export default function UserCardsView() {
   const settings = useSettingsContext();
-
+  const { profiles: userProfiles } = useGetUserProfiles();
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
@@ -28,20 +24,10 @@ export default function UserCardsView() {
           { name: "User", href: paths.dashboard.user.root },
           { name: "Cards" },
         ]}
-        action={
-          <Button
-            component={RouterLink}
-            href={paths.dashboard.user.new}
-            variant="contained"
-            startIcon={<Iconify icon="mingcute:add-line" />}
-          >
-            New User
-          </Button>
-        }
         sx={{ mb: { xs: 3, md: 5 } }}
       />
 
-      <UserCardList users={_userCards} />
+      <UserCardList userProfiles={userProfiles} />
     </Container>
   );
 }

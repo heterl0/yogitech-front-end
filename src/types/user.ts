@@ -141,7 +141,7 @@ export type IProfile = {
   user: string;
   first_name: string;
   last_name: string;
-  point: string;
+  point: number;
   exp: number;
   streak: number;
   avatar: null | string;
@@ -149,7 +149,7 @@ export type IProfile = {
   birthdate: null | string;
   height: null | number;
   weight: null | number;
-  ibm: null | number;
+  bmi: null | number;
   created_at: string;
   updated_at: string;
   active_status: number;

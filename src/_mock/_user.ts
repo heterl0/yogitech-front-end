@@ -174,3 +174,23 @@ export const _accountReal = [...Array(20)].map((_, index) => ({
   active_status: _mock.boolean(index + 4) ? 1 : 0,
   auth_provider: _mock.boolean(index + 3) ? "email" : "google",
 }));
+
+export const _profileReal = [...Array(20)].map((_, index) => ({
+  id: index,
+  user: _mock.firstName(index),
+  first_name: _mock.firstName(index),
+  last_name: _mock.lastName(index),
+  point: _mock.number.nativeS(index),
+  streak: _mock.number.nativeS(index + 1),
+  exp: _mock.number.nativeL(index),
+  avatar: _mock.image.avatar(index),
+  gender: _mock.boolean(index) ? 1 : 0,
+  birthdate: _mock.time(index + 1),
+  height: _mock.number.nativeM(index + 2),
+  weight: _mock.number.nativeS(index + 4),
+  bmi: _mock.number.price(index + 3),
+  created_at: _mock.time(index + 5),
+  updated_at: _mock.time(index + 6),
+  active_status: _mock.boolean(index + 7) ? 1 : 0,
+  level: _mock.number.nativeS(index + 8) / 3,
+}));

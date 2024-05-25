@@ -3,39 +3,54 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+// import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import { alpha, useTheme } from "@mui/material/styles";
 
 import { fShortenNumber } from "@/utils/format-number";
 
-import { _socials } from "@/_mock";
+import { _mock } from "@/_mock";
 import { AvatarShape } from "@/assets/illustrations";
 
 import Image from "@/components/image";
-import Iconify from "@/components/iconify";
+// import Iconify from "@/components/iconify";
 
-import { IUserCard } from "@/types/user";
+import { IProfile } from "@/types/user";
+import { format } from "date-fns";
+// import { stepButtonClasses } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  user: IUserCard;
+  userProfile: IProfile;
 };
 
-export default function UserCard({ user }: Props) {
+export default function UserCard({ userProfile }: Props) {
   const theme = useTheme();
 
   const {
-    name,
-    coverUrl,
-    role,
-    totalFollowers,
-    totalPosts,
-    avatarUrl,
-    totalFollowing,
-  } = user;
+    first_name,
+    last_name,
+    id,
+    // bmi,
+    avatar,
+    birthdate,
+    gender,
+    streak,
+    point,
+    exp,
+    // user,
+    height,
+    weight,
+  } = userProfile;
+
+  const fullName = `${first_name} ${last_name}`;
+
+  const birthdateFormatted = format(
+    birthdate ? new Date(birthdate) : new Date(),
+    "dd/MM/yyyy"
+  );
 
   return (
     <Card sx={{ textAlign: "center" }}>
@@ -52,8 +67,8 @@ export default function UserCard({ user }: Props) {
         />
 
         <Avatar
-          alt={name}
-          src={avatarUrl}
+          alt={fullName}
+          src={avatar || ""}
           sx={{
             width: 64,
             height: 64,
@@ -67,8 +82,8 @@ export default function UserCard({ user }: Props) {
         />
 
         <Image
-          src={coverUrl}
-          alt={coverUrl}
+          src={_mock.image.cover(id % 30)}
+          alt={fullName}
           ratio="16/9"
           overlay={alpha(theme.palette.grey[900], 0.48)}
         />
@@ -76,8 +91,8 @@ export default function UserCard({ user }: Props) {
 
       <ListItemText
         sx={{ mt: 7, mb: 1 }}
-        primary={name}
-        secondary={role}
+        primary={fullName}
+        secondary={`${exp} EXP`}
         primaryTypographyProps={{ typography: "subtitle1" }}
         secondaryTypographyProps={{ component: "span", mt: 0.5 }}
       />
@@ -87,20 +102,18 @@ export default function UserCard({ user }: Props) {
         alignItems="center"
         justifyContent="center"
         sx={{ mb: 2.5 }}
+        gap={"12px"}
       >
-        {_socials.map((social) => (
-          <IconButton
-            key={social.name}
-            sx={{
-              color: social.color,
-              "&:hover": {
-                bgcolor: alpha(social.color, 0.08),
-              },
-            }}
-          >
-            <Iconify icon={social.icon} />
-          </IconButton>
-        ))}
+        <Typography
+          variant="caption"
+          sx={{ color: "text.secondary" }}
+        >{`Birthday: ${birthdateFormatted}`}</Typography>
+        <Typography
+          variant="caption"
+          sx={{ color: "text.secondary" }}
+        >{`Gender: ${
+          gender ? (gender === 1 ? "Male" : "Female") : "Not set"
+        }`}</Typography>
       </Stack>
 
       <Divider sx={{ borderStyle: "dashed" }} />
@@ -108,7 +121,7 @@ export default function UserCard({ user }: Props) {
       <Box
         display="grid"
         gridTemplateColumns="repeat(3, 1fr)"
-        sx={{ py: 3, typography: "subtitle1" }}
+        sx={{ py: 3, px: 3, typography: "subtitle1" }}
       >
         <div>
           <Typography
@@ -116,9 +129,9 @@ export default function UserCard({ user }: Props) {
             component="div"
             sx={{ mb: 0.5, color: "text.secondary" }}
           >
-            Follower
+            Streak
           </Typography>
-          {fShortenNumber(totalFollowers)}
+          {fShortenNumber(streak)}
         </div>
 
         <div>
@@ -127,10 +140,10 @@ export default function UserCard({ user }: Props) {
             component="div"
             sx={{ mb: 0.5, color: "text.secondary" }}
           >
-            Following
+            Point
           </Typography>
 
-          {fShortenNumber(totalFollowing)}
+          {fShortenNumber(point)}
         </div>
 
         <div>
@@ -139,9 +152,9 @@ export default function UserCard({ user }: Props) {
             component="div"
             sx={{ mb: 0.5, color: "text.secondary" }}
           >
-            Total Post
+            Height/Weight
           </Typography>
-          {fShortenNumber(totalPosts)}
+          {fShortenNumber(height)} / {fShortenNumber(weight)}
         </div>
       </Box>
     </Card>

@@ -1,16 +1,16 @@
 import Box from "@mui/material/Box";
 
-import { IUserCard } from "@/types/user";
+import { IProfile } from "@/types/user";
 
 import UserCard from "./user-card";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  users: IUserCard[];
+  userProfiles: IProfile[];
 };
 
-export default function UserCardList({ users }: Props) {
+export default function UserCardList({ userProfiles }: Props) {
   return (
     <Box
       gap={3}
@@ -21,8 +21,8 @@ export default function UserCardList({ users }: Props) {
         md: "repeat(3, 1fr)",
       }}
     >
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} />
+      {userProfiles.map((userProfile) => (
+        <UserCard key={userProfile.id} userProfile={userProfile} />
       ))}
     </Box>
   );
