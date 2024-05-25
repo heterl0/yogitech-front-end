@@ -26,7 +26,7 @@ type Props = {
   onEditRow: VoidFunction;
   row: IAccount;
   onSelectRow: VoidFunction;
-  onDeleteRow: VoidFunction;
+  onBanRow: VoidFunction;
 };
 
 export default function UserTableRow({
@@ -34,7 +34,7 @@ export default function UserTableRow({
   selected,
   onEditRow,
   onSelectRow,
-  onDeleteRow,
+  onBanRow,
 }: Props) {
   const {
     username,
@@ -96,7 +96,21 @@ export default function UserTableRow({
 
         <TableCell sx={{ whiteSpace: "nowrap" }}>{role}</TableCell>
 
-        <TableCell sx={{ whiteSpace: "nowrap" }}>{auth_provider}</TableCell>
+        <TableCell>
+          <Label
+            color={
+              (auth_provider === "email" && "success") ||
+              (auth_provider === "google" && "warning") ||
+              "default"
+            }
+          >
+            {auth_provider === "email"
+              ? "Email"
+              : auth_provider === "Google"
+                ? "Google"
+                : auth_provider}
+          </Label>
+        </TableCell>
 
         <TableCell align="right" sx={{ px: 1, whiteSpace: "nowrap" }}>
           <Tooltip title="Quick Edit" placement="top" arrow>
@@ -136,8 +150,8 @@ export default function UserTableRow({
           }}
           sx={{ color: "error.main" }}
         >
-          <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
+          <Iconify icon="solar:close-circle-bold" />
+          Ban
         </MenuItem>
 
         <MenuItem
@@ -154,11 +168,18 @@ export default function UserTableRow({
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
-        content="Are you sure want to delete?"
+        title="Ban User"
+        content="Are you sure want to ban?"
         action={
-          <Button variant="contained" color="error" onClick={onDeleteRow}>
-            Delete
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => {
+              onBanRow();
+              confirm.onFalse();
+            }}
+          >
+            Ban
           </Button>
         }
       />

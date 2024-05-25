@@ -4,23 +4,22 @@ import Container from "@mui/material/Container";
 
 import { paths } from "@/routes/paths";
 
-import { _userList } from "@/_mock";
-
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
-import UserNewEditForm from "../user-new-edit-form";
+import { useGetProfile } from "@/api/user_profile";
+import ProfileEditForm from "../profile-edit-form";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  id: string;
+  id: number;
 };
 
 export default function UserEditView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const currentUser = _userList.find((user) => user.id === id);
+  const { profile: currentProfile } = useGetProfile(id + "");
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
@@ -35,14 +34,14 @@ export default function UserEditView({ id }: Props) {
             name: "User",
             href: paths.dashboard.user.root,
           },
-          { name: currentUser?.name },
+          { name: currentProfile ? currentProfile.id + "" : "Edit" },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
       />
 
-      <UserNewEditForm currentUser={currentUser} />
+      {currentProfile && <ProfileEditForm currentProfile={currentProfile} />}
     </Container>
   );
 }

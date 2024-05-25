@@ -51,6 +51,8 @@ import UserTableToolbar from "../user/user-table-toolbar";
 import UserTableFiltersResult from "../user/user-table-filters-result";
 import UserTableRow from "../user/user-table-row";
 import { useGetAccounts } from "@/api/account";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { HttpStatusCode } from "axios";
 
 // ----------------------------------------------------------------------
 
@@ -126,17 +128,35 @@ export default function AccountListView() {
     setFilters(defaultFilters);
   }, []);
 
-  const handleDeleteRow = useCallback(
-    (id: number) => {
-      const deleteRow = tableData.filter((row) => row.id !== id);
+  const handleBanRow = useCallback(
+    async (id: number) => {
+      const response = await axiosInstance.patch(
+        `${endpoints.account.details}${id}/`,
+        {
+          active_status: 0,
+        }
+      );
+      if (response.status === HttpStatusCode.Ok) {
+        const deleteRow = tableData.map((row) => {
+          if (row.id === id) {
+            return {
+              ...row,
+              active_status: row.active_status === 0 ? 1 : 0,
+            };
+          }
+          return row;
+        });
 
-      enqueueSnackbar("Delete success!");
+        enqueueSnackbar("Ban success!");
 
-      setTableData(deleteRow);
+        setTableData(deleteRow);
+      } else {
+        enqueueSnackbar("Ban failed!", { variant: "error" });
+      }
 
-      table.onUpdatePageDeleteRow(dataInPage.length);
+      // table.onUpdatePageDeleteRow(dataInPage.length);
     },
-    [dataInPage.length, enqueueSnackbar, table, tableData]
+    [enqueueSnackbar, tableData]
   );
 
   const handleDeleteRows = useCallback(() => {
@@ -319,7 +339,7 @@ export default function AccountListView() {
                         row={row}
                         selected={table.selected.includes(row.id)}
                         onSelectRow={() => table.onSelectRow(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
+                        onBanRow={() => handleBanRow(row.id)}
                         onEditRow={() => handleEditRow(row.id)}
                       />
                     ))}

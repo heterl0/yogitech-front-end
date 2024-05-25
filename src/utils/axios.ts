@@ -62,5 +62,6 @@ export const endpoints = {
   },
   profile: {
     list: "/api/v1/user-profiles/",
+    details: (id: string) => `/api/v1/user-profiles/${id}/`,
   },
 };

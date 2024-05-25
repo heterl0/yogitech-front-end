@@ -25,3 +25,22 @@ export function useGetUserProfiles() {
 
   return memoizedValue;
 }
+// ----------------------------------------------------------------------
+
+export function useGetProfile(id: string) {
+  const URL = id ? [endpoints.profile.details(id)] : "";
+
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+
+  const memoizedValue = useMemo(
+    () => ({
+      profile: data as IProfile,
+      profileLoading: isLoading,
+      profileError: error,
+      profileValidating: isValidating,
+    }),
+    [data, error, isLoading, isValidating]
+  );
+
+  return memoizedValue;
+}
