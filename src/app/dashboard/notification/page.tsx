@@ -6,6 +6,6 @@ export const metadata = {
   title: "Dashboard: Notification List",
 };
 
-export default function UserListPage() {
+export default function NotificationListPage() {
   return <NotificationListView />;
 }

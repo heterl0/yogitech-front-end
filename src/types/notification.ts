@@ -28,6 +28,7 @@ export const NOTIFICATION_STATUS = [
 export type INotificationTableFilters = {
   name: string;
   status: string[];
+  type: string;
 };
 
 export type INotificationTableFilterValue = string | string[];

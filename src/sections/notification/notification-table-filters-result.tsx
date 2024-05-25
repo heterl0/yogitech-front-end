@@ -48,6 +48,10 @@ export default function NotificationTableFiltersResult({
     [filters.status, onFilters]
   );
 
+  const handleRemoveType = useCallback(() => {
+    onFilters("type", "all");
+  }, [onFilters]);
+
   return (
     <Stack spacing={1.5} {...other}>
       <Box sx={{ typography: "body2" }}>
@@ -64,6 +68,16 @@ export default function NotificationTableFiltersResult({
         flexWrap="wrap"
         alignItems="center"
       >
+        {filters.type !== "all" && (
+          <Block label="Type:">
+            <Chip
+              size="small"
+              label={filters.type}
+              onDelete={handleRemoveType}
+            />
+          </Block>
+        )}
+
         {!!filters.status.length && (
           <Block label="Role:">
             {filters.status.map((item: string) => (

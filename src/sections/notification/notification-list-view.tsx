@@ -15,7 +15,6 @@ import TableContainer from "@mui/material/TableContainer";
 
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
-import { RouterLink } from "@/routes/components";
 import { useBoolean } from "@/hooks/use-boolean";
 import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
@@ -45,8 +44,15 @@ import { useGetNotifications } from "@/api/notification";
 import NotificationTableToolbar from "./notification-table-toolbar";
 import NotificationTableFiltersResult from "./notification-table-filters-result";
 import NotificationTableRow from "./notification-table-row";
+import { alpha, Tab, Tabs } from "@mui/material";
+import Label from "@/components/label";
 
 // ----------------------------------------------------------------------
+const TYPE_OPTIONS = [
+  { value: "all", label: "All" },
+  { value: "admin", label: "Admin" },
+  { value: "user", label: "User" },
+];
 
 const TABLE_HEAD = [
   { id: "title", label: "Title", width: 560 },
@@ -59,6 +65,7 @@ const TABLE_HEAD = [
 const defaultFilters: INotificationTableFilters = {
   name: "",
   status: [],
+  type: "all",
 };
 
 // ----------------------------------------------------------------------
@@ -175,31 +182,31 @@ export default function NotificationListView() {
     [router]
   );
 
-  // const handleFilterStatus = useCallback(
-  //   (event: React.SyntheticEvent, newValue: string) => {
-  //     handleFilters("status", newValue);
-  //   },
-  //   [handleFilters]
-  // );
+  const handleFilterType = useCallback(
+    (event: React.SyntheticEvent, newValue: string) => {
+      handleFilters("type", newValue);
+    },
+    [handleFilters]
+  );
 
   return (
     <>
       <Container maxWidth={settings.themeStretch ? false : "lg"}>
         <CustomBreadcrumbs
-          heading="List"
+          heading="Notification"
           links={[
             { name: "Dashboard", href: paths.dashboard.root },
-            { name: "Account", href: paths.dashboard.account.root },
+            { name: "Notification", href: paths.dashboard.notification.root },
             { name: "List" },
           ]}
           action={
             <Button
-              component={RouterLink}
-              href={paths.dashboard.account.new}
+              // component={RouterLink}
+              // href={paths.dashboard.account.new}
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              New User
+              Create
             </Button>
           }
           sx={{
@@ -208,6 +215,49 @@ export default function NotificationListView() {
         />
 
         <Card>
+          <Tabs
+            value={filters.type}
+            onChange={handleFilterType}
+            sx={{
+              px: 2.5,
+              boxShadow: (theme) =>
+                `inset 0 -2px 0 0 ${alpha(theme.palette.grey[500], 0.08)}`,
+            }}
+          >
+            {TYPE_OPTIONS.map((tab) => (
+              <Tab
+                key={tab.value}
+                iconPosition="end"
+                value={tab.value}
+                label={tab.label}
+                icon={
+                  <Label
+                    variant={
+                      ((tab.value === "all" || tab.value === filters.type) &&
+                        "filled") ||
+                      "soft"
+                    }
+                    color={
+                      (tab.value === "admin" && "success") ||
+                      (tab.value === "user" && "warning") ||
+                      "default"
+                    }
+                  >
+                    {["admin", "user"].includes(tab.value)
+                      ? tab.value === "admin"
+                        ? tableData.filter(
+                            (notification) => notification.is_admin
+                          ).length
+                        : tableData.filter(
+                            (notification) => !notification.is_admin
+                          ).length
+                      : tableData.length}
+                  </Label>
+                }
+              />
+            ))}
+          </Tabs>
+
           <NotificationTableToolbar
             filters={filters}
             onFilters={handleFilters}
@@ -350,7 +400,7 @@ function applyFilter({
   comparator: (a: any, b: any) => number;
   filters: INotificationTableFilters;
 }) {
-  const { name, status } = filters;
+  const { name, status, type } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index] as const);
 
@@ -366,6 +416,12 @@ function applyFilter({
     inputData = inputData.filter(
       (notification) =>
         notification.title.toLowerCase().indexOf(name.toLowerCase()) !== -1
+    );
+  }
+
+  if (type !== "all") {
+    inputData = inputData.filter((notification) =>
+      type === "admin" ? notification.is_admin : !notification.is_admin
     );
   }
 
