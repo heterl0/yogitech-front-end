@@ -28,12 +28,34 @@ import { IAccount } from "@/types/user";
 import { MenuItem } from "@mui/material";
 import { USER_STATUS_OPTIONS } from "@/_mock";
 import UserCard from "../user/user-card";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { HttpStatusCode } from "axios";
 // import { getFieldFromHeaderElem } from "@mui/x-data-grid/utils/domUtils";
 
 // ----------------------------------------------------------------------
 
 type Props = {
   currentAccount?: IAccount;
+};
+
+type CreateData = {
+  username: string;
+  email: string;
+  password: string;
+  phone: string;
+  is_active?: boolean;
+  is_staff?: boolean;
+  is_premium?: boolean;
+  active_status?: number;
+  auth_provider: string;
+};
+
+type UpdateData = {
+  phone: string;
+  is_active?: boolean;
+  is_staff?: boolean;
+  is_premium?: boolean;
+  active_status?: number;
 };
 
 export default function AccountNewEditForm({ currentAccount }: Props) {
@@ -51,6 +73,7 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
     status: Yup.string().required("Status is required"),
     role: Yup.string().required("Role is required"),
     provider: Yup.string().required("Provider is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   const defaultValues = useMemo(
@@ -70,6 +93,7 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
           ? "Premium User"
           : "User",
       provider: currentAccount?.auth_provider || "",
+      password: currentAccount ? " " : "",
     }),
     [currentAccount]
   );
@@ -80,7 +104,6 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
   });
 
   const {
-    reset,
     watch,
     control,
     handleSubmit,
@@ -91,11 +114,85 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar(currentAccount ? "Update success!" : "Create success!");
-      router.push(paths.dashboard.user.list);
-      console.info("DATA", data);
+      if (currentAccount) {
+        const updateData: UpdateData = {
+          phone: data.phone,
+        };
+        if (data.status === "banned") {
+          updateData.active_status = 0;
+        }
+        if (data.status === "active") {
+          updateData.is_active = true;
+          updateData.active_status = 1;
+        }
+        if (data.status === "pending") {
+          updateData.is_active = false;
+          updateData.active_status = 1;
+        }
+        if (data.role === "Admin") {
+          updateData.is_staff = true;
+        }
+        if (data.role === "Premium User") {
+          updateData.is_premium = true;
+        }
+        if (data.role === "User") {
+          updateData.is_staff = false;
+          updateData.is_premium = false;
+        }
+        const response = await axiosInstance.patch(
+          `${endpoints.account.details}${currentAccount?.id}/`,
+          updateData
+        );
+        if (response.status === HttpStatusCode.Ok) {
+          enqueueSnackbar("Update success!");
+        } else {
+          enqueueSnackbar(`Update failed! ${response.data}`, {
+            variant: "error",
+          });
+        }
+      } else {
+        const createData: CreateData = {
+          username: data.username,
+          email: data.email,
+          phone: data.phone,
+          password: data.password,
+          auth_provider: data.provider,
+        };
+
+        if (data.status === "banned") {
+          createData.active_status = 0;
+        }
+        if (data.status === "active") {
+          createData.is_active = true;
+          createData.active_status = 1;
+        }
+        if (data.status === "pending") {
+          createData.is_active = false;
+          createData.active_status = 1;
+        }
+        if (data.role === "Admin") {
+          createData.is_staff = true;
+        }
+        if (data.role === "Premium User") {
+          createData.is_premium = true;
+        }
+        if (data.role === "User") {
+          createData.is_staff = false;
+          createData.is_premium = false;
+        }
+        const response = await axiosInstance.post(
+          `${endpoints.account.create}`,
+          createData
+        );
+        if (response.status === HttpStatusCode.Created) {
+          enqueueSnackbar("Create success!");
+          router.push(paths.dashboard.account.root);
+        } else {
+          enqueueSnackbar(`Create failed! ${response.data}`, {
+            variant: "error",
+          });
+        }
+      }
     } catch (error) {
       console.error(error);
     }
@@ -104,36 +201,43 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
-        <Grid xs={12} md={4}>
-          <Card sx={{ pt: 3, pb: 3, px: 3 }}>
-            {currentAccount && (
-              <Label
-                color={
-                  (values.status === "active" && "success") ||
-                  (values.status === "banned" && "error") ||
-                  "warning"
-                }
-                sx={{ position: "absolute", bottom: 228, right: 36, zIndex: 9 }}
-              >
-                {values.status}
-              </Label>
-            )}
+        {currentAccount && (
+          <Grid xs={12} md={4}>
+            <Card sx={{ pt: 3, pb: 3, px: 3 }}>
+              {currentAccount && (
+                <Label
+                  color={
+                    (values.status === "active" && "success") ||
+                    (values.status === "banned" && "error") ||
+                    "warning"
+                  }
+                  sx={{
+                    position: "absolute",
+                    bottom: 228,
+                    right: 36,
+                    zIndex: 9,
+                  }}
+                >
+                  {values.status}
+                </Label>
+              )}
 
-            {currentAccount && (
-              <UserCard userProfile={currentAccount.profile} />
-            )}
+              {currentAccount && (
+                <UserCard userProfile={currentAccount.profile} />
+              )}
 
-            {/* {currentAccount && (
+              {/* {currentAccount && (
               <Stack justifyContent="center" alignItems="center" sx={{ mt: 3 }}>
                 <Button variant="soft" color="error">
                   Delete User
                 </Button>
               </Stack>
             )} */}
-          </Card>
-        </Grid>
+            </Card>
+          </Grid>
+        )}
 
-        <Grid xs={12} md={8}>
+        <Grid xs={12} md={currentAccount ? 8 : 12}>
           <Card sx={{ p: 3 }}>
             <Box
               rowGap={3}
@@ -154,6 +258,14 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                 disabled={currentAccount ? true : false}
                 label="Email Address"
               />
+
+              {!currentAccount && (
+                <RHFTextField
+                  name="password"
+                  type="password"
+                  label="Password"
+                />
+              )}
 
               <RHFSelect name="status" label="Status">
                 {USER_STATUS_OPTIONS.map((status) => (

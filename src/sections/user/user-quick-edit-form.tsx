@@ -24,6 +24,8 @@ import FormProvider, {
 } from "@/components/hook-form";
 
 import { IAccount } from "@/types/user";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { HttpStatusCode } from "axios";
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +33,14 @@ type Props = {
   open: boolean;
   onClose: VoidFunction;
   currentUser?: IAccount;
+};
+
+type UpdateData = {
+  phone: string;
+  is_active?: boolean;
+  is_staff?: boolean;
+  is_premium?: boolean;
+  active_status?: number;
 };
 
 export default function UserQuickEditForm({
@@ -85,12 +95,44 @@ export default function UserQuickEditForm({
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const updateData: UpdateData = {
+        phone: data.phone,
+      };
+      if (data.status === "banned") {
+        updateData.active_status = 0;
+      }
+      if (data.status === "active") {
+        updateData.is_active = true;
+        updateData.active_status = 1;
+      }
+      if (data.status === "pending") {
+        updateData.is_active = false;
+        updateData.active_status = 1;
+      }
+      if (data.role === "Admin") {
+        updateData.is_staff = true;
+      }
+      if (data.role === "Premium User") {
+        updateData.is_premium = true;
+      }
+      if (data.role === "User") {
+        updateData.is_staff = false;
+        updateData.is_premium = false;
+      }
+      const response = await axiosInstance.patch(
+        `${endpoints.account.details}${currentUser?.id}/`,
+        updateData
+      );
+      if (response.status === HttpStatusCode.Ok) {
+        onClose();
+        enqueueSnackbar("Update success!");
+        reset();
+      } else {
+        enqueueSnackbar("Update failed!", { variant: "error" });
+      }
+    } catch (error) {
       reset();
       onClose();
-      enqueueSnackbar("Update success!");
-      console.info("DATA", data);
-    } catch (error) {
       console.error(error);
     }
   });
@@ -151,7 +193,7 @@ export default function UserQuickEditForm({
                 </MenuItem>
               ))}
             </RHFSelect>
-            <RHFSelect name="provider" label="Provider">
+            <RHFSelect name="provider" label="Provider" disabled>
               {["Email", "Google"].map((value) => (
                 <MenuItem key={value} value={value.toLowerCase()}>
                   {value}

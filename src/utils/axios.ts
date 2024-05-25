@@ -57,6 +57,7 @@ export const endpoints = {
   },
   account: {
     list: "/api/v1/users/",
+    create: "/api/v1/user/",
     details: "/api/v1/users/",
   },
   profile: {
