@@ -18,6 +18,8 @@ import Image from "@/components/image";
 
 import { IProfile } from "@/types/user";
 import { format } from "date-fns";
+import { Link, Tooltip } from "@mui/material";
+import { paths } from "@/routes/paths";
 // import { stepButtonClasses } from "@mui/material";
 
 // ----------------------------------------------------------------------
@@ -34,7 +36,7 @@ export default function UserCard({ userProfile }: Props) {
     last_name,
     id,
     // bmi,
-    avatar,
+    avatar_url,
     birthdate,
     gender,
     streak,
@@ -65,22 +67,24 @@ export default function UserCard({ userProfile }: Props) {
             position: "absolute",
           }}
         />
-
-        <Avatar
-          alt={fullName}
-          src={avatar || ""}
-          sx={{
-            width: 64,
-            height: 64,
-            zIndex: 11,
-            left: 0,
-            right: 0,
-            bottom: -32,
-            mx: "auto",
-            position: "absolute",
-          }}
-        />
-
+        <Link href={paths.dashboard.user.edit(id)}>
+          <Tooltip title="Edit Profile" placement="left">
+            <Avatar
+              alt={fullName}
+              src={avatar_url || ""}
+              sx={{
+                width: 64,
+                height: 64,
+                zIndex: 11,
+                left: 0,
+                right: 0,
+                bottom: -32,
+                mx: "auto",
+                position: "absolute",
+              }}
+            />
+          </Tooltip>
+        </Link>
         <Image
           src={_mock.image.cover(id % 30)}
           alt={fullName}
@@ -131,7 +135,7 @@ export default function UserCard({ userProfile }: Props) {
           >
             Streak
           </Typography>
-          {fShortenNumber(streak)}
+          {fShortenNumber(streak) === "" ? 0 : fShortenNumber(streak)}
         </div>
 
         <div>
@@ -143,7 +147,7 @@ export default function UserCard({ userProfile }: Props) {
             Point
           </Typography>
 
-          {fShortenNumber(point)}
+          {fShortenNumber(point) === "" ? 0 : fShortenNumber(point)}
         </div>
 
         <div>

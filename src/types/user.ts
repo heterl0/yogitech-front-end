@@ -144,7 +144,7 @@ export type IProfile = {
   point: number;
   exp: number;
   streak: number;
-  avatar: null | string;
+  avatar_url: null | string;
   gender: number;
   birthdate: null | string;
   height: null | number;

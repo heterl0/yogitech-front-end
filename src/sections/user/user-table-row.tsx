@@ -45,6 +45,7 @@ export default function UserTableRow({
     email,
     phone,
     auth_provider,
+    profile: { avatar_url },
   } = row;
 
   const role = is_staff ? "Admin" : is_premium ? "Premium User" : "User";
@@ -65,7 +66,7 @@ export default function UserTableRow({
         </TableCell>
 
         <TableCell sx={{ display: "flex", alignItems: "center" }}>
-          <Avatar alt={username} sx={{ mr: 2 }} />
+          <Avatar alt={username} src={avatar_url || ""} sx={{ mr: 2 }} />
 
           <ListItemText
             primary={username}

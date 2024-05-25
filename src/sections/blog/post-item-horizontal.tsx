@@ -13,7 +13,6 @@ import { RouterLink } from "@/routes/components";
 import { useResponsive } from "@/hooks/use-responsive";
 
 import { fDate } from "@/utils/format-time";
-// import { fShortenNumber } from "@/utils/format-number";
 
 import Label from "@/components/label";
 import Image from "@/components/image";

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -16,13 +16,23 @@ import { fData } from "@/utils/format-number";
 
 import { useSnackbar } from "@/components/snackbar";
 import FormProvider, {
+  RHFSelect,
   RHFTextField,
   RHFUploadAvatar,
 } from "@/components/hook-form";
 
 import { IProfile } from "@/types/user";
-import { Grid } from "@mui/material";
-
+import { Grid, MenuItem } from "@mui/material";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { LEVELS } from "@/constants/level";
+import { GENDER } from "@/constants/gender";
+// import { set } from "lodash";
+import { fShortenNumber } from "@/utils/format-number";
+import Label from "@/components/label";
+import BmiScore from "../../constants/bmi-score";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { HttpStatusCode } from "axios";
+import { paths } from "@/routes/paths";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -32,21 +42,19 @@ type Props = {
 export default function ProfileEditForm({ currentProfile }: Props) {
   const router = useRouter();
 
+  const [date, setDate] = useState(
+    currentProfile?.birthdate ? new Date(currentProfile?.birthdate) : new Date()
+  );
+
   const { enqueueSnackbar } = useSnackbar();
 
   const ProfileSchema = Yup.object().shape({
     first_name: Yup.string().required("First name is required"),
     last_name: Yup.string().required("Last name is required"),
-    point: Yup.number().required("Point is required"),
-    exp: Yup.number().required("Exp is required"),
-    streak: Yup.number().required("Streak is required"),
-    avatar: Yup.string().required("Avatar is required"),
-    gender: Yup.string().required("Gender is require"),
-    birthdate: Yup.string().required("Birthdate is required"),
+    avatar: Yup.mixed<any>().nullable(),
+    gender: Yup.number().required("Gender is require"),
     height: Yup.number().required("Height is required"),
     weight: Yup.number().required("Weight is required"),
-    bmi: Yup.number().required("BMI is required"),
-    active_status: Yup.number().required("Active status is required"),
     level: Yup.number().required("Level is required"),
   });
 
@@ -54,21 +62,11 @@ export default function ProfileEditForm({ currentProfile }: Props) {
     () => ({
       first_name: currentProfile?.first_name || "",
       last_name: currentProfile?.last_name || "",
-      point: currentProfile?.point || 0,
-      exp: currentProfile?.exp || 0,
-      streak: currentProfile?.streak || 0,
-      avatar: currentProfile?.avatar || "",
-      gender: currentProfile?.gender
-        ? currentProfile.gender === 0
-          ? "Female"
-          : "Male"
-        : "Not set",
-      birthdate: currentProfile?.birthdate || "",
+      avatar: currentProfile?.avatar_url || "",
+      gender: currentProfile?.gender || -1,
       height: currentProfile?.height || 0,
       weight: currentProfile?.weight || 0,
-      bmi: currentProfile?.bmi || 0,
-      active_status: currentProfile?.active_status || 0,
-      level: currentProfile?.level,
+      level: currentProfile?.level || 1,
     }),
     [currentProfile]
   );
@@ -79,7 +77,6 @@ export default function ProfileEditForm({ currentProfile }: Props) {
   });
 
   const {
-    reset,
     watch,
     setValue,
     handleSubmit,
@@ -87,13 +84,35 @@ export default function ProfileEditForm({ currentProfile }: Props) {
   } = methods;
 
   const values = watch();
+  const bmi = useMemo(() => {
+    const height = values.height / 100;
+    const weight = values.weight;
+    return weight / (height * height);
+  }, [values.height, values.weight]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar(currentProfile ? "Update success!" : "Create success!");
-      // router.push(paths.dashboard.user.list);
+      const formData = new FormData();
+      formData.append("first_name", data.first_name);
+      formData.append("last_name", data.last_name);
+      formData.append("gender", data.gender + "");
+      formData.append("height", data.height + "");
+      formData.append("weight", data.weight + "");
+      formData.append("level", data.level + "");
+      formData.append("birthdate", date.toISOString());
+      formData.append("avatar", data.avatar);
+      formData.append("bmi", fShortenNumber(bmi) + "");
+      const response = await axiosInstance.patch(
+        endpoints.profile.details(currentProfile?.id + ""),
+        formData
+      );
+
+      if (response.status === HttpStatusCode.Ok) {
+        enqueueSnackbar("Update success!");
+        router.push(paths.dashboard.user.root);
+      } else {
+        enqueueSnackbar("Update failed!", { variant: "error" });
+      }
       console.info("DATA", data);
     } catch (error) {
       console.error(error);
@@ -108,9 +127,9 @@ export default function ProfileEditForm({ currentProfile }: Props) {
         preview: URL.createObjectURL(file),
       });
 
-      // if (file) {
-      //   setValue("avatar", newFile, { shouldValidate: true });
-      // }
+      if (file) {
+        setValue("avatar", newFile, { shouldValidate: true });
+      }
     },
     [setValue]
   );
@@ -122,7 +141,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
           <Card sx={{ p: 3, pt: 4 }}>
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
-                name="avatarUrl"
+                name="avatar"
                 maxSize={3145728}
                 onDrop={handleDrop}
                 helperText={
@@ -196,7 +215,9 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                   variant="body2"
                   sx={{ color: "text.secondary", textAlign: "center" }}
                 >
-                  {currentProfile?.bmi}
+                  <Label color={BmiScore(bmi).color}>
+                    {fShortenNumber(bmi) || 0}
+                  </Label>
                 </Typography>
               </Grid>
             </Grid>
@@ -216,10 +237,35 @@ export default function ProfileEditForm({ currentProfile }: Props) {
             >
               <RHFTextField name="last_name" label="Last Name" />
               <RHFTextField name="first_name" label="First Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="height" label="Height" type="number" />
-              <RHFTextField name="weight" label="Weight" type="number" />
-              <RHFTextField name="level" label="Level" type="number" />
+              <RHFSelect name="gender" label="Gender">
+                {GENDER.map(({ value, label }) => (
+                  <MenuItem key={value} value={value}>
+                    {label}
+                  </MenuItem>
+                ))}
+              </RHFSelect>
+
+              <DesktopDatePicker
+                label="Birth Date"
+                name="birthdate"
+                value={date}
+                onChange={(value) => setDate(value as Date)}
+                maxDate={new Date()}
+                slotProps={{
+                  textField: {
+                    fullWidth: true,
+                  },
+                }}
+              />
+              <RHFTextField name="height" label="Height (cm)" type="number" />
+              <RHFTextField name="weight" label="Weight (kg)" type="number" />
+              <RHFSelect name="level" label="Level">
+                {LEVELS.map(({ value, label }) => (
+                  <MenuItem key={value} value={value}>
+                    {label}
+                  </MenuItem>
+                ))}
+              </RHFSelect>
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
