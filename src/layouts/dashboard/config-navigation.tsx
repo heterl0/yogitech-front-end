@@ -104,13 +104,6 @@ export function useNavData() {
             title: t("user"),
             path: paths.dashboard.user.root,
             icon: ICONS.userGroup,
-            // children: [
-            //   { title: t("profile"), path: paths.dashboard.user.root },
-            //   { title: t("cards"), path: paths.dashboard.user.cards },
-            //   { title: t("list"), path: paths.dashboard.user.list },
-            //   { title: t("create"), path: paths.dashboard.user.new },
-            //   { title: t("account"), path: paths.dashboard.user.account },
-            // ],
           },
           {
             title: t("account"),
@@ -122,19 +115,12 @@ export function useNavData() {
             ],
           },
 
-          // PRODUCT
-          // {
-          //   title: t("product"),
-          //   path: paths.dashboard.product.root,
-          //   icon: ICONS.product,
-          //   children: [
-          //     { title: t("list"), path: paths.dashboard.product.root },
-          //     {
-          //       title: t("details"),
-          //     },
-          //     { title: t("create"), path: paths.dashboard.product.new },
-          //   ],
-          // },
+          // Notification
+          {
+            title: t("notification"),
+            path: paths.dashboard.notification.root,
+            icon: ICONS.calendar,
+          },
 
           // ORDER
           // {

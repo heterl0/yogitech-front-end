@@ -64,4 +64,8 @@ export const endpoints = {
     list: "/api/v1/user-profiles/",
     details: (id: string) => `/api/v1/user-profiles/${id}/`,
   },
+  notification: {
+    list: "/api/v1/notification/",
+    create: "/api/v1/notification/create/",
+  },
 };

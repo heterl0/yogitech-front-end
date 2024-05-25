@@ -3,7 +3,7 @@ import AccountListView from "@/sections/account/account-list-view";
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: "Dashboard: User List",
+  title: "Dashboard: Account List",
 };
 
 export default function UserListPage() {
