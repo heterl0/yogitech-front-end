@@ -4,12 +4,13 @@ import Container from "@mui/material/Container";
 
 import { paths } from "@/routes/paths";
 
-import { _accountReal } from "@/_mock";
+// import { _accountReal } from "@/_mock";
 
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
 import AccountNewEditForm from "./account-new-edit-form";
+import { useGetAccount } from "@/api/account";
 
 // ----------------------------------------------------------------------
 
@@ -19,8 +20,7 @@ type Props = {
 
 export default function AccountEditView({ id }: Props) {
   const settings = useSettingsContext();
-
-  const currentUser = _accountReal.find((user) => user.id === id);
+  const { account: currentAccount } = useGetAccount(id + "");
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
@@ -35,14 +35,14 @@ export default function AccountEditView({ id }: Props) {
             name: "Account",
             href: paths.dashboard.account.root,
           },
-          { name: currentUser?.username },
+          { name: currentAccount?.username },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
       />
 
-      <AccountNewEditForm currentUser={currentUser} />
+      {currentAccount && <AccountNewEditForm currentAccount={currentAccount} />}
     </Container>
   );
 }

@@ -2,7 +2,7 @@
 "use client";
 
 import isEqual from "lodash/isEqual";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -22,7 +22,7 @@ import { RouterLink } from "@/routes/components";
 
 import { useBoolean } from "@/hooks/use-boolean";
 
-import { _accountReal, _yogitechRole, USER_STATUS_OPTIONS } from "@/_mock";
+import { _yogitechRole, USER_STATUS_OPTIONS } from "@/_mock";
 
 import Label from "@/components/label";
 import Iconify from "@/components/iconify";
@@ -50,6 +50,7 @@ import {
 import UserTableToolbar from "../user/user-table-toolbar";
 import UserTableFiltersResult from "../user/user-table-filters-result";
 import UserTableRow from "../user/user-table-row";
+import { useGetAccounts } from "@/api/account";
 
 // ----------------------------------------------------------------------
 
@@ -83,7 +84,9 @@ export default function AccountListView() {
 
   const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState<IAccount[]>(_accountReal);
+  const { accounts } = useGetAccounts();
+
+  const [tableData, setTableData] = useState<IAccount[]>([]);
 
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -103,6 +106,10 @@ export default function AccountListView() {
   const canReset = !isEqual(defaultFilters, filters);
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
+
+  useEffect(() => {
+    setTableData(accounts);
+  }, [accounts]);
 
   const handleFilters = useCallback(
     (name: string, value: IUserTableFilterValue) => {
@@ -225,13 +232,12 @@ export default function AccountListView() {
                     {["active", "pending", "banned"].includes(tab.value)
                       ? tab.value === "active"
                         ? tableData.filter(
-                            (user) =>
-                              user.is_active === 1 && user.active_status === 1
+                            (user) => user.is_active && user.active_status === 1
                           ).length
                         : tab.value === "pending"
                           ? tableData.filter(
                               (user) =>
-                                user.is_active === 0 && user.active_status === 1
+                                !user.is_active && user.active_status === 1
                             ).length
                           : tableData.filter((user) => user.active_status === 0)
                               .length
@@ -405,12 +411,12 @@ function applyFilter({
   if (status !== "all") {
     if (status === "pending") {
       inputData = inputData.filter(
-        (account) => account.is_active === 0 && account.active_status === 1
+        (account) => !account.is_active && account.active_status === 1
       );
     }
     if (status === "active") {
       inputData = inputData.filter(
-        (account) => account.is_active === 1 && account.active_status === 1
+        (account) => account.is_active && account.active_status === 1
       );
     }
 

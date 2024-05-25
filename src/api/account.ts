@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { fetcher, endpoints } from "@/utils/axios";
 
 import { IBlog } from "@/types/blog";
-import { IUserAccount } from "@/types/user";
+import { IAccount } from "@/types/user";
 
 // ----------------------------------------------------------------------
 
@@ -15,11 +15,11 @@ export function useGetAccounts() {
 
   const memoizedValue = useMemo(
     () => ({
-      posts: (data as IUserAccount[]) || [],
-      postsLoading: isLoading,
-      postsError: error,
-      postsValidating: isValidating,
-      postsEmpty: !isLoading && !data?.length,
+      accounts: (data as IAccount[]) || [],
+      accountsLoading: isLoading,
+      accountsError: error,
+      accountsValidating: isValidating,
+      accountsEmpty: !isLoading && !data?.length,
     }),
     [data, error, isLoading, isValidating]
   );
@@ -29,17 +29,17 @@ export function useGetAccounts() {
 
 // ----------------------------------------------------------------------
 
-export function useGetPost(id: string) {
-  const URL = id ? [`${endpoints.post.details}${id}/`] : "";
+export function useGetAccount(id: string) {
+  const URL = id ? [`${endpoints.account.details}${id}/`] : "";
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
-      post: data as IBlog,
-      postLoading: isLoading,
-      postError: error,
-      postValidating: isValidating,
+      account: data as IAccount,
+      accountLoading: isLoading,
+      accountError: error,
+      accountValidating: isValidating,
     }),
     [data, error, isLoading, isValidating]
   );

@@ -57,6 +57,7 @@ export const endpoints = {
   },
   account: {
     list: "/api/v1/users/",
+    details: "/api/v1/users/",
   },
   product: {
     list: "/api/product/list",

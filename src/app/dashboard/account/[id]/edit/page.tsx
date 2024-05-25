@@ -1,4 +1,3 @@
-import { _accountReal } from "@/_mock/_user";
 import AccountEditView from "@/sections/account/account-edit-view";
 
 // ----------------------------------------------------------------------
@@ -20,8 +19,10 @@ export default function UserEditPage({ params }: Props) {
   return <AccountEditView id={id} />;
 }
 
-export async function generateStaticParams() {
-  return _accountReal.map((user) => ({
-    id: user.id + "",
-  }));
-}
+// export async function generateStaticParams() {
+//   const res = await axiosInstance.get(endpoints.account.list);
+//   const data = res.data as IAccount[];
+//   return data.map((account) => ({
+//     id: account.id + "",
+//   }));
+// }

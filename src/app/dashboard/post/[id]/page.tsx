@@ -21,7 +21,7 @@ export default function PostDetailsPage({ params }: Props) {
 }
 
 // export async function generateStaticParams() {
-//   const res = await axios.get(endpoints.post.list);
+//   const res = await axiosInstance.get(endpoints.post.list);
 
 //   return res.data.posts.map((post: { title: string }) => ({
 //     title: paramCase(post.title),

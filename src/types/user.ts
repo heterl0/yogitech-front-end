@@ -136,14 +136,43 @@ export type IUserAccountChangePassword = {
   confirmNewPassword: string;
 };
 
+export type IProfile = {
+  id: number;
+  user: string;
+  first_name: string;
+  last_name: string;
+  point: string;
+  exp: number;
+  streak: number;
+  avatar: null | string;
+  gender: number;
+  birthdate: null | string;
+  height: null | number;
+  weight: null | number;
+  ibm: null | number;
+  created_at: string;
+  updated_at: string;
+  active_status: number;
+  level: null | number;
+};
+
+export type IFollowing = {
+  id: number;
+  follower: number;
+  followed: number;
+};
+
 export type IAccount = {
   id: number;
   username: string;
   email: string;
   phone: string;
-  is_active: number;
-  is_staff: number;
-  is_premium: number;
+  is_active: boolean;
+  is_staff: boolean;
+  is_premium: boolean;
   active_status: number;
   auth_provider: string;
+  profile: IProfile;
+  following: IFollowing[];
+  last_login: null | string;
 };

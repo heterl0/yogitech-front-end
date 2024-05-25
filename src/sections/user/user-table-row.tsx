@@ -49,7 +49,7 @@ export default function UserTableRow({
 
   const role = is_staff ? "Admin" : is_premium ? "Premium User" : "User";
   const status =
-    active_status === 0 ? "banned" : is_active === 1 ? "active" : "pending";
+    active_status === 0 ? "banned" : is_active ? "active" : "pending";
 
   const confirm = useBoolean();
 

@@ -59,9 +59,9 @@ export default function UserQuickEditForm({
       status:
         currentUser?.active_status === 0
           ? "banned"
-          : currentUser?.is_active === 0
-            ? "pending"
-            : "active",
+          : currentUser?.is_active
+            ? "active"
+            : "pending",
       role: currentUser?.is_staff
         ? "Admin"
         : currentUser?.is_premium
