@@ -27,6 +27,7 @@ import FormProvider, {
 import { IAccount } from "@/types/user";
 import { MenuItem } from "@mui/material";
 import { USER_STATUS_OPTIONS } from "@/_mock";
+import UserCard from "../user/user-card";
 // import { getFieldFromHeaderElem } from "@mui/x-data-grid/utils/domUtils";
 
 // ----------------------------------------------------------------------
@@ -104,7 +105,7 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
         <Grid xs={12} md={4}>
-          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
+          <Card sx={{ pt: 3, pb: 3, px: 3 }}>
             {currentAccount && (
               <Label
                 color={
@@ -112,10 +113,14 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                   (values.status === "banned" && "error") ||
                   "warning"
                 }
-                sx={{ position: "absolute", top: 24, right: 24 }}
+                sx={{ position: "absolute", bottom: 228, right: 36, zIndex: 9 }}
               >
                 {values.status}
               </Label>
+            )}
+
+            {currentAccount && (
+              <UserCard userProfile={currentAccount.profile} />
             )}
 
             {/* {currentAccount && (
@@ -216,7 +221,7 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                     </Typography>
                   </>
                 }
-                sx={{ mx: 0, mb: 3, width: 1, justifyContent: "space-between" }}
+                sx={{ mx: 0, mb: 0, width: 1, justifyContent: "space-between" }}
               />
 
               {currentAccount && (
@@ -254,7 +259,7 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                   }
                   sx={{
                     mx: 0,
-                    mb: 3,
+                    mb: 0,
                     width: 1,
                     justifyContent: "space-between",
                   }}
