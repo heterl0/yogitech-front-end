@@ -47,6 +47,7 @@ const ICONS = {
   ecommerce: icon("ic_ecommerce"),
   analytics: icon("ic_analytics"),
   dashboard: icon("ic_dashboard"),
+  bill: icon("ic_bill"),
 };
 
 // ----------------------------------------------------------------------
@@ -155,16 +156,16 @@ export function useNavData() {
             ],
           },
 
-          // JOB
-          // {
-          //   title: t("job"),
-          //   path: paths.dashboard.job.root,
-          //   icon: ICONS.job,
-          //   children: [
-          //     { title: t("list"), path: paths.dashboard.job.root },
-          //     { title: t("create"), path: paths.dashboard.job.new },
-          //   ],
-          // },
+          // Exercise
+          {
+            title: t("pose_exercise"),
+            path: paths.dashboard.exercise.root,
+            icon: ICONS.bill,
+            children: [
+              { title: t("pose"), path: paths.dashboard.exercise.pose },
+              { title: t("exercise"), path: paths.dashboard.exercise.root },
+            ],
+          },
 
           // TOUR
           // {

@@ -105,11 +105,13 @@ export const paths = {
       root: `${ROOTS.DASHBOARD}/order`,
       details: (id: string) => `${ROOTS.DASHBOARD}/order/${id}`,
     },
-    job: {
-      root: `${ROOTS.DASHBOARD}/job`,
-      new: `${ROOTS.DASHBOARD}/job/new`,
-      details: (id: string) => `${ROOTS.DASHBOARD}/job/${id}`,
-      edit: (id: string) => `${ROOTS.DASHBOARD}/job/${id}/edit`,
+    exercise: {
+      root: `${ROOTS.DASHBOARD}/exercise`,
+      new: `${ROOTS.DASHBOARD}/exercise/new`,
+      pose: `${ROOTS.DASHBOARD}/exercise/pose`,
+      pNew: `${ROOTS.DASHBOARD}/exercise/pose/new`,
+      details: (id: string) => `${ROOTS.DASHBOARD}/exercise/${id}`,
+      edit: (id: string) => `${ROOTS.DASHBOARD}/exercise/${id}/edit`,
     },
     tour: {
       root: `${ROOTS.DASHBOARD}/tour`,
