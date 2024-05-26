@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 
-import { useMockedUser } from "@/hooks/use-mocked-user";
+// import { useMockedUser } from "@/hooks/use-mocked-user";
 
 import { useAuthContext } from "@/auth/hooks";
 
@@ -22,18 +22,18 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
-const OPTIONS = [
+const OPTIONS = (id: number, profileId: number) => [
   {
     label: "Home",
     linkTo: "/",
   },
   {
     label: "Profile",
-    linkTo: paths.dashboard.user.profile,
+    linkTo: paths.dashboard.user.edit(profileId),
   },
   {
     label: "Settings",
-    linkTo: paths.dashboard.user.account,
+    linkTo: paths.dashboard.account.edit(id),
   },
 ];
 
@@ -42,9 +42,9 @@ const OPTIONS = [
 export default function AccountPopover() {
   const router = useRouter();
 
-  const { user } = useMockedUser();
+  // const { user } = useMockedUser();
 
-  const { logout } = useAuthContext();
+  const { logout, user } = useAuthContext();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -85,8 +85,8 @@ export default function AccountPopover() {
         }}
       >
         <Avatar
-          src={user?.photoURL}
-          alt={user?.displayName}
+          src={user?.profile?.avatar_url}
+          alt={user?.username}
           sx={{
             width: 36,
             height: 36,
@@ -104,7 +104,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ p: 2, pb: 1.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {user?.displayName}
+            {user?.username || "User"}
           </Typography>
 
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
@@ -115,7 +115,7 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: "dashed" }} />
 
         <Stack sx={{ p: 1 }}>
-          {OPTIONS.map((option) => (
+          {OPTIONS(user?.id, user?.profile.id).map((option) => (
             <MenuItem
               key={option.label}
               onClick={() => handleClickItem(option.linkTo)}

@@ -1,176 +1,176 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import isEqual from "lodash/isEqual";
-import { useState, useCallback } from "react";
+// import isEqual from "lodash/isEqual";
+// import { useState, useCallback } from "react";
 
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Card from "@mui/material/Card";
-import Table from "@mui/material/Table";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import { alpha } from "@mui/material/styles";
-import Container from "@mui/material/Container";
-import TableBody from "@mui/material/TableBody";
-import IconButton from "@mui/material/IconButton";
-import TableContainer from "@mui/material/TableContainer";
+// import Tab from "@mui/material/Tab";
+// import Tabs from "@mui/material/Tabs";
+// import Card from "@mui/material/Card";
+// import Table from "@mui/material/Table";
+// import Button from "@mui/material/Button";
+// import Tooltip from "@mui/material/Tooltip";
+// import { alpha } from "@mui/material/styles";
+// import Container from "@mui/material/Container";
+// import TableBody from "@mui/material/TableBody";
+// import IconButton from "@mui/material/IconButton";
+// import TableContainer from "@mui/material/TableContainer";
 
-import { paths } from "@/routes/paths";
-import { useRouter } from "@/routes/hooks";
-import { RouterLink } from "@/routes/components";
+// import { paths } from "@/routes/paths";
+// import { useRouter } from "@/routes/hooks";
+// import { RouterLink } from "@/routes/components";
 
-import { useBoolean } from "@/hooks/use-boolean";
+// import { useBoolean } from "@/hooks/use-boolean";
 
-import { _roles, _userList, USER_STATUS_OPTIONS } from "@/_mock";
+// import { _roles, _userList, USER_STATUS_OPTIONS } from "@/_mock";
 
-import Label from "@/components/label";
-import Iconify from "@/components/iconify";
-import Scrollbar from "@/components/scrollbar";
-import { useSnackbar } from "@/components/snackbar";
-import { ConfirmDialog } from "@/components/custom-dialog";
-import { useSettingsContext } from "@/components/settings";
-import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-import {
-  useTable,
-  emptyRows,
-  TableNoData,
-  getComparator,
-  TableEmptyRows,
-  TableHeadCustom,
-  TableSelectedAction,
-  TablePaginationCustom,
-} from "@/components/table";
+// import Label from "@/components/label";
+// import Iconify from "@/components/iconify";
+// import Scrollbar from "@/components/scrollbar";
+// import { useSnackbar } from "@/components/snackbar";
+// import { ConfirmDialog } from "@/components/custom-dialog";
+// import { useSettingsContext } from "@/components/settings";
+// import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
+// import {
+//   useTable,
+//   emptyRows,
+//   TableNoData,
+//   getComparator,
+//   TableEmptyRows,
+//   TableHeadCustom,
+//   TableSelectedAction,
+//   TablePaginationCustom,
+// } from "@/components/table";
 
-import {
-  IUserItem,
-  IUserTableFilters,
-  IUserTableFilterValue,
-} from "@/types/user";
+// import {
+//   IUserItem,
+//   IUserTableFilters,
+//   IUserTableFilterValue,
+// } from "@/types/user";
 
-import UserTableRow from "../user-table-row";
-import UserTableToolbar from "../user-table-toolbar";
-import UserTableFiltersResult from "../user-table-filters-result";
+// import UserTableRow from "../user-table-row";
+// import UserTableToolbar from "../user-table-toolbar";
+// import UserTableFiltersResult from "../user-table-filters-result";
 
-// ----------------------------------------------------------------------
+// // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: "all", label: "All" }, ...USER_STATUS_OPTIONS];
+// const STATUS_OPTIONS = [{ value: "all", label: "All" }, ...USER_STATUS_OPTIONS];
 
-const TABLE_HEAD = [
-  { id: "name", label: "Name" },
-  { id: "phoneNumber", label: "Phone Number", width: 180 },
-  { id: "company", label: "Company", width: 220 },
-  { id: "role", label: "Role", width: 180 },
-  { id: "status", label: "Status", width: 100 },
-  { id: "", width: 88 },
-];
+// const TABLE_HEAD = [
+//   { id: "name", label: "Name" },
+//   { id: "phoneNumber", label: "Phone Number", width: 180 },
+//   { id: "company", label: "Company", width: 220 },
+//   { id: "role", label: "Role", width: 180 },
+//   { id: "status", label: "Status", width: 100 },
+//   { id: "", width: 88 },
+// ];
 
-const defaultFilters: IUserTableFilters = {
-  name: "",
-  role: [],
-  status: "all",
-};
+// const defaultFilters: IUserTableFilters = {
+//   name: "",
+//   role: [],
+//   status: "all",
+// };
 
 // ----------------------------------------------------------------------
 
 export default function UserListView() {
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
 
-  const table = useTable();
+  // const table = useTable();
 
-  const settings = useSettingsContext();
+  // const settings = useSettingsContext();
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const confirm = useBoolean();
+  // const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState<IUserItem[]>(_userList);
+  // const [tableData, setTableData] = useState<IUserItem[]>(_userList);
 
-  const [filters, setFilters] = useState(defaultFilters);
+  // const [filters, setFilters] = useState(defaultFilters);
 
-  const dataFiltered = applyFilter({
-    inputData: tableData,
-    comparator: getComparator(table.order, table.orderBy),
-    filters,
-  });
+  // const dataFiltered = applyFilter({
+  //   inputData: tableData,
+  //   comparator: getComparator(table.order, table.orderBy),
+  //   filters,
+  // });
 
-  const dataInPage = dataFiltered.slice(
-    table.page * table.rowsPerPage,
-    table.page * table.rowsPerPage + table.rowsPerPage
-  );
+  // const dataInPage = dataFiltered.slice(
+  //   table.page * table.rowsPerPage,
+  //   table.page * table.rowsPerPage + table.rowsPerPage
+  // );
 
-  const denseHeight = table.dense ? 56 : 56 + 20;
+  // const denseHeight = table.dense ? 56 : 56 + 20;
 
-  const canReset = !isEqual(defaultFilters, filters);
+  // const canReset = !isEqual(defaultFilters, filters);
 
-  const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
+  // const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
-  const handleFilters = useCallback(
-    (name: string, value: IUserTableFilterValue) => {
-      table.onResetPage();
-      setFilters((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    },
-    [table]
-  );
+  // const handleFilters = useCallback(
+  //   (name: string, value: IUserTableFilterValue) => {
+  //     table.onResetPage();
+  //     setFilters((prevState) => ({
+  //       ...prevState,
+  //       [name]: value,
+  //     }));
+  //   },
+  //   [table]
+  // );
 
-  const handleResetFilters = useCallback(() => {
-    setFilters(defaultFilters);
-  }, []);
+  // const handleResetFilters = useCallback(() => {
+  //   setFilters(defaultFilters);
+  // }, []);
 
-  const handleDeleteRow = useCallback(
-    (id: string) => {
-      const deleteRow = tableData.filter((row) => row.id !== id);
+  // const handleDeleteRow = useCallback(
+  //   (id: string) => {
+  //     const deleteRow = tableData.filter((row) => row.id !== id);
 
-      enqueueSnackbar("Delete success!");
+  //     enqueueSnackbar("Delete success!");
 
-      setTableData(deleteRow);
+  //     setTableData(deleteRow);
 
-      table.onUpdatePageDeleteRow(dataInPage.length);
-    },
-    [dataInPage.length, enqueueSnackbar, table, tableData]
-  );
+  //     table.onUpdatePageDeleteRow(dataInPage.length);
+  //   },
+  //   [dataInPage.length, enqueueSnackbar, table, tableData]
+  // );
 
-  const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter(
-      (row) => !table.selected.includes(row.id)
-    );
+  // const handleDeleteRows = useCallback(() => {
+  //   const deleteRows = tableData.filter(
+  //     (row) => !table.selected.includes(row.id)
+  //   );
 
-    enqueueSnackbar("Delete success!");
+  //   enqueueSnackbar("Delete success!");
 
-    setTableData(deleteRows);
+  //   setTableData(deleteRows);
 
-    table.onUpdatePageDeleteRows({
-      totalRowsInPage: dataInPage.length,
-      totalRowsFiltered: dataFiltered.length,
-    });
-  }, [
-    dataFiltered.length,
-    dataInPage.length,
-    enqueueSnackbar,
-    table,
-    tableData,
-  ]);
+  //   table.onUpdatePageDeleteRows({
+  //     totalRowsInPage: dataInPage.length,
+  //     totalRowsFiltered: dataFiltered.length,
+  //   });
+  // }, [
+  //   dataFiltered.length,
+  //   dataInPage.length,
+  //   enqueueSnackbar,
+  //   table,
+  //   tableData,
+  // ]);
 
-  const handleEditRow = useCallback(
-    (id: string) => {
-      router.push(paths.dashboard.user.edit(id));
-    },
-    [router]
-  );
+  // const handleEditRow = useCallback(
+  //   (id: string) => {
+  //     router.push(paths.dashboard.user.edit(id));
+  //   },
+  //   [router]
+  // );
 
-  const handleFilterStatus = useCallback(
-    (event: React.SyntheticEvent, newValue: string) => {
-      handleFilters("status", newValue);
-    },
-    [handleFilters]
-  );
+  // const handleFilterStatus = useCallback(
+  //   (event: React.SyntheticEvent, newValue: string) => {
+  //     handleFilters("status", newValue);
+  //   },
+  //   [handleFilters]
+  // );
 
   return (
     <>
-      <Container maxWidth={settings.themeStretch ? false : "lg"}>
+      {/* <Container maxWidth={settings.themeStretch ? false : "lg"}>
         <CustomBreadcrumbs
           heading="List"
           links={[
@@ -361,47 +361,47 @@ export default function UserListView() {
             Delete
           </Button>
         }
-      />
+      /> */}
     </>
   );
 }
 
 // ----------------------------------------------------------------------
 
-function applyFilter({
-  inputData,
-  comparator,
-  filters,
-}: {
-  inputData: IUserItem[];
-  comparator: (a: any, b: any) => number;
-  filters: IUserTableFilters;
-}) {
-  const { name, status, role } = filters;
+// function applyFilter({
+//   inputData,
+//   comparator,
+//   filters,
+// }: {
+//   inputData: IUserItem[];
+//   comparator: (a: any, b: any) => number;
+//   filters: IUserTableFilters;
+// }) {
+//   const { name, status, role } = filters;
 
-  const stabilizedThis = inputData.map((el, index) => [el, index] as const);
+//   const stabilizedThis = inputData.map((el, index) => [el, index] as const);
 
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
+//   stabilizedThis.sort((a, b) => {
+//     const order = comparator(a[0], b[0]);
+//     if (order !== 0) return order;
+//     return a[1] - b[1];
+//   });
 
-  inputData = stabilizedThis.map((el) => el[0]);
+//   inputData = stabilizedThis.map((el) => el[0]);
 
-  if (name) {
-    inputData = inputData.filter(
-      (user) => user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1
-    );
-  }
+//   if (name) {
+//     inputData = inputData.filter(
+//       (user) => user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1
+//     );
+//   }
 
-  if (status !== "all") {
-    inputData = inputData.filter((user) => user.status === status);
-  }
+//   if (status !== "all") {
+//     inputData = inputData.filter((user) => user.status === status);
+//   }
 
-  if (role.length) {
-    inputData = inputData.filter((user) => role.includes(user.role));
-  }
+//   if (role.length) {
+//     inputData = inputData.filter((user) => role.includes(user.role));
+//   }
 
-  return inputData;
-}
+//   return inputData;
+// }
