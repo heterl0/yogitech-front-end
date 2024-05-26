@@ -67,5 +67,7 @@ export const endpoints = {
   notification: {
     list: "/api/v1/notification/",
     create: "/api/v1/notification/create/",
+    update: (id: string) => `/api/v1/notification/${id}/`,
+    delete: (id: string) => `/api/v1/notification/${id}/`,
   },
 };

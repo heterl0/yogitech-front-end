@@ -16,6 +16,7 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 
 import { format } from "date-fns";
 import { INotification } from "@/types/notification";
+import NotificationQuickCreateEditForm from "./notification-quick-create-edit-form";
 
 // ----------------------------------------------------------------------
 
@@ -94,11 +95,13 @@ export default function NotificationTableRow({
         </TableCell>
       </TableRow>
 
-      {/* <UserQuickEditForm
-        currentUser={row}
-        open={quickEdit.value}
-        onClose={quickEdit.onFalse}
-      /> */}
+      {row && (
+        <NotificationQuickCreateEditForm
+          currentNotification={row}
+          open={quickEdit.value}
+          onClose={quickEdit.onFalse}
+        />
+      )}
 
       <CustomPopover
         open={popover.open}

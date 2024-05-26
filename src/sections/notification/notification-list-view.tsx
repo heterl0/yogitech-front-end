@@ -46,6 +46,7 @@ import NotificationTableFiltersResult from "./notification-table-filters-result"
 import NotificationTableRow from "./notification-table-row";
 import { alpha, Tab, Tabs } from "@mui/material";
 import Label from "@/components/label";
+import NotificationQuickCreateEditForm from "./notification-quick-create-edit-form";
 
 // ----------------------------------------------------------------------
 const TYPE_OPTIONS = [
@@ -78,6 +79,8 @@ export default function NotificationListView() {
   const settings = useSettingsContext();
 
   const router = useRouter();
+
+  const quickCreate = useBoolean();
 
   const confirm = useBoolean();
 
@@ -203,6 +206,7 @@ export default function NotificationListView() {
             <Button
               // component={RouterLink}
               // href={paths.dashboard.account.new}
+              onClick={quickCreate.onTrue}
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
@@ -384,6 +388,10 @@ export default function NotificationListView() {
             Delete
           </Button>
         }
+      />
+      <NotificationQuickCreateEditForm
+        open={quickCreate.value}
+        onClose={quickCreate.onFalse}
       />
     </>
   );

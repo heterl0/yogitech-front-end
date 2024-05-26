@@ -99,7 +99,7 @@ export const paths = {
       //   },
     },
     notification: {
-      root: `${ROOTS.DASHBOARD}/notifcation`,
+      root: `${ROOTS.DASHBOARD}/notification`,
     },
     order: {
       root: `${ROOTS.DASHBOARD}/order`,
