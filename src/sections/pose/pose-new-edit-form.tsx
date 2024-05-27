@@ -2,7 +2,7 @@
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useMemo, useEffect, useCallback } from "react";
+import { useMemo, useEffect, useCallback, useState, ChangeEvent } from "react";
 
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
@@ -29,12 +29,16 @@ import FormProvider, {
 } from "@/components/hook-form";
 
 import { IMuscle, IPose } from "@/types/pose";
-import { UploadBox } from "@/components/upload";
-import Iconify from "@/components/iconify";
-import { MenuItem } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import { LEVELS } from "@/constants/level";
 import { useGetMuscles } from "@/api/muscle";
-
+import {
+  FilesetResolver,
+  NormalizedLandmark,
+  PoseLandmarker,
+} from "@mediapipe/tasks-vision";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { HttpStatusCode } from "axios";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -43,10 +47,15 @@ type Props = {
 
 export default function PoseNewEditForm({ currentPose }: Props) {
   const router = useRouter();
-
+  const [keypoints, setKeypoints] = useState<NormalizedLandmark[]>([]);
+  const [active, setActive] = useState(
+    currentPose ? currentPose.active_status === 1 : true
+  );
   const { muscles } = useGetMuscles();
-
+  const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
+
+  const [model, setModel] = useState<PoseLandmarker>();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -58,17 +67,19 @@ export default function PoseNewEditForm({ currentPose }: Props) {
     muscles: Yup.array().min(1, "Must have at least 1 guide"),
     duration: Yup.number().required("Duration is required"),
     level: Yup.number().required("Level is required"),
+    calories: Yup.number().required("Calories is required"),
   });
 
   const defaultValues = useMemo(
     () => ({
       name: currentPose?.name || "",
       instruction: currentPose?.instruction || "",
-      image: currentPose?.image || "",
+      image: currentPose?.image_url || "",
       //
       muscles: currentPose?.muscles || [],
       duration: currentPose?.duration || 0,
       level: currentPose?.level || 1,
+      calories: currentPose?.calories || 0,
     }),
     [currentPose]
   );
@@ -97,18 +108,109 @@ export default function PoseNewEditForm({ currentPose }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar(currentPose ? "Update success!" : "Create success!");
-      router.push(paths.dashboard.tour.root);
-      console.info("DATA", data);
+      if (!currentPose) {
+        const json = JSON.stringify(keypoints);
+
+        // Create a Blob from the JSON string
+        const blob = new Blob([json], { type: "application/json" });
+
+        // Create a FormData object
+        const formData = new FormData();
+
+        // Append the Blob to the FormData
+        formData.append("file", blob, "results.json");
+        const fileResponse = await axiosInstance.post(
+          endpoints.media.uploadFile,
+          formData
+        );
+
+        const formData2 = new FormData();
+        formData2.append("name", data.name);
+        formData2.append("instruction", data.instruction);
+        formData2.append("image", data.image);
+        data.muscles?.forEach((m) =>
+          formData2.append("muscle_ids", m.id.toString())
+        );
+        formData2.append("duration", data.duration + "");
+        formData2.append("level", data.level + "");
+        formData2.append("keypoint", fileResponse.data.file_url);
+        formData2.append("calories", data.calories + "");
+        formData2.append("active_status", active ? "1" : "0");
+
+        const response = await axiosInstance.post(
+          endpoints.pose.create,
+          formData2
+        );
+        if (response.status === HttpStatusCode.Created) {
+          enqueueSnackbar("Create success!");
+          setTimeout(() => router.push(paths.dashboard.exercise.pose), 2000);
+        } else {
+          enqueueSnackbar("Create failed!");
+        }
+      } else {
+        let keypoint_url = currentPose.keypoint;
+        if (checkImageChange) {
+          const json = JSON.stringify(keypoints);
+
+          // Create a Blob from the JSON string
+          const blob = new Blob([json], { type: "application/json" });
+
+          // Create a FormData object
+          const formData = new FormData();
+
+          // Append the Blob to the FormData
+          formData.append("file", blob, "results.json");
+          const fileResponse = await axiosInstance.post(
+            endpoints.media.uploadFile,
+            formData
+          );
+          keypoint_url = fileResponse.data.file_url;
+        }
+        const formData2 = new FormData();
+        formData2.append("name", data.name);
+        formData2.append("instruction", data.instruction);
+        formData2.append("image", data.image);
+        data.muscles?.forEach((m) =>
+          formData2.append("muscle_ids", m.id.toString())
+        );
+        formData2.append("duration", data.duration + "");
+        formData2.append("level", data.level + "");
+        formData2.append("keypoint", keypoint_url);
+        formData2.append("calories", data.calories + "");
+        formData2.append("active_status", active ? "1" : "0");
+        const response = await axiosInstance.post(
+          endpoints.pose.create,
+          formData2
+        );
+        if (response.status === HttpStatusCode.Created) {
+          enqueueSnackbar("Upload success!");
+        } else {
+          enqueueSnackbar("Upload failed!");
+        }
+      }
     } catch (error) {
       console.error(error);
     }
   });
 
+  useEffect(() => {
+    const loadModel = async () => {
+      const vision = await FilesetResolver.forVisionTasks(
+        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+      );
+      const poseLandmark = await PoseLandmarker.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath: "/models/pose_landmarker_heavy.task",
+        },
+        runningMode: "IMAGE",
+      });
+      setModel(poseLandmark);
+    };
+    loadModel();
+  }, []);
+
   const handleDrop = useCallback(
-    (acceptedFiles: File[]) => {
+    async (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
 
       const newFile = Object.assign(file, {
@@ -117,9 +219,21 @@ export default function PoseNewEditForm({ currentPose }: Props) {
 
       if (file) {
         setValue("image", newFile, { shouldValidate: true });
+        setCheckImageChange(true);
+
+        const image = new Image();
+        image.src = newFile.preview;
+        await new Promise((resolve) => (image.onload = resolve));
+
+        // Extract keypoints from the image
+        if (model) {
+          const results = model.detect(image);
+          setKeypoints(results.landmarks[0]);
+          console.log(results);
+        }
       }
     },
-    [setValue]
+    [model, setKeypoints, setValue]
   );
 
   const handleRemoveFile = useCallback(() => {
@@ -158,7 +272,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
               <Typography variant="subtitle2">Image</Typography>
               <RHFUpload
                 thumbnail
-                name="images"
+                name="image"
                 maxSize={3145728}
                 onDrop={handleDrop}
                 onRemove={handleRemoveFile}
@@ -167,19 +281,15 @@ export default function PoseNewEditForm({ currentPose }: Props) {
             </Stack>
             <Stack spacing={1.5}>
               <Typography variant="subtitle2">Keypoint</Typography>
-              <UploadBox
+              <TextField
+                multiline
                 disabled
-                placeholder={
-                  <Stack spacing={0.5} alignItems="center">
-                    <Iconify icon="eva:cloud-upload-fill" width={40} />
-                    <Typography variant="body2">Upload .json file</Typography>
-                  </Stack>
-                }
+                maxRows={8}
+                value={JSON.stringify(keypoints)}
                 sx={{
                   flexGrow: 1,
                   height: "auto",
                   py: 2.5,
-                  mb: 3,
                   width: "100%",
                 }}
               />
@@ -212,7 +322,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
               Length
             </Typography>
 
-            <RHFTextField name="length" label="Length" type="number" />
+            <RHFTextField name="duration" label="Length" type="number" />
 
             <RHFSelect name="level" label="Level">
               {LEVELS.map((status) => (
@@ -257,106 +367,6 @@ export default function PoseNewEditForm({ currentPose }: Props) {
                 ))
               }
             />
-
-            {/* <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Available</Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Controller
-                  name="available.startDate"
-                  control={control}
-                  render={({ field, fieldState: { error } }) => (
-                    <DatePicker
-                      {...field}
-                      format="dd/MM/yyyy"
-                      slotProps={{
-                        textField: {
-                          fullWidth: true,
-                          error: !!error,
-                          helperText: error?.message,
-                        },
-                      }}
-                    />
-                  )}
-                />
-                <Controller
-                  name="available.endDate"
-                  control={control}
-                  render={({ field, fieldState: { error } }) => (
-                    <DatePicker
-                      {...field}
-                      format="dd/MM/yyyy"
-                      slotProps={{
-                        textField: {
-                          fullWidth: true,
-                          error: !!error,
-                          helperText: error?.message,
-                        },
-                      }}
-                    />
-                  )}
-                />
-              </Stack>
-            </Stack>
-
-            <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Duration</Typography>
-              <RHFTextField
-                name="durations"
-                placeholder="Ex: 2 days, 4 days 3 nights..."
-              />
-            </Stack>
-
-            <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Destination</Typography>
-              <RHFAutocomplete
-                name="destination"
-                type="country"
-                placeholder="+ Destination"
-                options={countries.map((option) => option.label)}
-                getOptionLabel={(option) => option}
-              />
-            </Stack>
-
-            <Stack spacing={1}>
-              <Typography variant="subtitle2">Services</Typography>
-              <RHFMultiCheckbox
-                name="services"
-                options={TOUR_SERVICE_OPTIONS}
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(2, 1fr)",
-                }}
-              />
-            </Stack>
-
-            <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Tags</Typography>
-              <RHFAutocomplete
-                name="tags"
-                placeholder="+ Tags"
-                multiple
-                freeSolo
-                options={_tags.map((option) => option)}
-                getOptionLabel={(option) => option}
-                renderOption={(props, option) => (
-                  <li {...props} key={option}>
-                    {option}
-                  </li>
-                )}
-                renderTags={(selected, getTagProps) =>
-                  selected.map((option, index) => (
-                    <Chip
-                      {...getTagProps({ index })}
-                      key={option}
-                      label={option}
-                      size="small"
-                      color="info"
-                      variant="soft"
-                    />
-                  ))
-                }
-              />
-            </Stack> */}
           </Stack>
         </Card>
       </Grid>
@@ -368,8 +378,16 @@ export default function PoseNewEditForm({ currentPose }: Props) {
       {mdUp && <Grid md={4} />}
       <Grid xs={12} md={8} sx={{ display: "flex", alignItems: "center" }}>
         <FormControlLabel
-          control={<Switch defaultChecked />}
-          label="Publish"
+          control={
+            <Switch
+              value={active}
+              onChange={(
+                event: ChangeEvent<HTMLInputElement>,
+                checked: boolean
+              ) => setActive(checked)}
+            />
+          }
+          label="Active"
           sx={{ flexGrow: 1, pl: 3 }}
         />
 

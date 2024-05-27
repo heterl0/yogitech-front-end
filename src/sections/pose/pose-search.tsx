@@ -103,7 +103,7 @@ export default function PoseSearch({
             <Avatar
               key={pose.id}
               alt={pose.name}
-              src={pose.image}
+              src={pose.image_url}
               variant="rounded"
               sx={{
                 width: 48,

@@ -82,4 +82,8 @@ export const endpoints = {
     update: (id: string) => `/api/v1/muscles/${id}/`,
     delete: (id: string) => `/api/v1/muscles/${id}/`,
   },
+  media: {
+    uploadFile: "/api/v1/media/file/upload",
+    uploadImage: "/api/v1/media/upload/image",
+  },
 };

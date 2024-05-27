@@ -6,6 +6,6 @@ export const metadata = {
   title: "Dashboard: Create New Pose",
 };
 
-export default function CreatePosePage() {
+export default async function CreatePosePage() {
   return <PoseCreateView />;
 }

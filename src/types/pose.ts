@@ -12,9 +12,9 @@ export type IPose = {
   id: number;
   muscles: IMuscle[];
   name: string;
-  image: string;
+  image_url: string;
   duration: number;
-  calories: string;
+  calories: number;
   keypoint: string;
   instruction: string;
   created_at: string;

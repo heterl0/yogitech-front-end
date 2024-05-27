@@ -31,7 +31,7 @@ type Props = {
 export default function PoseItem({ pose, onView, onEdit, onDelete }: Props) {
   const popover = usePopover();
 
-  const { id, name, image, duration, level, created_at } = pose;
+  const { id, name, image_url, duration, level, created_at } = pose;
 
   // const renderRating = (
   //   <Stack
@@ -93,8 +93,8 @@ export default function PoseItem({ pose, onView, onEdit, onDelete }: Props) {
         {/* {renderPrice}
         {renderRating} */}
         <Image
-          alt={image}
-          src={image}
+          alt={image_url}
+          src={image_url}
           sx={{ borderRadius: 1, height: 164, width: 1 }}
         />
       </Stack>
