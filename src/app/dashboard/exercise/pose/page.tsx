@@ -1,11 +1,11 @@
-import { TourListView } from "@/sections/tour/view";
-
 // ----------------------------------------------------------------------
 
+import PoseListView from "@/sections/pose/view/pose-list-view";
+
 export const metadata = {
-  title: "Dashboard: Tour List",
+  title: "Dashboard: Pose List",
 };
 
 export default function TourListPage() {
-  return <TourListView />;
+  return <PoseListView />;
 }

@@ -70,4 +70,16 @@ export const endpoints = {
     update: (id: string) => `/api/v1/notification/${id}/`,
     delete: (id: string) => `/api/v1/notification/${id}/`,
   },
+  pose: {
+    list: "/api/v1/poses/",
+    create: "/api/v1/poses/",
+    update: (id: string) => `/api/v1/poses/${id}/`,
+    delete: (id: string) => `/api/v1/poses/${id}/`,
+  },
+  muscle: {
+    list: "/api/v1/muscles/",
+    create: "/api/v1/muscles/",
+    update: (id: string) => `/api/v1/muscles/${id}/`,
+    delete: (id: string) => `/api/v1/muscles/${id}/`,
+  },
 };

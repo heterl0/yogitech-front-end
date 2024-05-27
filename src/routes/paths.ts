@@ -110,6 +110,7 @@ export const paths = {
       new: `${ROOTS.DASHBOARD}/exercise/new`,
       pose: `${ROOTS.DASHBOARD}/exercise/pose`,
       pNew: `${ROOTS.DASHBOARD}/exercise/pose/new`,
+      pEdit: (id: string) => `${ROOTS.DASHBOARD}/exercise/pose/${id}/edit`,
       details: (id: string) => `${ROOTS.DASHBOARD}/exercise/${id}`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/exercise/${id}/edit`,
     },

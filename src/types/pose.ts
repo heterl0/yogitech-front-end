@@ -1,4 +1,4 @@
-export type Muscle = {
+export type IMuscle = {
   id: number;
   name: string;
   image: string;
@@ -8,9 +8,9 @@ export type Muscle = {
   active_status: number;
 };
 
-export type Pose = {
+export type IPose = {
   id: number;
-  muscles: Muscle[];
+  muscles: IMuscle[];
   name: string;
   image: string;
   duration: number;
@@ -22,3 +22,16 @@ export type Pose = {
   active_status: number;
   level: number;
 };
+
+export type IPoseFilters = {
+  muscles: IMuscle[];
+  status: number;
+  level: number;
+};
+
+export type IPoseFilterValue = number | IMuscle[] | null;
+
+export const POSE_SORT_OPTIONS = [
+  { value: "latest", label: "Latest" },
+  { value: "oldest", label: "Oldest" },
+];
