@@ -12,8 +12,6 @@ import { RouterLink } from "@/routes/components";
 
 import { useBoolean } from "@/hooks/use-boolean";
 
-import { _tours } from "@/_mock";
-
 import Iconify from "@/components/iconify";
 import EmptyContent from "@/components/empty-content";
 import { useSettingsContext } from "@/components/settings";
