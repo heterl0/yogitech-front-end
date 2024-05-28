@@ -2,22 +2,20 @@
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
 
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 
-import { fDateTime } from "@/utils/format-time";
-// import { fCurrency } from "@/utils/format-number";
+import { fSeconds } from "@/utils/format-number";
 
 import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 // import { shortDateLabel } from "@/components/custom-date-range-picker";
-import CustomPopover, { usePopover } from "@/components/custom-popover";
-
 import { IPose } from "@/types/pose";
+import { LEVELS } from "@/constants/level";
+import { Tooltip } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +25,8 @@ type Props = {
   onDelete: VoidFunction;
 };
 
-export default function PoseItem({ pose, onEdit, onDelete }: Props) {
-  const popover = usePopover();
-
-  const { id, name, image_url, duration, level, created_at } = pose;
+export default function PoseItem({ pose, onEdit }: Props) {
+  const { id, name, image_url, duration, level } = pose;
 
   // const renderRating = (
   //   <Stack
@@ -52,33 +48,25 @@ export default function PoseItem({ pose, onEdit, onDelete }: Props) {
   //   </Stack>
   // );
 
-  // const renderPrice = (
-  //   <Stack
-  //     direction="row"
-  //     alignItems="center"
-  //     sx={{
-  //       top: 8,
-  //       left: 8,
-  //       zIndex: 9,
-  //       borderRadius: 1,
-  //       bgcolor: "grey.800",
-  //       position: "absolute",
-  //       p: "2px 6px 2px 4px",
-  //       color: "common.white",
-  //       typography: "subtitle2",
-  //     }}
-  //   >
-  //     {!!priceSale && (
-  //       <Box
-  //         component="span"
-  //         sx={{ color: "grey.500", mr: 0.25, textDecoration: "line-through" }}
-  //       >
-  //         {fCurrency(priceSale)}
-  //       </Box>
-  //     )}
-  //     {fCurrency(price)}
-  //   </Stack>
-  // );
+  const renderPrice = (
+    <Stack
+      direction="row"
+      alignItems="center"
+      sx={{
+        top: 8,
+        right: 8,
+        zIndex: 9,
+        borderRadius: 1,
+        bgcolor: "primary.main",
+        position: "absolute",
+        p: "2px 6px 2px 4px",
+        color: "common.white",
+        typography: "subtitle2",
+      }}
+    >
+      {fSeconds(duration)}
+    </Stack>
+  );
 
   const renderImages = (
     <Stack
@@ -89,8 +77,8 @@ export default function PoseItem({ pose, onEdit, onDelete }: Props) {
       }}
     >
       <Stack flexGrow={1} sx={{ position: "relative" }}>
-        {/* {renderPrice}
-        {renderRating} */}
+        {renderPrice}
+        {/* {renderRating} */}
         <Image
           alt={image_url}
           src={image_url}
@@ -119,7 +107,7 @@ export default function PoseItem({ pose, onEdit, onDelete }: Props) {
       sx={{
         p: (theme) => theme.spacing(2.5, 2.5, 2, 2.5),
       }}
-      primary={`Posted date: ${fDateTime(created_at)}`}
+      // primary={`Posted date: ${fDateTime(created_at)}`}
       secondary={
         <Link
           component={RouterLink}
@@ -151,28 +139,37 @@ export default function PoseItem({ pose, onEdit, onDelete }: Props) {
         p: (theme) => theme.spacing(0, 2.5, 2.5, 2.5),
       }}
     >
-      <IconButton
+      {/* <IconButton
         onClick={popover.onOpen}
         sx={{ position: "absolute", bottom: 20, right: 8 }}
       >
         <Iconify icon="eva:more-vertical-fill" />
+      </IconButton> */}
+
+      <IconButton
+        onClick={() => onEdit()}
+        sx={{ position: "absolute", bottom: 20, right: 8 }}
+      >
+        <Tooltip title="Edit">
+          <Iconify icon="solar:pen-bold" />
+        </Tooltip>
       </IconButton>
 
       {[
+        // {
+        //   label: duration,
+        //   icon: (
+        //     <Iconify
+        //       icon="mingcute:location-fill"
+        //       sx={{ color: "error.main" }}
+        //     />
+        //   ),
+        // },
         {
-          label: duration,
+          label: `Level: ${LEVELS[level - 1].label}`,
           icon: (
             <Iconify
-              icon="mingcute:location-fill"
-              sx={{ color: "error.main" }}
-            />
-          ),
-        },
-        {
-          label: level,
-          icon: (
-            <Iconify
-              icon="solar:clock-circle-bold"
+              icon="mingcute:filter-2-fill"
               sx={{ color: "info.main" }}
             />
           ),
@@ -211,13 +208,13 @@ export default function PoseItem({ pose, onEdit, onDelete }: Props) {
         {renderInfo}
       </Card>
 
-      <CustomPopover
+      {/* <CustomPopover
         open={popover.open}
         onClose={popover.onClose}
         arrow="right-top"
         sx={{ width: 140 }}
       >
-        {/* <MenuItem
+        <MenuItem
           onClick={() => {
             popover.onClose();
             onView();
@@ -225,7 +222,7 @@ export default function PoseItem({ pose, onEdit, onDelete }: Props) {
         >
           <Iconify icon="solar:eye-bold" />
           View
-        </MenuItem> */}
+        </MenuItem>
 
         <MenuItem
           onClick={() => {
@@ -247,7 +244,7 @@ export default function PoseItem({ pose, onEdit, onDelete }: Props) {
           <Iconify icon="solar:trash-bin-trash-bold" />
           Delete
         </MenuItem>
-      </CustomPopover>
+      </CustomPopover> */}
     </>
   );
 }

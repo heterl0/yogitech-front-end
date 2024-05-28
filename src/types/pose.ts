@@ -15,7 +15,7 @@ export type IPose = {
   image_url: string;
   duration: number;
   calories: number;
-  keypoint: string;
+  keypoint_url: string;
   instruction: string;
   created_at: string;
   updated_at: string;

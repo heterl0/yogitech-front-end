@@ -114,3 +114,21 @@ export function fData(inputValue: InputValue) {
 
   return fm;
 }
+
+// ----------------------------------------------------------------------
+
+export function fSeconds(inputValue: InputValue) {
+  if (!inputValue) return "";
+
+  const totalSeconds = Number(inputValue);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds - hours * 3600) / 60);
+  const seconds = totalSeconds - hours * 3600 - minutes * 60;
+
+  const paddedHours = hours.toString().padStart(2, "0");
+  const paddedMinutes = minutes.toString().padStart(2, "0");
+  const paddedSeconds = seconds.toString().padStart(2, "0");
+
+  if (hours === 0) return `${paddedMinutes}m${paddedSeconds}`;
+  return `${paddedHours}h${paddedMinutes}m${paddedSeconds}`;
+}

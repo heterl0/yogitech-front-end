@@ -53,8 +53,8 @@ export default function PoseNewEditForm({ currentPose }: Props) {
   );
 
   useEffect(() => {
-    if (currentPose?.keypoint) {
-      fetch(currentPose.keypoint)
+    if (currentPose?.keypoint_url) {
+      fetch(currentPose.keypoint_url)
         .then((response) => response.json())
         .then((data) => setKeypoints(data))
         .catch((error) => console.error(error));
@@ -127,29 +127,21 @@ export default function PoseNewEditForm({ currentPose }: Props) {
         // Create a FormData object
         const formData = new FormData();
 
-        // Append the Blob to the FormData
-        formData.append("file", blob, "results.json");
-        const fileResponse = await axiosInstance.post(
-          endpoints.media.uploadFile,
-          formData
-        );
-
-        const formData2 = new FormData();
-        formData2.append("name", data.name);
-        formData2.append("instruction", data.instruction);
-        formData2.append("image", data.image);
+        formData.append("keypoint", blob, "results.json");
+        formData.append("name", data.name);
+        formData.append("instruction", data.instruction);
+        formData.append("image", data.image);
         data.muscles?.forEach((m) =>
-          formData2.append("muscle_ids", m.id.toString())
+          formData.append("muscle_ids", m.id.toString())
         );
-        formData2.append("duration", data.duration + "");
-        formData2.append("level", data.level + "");
-        formData2.append("keypoint", fileResponse.data.file_url);
-        formData2.append("calories", data.calories + "");
-        formData2.append("active_status", active ? "1" : "0");
+        formData.append("duration", data.duration + "");
+        formData.append("level", data.level + "");
+        formData.append("calories", data.calories + "");
+        formData.append("active_status", active ? "1" : "0");
 
         const response = await axiosInstance.post(
           endpoints.pose.create,
-          formData2
+          formData
         );
         if (response.status === HttpStatusCode.Created) {
           enqueueSnackbar("Create success!");
@@ -158,39 +150,26 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           enqueueSnackbar("Create failed!");
         }
       } else {
-        let keypoint_url = currentPose.keypoint;
+        const formData = new FormData();
         if (checkImageChange) {
           const json = JSON.stringify(keypoints);
-
-          // Create a Blob from the JSON string
           const blob = new Blob([json], { type: "application/json" });
-
-          // Create a FormData object
-          const formData = new FormData();
-
-          // Append the Blob to the FormData
-          formData.append("file", blob, "results.json");
-          const fileResponse = await axiosInstance.post(
-            endpoints.media.uploadFile,
-            formData
-          );
-          keypoint_url = fileResponse.data.file_url;
+          formData.append("keypoint", blob, "results.json");
+          formData.append("image", data.image);
         }
-        const formData2 = new FormData();
-        formData2.append("name", data.name);
-        formData2.append("instruction", data.instruction);
-        formData2.append("image", data.image);
+        formData.append("name", data.name);
+        formData.append("instruction", data.instruction);
+        formData.append("image", data.image);
         data.muscles?.forEach((m) =>
-          formData2.append("muscle_ids", m.id.toString())
+          formData.append("muscle_ids", m.id.toString())
         );
-        formData2.append("duration", data.duration + "");
-        formData2.append("level", data.level + "");
-        formData2.append("keypoint", keypoint_url);
-        formData2.append("calories", data.calories + "");
-        formData2.append("active_status", active ? "1" : "0");
-        const response = await axiosInstance.post(
-          endpoints.pose.create,
-          formData2
+        formData.append("duration", data.duration + "");
+        formData.append("level", data.level + "");
+        formData.append("calories", data.calories + "");
+        formData.append("active_status", active ? "1" : "0");
+        const response = await axiosInstance.patch(
+          endpoints.pose.update(currentPose.id + ""),
+          formData
         );
         if (response.status === HttpStatusCode.Created) {
           enqueueSnackbar("Upload success!");

@@ -30,7 +30,7 @@ export default function PoseEditView({ id }: Props) {
             href: paths.dashboard.root,
           },
           {
-            name: "Tour",
+            name: "Pose",
             href: paths.dashboard.tour.root,
           },
           { name: currentPose?.name },
