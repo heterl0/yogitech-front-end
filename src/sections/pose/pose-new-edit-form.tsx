@@ -51,6 +51,16 @@ export default function PoseNewEditForm({ currentPose }: Props) {
   const [active, setActive] = useState(
     currentPose ? currentPose.active_status === 1 : true
   );
+
+  useEffect(() => {
+    if (currentPose?.keypoint) {
+      fetch(currentPose.keypoint)
+        .then((response) => response.json())
+        .then((data) => setKeypoints(data))
+        .catch((error) => console.error(error));
+    }
+  }, [currentPose]);
+
   const { muscles } = useGetMuscles();
   const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
@@ -380,7 +390,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
         <FormControlLabel
           control={
             <Switch
-              value={active}
+              checked={active}
               onChange={(
                 event: ChangeEvent<HTMLInputElement>,
                 checked: boolean
@@ -398,7 +408,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentPose ? "Create Tour" : "Save Changes"}
+          {!currentPose ? "Create Pose" : "Update Pose"}
         </LoadingButton>
       </Grid>
     </>

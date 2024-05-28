@@ -24,3 +24,23 @@ export function useGetPoses() {
 
   return memoizedValue;
 }
+
+// ----------------------------------------------------------------------
+
+export function useGetPose(id: string) {
+  const URL = id ? [`${endpoints.pose.details(id)}`] : "";
+
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+
+  const memoizedValue = useMemo(
+    () => ({
+      pose: data as IPose,
+      poseLoading: isLoading,
+      poseError: error,
+      poseValidating: isValidating,
+    }),
+    [data, error, isLoading, isValidating]
+  );
+
+  return memoizedValue;
+}

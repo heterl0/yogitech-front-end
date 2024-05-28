@@ -18,12 +18,12 @@ type Props = {
 export default function PoseList({ poses }: Props) {
   const router = useRouter();
 
-  const handleView = useCallback(
-    (id: string) => {
-      router.push(paths.dashboard.exercise.pEdit(id));
-    },
-    [router]
-  );
+  // const handleView = useCallback(
+  //   (id: string) => {
+  //     router.push(paths.dashboard.exercise.pEdit(id));
+  //   },
+  //   [router]
+  // );
 
   const handleEdit = useCallback(
     (id: string) => {
@@ -51,7 +51,7 @@ export default function PoseList({ poses }: Props) {
           <PoseItem
             key={pose.id}
             pose={pose}
-            onView={() => handleView(pose.id + "")}
+            // onView={() => handleView(pose.id + "")}
             onEdit={() => handleEdit(pose.id + "")}
             onDelete={() => handleDelete(pose.id + "")}
           />

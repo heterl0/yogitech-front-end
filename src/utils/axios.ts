@@ -73,6 +73,7 @@ export const endpoints = {
   pose: {
     list: "/api/v1/poses/",
     create: "/api/v1/poses/",
+    details: (id: string) => `/api/v1/poses/${id}/`,
     update: (id: string) => `/api/v1/poses/${id}/`,
     delete: (id: string) => `/api/v1/poses/${id}/`,
   },

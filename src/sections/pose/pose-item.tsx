@@ -23,12 +23,11 @@ import { IPose } from "@/types/pose";
 
 type Props = {
   pose: IPose;
-  onView: VoidFunction;
   onEdit: VoidFunction;
   onDelete: VoidFunction;
 };
 
-export default function PoseItem({ pose, onView, onEdit, onDelete }: Props) {
+export default function PoseItem({ pose, onEdit, onDelete }: Props) {
   const popover = usePopover();
 
   const { id, name, image_url, duration, level, created_at } = pose;
@@ -218,7 +217,7 @@ export default function PoseItem({ pose, onView, onEdit, onDelete }: Props) {
         arrow="right-top"
         sx={{ width: 140 }}
       >
-        <MenuItem
+        {/* <MenuItem
           onClick={() => {
             popover.onClose();
             onView();
@@ -226,7 +225,7 @@ export default function PoseItem({ pose, onView, onEdit, onDelete }: Props) {
         >
           <Iconify icon="solar:eye-bold" />
           View
-        </MenuItem>
+        </MenuItem> */}
 
         <MenuItem
           onClick={() => {
