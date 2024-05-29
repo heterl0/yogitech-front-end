@@ -129,6 +129,6 @@ export function fSeconds(inputValue: InputValue) {
   const paddedMinutes = minutes.toString().padStart(2, "0");
   const paddedSeconds = seconds.toString().padStart(2, "0");
 
-  if (hours === 0) return `${paddedMinutes}m${paddedSeconds}`;
-  return `${paddedHours}h${paddedMinutes}m${paddedSeconds}`;
+  if (hours === 0) return `${paddedMinutes}m${paddedSeconds}s`;
+  return `${paddedHours}h${paddedMinutes}m${paddedSeconds}s`;
 }

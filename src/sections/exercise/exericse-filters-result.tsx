@@ -2,19 +2,18 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
 import Stack, { StackProps } from "@mui/material/Stack";
 
 import Iconify from "@/components/iconify";
-import { IMuscle, IPoseFilterValue, IPoseFilters } from "@/types/pose";
 import { LEVELS } from "@/constants/level";
 import { NOTIFICATION_STATUS } from "@/types/notification";
+import { IExerciseFilterValue, IExerciseFilters } from "@/types/exercise";
 
 // ----------------------------------------------------------------------
 
 type Props = StackProps & {
-  filters: IPoseFilters;
-  onFilters: (name: string, value: IPoseFilterValue) => void;
+  filters: IExerciseFilters;
+  onFilters: (name: string, value: IExerciseFilterValue) => void;
   //
   canReset: boolean;
   onResetFilters: VoidFunction;
@@ -22,7 +21,7 @@ type Props = StackProps & {
   results: number;
 };
 
-export default function PoseFiltersResult({
+export default function ExerciseFiltersResult({
   filters,
   onFilters,
   //
@@ -47,11 +46,9 @@ export default function PoseFiltersResult({
   //   onFilters("endDate", null);
   // };
 
-  const handleRemoveMuscles = (inputValue: IMuscle) => {
-    const newValue = filters.muscles.filter(
-      (item) => item.name !== inputValue.name
-    );
-    onFilters("muscle", newValue);
+  const handleRemoveMuscles = (inputValue: string) => {
+    const newValue = filters.benefits.filter((item) => item !== inputValue);
+    onFilters("benefits", newValue);
   };
 
   // const handleRemoveDestination = (inputValue: string) => {
@@ -85,14 +82,14 @@ export default function PoseFiltersResult({
           </Block>
         )} */}
 
-        {!!filters.muscles.length && (
-          <Block label="Muscle:">
-            {filters.muscles.map((item) => (
+        {!!filters.benefits.length && (
+          <Block label="Benefits:">
+            {filters.benefits.map((item) => (
               <Chip
-                key={item.id}
+                key={item}
                 size="small"
-                avatar={<Avatar alt={item.name} src={item.image} />}
-                label={item.name}
+                // avatar={<Avatar alt={item} src={item.image} />}
+                label={item}
                 onDelete={() => handleRemoveMuscles(item)}
               />
             ))}

@@ -16,12 +16,13 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
 
-import { IMuscle, IPoseFilterValue, IPoseFilters } from "@/types/pose";
 import Image from "@/components/image";
 import { LEVELS } from "@/constants/level";
 import { MenuItem } from "@mui/material";
 import { NOTIFICATION_STATUS } from "@/types/notification";
 import Label, { LabelColor } from "@/components/label";
+import { IExerciseFilterValue, IExerciseFilters } from "@/types/exercise";
+import { benefits } from "../blog/post-new-edit-form";
 
 // ----------------------------------------------------------------------
 
@@ -30,16 +31,14 @@ type Props = {
   onOpen: VoidFunction;
   onClose: VoidFunction;
   //
-  filters: IPoseFilters;
-  onFilters: (name: string, value: IPoseFilterValue) => void;
+  filters: IExerciseFilters;
+  onFilters: (name: string, value: IExerciseFilterValue) => void;
   //
   canReset: boolean;
   onResetFilters: VoidFunction;
-  //
-  muscleOptions: IMuscle[];
 };
 
-export default function PoseFilters({
+export default function ExerciseFilters({
   open,
   onOpen,
   onClose,
@@ -50,7 +49,6 @@ export default function PoseFilters({
   canReset,
   onResetFilters,
   //
-  muscleOptions,
 }: Props) {
   const handleFilterLevel = useCallback(
     (newValue: number) => {
@@ -67,8 +65,8 @@ export default function PoseFilters({
   );
 
   const handleFilterMuscle = useCallback(
-    (newValue: IMuscle[]) => {
-      onFilters("muscles", newValue);
+    (newValue: string[]) => {
+      onFilters("benefits", newValue);
     },
     [onFilters]
   );
@@ -154,34 +152,27 @@ export default function PoseFilters({
       <Autocomplete
         multiple
         disableCloseOnSelect
-        options={muscleOptions}
-        value={filters.muscles}
+        options={benefits}
+        value={filters.benefits}
         onChange={(event, newValue) => handleFilterMuscle(newValue)}
-        getOptionLabel={(option) => option.name}
+        getOptionLabel={(option) => option}
         renderInput={(params) => (
           <TextField placeholder="Select Muscles" {...params} />
         )}
-        renderOption={(props, muscle) => (
-          <li {...props} key={muscle.id}>
-            <Image
-              key={muscle.id}
-              alt={muscle.image}
-              src={muscle.image}
-              sx={{ width: 24, height: 24, flexShrink: 0, mr: 1 }}
-            />
-
-            {muscle.name}
+        renderOption={(props, benefit) => (
+          <li {...props} key={benefit}>
+            {benefit}
           </li>
         )}
         renderTags={(selected, getTagProps) =>
-          selected.map((muscle, index) => (
+          selected.map((benefit, index) => (
             <Chip
               {...getTagProps({ index })}
-              key={muscle.id}
+              key={benefit}
               size="small"
               variant="soft"
-              label={muscle.name}
-              avatar={<Image alt={muscle.name} src={muscle.image} />}
+              label={benefit}
+              avatar={<Image alt={benefit} src={benefit} />}
             />
           ))
         }
