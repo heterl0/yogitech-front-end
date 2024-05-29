@@ -54,7 +54,7 @@ export function SingleFileVideoPreview({
         component="video"
         src={videoUrl}
         sx={{ height: "312px", borderRadius: "8px" }}
-        title="Video title"
+        title="Video preview"
         controls // Add this if you want to show video controls
       />
     </Box>

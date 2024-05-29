@@ -307,11 +307,11 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           {!mdUp && <CardHeader title="Properties" />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
-            <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-              Length
-            </Typography>
+            {/* <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
+              Duration
+            </Typography> */}
 
-            <RHFTextField name="duration" label="Length" type="number" />
+            <RHFTextField name="duration" label="Duration" type="number" />
 
             <RHFSelect name="level" label="Level">
               {LEVELS.map((status) => (

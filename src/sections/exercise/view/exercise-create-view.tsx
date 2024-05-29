@@ -7,16 +7,17 @@ import { paths } from "@/routes/paths";
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 import ExerciseNewEditForm from "../exercise-new-edit-form";
+import { useGetPoses } from "@/api/pose";
 
 // ----------------------------------------------------------------------
 
 export default function ExerciseCreateView() {
   const settings = useSettingsContext();
-
+  const { poses } = useGetPoses();
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="Create a new pose"
+        heading="Create a new exercise"
         links={[
           {
             name: "Dashboard",
@@ -33,7 +34,7 @@ export default function ExerciseCreateView() {
         }}
       />
 
-      <ExerciseNewEditForm />
+      {poses && <ExerciseNewEditForm poses={poses} />}
     </Container>
   );
 }

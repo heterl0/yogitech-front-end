@@ -15,12 +15,8 @@ import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from "@/routes/paths";
-import { useRouter } from "@/routes/hooks";
-
 import { useResponsive } from "@/hooks/use-responsive";
 
-import { useSnackbar } from "@/components/snackbar";
 import FormProvider, {
   RHFUpload,
   RHFTextField,
@@ -30,41 +26,45 @@ import FormProvider, {
   RHFUploadVideo,
 } from "@/components/hook-form";
 
-import { IMuscle } from "@/types/pose";
-import { CardContent, CardMedia, MenuItem, TextField } from "@mui/material";
+import { IPose } from "@/types/pose";
+import { Box, MenuItem } from "@mui/material";
 import { LEVELS } from "@/constants/level";
-import { useGetMuscles } from "@/api/muscle";
-import axiosInstance, { endpoints } from "@/utils/axios";
-import { HttpStatusCode } from "axios";
-import { IExercise } from "@/types/exercise";
+import { IExercise, IPoseWithTime } from "@/types/exercise";
 import { benefits } from "../blog/post-new-edit-form";
+import ExercisePoseList from "./exercise-pose-list";
 // ----------------------------------------------------------------------
 
 type Props = {
   currentExercise?: IExercise;
+  poses: IPose[];
 };
 
-export default function ExerciseNewEditForm({ currentExercise }: Props) {
-  const router = useRouter();
+export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
   // const [keypoints, setKeypoints] = useState<NormalizedLandmark[]>([]);
+
+  const [poseSelectedIndex, setPoseSelectedIndex] = useState(-1);
+  const [poseExercises, setPoseExercises] = useState<IPoseWithTime[]>([]);
   const [active, setActive] = useState(
     currentExercise ? currentExercise.active_status === 1 : true
   );
 
-  // useEffect(() => {
-  //   if (currentExercise?.keypoint_url) {
-  //     fetch(currentExercise.keypoint_url)
-  //       .then((response) => response.json())
-  //       .then((data) => setKeypoints(data))
-  //       .catch((error) => console.error(error));
-  //   }
-  // }, [currentExercise]);
+  const handleRemovePose = useCallback(
+    (index: number) => {
+      setPoseExercises((prevPoseExercises) =>
+        prevPoseExercises.filter((_, i) => i !== index)
+      );
+      setPoseSelectedIndex(
+        index === poseSelectedIndex
+          ? poseSelectedIndex === 0
+            ? poseSelectedIndex
+            : poseSelectedIndex - 1
+          : poseSelectedIndex
+      );
+    },
+    [poseSelectedIndex]
+  );
 
-  const { muscles } = useGetMuscles();
-  const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
-  const [video, setVideo] = useState("");
-  const { enqueueSnackbar } = useSnackbar();
 
   const NewExerciseSchema = Yup.object().shape({
     title: Yup.string().required("Name is required"),
@@ -75,6 +75,11 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
     video: Yup.mixed<any>().required("Image is required"),
     level: Yup.number().required("Level is required"),
     point: Yup.number().required("Point is required"),
+    pose: Yup.mixed<any>(),
+    minute: Yup.number(),
+    second: Yup.number(),
+    inSecond: Yup.number(),
+    duration: Yup.number(),
   });
 
   const defaultValues = useMemo(
@@ -89,8 +94,21 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
       video: "",
       level: currentExercise?.level || 1,
       point: currentExercise?.point || 0,
+      pose: poses[0] || { id: -1, name: "Not Select" },
+      minute: 0,
+      second: 0,
+      inSecond: 0,
+      duration: 0,
     }),
-    [currentExercise]
+    [
+      currentExercise?.benefit,
+      currentExercise?.description,
+      currentExercise?.image,
+      currentExercise?.level,
+      currentExercise?.point,
+      currentExercise?.title,
+      poses,
+    ]
   );
 
   const methods = useForm({
@@ -99,7 +117,7 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
   });
 
   const {
-    // watch,
+    watch,
     reset,
     // control,
     setValue,
@@ -107,7 +125,7 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
     formState: { isSubmitting },
   } = methods;
 
-  // const values = watch();
+  const values = watch();
 
   useEffect(() => {
     if (currentExercise) {
@@ -179,6 +197,25 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
     }
   });
 
+  const handleSelectedPose = useCallback((index: number) => {
+    setPoseSelectedIndex(index);
+  }, []);
+
+  const handleAppendPose = useCallback(() => {
+    const pose = poses[0];
+    if (pose) {
+      setPoseExercises((prev) => [
+        ...prev,
+        {
+          pose: pose,
+          duration: pose.duration,
+          time: 0,
+        },
+      ]);
+      setPoseSelectedIndex(poseExercises.length);
+    }
+  }, [poseExercises.length, poses]);
+
   const handleDrop = useCallback(
     async (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
@@ -189,7 +226,6 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
 
       if (file) {
         setValue("image", newFile, { shouldValidate: true });
-        setCheckImageChange(true);
       }
     },
     [setValue]
@@ -202,27 +238,27 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
       const newFile = Object.assign(file, {
         preview: URL.createObjectURL(file),
       });
-      setVideo(newFile.preview);
 
-      // const newFile = Object.assign(file, {
-      //   preview: () => {
-      //     return new Promise((resolve, reject) => {
-      //       const reader = new FileReader();
-      //       reader.onloadend = () => resolve(reader.result);
-      //       reader.onerror = reject;
-      //       reader.readAsDataURL(file);
-      //     });
-      //   },
-      // });
       console.log(newFile);
 
       if (file) {
         setValue("video", newFile, { shouldValidate: true });
-        setCheckImageChange(true);
       }
     },
     [setValue]
   );
+
+  useEffect(() => {
+    if (poseSelectedIndex !== -1) {
+      const poseWithTime = poseExercises[poseSelectedIndex];
+      setValue("pose", poseWithTime.pose, { shouldValidate: true });
+      setValue("second", poseWithTime.time % 60);
+      setValue("minute", (poseWithTime.time - (poseWithTime.time % 60)) / 60);
+      setValue("inSecond", poseWithTime.time);
+      setValue("duration", poseWithTime.duration);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [poseSelectedIndex]);
 
   const handleRemoveFile = useCallback(() => {
     setValue("image", null);
@@ -231,6 +267,46 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
   const handleRemoveFileVideo = useCallback(() => {
     setValue("video", null);
   }, [setValue]);
+
+  const handleUpdateSelectedPose = useCallback(() => {
+    const updatedPoseExercises = [...poseExercises];
+    if (values.pose) {
+      const newPoseWithTime: IPoseWithTime = {
+        duration: 0,
+        time: 0,
+        pose: values.pose,
+      };
+      if (values.duration) {
+        newPoseWithTime.duration = values.duration;
+      }
+      if (values.inSecond) {
+        newPoseWithTime.time = values.inSecond;
+      }
+      updatedPoseExercises[poseSelectedIndex] = {
+        ...updatedPoseExercises[poseSelectedIndex],
+        ...newPoseWithTime,
+      };
+      setPoseExercises(updatedPoseExercises);
+    }
+  }, [
+    poseExercises,
+    poseSelectedIndex,
+    values.duration,
+    values.inSecond,
+    values.pose,
+  ]);
+
+  const handleInputTime = useCallback(() => {
+    let inSecond = 0;
+    if (values.minute || values.minute === 0) {
+      inSecond = values.minute * 60;
+    }
+    if (values.second || values.second === 0) {
+      inSecond = inSecond + values.second;
+    }
+    setValue("inSecond", inSecond);
+    handleUpdateSelectedPose();
+  }, [handleUpdateSelectedPose, setValue, values.minute, values.second]);
 
   const renderDetails = (
     <>
@@ -294,7 +370,7 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
                 name="image"
                 maxSize={3145728}
                 onDrop={handleDrop}
-                onRemove={handleRemoveFile}
+                onDelete={handleRemoveFile}
                 onUpload={() => console.info("ON UPLOAD")}
               />
             </Stack>
@@ -329,13 +405,97 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
                 name="video"
                 // maxSize={3145728}
                 onDrop={handleDropVideo}
-                onRemove={handleRemoveFileVideo}
+                onDelete={handleRemoveFileVideo}
                 onUpload={() => console.info("ON UPLOAD")}
               />
             </Stack>
+            <Stack spacing={1.5}>
+              <Typography variant="subtitle2">Poses</Typography>
+              <ExercisePoseList
+                poseSelectedIndex={poseSelectedIndex}
+                onRemove={handleRemovePose}
+                onSelect={handleSelectedPose}
+                posesWithTime={poseExercises}
+                onAppend={handleAppendPose}
+              />
+            </Stack>
+            {poseSelectedIndex !== -1 && poseExercises.length > 0 && (
+              <>
+                <Stack spacing={1.5}>
+                  <RHFAutocomplete
+                    name="pose"
+                    label="Pose"
+                    options={poses}
+                    onSelect={handleUpdateSelectedPose}
+                    getOptionLabel={(option) => (option as IPose).name}
+                    isOptionEqualToValue={(option, value) =>
+                      option.id === value.id
+                    }
+                    renderOption={(props, pose) => (
+                      <li {...props} key={pose.id}>
+                        <Avatar
+                          key={pose.id}
+                          alt={pose.image_url}
+                          src={pose.image_url}
+                          sx={{ width: 24, height: 24, flexShrink: 0, mr: 1 }}
+                        />
 
-            <RHFTextField name="duration" label="Length" type="number" />
+                        {pose.name}
+                      </li>
+                    )}
+                    renderTags={(selected, getTagProps) =>
+                      selected.map((pose, index) => (
+                        <Chip
+                          {...getTagProps({ index })}
+                          key={pose.id}
+                          size="small"
+                          variant="soft"
+                          label={pose.name}
+                          avatar={
+                            <Avatar alt={pose.name} src={pose.image_url} />
+                          }
+                        />
+                      ))
+                    }
+                  />
+                </Stack>
 
+                <Box
+                  gap={3}
+                  display="grid"
+                  gridTemplateColumns={{
+                    xs: "repeat(1, 1fr)",
+                    sm: "repeat(2, 1fr)",
+                    md: "repeat(3, 1fr)",
+                  }}
+                >
+                  <RHFTextField
+                    type="number"
+                    name="minute"
+                    label="Minute"
+                    onBlur={handleInputTime}
+                  />
+                  <RHFTextField
+                    type="number"
+                    name="second"
+                    label="Second"
+                    onBlur={handleInputTime}
+                  />
+                  <RHFTextField
+                    type="number"
+                    disabled
+                    name="inSecond"
+                    label="In Seconds"
+                  />
+                </Box>
+                <RHFTextField
+                  type="number"
+                  name="duration"
+                  label="Duration"
+                  onBlur={handleUpdateSelectedPose}
+                />
+              </>
+            )}
             <RHFSelect name="level" label="Level">
               {LEVELS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
@@ -345,40 +505,6 @@ export default function ExerciseNewEditForm({ currentExercise }: Props) {
             </RHFSelect>
 
             <RHFTextField name="calories" label="Calories" type="number" />
-
-            <RHFAutocomplete
-              multiple
-              name="muscles"
-              label="Muscles"
-              disableCloseOnSelect
-              options={muscles}
-              getOptionLabel={(option) => (option as IMuscle).name}
-              isOptionEqualToValue={(option, value) => option.id === value.id}
-              renderOption={(props, muscle) => (
-                <li {...props} key={muscle.id}>
-                  <Avatar
-                    key={muscle.id}
-                    alt={muscle.image}
-                    src={muscle.image}
-                    sx={{ width: 24, height: 24, flexShrink: 0, mr: 1 }}
-                  />
-
-                  {muscle.name}
-                </li>
-              )}
-              renderTags={(selected, getTagProps) =>
-                selected.map((muscle, index) => (
-                  <Chip
-                    {...getTagProps({ index })}
-                    key={muscle.id}
-                    size="small"
-                    variant="soft"
-                    label={muscle.name}
-                    avatar={<Avatar alt={muscle.name} src={muscle.image} />}
-                  />
-                ))
-              }
-            />
           </Stack>
         </Card>
       </Grid>
