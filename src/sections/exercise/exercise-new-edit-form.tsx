@@ -26,76 +26,75 @@ import FormProvider, {
   RHFTextField,
   RHFAutocomplete,
   RHFSelect,
+  RHFEditor,
+  RHFUploadVideo,
 } from "@/components/hook-form";
 
-import { IMuscle, IPose } from "@/types/pose";
-import { MenuItem, TextField } from "@mui/material";
+import { IMuscle } from "@/types/pose";
+import { CardContent, CardMedia, MenuItem, TextField } from "@mui/material";
 import { LEVELS } from "@/constants/level";
 import { useGetMuscles } from "@/api/muscle";
-import {
-  FilesetResolver,
-  NormalizedLandmark,
-  PoseLandmarker,
-} from "@mediapipe/tasks-vision";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
+import { IExercise } from "@/types/exercise";
+import { benefits } from "../blog/post-new-edit-form";
 // ----------------------------------------------------------------------
 
 type Props = {
-  currentPose?: IPose;
+  currentExercise?: IExercise;
 };
 
-export default function PoseNewEditForm({ currentPose }: Props) {
+export default function ExerciseNewEditForm({ currentExercise }: Props) {
   const router = useRouter();
-  const [keypoints, setKeypoints] = useState<NormalizedLandmark[]>([]);
+  // const [keypoints, setKeypoints] = useState<NormalizedLandmark[]>([]);
   const [active, setActive] = useState(
-    currentPose ? currentPose.active_status === 1 : true
+    currentExercise ? currentExercise.active_status === 1 : true
   );
 
-  useEffect(() => {
-    if (currentPose?.keypoint_url) {
-      fetch(currentPose.keypoint_url)
-        .then((response) => response.json())
-        .then((data) => setKeypoints(data))
-        .catch((error) => console.error(error));
-    }
-  }, [currentPose]);
+  // useEffect(() => {
+  //   if (currentExercise?.keypoint_url) {
+  //     fetch(currentExercise.keypoint_url)
+  //       .then((response) => response.json())
+  //       .then((data) => setKeypoints(data))
+  //       .catch((error) => console.error(error));
+  //   }
+  // }, [currentExercise]);
 
   const { muscles } = useGetMuscles();
   const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
-
-  const [model, setModel] = useState<PoseLandmarker>();
-
+  const [video, setVideo] = useState("");
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewTourSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    instruction: Yup.string().required("Content is required"),
+  const NewExerciseSchema = Yup.object().shape({
+    title: Yup.string().required("Name is required"),
+    benefit: Yup.array().min(1, "Must have at least 1 tag"),
+    description: Yup.string().required("Content is required"),
     image: Yup.mixed<any>().required("Image is required"),
     //
-    muscles: Yup.array().min(1, "Must have at least 1 guide"),
-    duration: Yup.number().required("Duration is required"),
+    video: Yup.mixed<any>().required("Image is required"),
     level: Yup.number().required("Level is required"),
-    calories: Yup.number().required("Calories is required"),
+    point: Yup.number().required("Point is required"),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentPose?.name || "",
-      instruction: currentPose?.instruction || "",
-      image: currentPose?.image_url || "",
+      title: currentExercise?.title || "",
+      benefit: currentExercise?.benefit
+        ? (JSON.parse(currentExercise.benefit) as string[])
+        : [],
+      description: currentExercise?.description || "",
+      image: currentExercise?.image || "",
       //
-      muscles: currentPose?.muscles || [],
-      duration: currentPose?.duration || 0,
-      level: currentPose?.level || 1,
-      calories: currentPose?.calories || 0,
+      video: "",
+      level: currentExercise?.level || 1,
+      point: currentExercise?.point || 0,
     }),
-    [currentPose]
+    [currentExercise]
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewTourSchema),
+    resolver: yupResolver(NewExerciseSchema),
     defaultValues,
   });
 
@@ -111,92 +110,74 @@ export default function PoseNewEditForm({ currentPose }: Props) {
   // const values = watch();
 
   useEffect(() => {
-    if (currentPose) {
+    if (currentExercise) {
       reset(defaultValues);
     }
-  }, [currentPose, defaultValues, reset]);
+  }, [currentExercise, defaultValues, reset]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (!currentPose) {
-        const json = JSON.stringify(keypoints);
+      console.log(data);
 
-        // Create a Blob from the JSON string
-        const blob = new Blob([json], { type: "application/json" });
-
-        // Create a FormData object
-        const formData = new FormData();
-
-        formData.append("keypoint", blob, "results.json");
-        formData.append("name", data.name);
-        formData.append("instruction", data.instruction);
-        formData.append("image", data.image);
-        data.muscles?.forEach((m) =>
-          formData.append("muscle_ids", m.id.toString())
-        );
-        formData.append("duration", data.duration + "");
-        formData.append("level", data.level + "");
-        formData.append("calories", data.calories + "");
-        formData.append("active_status", active ? "1" : "0");
-
-        const response = await axiosInstance.post(
-          endpoints.pose.create,
-          formData
-        );
-        if (response.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Create success!");
-          setTimeout(() => router.push(paths.dashboard.exercise.pose), 2000);
-        } else {
-          enqueueSnackbar("Create failed!");
-        }
-      } else {
-        const formData = new FormData();
-        if (checkImageChange) {
-          const json = JSON.stringify(keypoints);
-          const blob = new Blob([json], { type: "application/json" });
-          formData.append("keypoint", blob, "results.json");
-          formData.append("image", data.image);
-        }
-        formData.append("name", data.name);
-        formData.append("instruction", data.instruction);
-        formData.append("image", data.image);
-        data.muscles?.forEach((m) =>
-          formData.append("muscle_ids", m.id.toString())
-        );
-        formData.append("duration", data.duration + "");
-        formData.append("level", data.level + "");
-        formData.append("calories", data.calories + "");
-        formData.append("active_status", active ? "1" : "0");
-        const response = await axiosInstance.patch(
-          endpoints.pose.update(currentPose.id + ""),
-          formData
-        );
-        if (response.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Upload success!");
-        } else {
-          enqueueSnackbar("Upload failed!");
-        }
-      }
+      // if (!currentExercise) {
+      //   const json = JSON.stringify(keypoints);
+      //   // Create a Blob from the JSON string
+      //   const blob = new Blob([json], { type: "application/json" });
+      //   // Create a FormData object
+      //   const formData = new FormData();
+      //   formData.append("keypoint", blob, "results.json");
+      //   formData.append("name", data.name);
+      //   formData.append("instruction", data.instruction);
+      //   formData.append("image", data.image);
+      //   data.muscles?.forEach((m) =>
+      //     formData.append("muscle_ids", m.id.toString())
+      //   );
+      //   formData.append("duration", data.duration + "");
+      //   formData.append("level", data.level + "");
+      //   formData.append("calories", data.calories + "");
+      //   formData.append("active_status", active ? "1" : "0");
+      //   const response = await axiosInstance.post(
+      //     endpoints.pose.create,
+      //     formData
+      //   );
+      //   if (response.status === HttpStatusCode.Created) {
+      //     enqueueSnackbar("Create success!");
+      //     setTimeout(() => router.push(paths.dashboard.exercise.pose), 2000);
+      //   } else {
+      //     enqueueSnackbar("Create failed!");
+      //   }
+      // } else {
+      //   const formData = new FormData();
+      //   if (checkImageChange) {
+      //     const json = JSON.stringify(keypoints);
+      //     const blob = new Blob([json], { type: "application/json" });
+      //     formData.append("keypoint", blob, "results.json");
+      //     formData.append("image", data.image);
+      //   }
+      //   formData.append("name", data.name);
+      //   formData.append("instruction", data.instruction);
+      //   formData.append("image", data.image);
+      //   data.muscles?.forEach((m) =>
+      //     formData.append("muscle_ids", m.id.toString())
+      //   );
+      //   formData.append("duration", data.duration + "");
+      //   formData.append("level", data.level + "");
+      //   formData.append("calories", data.calories + "");
+      //   formData.append("active_status", active ? "1" : "0");
+      //   const response = await axiosInstance.patch(
+      //     endpoints.pose.update(currentExercise.id + ""),
+      //     formData
+      //   );
+      //   if (response.status === HttpStatusCode.Created) {
+      //     enqueueSnackbar("Upload success!");
+      //   } else {
+      //     enqueueSnackbar("Upload failed!");
+      //   }
+      // }
     } catch (error) {
       console.error(error);
     }
   });
-
-  useEffect(() => {
-    const loadModel = async () => {
-      const vision = await FilesetResolver.forVisionTasks(
-        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
-      );
-      const poseLandmark = await PoseLandmarker.createFromOptions(vision, {
-        baseOptions: {
-          modelAssetPath: "/models/pose_landmarker_heavy.task",
-        },
-        runningMode: "IMAGE",
-      });
-      setModel(poseLandmark);
-    };
-    loadModel();
-  }, []);
 
   const handleDrop = useCallback(
     async (acceptedFiles: File[]) => {
@@ -209,24 +190,46 @@ export default function PoseNewEditForm({ currentPose }: Props) {
       if (file) {
         setValue("image", newFile, { shouldValidate: true });
         setCheckImageChange(true);
-
-        const image = new Image();
-        image.src = newFile.preview;
-        await new Promise((resolve) => (image.onload = resolve));
-
-        // Extract keypoints from the image
-        if (model) {
-          const results = model.detect(image);
-          setKeypoints(results.landmarks[0]);
-          console.log(results);
-        }
       }
     },
-    [model, setKeypoints, setValue]
+    [setValue]
+  );
+
+  const handleDropVideo = useCallback(
+    async (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0];
+
+      const newFile = Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      });
+      setVideo(newFile.preview);
+
+      // const newFile = Object.assign(file, {
+      //   preview: () => {
+      //     return new Promise((resolve, reject) => {
+      //       const reader = new FileReader();
+      //       reader.onloadend = () => resolve(reader.result);
+      //       reader.onerror = reject;
+      //       reader.readAsDataURL(file);
+      //     });
+      //   },
+      // });
+      console.log(newFile);
+
+      if (file) {
+        setValue("video", newFile, { shouldValidate: true });
+        setCheckImageChange(true);
+      }
+    },
+    [setValue]
   );
 
   const handleRemoveFile = useCallback(() => {
     setValue("image", null);
+  }, [setValue]);
+
+  const handleRemoveFileVideo = useCallback(() => {
+    setValue("video", null);
   }, [setValue]);
 
   const renderDetails = (
@@ -249,12 +252,39 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
               {/* <Typography variant="subtitle2">Name</Typography> */}
-              <RHFTextField name="name" label="Name" />
+              <RHFTextField name="title" label="Title" />
             </Stack>
 
+            <RHFAutocomplete
+              name="benefit"
+              label="Benefits"
+              placeholder="+ Benefits"
+              multiple
+              freeSolo
+              options={benefits.map((option) => option)}
+              getOptionLabel={(option) => option}
+              renderOption={(props, option) => (
+                <li {...props} key={option}>
+                  {option}
+                </li>
+              )}
+              renderTags={(selected, getTagProps) =>
+                selected.map((option, index) => (
+                  <Chip
+                    {...getTagProps({ index })}
+                    key={option}
+                    label={option}
+                    size="small"
+                    color="info"
+                    variant="soft"
+                  />
+                ))
+              }
+            />
+
             <Stack spacing={1.5}>
-              {/* <Typography variant="subtitle2">Content</Typography> */}
-              <RHFTextField name="instruction" label="Instruction" multiline />
+              <Typography variant="subtitle2">Description</Typography>
+              <RHFEditor simple name="description" />
             </Stack>
 
             <Stack spacing={1.5}>
@@ -266,21 +296,6 @@ export default function PoseNewEditForm({ currentPose }: Props) {
                 onDrop={handleDrop}
                 onRemove={handleRemoveFile}
                 onUpload={() => console.info("ON UPLOAD")}
-              />
-            </Stack>
-            <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Keypoint</Typography>
-              <TextField
-                multiline
-                disabled
-                maxRows={8}
-                value={JSON.stringify(keypoints)}
-                sx={{
-                  flexGrow: 1,
-                  height: "auto",
-                  py: 2.5,
-                  width: "100%",
-                }}
               />
             </Stack>
           </Stack>
@@ -307,9 +322,17 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           {!mdUp && <CardHeader title="Properties" />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
-            <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-              Length
-            </Typography>
+            <Stack spacing={1.5}>
+              <Typography variant="subtitle2">Video</Typography>
+              <RHFUploadVideo
+                thumbnail
+                name="video"
+                // maxSize={3145728}
+                onDrop={handleDropVideo}
+                onRemove={handleRemoveFileVideo}
+                onUpload={() => console.info("ON UPLOAD")}
+              />
+            </Stack>
 
             <RHFTextField name="duration" label="Length" type="number" />
 
@@ -387,7 +410,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentPose ? "Create Pose" : "Update Pose"}
+          {!currentExercise ? "Create Pose" : "Update Pose"}
         </LoadingButton>
       </Grid>
     </>

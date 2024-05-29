@@ -6,8 +6,8 @@ import { paths } from "@/routes/paths";
 
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-import PoseNewEditForm from "../pose-new-edit-form";
 import { useGetPose } from "@/api/pose";
+import PoseNewEditForm from "@/sections/pose/pose-new-edit-form";
 
 // ----------------------------------------------------------------------
 

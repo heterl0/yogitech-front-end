@@ -6,11 +6,11 @@ import { paths } from "@/routes/paths";
 
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-import PoseNewEditForm from "../pose-new-edit-form";
+import ExerciseNewEditForm from "../exercise-new-edit-form";
 
 // ----------------------------------------------------------------------
 
-export default function PoseCreateView() {
+export default function ExerciseCreateView() {
   const settings = useSettingsContext();
 
   return (
@@ -23,17 +23,17 @@ export default function PoseCreateView() {
             href: paths.dashboard.root,
           },
           {
-            name: "Pose",
+            name: "Exercise",
             href: paths.dashboard.tour.root,
           },
-          { name: "New pose" },
+          { name: "New Exercise" },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
       />
 
-      <PoseNewEditForm />
+      <ExerciseNewEditForm />
     </Container>
   );
 }
