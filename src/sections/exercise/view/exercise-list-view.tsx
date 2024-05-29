@@ -178,7 +178,7 @@ export default function ExerciseListView() {
         action={
           <Button
             component={RouterLink}
-            href={paths.dashboard.exercise.pNew}
+            href={paths.dashboard.exercise.new}
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
