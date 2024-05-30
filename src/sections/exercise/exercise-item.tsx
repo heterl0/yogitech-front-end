@@ -26,7 +26,7 @@ type Props = {
 };
 
 export default function ExerciseItem({ exercise, onEdit }: Props) {
-  const { id, title, image, duration, level } = exercise;
+  const { id, title, image_url, durations, level } = exercise;
 
   // const renderRating = (
   //   <Stack
@@ -64,7 +64,7 @@ export default function ExerciseItem({ exercise, onEdit }: Props) {
         typography: "subtitle2",
       }}
     >
-      {fSeconds(duration)}
+      {fSeconds(durations)}
     </Stack>
   );
 
@@ -80,8 +80,8 @@ export default function ExerciseItem({ exercise, onEdit }: Props) {
         {renderPrice}
         {/* {renderRating} */}
         <Image
-          alt={image}
-          src={image}
+          alt={image_url}
+          src={image_url}
           sx={{ borderRadius: 1, height: 164, width: 1 }}
         />
       </Stack>
@@ -111,7 +111,7 @@ export default function ExerciseItem({ exercise, onEdit }: Props) {
       secondary={
         <Link
           component={RouterLink}
-          href={paths.dashboard.exercise.pEdit(id + "")}
+          href={paths.dashboard.exercise.edit(id + "")}
           color="inherit"
         >
           {title}

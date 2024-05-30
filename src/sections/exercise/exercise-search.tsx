@@ -104,7 +104,7 @@ export default function ExerciseSearch({
             <Avatar
               key={exercise.id}
               alt={exercise.title}
-              src={exercise.image}
+              src={exercise.image_url}
               variant="rounded"
               sx={{
                 width: 48,

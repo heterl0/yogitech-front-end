@@ -9,8 +9,9 @@ export type IPoseWithTime = {
 export type IExercise = {
   id: number;
   title: string;
-  image: string;
-  duration: number;
+  image_url: string;
+  video_url: string;
+  durations: number;
   level: number;
   benefit: string;
   description: string;

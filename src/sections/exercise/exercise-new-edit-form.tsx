@@ -32,6 +32,12 @@ import { LEVELS } from "@/constants/level";
 import { IExercise, IPoseWithTime } from "@/types/exercise";
 import { benefits } from "../blog/post-new-edit-form";
 import ExercisePoseList from "./exercise-pose-list";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { HttpStatusCode } from "axios";
+import { useSnackbar } from "notistack";
+import { paths } from "@/routes/paths";
+import { fShortenNumber } from "@/utils/format-number";
+import { useRouter } from "next/navigation";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -39,14 +45,36 @@ type Props = {
   poses: IPose[];
 };
 
+export type ExerciseParams = {
+  title?: string;
+  image?: string;
+  duration?: number;
+  level?: number;
+  poses_id?: { id: number; time: number; duration: number }[];
+  benefit?: string;
+  description?: string;
+  calories?: string;
+  number_poses?: number;
+  point?: number;
+  is_premium?: boolean;
+  active_status?: number;
+};
+
 export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
   // const [keypoints, setKeypoints] = useState<NormalizedLandmark[]>([]);
-
-  const [poseSelectedIndex, setPoseSelectedIndex] = useState(-1);
-  const [poseExercises, setPoseExercises] = useState<IPoseWithTime[]>([]);
-  const [active, setActive] = useState(
-    currentExercise ? currentExercise.active_status === 1 : true
+  const router = useRouter();
+  const [checkVideoChange, setCheckVideoChange] = useState(false);
+  const [checkImageChange, setCheckImageChange] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const [poseSelectedIndex, setPoseSelectedIndex] = useState(
+    currentExercise?.poses ? 0 : -1
   );
+  const [poseExercises, setPoseExercises] = useState<IPoseWithTime[]>(
+    currentExercise?.poses || []
+  );
+  const [active, setActive] = useState(true);
+
+  const [isPremium, setIsPremium] = useState(false);
 
   const handleRemovePose = useCallback(
     (index: number) => {
@@ -69,7 +97,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
   const NewExerciseSchema = Yup.object().shape({
     title: Yup.string().required("Name is required"),
     benefit: Yup.array().min(1, "Must have at least 1 tag"),
-    description: Yup.string().required("Content is required"),
+    description: Yup.string().required("Description is required"),
     image: Yup.mixed<any>().required("Image is required"),
     //
     video: Yup.mixed<any>().required("Image is required"),
@@ -86,12 +114,12 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     () => ({
       title: currentExercise?.title || "",
       benefit: currentExercise?.benefit
-        ? (JSON.parse(currentExercise.benefit) as string[])
+        ? (JSON.parse(currentExercise?.benefit) as string[])
         : [],
       description: currentExercise?.description || "",
-      image: currentExercise?.image || "",
+      image: currentExercise?.image_url || "",
       //
-      video: "",
+      video: currentExercise?.video_url || "",
       level: currentExercise?.level || 1,
       point: currentExercise?.point || 0,
       pose: poses[0] || { id: -1, name: "Not Select" },
@@ -103,10 +131,11 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     [
       currentExercise?.benefit,
       currentExercise?.description,
-      currentExercise?.image,
+      currentExercise?.image_url,
       currentExercise?.level,
       currentExercise?.point,
       currentExercise?.title,
+      currentExercise?.video_url,
       poses,
     ]
   );
@@ -130,6 +159,10 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
   useEffect(() => {
     if (currentExercise) {
       reset(defaultValues);
+      setPoseExercises(currentExercise.poses || []);
+      setPoseSelectedIndex(currentExercise.poses ? 0 : -1);
+      setActive(currentExercise.active_status === 1);
+      setIsPremium(currentExercise.is_premium);
     }
   }, [currentExercise, defaultValues, reset]);
 
@@ -137,61 +170,72 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     try {
       console.log(data);
 
-      // if (!currentExercise) {
-      //   const json = JSON.stringify(keypoints);
-      //   // Create a Blob from the JSON string
-      //   const blob = new Blob([json], { type: "application/json" });
-      //   // Create a FormData object
-      //   const formData = new FormData();
-      //   formData.append("keypoint", blob, "results.json");
-      //   formData.append("name", data.name);
-      //   formData.append("instruction", data.instruction);
-      //   formData.append("image", data.image);
-      //   data.muscles?.forEach((m) =>
-      //     formData.append("muscle_ids", m.id.toString())
-      //   );
-      //   formData.append("duration", data.duration + "");
-      //   formData.append("level", data.level + "");
-      //   formData.append("calories", data.calories + "");
-      //   formData.append("active_status", active ? "1" : "0");
-      //   const response = await axiosInstance.post(
-      //     endpoints.pose.create,
-      //     formData
-      //   );
-      //   if (response.status === HttpStatusCode.Created) {
-      //     enqueueSnackbar("Create success!");
-      //     setTimeout(() => router.push(paths.dashboard.exercise.pose), 2000);
-      //   } else {
-      //     enqueueSnackbar("Create failed!");
-      //   }
-      // } else {
-      //   const formData = new FormData();
-      //   if (checkImageChange) {
-      //     const json = JSON.stringify(keypoints);
-      //     const blob = new Blob([json], { type: "application/json" });
-      //     formData.append("keypoint", blob, "results.json");
-      //     formData.append("image", data.image);
-      //   }
-      //   formData.append("name", data.name);
-      //   formData.append("instruction", data.instruction);
-      //   formData.append("image", data.image);
-      //   data.muscles?.forEach((m) =>
-      //     formData.append("muscle_ids", m.id.toString())
-      //   );
-      //   formData.append("duration", data.duration + "");
-      //   formData.append("level", data.level + "");
-      //   formData.append("calories", data.calories + "");
-      //   formData.append("active_status", active ? "1" : "0");
-      //   const response = await axiosInstance.patch(
-      //     endpoints.pose.update(currentExercise.id + ""),
-      //     formData
-      //   );
-      //   if (response.status === HttpStatusCode.Created) {
-      //     enqueueSnackbar("Upload success!");
-      //   } else {
-      //     enqueueSnackbar("Upload failed!");
-      //   }
-      // }
+      if (!currentExercise) {
+        const formData = new FormData();
+        formData.append("title", data.title);
+        formData.append("description", data.description);
+        formData.append("image", data.image);
+        formData.append("video", data.video);
+        let duration = 0;
+        let calories = 0;
+        poseExercises.forEach((p) => {
+          formData.append("pose", p.pose.id.toString());
+          formData.append("time", p.time + "");
+          formData.append("duration", p.duration + "");
+          duration += p.duration;
+          calories += (p.pose.calories * p.duration) / p.pose.duration;
+        });
+        formData.append("duration", duration + "");
+        formData.append("level", data.level + "");
+        formData.append("calories", fShortenNumber(calories) + "");
+        formData.append("active_status", active ? "1" : "0");
+        formData.append("is_premium", isPremium ? "1" : "0");
+        formData.append("point", data.point + "");
+        formData.append("benefit", JSON.stringify(data.benefit));
+        formData.append("number_poses", poseExercises.length + "");
+        const response = await axiosInstance.post(
+          endpoints.exercise.create,
+          formData
+        );
+        if (response.status === HttpStatusCode.Created) {
+          enqueueSnackbar("Create success!");
+          setTimeout(() => router.push(paths.dashboard.exercise.root), 2000);
+        } else {
+          enqueueSnackbar("Create failed!");
+        }
+      } else {
+        const formData = new FormData();
+        formData.append("title", data.title);
+        formData.append("description", data.description);
+        if (checkImageChange) formData.append("image", data.image);
+        if (checkVideoChange) formData.append("video", data.video);
+        let duration = 0;
+        let calories = 0;
+        poseExercises.forEach((p) => {
+          formData.append("pose", p.pose.id.toString());
+          formData.append("time", p.time + "");
+          formData.append("duration", p.duration + "");
+          duration += p.duration;
+          calories += (p.pose.calories * p.duration) / p.pose.duration;
+        });
+        formData.append("duration", duration + "");
+        formData.append("level", data.level + "");
+        formData.append("calories", fShortenNumber(calories) + "");
+        formData.append("active_status", active ? "1" : "0");
+        formData.append("is_premium", isPremium ? "1" : "0");
+        formData.append("point", data.point + "");
+        formData.append("benefit", JSON.stringify(data.benefit));
+        formData.append("number_poses", poseExercises.length + "");
+        const response = await axiosInstance.patch(
+          endpoints.exercise.update(currentExercise.id + ""),
+          formData
+        );
+        if (response.status === HttpStatusCode.Ok) {
+          enqueueSnackbar("Upload success!");
+        } else {
+          enqueueSnackbar("Upload failed!");
+        }
+      }
     } catch (error) {
       console.error(error);
     }
@@ -225,6 +269,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       });
 
       if (file) {
+        setCheckImageChange(true);
         setValue("image", newFile, { shouldValidate: true });
       }
     },
@@ -242,6 +287,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       console.log(newFile);
 
       if (file) {
+        setCheckVideoChange(true);
         setValue("video", newFile, { shouldValidate: true });
       }
     },
@@ -261,12 +307,14 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
   }, [poseSelectedIndex]);
 
   const handleRemoveFile = useCallback(() => {
-    setValue("image", null);
-  }, [setValue]);
+    setValue("image", currentExercise?.image_url || null);
+    setCheckImageChange(false);
+  }, [currentExercise?.image_url, setValue]);
 
   const handleRemoveFileVideo = useCallback(() => {
-    setValue("video", null);
-  }, [setValue]);
+    setValue("video", currentExercise?.video_url || null);
+    setCheckImageChange(false);
+  }, [currentExercise?.video_url, setValue]);
 
   const handleUpdateSelectedPose = useCallback(() => {
     const updatedPoseExercises = [...poseExercises];
@@ -504,7 +552,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
               ))}
             </RHFSelect>
 
-            <RHFTextField name="calories" label="Calories" type="number" />
+            <RHFTextField name="point" label="Point" type="number" />
           </Stack>
         </Card>
       </Grid>
@@ -515,6 +563,19 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     <>
       {mdUp && <Grid md={4} />}
       <Grid xs={12} md={8} sx={{ display: "flex", alignItems: "center" }}>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isPremium}
+              onChange={(
+                event: ChangeEvent<HTMLInputElement>,
+                checked: boolean
+              ) => setIsPremium(checked)}
+            />
+          }
+          label="Is Premium?"
+          sx={{ flexGrow: 1, pl: 3 }}
+        />
         <FormControlLabel
           control={
             <Switch
@@ -536,7 +597,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentExercise ? "Create Pose" : "Update Pose"}
+          {!currentExercise ? "Create Exercise" : "Update Exercise"}
         </LoadingButton>
       </Grid>
     </>

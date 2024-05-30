@@ -6,8 +6,9 @@ import { paths } from "@/routes/paths";
 
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-import { useGetPose } from "@/api/pose";
-import PoseNewEditForm from "@/sections/pose/pose-new-edit-form";
+import { useGetExercise } from "@/api/exercise";
+import ExerciseNewEditForm from "@/sections/exercise/exercise-new-edit-form";
+import { useGetPoses } from "@/api/pose";
 
 // ----------------------------------------------------------------------
 
@@ -15,11 +16,11 @@ type Props = {
   id: string;
 };
 
-export default function PoseEditView({ id }: Props) {
+export default function ExerciseEditView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const { pose: currentPose } = useGetPose(id);
-
+  const { exercise: currentExercise } = useGetExercise(id);
+  const { poses } = useGetPoses();
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
@@ -30,17 +31,19 @@ export default function PoseEditView({ id }: Props) {
             href: paths.dashboard.root,
           },
           {
-            name: "Pose",
-            href: paths.dashboard.tour.root,
+            name: "Exercise",
+            href: paths.dashboard.exercise.root,
           },
-          { name: currentPose?.name },
+          { name: currentExercise?.title },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
       />
 
-      <PoseNewEditForm currentPose={currentPose} />
+      {poses && (
+        <ExerciseNewEditForm poses={poses} currentExercise={currentExercise} />
+      )}
     </Container>
   );
 }

@@ -6,6 +6,6 @@ export const metadata = {
   title: "Dashboard: Exercise List",
 };
 
-export default function PoseListPage() {
+export default function ExerciseListPage() {
   return <ExerciseListView />;
 }

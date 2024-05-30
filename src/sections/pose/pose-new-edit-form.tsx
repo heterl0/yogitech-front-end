@@ -171,7 +171,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           endpoints.pose.update(currentPose.id + ""),
           formData
         );
-        if (response.status === HttpStatusCode.Created) {
+        if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar("Upload success!");
         } else {
           enqueueSnackbar("Upload failed!");

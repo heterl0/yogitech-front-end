@@ -125,7 +125,7 @@ export default function ExerciseListView() {
         query={search.query}
         results={search.results}
         onSearch={handleSearch}
-        hrefItem={(id: string) => paths.dashboard.exercise.pEdit(id)}
+        hrefItem={(id: string) => paths.dashboard.exercise.edit(id)}
       />
 
       <Stack direction="row" spacing={1} flexShrink={0}>

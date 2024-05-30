@@ -12,7 +12,7 @@ type Props = {
   };
 };
 
-export default function TourEditPage({ params }: Props) {
+export default function PoseEditPage({ params }: Props) {
   const { id } = params;
 
   return <PoseEditView id={id} />;
