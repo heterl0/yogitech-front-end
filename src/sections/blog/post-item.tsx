@@ -55,7 +55,7 @@ export default function PostItem({ post, index }: Props) {
       <Card>
         <Avatar
           alt={owner}
-          src={`https://api.dicebear.com/8.x/initials/svg?seed=${owner}`}
+          src={owner}
           sx={{
             top: 24,
             left: 24,
