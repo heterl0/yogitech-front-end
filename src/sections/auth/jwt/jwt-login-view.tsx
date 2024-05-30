@@ -22,7 +22,11 @@ import { useBoolean } from "@/hooks/use-boolean";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useAuthContext } from "@/auth/hooks";
-import { PATH_AFTER_LOGIN } from "@/config-global";
+import {
+  ALLOW_TO_LOGIN_WITH_GOOGLE,
+  ALLOW_TO_REGISTER,
+  PATH_AFTER_LOGIN,
+} from "@/config-global";
 
 import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
@@ -84,9 +88,7 @@ export default function JwtLoginView() {
     <Stack spacing={2} sx={{ mb: 5 }}>
       <Typography variant="h4">Sign in to Minimal</Typography>
 
-      {(process.env.ALLOW_TO_REGISTER
-        ? JSON.parse(process.env.ALLOW_TO_REGISTER)
-        : false) && (
+      {ALLOW_TO_REGISTER && (
         <Stack direction="row" spacing={0.5}>
           <Typography variant="body2">New user?</Typography>
 
@@ -177,9 +179,7 @@ export default function JwtLoginView() {
               : ""
           }
         >
-          {(process.env.ALLOW_TO_LOGIN_WITH_GOOGLE
-            ? JSON.parse(process.env.ALLOW_TO_LOGIN_WITH_GOOGLE)
-            : false) && <GoogleLoginButton />}
+          {ALLOW_TO_LOGIN_WITH_GOOGLE && <GoogleLoginButton />}
         </GoogleOAuthProvider>
       </div>
     </>

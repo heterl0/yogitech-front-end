@@ -21,7 +21,7 @@ import { useRouter, useSearchParams } from "@/routes/hooks";
 import { useBoolean } from "@/hooks/use-boolean";
 
 import { useAuthContext } from "@/auth/hooks";
-import { PATH_AFTER_LOGIN } from "@/config-global";
+import { ALLOW_TO_REGISTER, PATH_AFTER_LOGIN } from "@/config-global";
 
 import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
@@ -34,9 +34,7 @@ export default function JwtRegisterView() {
 
   const router = useRouter();
 
-  const allowRegister = process.env.ALLOW_TO_REGISTER
-    ? JSON.parse(process.env.ALLOW_TO_REGISTER)
-    : false;
+  const allowRegister = ALLOW_TO_REGISTER;
 
   const [errorMsg, setErrorMsg] = useState("");
 
