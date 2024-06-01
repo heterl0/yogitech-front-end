@@ -9,7 +9,7 @@ export type IEvent = {
   expire_date: string;
   description: string;
   active_status: number;
-  exercise: IExercise[];
+  exercises: IExercise[];
 };
 
 export type IEventFilters = {

@@ -6,13 +6,14 @@ import { paths } from "@/routes/paths";
 
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-import PoseNewEditForm from "../pose-new-edit-form";
+import { useGetExercises } from "@/api/exercise";
+import EventNewEditForm from "../event-new-edit-form";
 
 // ----------------------------------------------------------------------
 
 export default function EventCreateView() {
   const settings = useSettingsContext();
-
+  const { exercises } = useGetExercises();
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
@@ -33,7 +34,7 @@ export default function EventCreateView() {
         }}
       />
 
-      <PoseNewEditForm />
+      <EventNewEditForm exercises={exercises} />
     </Container>
   );
 }

@@ -33,7 +33,6 @@ import { MenuItem } from "@mui/material";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
 import { IEvent } from "@/types/event";
-import { useGetExercises } from "@/api/exercise";
 import { IExercise } from "@/types/exercise";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { getStatusLabel } from "@/types/tour";
@@ -41,15 +40,15 @@ import { getStatusLabel } from "@/types/tour";
 
 type Props = {
   currentEvent?: IEvent;
+  exercises: IExercise[];
 };
 
-export default function EventNewEditForm({ currentEvent }: Props) {
+export default function EventNewEditForm({ currentEvent, exercises }: Props) {
   const router = useRouter();
   const [active, setActive] = useState(
     currentEvent ? currentEvent.active_status === 1 : true
   );
 
-  const { exercises } = useGetExercises();
   const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
 
@@ -80,10 +79,14 @@ export default function EventNewEditForm({ currentEvent }: Props) {
       description: currentEvent?.description || "",
       image: currentEvent?.image_url || "",
       //
-      exercise: currentEvent?.exercise || [],
+      exercise: currentEvent?.exercises || [],
       available: {
-        startDate: currentEvent?.start_date || null,
-        endDate: currentEvent?.expire_date || null,
+        startDate: currentEvent?.start_date
+          ? new Date(currentEvent?.start_date)
+          : null,
+        endDate: currentEvent?.exercises
+          ? new Date(currentEvent?.expire_date)
+          : null,
       },
       status: currentEvent?.status || 0,
     }),
@@ -109,6 +112,7 @@ export default function EventNewEditForm({ currentEvent }: Props) {
   useEffect(() => {
     if (currentEvent) {
       reset(defaultValues);
+      setActive(currentEvent.active_status === 1);
     }
   }, [currentEvent, defaultValues, reset]);
 
@@ -120,7 +124,7 @@ export default function EventNewEditForm({ currentEvent }: Props) {
         formData.append("description", data.description);
         formData.append("image", data.image);
         data.exercise?.forEach((exericse) =>
-          formData.append("exercise", exericse.id.toString())
+          formData.append("exercise_ids", exericse.id.toString())
         );
         formData.append("status", data.status + "");
         formData.append("active_status", active ? "1" : "0");
@@ -145,7 +149,7 @@ export default function EventNewEditForm({ currentEvent }: Props) {
         formData.append("title", data.title);
         formData.append("description", data.description);
         data.exercise?.forEach((exericse) =>
-          formData.append("exercise", exericse.id.toString())
+          formData.append("exercise_ids", exericse.id.toString())
         );
         formData.append("status", data.status + "");
         formData.append("active_status", active ? "1" : "0");

@@ -113,6 +113,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
   useEffect(() => {
     if (currentPose) {
       reset(defaultValues);
+      setActive(currentPose.active_status === 1);
     }
   }, [currentPose, defaultValues, reset]);
 

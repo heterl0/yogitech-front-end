@@ -6,8 +6,9 @@ import { paths } from "@/routes/paths";
 
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-import EventNewEditForm from "../pose-new-edit-form";
+import EventNewEditForm from "../event-new-edit-form";
 import { useGetEvent } from "@/api/event";
+import { useGetExercises } from "@/api/exercise";
 
 // ----------------------------------------------------------------------
 
@@ -19,6 +20,7 @@ export default function EventEditView({ id }: Props) {
   const settings = useSettingsContext();
 
   const { event: currentEvent } = useGetEvent(id);
+  const { exercises } = useGetExercises();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
@@ -40,7 +42,7 @@ export default function EventEditView({ id }: Props) {
         }}
       />
 
-      <EventNewEditForm currentEvent={currentEvent} />
+      <EventNewEditForm currentEvent={currentEvent} exercises={exercises} />
     </Container>
   );
 }
