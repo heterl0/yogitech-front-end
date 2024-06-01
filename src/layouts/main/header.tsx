@@ -24,9 +24,7 @@ import Logo from "@/components/logo";
 import NavDesktop from "./nav/desktop";
 import { HEADER } from "../config-layout";
 import { navConfig } from "./config-navigation";
-import { useLocales, useTranslate } from "@/locales";
-import Iconify from "@/components/iconify";
-import { useMemo } from "react";
+import LanguagePopover from "../common/language-popover";
 
 // ----------------------------------------------------------------------
 
@@ -36,17 +34,9 @@ type Props = {
 
 export default function Header({ isBlurFromStart = false }: Props) {
   const theme = useTheme();
-  const { t, onChangeLang } = useTranslate();
-  const { allLangs, currentLang } = useLocales();
   const mdUp = useResponsive("up", "md");
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
-  const targetLang = useMemo(() => {
-    const targetLang = allLangs.filter(
-      (item) => item.value !== currentLang.value
-    )[0];
-    return targetLang;
-  }, [allLangs, currentLang.value]);
 
   return (
     <AppBar>
@@ -105,15 +95,9 @@ export default function Header({ isBlurFromStart = false }: Props) {
           <Stack
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
-            className="cursor-pointer"
+            paddingX={"20px"}
           >
-            <Iconify
-              onClick={() => onChangeLang(targetLang.value)}
-              icon={targetLang.icon}
-              height={24}
-              className="cursor-pointer"
-              sx={{ mr: 3 }}
-            />
+            <LanguagePopover />
           </Stack>
           <Stack
             alignItems="center"
