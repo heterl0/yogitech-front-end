@@ -120,5 +120,11 @@ export const paths = {
       details: (id: string) => `${ROOTS.DASHBOARD}/tour/${id}`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/tour/${id}/edit`,
     },
+    event: {
+      root: `${ROOTS.DASHBOARD}/event`,
+      new: `${ROOTS.DASHBOARD}/event/new`,
+      details: (id: string) => `${ROOTS.DASHBOARD}/event/${id}`,
+      edit: (id: string) => `${ROOTS.DASHBOARD}/event/${id}/edit`,
+    },
   },
 };

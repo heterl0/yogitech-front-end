@@ -94,4 +94,11 @@ export const endpoints = {
     uploadFile: "/api/v1/media/file/upload",
     uploadImage: "/api/v1/media/upload/image",
   },
+  event: {
+    list: "/api/v1/events/",
+    create: "/api/v1/events/",
+    details: (id: string) => `/api/v1/events/${id}/`,
+    update: (id: string) => `/api/v1/events/${id}/`,
+    delete: (id: string) => `/api/v1/events/${id}/`,
+  },
 };

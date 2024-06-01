@@ -59,5 +59,6 @@
   "notification": "Notification",
   "pose_exercise": "Pose & Exercise",
   "pose": "Pose",
-  "exercise": "Exercise"
+  "exercise": "Exercise",
+  "event": "Event"
 }

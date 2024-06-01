@@ -123,13 +123,13 @@ export function useNavData() {
             icon: ICONS.calendar,
           },
 
-          // ORDER
-          // {
-          //   title: t("order"),
-          //   path: paths.dashboard.order.root,
-          //   icon: ICONS.order,
-          //   children: [{ title: t("list"), path: paths.dashboard.order.root }],
-          // },
+          // Event
+          {
+            title: t("event"),
+            path: paths.dashboard.event.root,
+            icon: ICONS.mail,
+            // children: [{ title: t("list"), path: paths.dashboard.order.root }],
+          },
 
           // INVOICE
           // {
