@@ -266,8 +266,8 @@ export default function HomeHero() {
           alt={lightMode ? "light_1" : "dark_1"}
           src={
             lightMode
-              ? `/assets/images/home/hero/light_1.webp`
-              : `/assets/images/home/hero/dark_1.webp`
+              ? `/assets/images/home/hero/light_1.png`
+              : `/assets/images/home/hero/dark_1.png`
           }
           sx={{ position: "absolute", mt: -5 }}
         />
@@ -278,8 +278,8 @@ export default function HomeHero() {
           alt={lightMode ? "light_1" : "dark_1"}
           src={
             lightMode
-              ? `/assets/images/home/hero/light_1.webp`
-              : `/assets/images/home/hero/dark_1.webp`
+              ? `/assets/images/home/hero/light_1.png`
+              : `/assets/images/home/hero/dark_1.png`
           }
           sx={{ position: "absolute" }}
         />
@@ -297,8 +297,8 @@ export default function HomeHero() {
           alt={lightMode ? "light_2" : "dark_2"}
           src={
             lightMode
-              ? `/assets/images/home/hero/light_2.webp`
-              : `/assets/images/home/hero/dark_2.webp`
+              ? `/assets/images/home/hero/light_2.png`
+              : `/assets/images/home/hero/dark_2.png`
           }
           sx={{ position: "absolute", mt: -5 }}
         />
@@ -309,8 +309,8 @@ export default function HomeHero() {
           alt={lightMode ? "light_2" : "dark_2"}
           src={
             lightMode
-              ? `/assets/images/home/hero/light_2.webp`
-              : `/assets/images/home/hero/dark_2.webp`
+              ? `/assets/images/home/hero/light_2.png`
+              : `/assets/images/home/hero/dark_2.png`
           }
           sx={{ position: "absolute" }}
         />
