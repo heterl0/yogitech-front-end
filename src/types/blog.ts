@@ -1,5 +1,7 @@
 // ----------------------------------------------------------------------
 
+import { IAccount } from "./user";
+
 export type IPostFilterValue = string;
 
 export type IPostFilters = {
@@ -68,14 +70,14 @@ export type IPostItem = {
 export type IBlogVote = {
   id: number;
   user: string;
-  user_id: number;
+  user_id: string;
   blog: string;
   vote_value: number;
 };
 
 export type IBlog = {
   id: number;
-  owner: string;
+  owner: IAccount;
   title: string;
   description: string;
   image_url: string;

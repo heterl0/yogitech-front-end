@@ -183,8 +183,8 @@ export default function PostItemHorizontal({ post }: Props) {
             }}
           >
             <Avatar
-              alt={owner}
-              src={`https://api.dicebear.com/8.x/initials/svg?seed=${owner}`}
+              alt={owner.username}
+              src={owner.profile.avatar_url || ""}
               sx={{ position: "absolute", top: 16, right: 16, zIndex: 9 }}
             />
             <Image

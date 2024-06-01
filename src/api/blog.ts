@@ -11,7 +11,6 @@ export function useGetPosts() {
   const URL = endpoints.post.list;
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
-  console.log(data);
 
   const memoizedValue = useMemo(
     () => ({

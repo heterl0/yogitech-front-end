@@ -34,6 +34,8 @@ type Props = {
 export default function PostItem({ post, index }: Props) {
   const theme = useTheme();
 
+  console.log(post);
+
   const mdUp = useResponsive("up", "md");
 
   const { owner, title, image_url, created_at, votes } = post;
@@ -54,8 +56,8 @@ export default function PostItem({ post, index }: Props) {
     return (
       <Card>
         <Avatar
-          alt={owner}
-          src={owner}
+          alt={owner.username}
+          src={owner.profile?.avatar_url || ""}
           sx={{
             top: 24,
             left: 24,
@@ -99,8 +101,8 @@ export default function PostItem({ post, index }: Props) {
         />
 
         <Avatar
-          alt={owner}
-          src={`https://api.dicebear.com/8.x/initials/svg?seed=${owner}`}
+          alt={owner.username}
+          src={owner.profile?.avatar_url || ""}
           sx={{
             left: 24,
             zIndex: 9,

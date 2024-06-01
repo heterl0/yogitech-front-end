@@ -24,6 +24,7 @@ import PostDetailsHero from "../post-details-hero";
 import { PostDetailsSkeleton } from "../post-skeleton";
 import PostDetailsToolbar from "../post-details-toolbar";
 import axiosInstance, { endpoints } from "@/utils/axios";
+import { Avatar, AvatarGroup, avatarGroupClasses } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -97,7 +98,15 @@ export default function PostDetailsView({ id }: Props) {
         publishOptions={POST_PUBLISH_OPTIONS}
       />
 
-      <PostDetailsHero title={post.title} coverUrl={post.image_url} />
+      <PostDetailsHero
+        title={post.title}
+        coverUrl={post.image_url}
+        createdAt={new Date(post.created_at)}
+        author={{
+          avatarUrl: post.owner.profile.avatar_url || "",
+          name: post.owner.username,
+        }}
+      />
 
       <Stack
         sx={{
@@ -122,29 +131,50 @@ export default function PostDetailsView({ id }: Props) {
         >
           <Stack direction="row" flexWrap="wrap" spacing={1}>
             {JSON.parse(post.benefit).map((tag: string) => (
-              <Chip key={tag} label={tag} variant="soft" />
+              <Chip key={tag} label={tag} variant="soft" color="primary" />
             ))}
           </Stack>
-        </Stack>
-        <Stack
-          spacing={1.5}
-          flexGrow={1}
-          direction="row"
-          flexWrap="wrap"
-          justifyContent="flex-end"
-          sx={{
-            typography: "caption",
-            color: "text.disabled",
-          }}
-        >
-          <Stack direction="row" alignItems="center">
-            <Iconify icon="solar:like-bold" width={16} sx={{ mr: 0.5 }} />
-            {vote.up}
-          </Stack>
+          <Stack
+            spacing={1.5}
+            flexGrow={1}
+            direction="row"
+            flexWrap="wrap"
+            gap={1}
+            justifyContent="flex-start"
+            sx={{
+              typography: "caption",
+              color: "text.disabled",
+            }}
+          >
+            <Stack direction="row" alignItems="center" className="">
+              <Iconify icon="solar:like-bold" width={24} sx={{ mr: 0.5 }} />
+              <Typography variant="body2" sx={{ mr: 0.5 }}>
+                {vote.up}
+              </Typography>
+            </Stack>
 
-          <Stack direction="row" alignItems="center">
-            <Iconify icon="solar:dislike-bold" width={16} sx={{ mr: 0.5 }} />
-            {vote.down}
+            <Stack direction="row" alignItems="center">
+              <Iconify icon="solar:dislike-bold" width={25} sx={{ mr: 0.5 }} />
+              <Typography variant="body2" sx={{ mr: 0.5 }}>
+                {vote.down}
+              </Typography>
+            </Stack>
+            <AvatarGroup
+              sx={{
+                [`& .${avatarGroupClasses.avatar}`]: {
+                  width: 32,
+                  height: 32,
+                },
+              }}
+            >
+              {post.votes.map((vote) => (
+                <Avatar
+                  key={vote.id}
+                  alt={vote.user}
+                  src={vote.user_id || ""}
+                />
+              ))}
+            </AvatarGroup>
           </Stack>
         </Stack>
       </Stack>
