@@ -213,8 +213,10 @@ export default function HomeHero() {
 
       <m.div variants={varFade().in}>
         <Typography variant="body2" sx={{ textAlign: "center" }}>
-          The starting point for your next project is based on MUI.Easy
-          customization Helps you build apps faster and better.
+          Explore YogiTech, the premier yoga app designed for all skill levels.
+          Experience the convenience of personalized yoga sessions anytime,
+          anywhere, and start your journey towards better health and flexibility
+          today!
         </Typography>
       </m.div>
 
