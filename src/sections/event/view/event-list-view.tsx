@@ -235,7 +235,12 @@ const applyFilter = ({
   // FILTERS
 
   if (status !== -1) {
-    inputData = inputData.filter((event) => event.active_status === status);
+    inputData = inputData.filter((event) => {
+      if (status === 0) {
+        return event.active_status === 0;
+      } else if (event.active_status === 1) return event.status === status - 1;
+      return false;
+    });
   }
 
   if (!dateError) {

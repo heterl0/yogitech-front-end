@@ -1,3 +1,4 @@
+import { LabelColor } from "@/components/label";
 import { IExercise } from "./exercise";
 
 export type IEvent = {
@@ -24,3 +25,34 @@ export const EVENT_SORT_OPTIONS = [
   { value: "latest", label: "Latest" },
   { value: "oldest", label: "Oldest" },
 ];
+
+export const EVENT_STATUS = [
+  { label: "Inactive", color: "default" as LabelColor, value: 0 },
+  { label: "Not Start", color: "success" as LabelColor, value: 1 },
+  { label: "In Progress", color: "warning" as LabelColor, value: 2 },
+  { label: "Ended", color: "error" as LabelColor, value: 3 },
+];
+
+export function getStatusLabel(status: number, active_status?: number): string {
+  if (active_status !== undefined) {
+    if (active_status === 1) {
+      if (status === 0) {
+        return "Not start";
+      } else if (status === 1) {
+        return "In Progress";
+      } else {
+        return "Ended";
+      }
+    } else {
+      return "Inactive";
+    }
+  } else {
+    if (status === 0) {
+      return "Not start";
+    } else if (status === 1) {
+      return "In Progress";
+    } else {
+      return "Ended";
+    }
+  }
+}

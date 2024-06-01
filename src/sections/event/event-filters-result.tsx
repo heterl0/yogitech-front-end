@@ -5,8 +5,7 @@ import Button from "@mui/material/Button";
 import Stack, { StackProps } from "@mui/material/Stack";
 
 import Iconify from "@/components/iconify";
-import { NOTIFICATION_STATUS } from "@/types/notification";
-import { IEventFilterValue, IEventFilters } from "@/types/event";
+import { EVENT_STATUS, IEventFilterValue, IEventFilters } from "@/types/event";
 import { shortDateLabel } from "@/components/custom-date-range-picker";
 
 // ----------------------------------------------------------------------
@@ -77,7 +76,7 @@ export default function EventFiltersResult({
         {filters.status !== -1 && (
           <Block label="Status:">
             <Chip
-              label={NOTIFICATION_STATUS[filters.status].label}
+              label={EVENT_STATUS[filters.status].label}
               size="small"
               onDelete={() => handleRemoveStatus()}
             />

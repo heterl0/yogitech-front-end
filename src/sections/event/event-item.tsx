@@ -12,9 +12,8 @@ import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 // import { shortDateLabel } from "@/components/custom-date-range-picker";
 import { Tooltip } from "@mui/material";
-import { IEvent } from "@/types/event";
+import { IEvent, getStatusLabel } from "@/types/event";
 import { fDateTime } from "@/utils/format-time";
-import { getStatusLabel } from "@/types/tour";
 
 // ----------------------------------------------------------------------
 

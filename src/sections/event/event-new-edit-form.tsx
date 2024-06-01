@@ -32,10 +32,9 @@ import FormProvider, {
 import { MenuItem } from "@mui/material";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
-import { IEvent } from "@/types/event";
+import { IEvent, getStatusLabel } from "@/types/event";
 import { IExercise } from "@/types/exercise";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { getStatusLabel } from "@/types/tour";
 // ----------------------------------------------------------------------
 
 type Props = {

@@ -15,9 +15,8 @@ import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
 
 import { MenuItem } from "@mui/material";
-import { NOTIFICATION_STATUS } from "@/types/notification";
 import Label, { LabelColor } from "@/components/label";
-import { IEventFilterValue, IEventFilters } from "@/types/event";
+import { EVENT_STATUS, IEventFilterValue, IEventFilters } from "@/types/event";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 // ----------------------------------------------------------------------
@@ -136,7 +135,7 @@ export default function EventFilters({
       >
         {[
           { label: "All", value: -1, color: "default" as LabelColor },
-          ...NOTIFICATION_STATUS,
+          ...EVENT_STATUS,
         ].map((option) => (
           <MenuItem key={option.value} value={option.value}>
             <Label color={option.color}>{option.label}</Label>
