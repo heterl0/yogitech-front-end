@@ -1,6 +1,6 @@
 {
-  "name": "Minimal UI",
-  "short_name": "Minimal UI",
+  "name": "YogiTech",
+  "short_name": "YogiTech",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#000000",
