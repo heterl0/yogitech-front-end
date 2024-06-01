@@ -10,23 +10,23 @@ import PoseNewEditForm from "../pose-new-edit-form";
 
 // ----------------------------------------------------------------------
 
-export default function PoseCreateView() {
+export default function EventCreateView() {
   const settings = useSettingsContext();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="Create a new pose"
+        heading="Create a new event"
         links={[
           {
             name: "Dashboard",
             href: paths.dashboard.root,
           },
           {
-            name: "Pose",
+            name: "Event",
             href: paths.dashboard.tour.root,
           },
-          { name: "New pose" },
+          { name: "New event" },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },

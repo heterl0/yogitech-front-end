@@ -48,3 +48,27 @@ export type ITourItem = {
     endDate: Date;
   };
 };
+
+export function getStatusLabel(status: number, active_status?: number): string {
+  if (active_status) {
+    if (active_status === 1) {
+      if (status === 0) {
+        return "Not start";
+      } else if (status === 1) {
+        return "In Progress";
+      } else {
+        return "Ended";
+      }
+    } else {
+      return "Inactive";
+    }
+  } else {
+    if (status === 0) {
+      return "Not start";
+    } else if (status === 1) {
+      return "In Progress";
+    } else {
+      return "Ended";
+    }
+  }
+}

@@ -159,7 +159,6 @@ export default function PoseNewEditForm({ currentPose }: Props) {
         }
         formData.append("name", data.name);
         formData.append("instruction", data.instruction);
-        formData.append("image", data.image);
         data.muscles?.forEach((m) =>
           formData.append("muscle_ids", m.id.toString())
         );

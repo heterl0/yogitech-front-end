@@ -6,8 +6,8 @@ import { paths } from "@/routes/paths";
 
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-import PoseNewEditForm from "../pose-new-edit-form";
-import { useGetPose } from "@/api/pose";
+import EventNewEditForm from "../pose-new-edit-form";
+import { useGetEvent } from "@/api/event";
 
 // ----------------------------------------------------------------------
 
@@ -15,10 +15,10 @@ type Props = {
   id: string;
 };
 
-export default function PoseEditView({ id }: Props) {
+export default function EventEditView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const { pose: currentPose } = useGetPose(id);
+  const { event: currentEvent } = useGetEvent(id);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
@@ -30,17 +30,17 @@ export default function PoseEditView({ id }: Props) {
             href: paths.dashboard.root,
           },
           {
-            name: "Pose",
-            href: paths.dashboard.tour.root,
+            name: "Event",
+            href: paths.dashboard.event.root,
           },
-          { name: currentPose?.name },
+          { name: currentEvent?.title },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
       />
 
-      <PoseNewEditForm currentPose={currentPose} />
+      <EventNewEditForm currentEvent={currentEvent} />
     </Container>
   );
 }

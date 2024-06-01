@@ -178,7 +178,7 @@ export default function EventListView() {
         action={
           <Button
             component={RouterLink}
-            href={paths.dashboard.exercise.pNew}
+            href={paths.dashboard.event.new}
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >

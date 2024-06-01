@@ -14,6 +14,7 @@ import Iconify from "@/components/iconify";
 import { Tooltip } from "@mui/material";
 import { IEvent } from "@/types/event";
 import { fDateTime } from "@/utils/format-time";
+import { getStatusLabel } from "@/types/tour";
 
 // ----------------------------------------------------------------------
 
@@ -70,13 +71,7 @@ export default function EventItem({ event, onEdit }: Props) {
         typography: "subtitle2",
       }}
     >
-      {active_status === 1
-        ? status === 0
-          ? "Not start"
-          : status === 1
-            ? "In Progress"
-            : "Ended"
-        : "Inactive"}
+      {getStatusLabel(status, active_status)}
     </Stack>
   );
 
