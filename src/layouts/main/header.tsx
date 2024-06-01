@@ -24,6 +24,7 @@ import Logo from "@/components/logo";
 import NavDesktop from "./nav/desktop";
 import { HEADER } from "../config-layout";
 import { navConfig } from "./config-navigation";
+import { useTranslate } from "@/locales";
 import LanguagePopover from "../common/language-popover";
 
 // ----------------------------------------------------------------------
@@ -34,6 +35,7 @@ type Props = {
 
 export default function Header({ isBlurFromStart = false }: Props) {
   const theme = useTheme();
+  const { t } = useTranslate();
   const mdUp = useResponsive("up", "md");
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
