@@ -1,21 +1,18 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Container from "@mui/material/Container";
-
 import { paths } from "@/routes/paths";
 import { useSettingsContext } from "@/components/settings";
-
-import TourDetailsToolbar from "../event-details-toolbar";
 import { useGetEvent } from "@/api/event";
 import { EVENT_DETAILS_TABS, EVENT_STATUS } from "@/types/event";
 import EventDetailsContent from "../event-details-content";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import Label from "@/components/label";
 import EventDetailsCandidates from "../event-details-candidates";
+import EventDetailsToolbar from "../event-details-toolbar";
 
 // ----------------------------------------------------------------------
 
@@ -113,7 +110,7 @@ export default function EventDetailsView({ id }: Props) {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
-      <TourDetailsToolbar
+      <EventDetailsToolbar
         backLink={paths.dashboard.event.root}
         editLink={paths.dashboard.event.edit(`${currentEvent?.id}`)}
         status={status || 0}

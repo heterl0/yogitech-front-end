@@ -46,7 +46,7 @@ export const benefits = [
   "Health",
   "Happy",
   "Sports",
-  "Health",
+  "Breath",
   "Mood",
   "Motivation",
 ];
