@@ -5,27 +5,31 @@ import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import Iconify from "@/components/iconify";
 import Markdown from "@/components/markdown";
-import { Avatar, AvatarGroup, alpha, useTheme } from "@mui/material";
+import { Link, alpha, useTheme } from "@mui/material";
 import { bgGradient } from "@/theme/css";
-import { IPose } from "@/types/pose";
 import { LEVELS } from "@/constants/level";
+import { IExercise } from "@/types/exercise";
+import Label from "@/components/label";
 // ----------------------------------------------------------------------
 
 type Props = {
-  pose: IPose;
+  exercise: IExercise;
 };
 
-export default function PoseDetailsContent({ pose }: Props) {
+export default function ExerciseDetailsContent({ exercise }: Props) {
   const {
-    name,
+    title,
     level,
     calories,
-    duration,
-    keypoint_url,
+    durations,
+    video_url,
     image_url,
-    instruction,
-    muscles,
-  } = pose;
+    description,
+    point,
+    benefit,
+    is_premium,
+    poses,
+  } = exercise;
 
   const theme = useTheme();
 
@@ -51,27 +55,9 @@ export default function PoseDetailsContent({ pose }: Props) {
     <>
       <Stack direction="row" sx={{ mb: 3 }}>
         <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          {name}
+          {title}
         </Typography>
       </Stack>
-      <Typography variant="h6" sx={{ mb: 2 }}>
-        Muscles
-      </Typography>
-      <div className="flex flex-row">
-        <AvatarGroup>
-          {muscles.map((muscle) => (
-            <Avatar
-              alt={muscle.name}
-              src={muscle.image}
-              key={muscle.id}
-              sx={{
-                width: 24,
-                height: 24,
-              }}
-            />
-          ))}
-        </AvatarGroup>
-      </div>
     </>
   );
 
@@ -97,13 +83,28 @@ export default function PoseDetailsContent({ pose }: Props) {
         },
         {
           label: "Duration",
-          value: `${duration}s`,
+          value: `${durations}s`,
           icon: <Iconify icon="solar:clock-circle-bold" />,
         },
         {
-          label: "Keypoint .json file",
-          value: `${keypoint_url}`,
-          icon: <Iconify icon="solar:file-text-bold" />,
+          label: "List of poses",
+          value: `${poses.map((pose) => pose.pose.name).join(", ")}`,
+          icon: <Iconify icon="solar:bill-list-bold" />,
+        },
+        {
+          label: "Point",
+          value: `${point}`,
+          icon: <Iconify icon="eva:info-fill" />,
+        },
+        {
+          label: "Video URL",
+          value: <Link href={video_url}>{video_url}</Link>,
+          icon: <Iconify icon="solar:gallery-wide-bold" />,
+        },
+        {
+          label: "Premium?",
+          value: `${is_premium ? "Yes" : "No"}`,
+          icon: <Iconify icon="solar:lock-bold" />,
         },
       ].map((item) => (
         <Stack key={item.label} spacing={1.5} direction="row">
@@ -114,6 +115,7 @@ export default function PoseDetailsContent({ pose }: Props) {
             primaryTypographyProps={{
               typography: "body2",
               color: "text.secondary",
+              textOverflow: "ellipsis",
               mb: 0.5,
             }}
             secondaryTypographyProps={{
@@ -131,7 +133,22 @@ export default function PoseDetailsContent({ pose }: Props) {
 
   const renderContent = (
     <>
-      <Markdown>{instruction}</Markdown>
+      <Markdown>{description}</Markdown>
+    </>
+  );
+
+  const renderBenefit = (
+    <>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        Benefit
+      </Typography>
+      <Stack spacing={1} sx={{ mb: 2 }} flexDirection={"row"} flexWrap={"wrap"}>
+        {JSON.parse(benefit).map((item: string, index: number) => (
+          <Label key={index} variant="outlined" color="info">
+            {item}
+          </Label>
+        ))}
+      </Stack>
     </>
   );
 
@@ -147,8 +164,11 @@ export default function PoseDetailsContent({ pose }: Props) {
         {renderOverview}
 
         <Divider sx={{ borderStyle: "dashed", my: 5 }} />
+
+        {renderBenefit}
+
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Instruction
+          Description
         </Typography>
 
         {renderContent}
