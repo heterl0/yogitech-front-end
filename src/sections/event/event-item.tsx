@@ -117,7 +117,7 @@ export default function EventItem({ event, onEdit }: Props) {
       secondary={
         <Link
           component={RouterLink}
-          href={paths.dashboard.event.edit(id + "")}
+          href={paths.dashboard.event.details(id + "")}
           color="inherit"
         >
           {title}

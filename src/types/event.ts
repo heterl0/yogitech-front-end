@@ -56,3 +56,8 @@ export function getStatusLabel(status: number, active_status?: number): string {
     }
   }
 }
+
+export const EVENT_DETAILS_TABS = [
+  { value: "detail", label: "Event Detail" },
+  { value: "ranking", label: "Ranking" },
+];
