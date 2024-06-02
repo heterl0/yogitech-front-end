@@ -1,37 +1,32 @@
-import { useState, useCallback } from "react";
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
-import { alpha } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
 
 import Iconify from "@/components/iconify";
 
-import { ITourBooker } from "@/types/tour";
+import { ICandidateEvent } from "@/types/event";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  bookers: ITourBooker[];
+  candidates: ICandidateEvent[];
 };
 
-export default function TourDetailsBookers({ bookers }: Props) {
-  const [approved, setApproved] = useState<string[]>([]);
+export default function EventDetailsCandidates({ candidates }: Props) {
+  // const [approved, setApproved] = useState<string[]>([]);
 
-  const handleClick = useCallback(
-    (item: string) => {
-      const selected = approved.includes(item)
-        ? approved.filter((value) => value !== item)
-        : [...approved, item];
+  // const handleClick = useCallback(
+  //   (item: string) => {
+  //     const selected = approved.includes(item)
+  //       ? approved.filter((value) => value !== item)
+  //       : [...approved, item];
 
-      setApproved(selected);
-    },
-    [approved]
-  );
+  //     setApproved(selected);
+  //   },
+  //   [approved]
+  // );
 
   return (
     <Box
@@ -43,14 +38,15 @@ export default function TourDetailsBookers({ bookers }: Props) {
         md: "repeat(3, 1fr)",
       }}
     >
-      {bookers.map((booker) => (
-        <BookerItem
-          key={booker.id}
-          booker={booker}
-          selected={approved.includes(booker.id)}
-          onSelected={() => handleClick(booker.id)}
-        />
-      ))}
+      {candidates
+        .sort((a, b) => b.event_point - a.event_point)
+        .map((candidate, index) => (
+          <CandidateItem
+            key={candidate.id}
+            candidate={candidate}
+            ranking={index}
+          />
+        ))}
     </Box>
   );
 }
@@ -58,33 +54,52 @@ export default function TourDetailsBookers({ bookers }: Props) {
 // ----------------------------------------------------------------------
 
 type BookerItemProps = {
-  selected: boolean;
-  booker: ITourBooker;
-  onSelected: VoidFunction;
+  candidate: ICandidateEvent;
+  ranking: number;
 };
 
-function BookerItem({ booker, selected, onSelected }: BookerItemProps) {
+function CandidateItem({ candidate, ranking }: BookerItemProps) {
+  const getRankingLabelByIndex = (index: number): JSX.Element => {
+    switch (index) {
+      case 0:
+        return (
+          <span className="text-2xl font-bold text-primary-main">1st</span>
+        );
+      case 1:
+        return (
+          <span className="text-2xl font-bold text-secondary-main">2nd</span>
+        );
+      case 2:
+        return <span className="text-disabled  text-2xl font-bold">3rd</span>;
+      default:
+        return (
+          <span className="text-disabled  text-2xl font-bold">
+            {index + 1}th
+          </span>
+        );
+    }
+  };
+
   return (
     <Stack
       component={Card}
       direction="row"
       spacing={2}
-      key={booker.id}
+      key={candidate.id}
       sx={{ p: 3 }}
     >
       <Avatar
-        alt={booker.name}
-        src={booker.avatarUrl}
+        alt={candidate.user.username}
+        src={candidate.user.profile.avatar_url || candidate.user.username}
         sx={{ width: 48, height: 48 }}
       />
-
       <Stack spacing={2} flexGrow={1}>
         <ListItemText
-          primary={booker.name}
+          primary={`${candidate.user.username}`}
           secondary={
             <Stack direction="row" alignItems="center" spacing={0.5}>
-              <Iconify icon="solar:users-group-rounded-bold" width={16} />
-              {booker.guests} guests
+              <Iconify icon="mingcute:flash-fill" width={16} />
+              {candidate.event_point} points
             </Stack>
           }
           secondaryTypographyProps={{
@@ -95,7 +110,7 @@ function BookerItem({ booker, selected, onSelected }: BookerItemProps) {
           }}
         />
 
-        <Stack spacing={1} direction="row">
+        {/* <Stack spacing={1} direction="row">
           <IconButton
             size="small"
             color="error"
@@ -137,10 +152,9 @@ function BookerItem({ booker, selected, onSelected }: BookerItemProps) {
           >
             <Iconify width={18} icon="fluent:mail-24-filled" />
           </IconButton>
-        </Stack>
+        </Stack> */}
       </Stack>
-
-      <Button
+      {/* <Button
         size="small"
         variant={selected ? "text" : "outlined"}
         color={selected ? "success" : "inherit"}
@@ -152,7 +166,8 @@ function BookerItem({ booker, selected, onSelected }: BookerItemProps) {
         onClick={onSelected}
       >
         {selected ? "Approved" : "Approve"}
-      </Button>
+      </Button> */}
+      {getRankingLabelByIndex(ranking)}
     </Stack>
   );
 }

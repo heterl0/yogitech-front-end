@@ -14,6 +14,8 @@ import { useGetEvent } from "@/api/event";
 import { EVENT_DETAILS_TABS, EVENT_STATUS } from "@/types/event";
 import EventDetailsContent from "../event-details-content";
 import axiosInstance, { endpoints } from "@/utils/axios";
+import Label from "@/components/label";
+import EventDetailsCandidates from "../event-details-candidates";
 
 // ----------------------------------------------------------------------
 
@@ -95,13 +97,15 @@ export default function EventDetailsView({ id }: Props) {
           iconPosition="end"
           value={tab.value}
           label={tab.label}
-          // icon={
-          //   tab.value === "ranking" ? (
-          //     <Label variant="filled">{?.bookers.length}</Label>
-          //   ) : (
-          //     ""
-          //   )
-          // }
+          icon={
+            tab.value === "ranking" ? (
+              <Label variant="filled">
+                {currentEvent?.event_candidate.length}
+              </Label>
+            ) : (
+              ""
+            )
+          }
         />
       ))}
     </Tabs>
@@ -122,9 +126,9 @@ export default function EventDetailsView({ id }: Props) {
         <EventDetailsContent event={currentEvent} />
       )}
 
-      {/* {currentTab === "bookers" && (
-        <TourDetailsBookers bookers={currentTour?.bookers} />
-      )} */}
+      {currentTab === "ranking" && (
+        <EventDetailsCandidates candidates={currentEvent?.event_candidate} />
+      )}
     </Container>
   );
 }

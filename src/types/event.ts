@@ -1,5 +1,6 @@
 import { LabelColor } from "@/components/label";
 import { IExercise } from "./exercise";
+import { IAccount } from "./user";
 
 export type IEvent = {
   id: number;
@@ -11,6 +12,18 @@ export type IEvent = {
   description: string;
   active_status: number;
   exercises: IExercise[];
+  event_candidate: ICandidateEvent[];
+  owner: IAccount;
+};
+
+export type ICandidateEvent = {
+  id: number;
+  user: IAccount;
+  event_point: number;
+  active_status: number;
+  join_at: string;
+  updated_at: string;
+  event: number;
 };
 
 export type IEventFilters = {

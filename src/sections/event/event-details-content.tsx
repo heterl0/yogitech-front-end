@@ -7,8 +7,9 @@ import { fDate } from "@/utils/format-time";
 import Iconify from "@/components/iconify";
 import Markdown from "@/components/markdown";
 import { IEvent } from "@/types/event";
-import { alpha, useTheme } from "@mui/material";
+import { Link, alpha, useTheme } from "@mui/material";
 import { bgGradient } from "@/theme/css";
+import { paths } from "@/routes/paths";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -55,10 +56,17 @@ export default function EventDetailsContent({ event }: Props) {
         >
           <Iconify icon="solar:flag-bold" sx={{ color: "info.main" }} />
           <Box
+            className="flex flex-row gap-2"
             component="span"
             sx={{ typography: "body2", color: "text.secondary" }}
           >
-            Created by
+            Created by{" "}
+            <Link
+              href={paths.dashboard.user.edit(event.owner.profile.id)}
+              className="flex flex-row gap-2"
+            >
+              {event.owner.username}
+            </Link>
           </Box>
         </Stack>
       </Stack>
@@ -80,13 +88,11 @@ export default function EventDetailsContent({ event }: Props) {
           value: `${fDate(start_date)} - ${fDate(expire_date)}`,
           icon: <Iconify icon="solar:calendar-date-bold" />,
         },
-        // {
-        //   label: "Number of people",
-        //   value: tourGuides
-        //     .map((tourGuide) => tourGuide.phoneNumber)
-        //     .join(", "),
-        //   icon: <Iconify icon="solar:user-rounded-bold" />,
-        // },
+        {
+          label: "Number of people",
+          value: event.event_candidate.length,
+          icon: <Iconify icon="solar:user-rounded-bold" />,
+        },
       ].map((item) => (
         <Stack key={item.label} spacing={1.5} direction="row">
           {item.icon}
