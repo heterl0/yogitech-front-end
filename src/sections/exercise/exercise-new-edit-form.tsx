@@ -199,7 +199,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
         );
         if (response.status === HttpStatusCode.Created) {
           enqueueSnackbar("Create success!");
-          setTimeout(() => router.push(paths.dashboard.exercise.root), 2000);
+          router.push(paths.dashboard.exercise.root);
         } else {
           enqueueSnackbar("Create failed!");
         }
@@ -232,6 +232,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
         );
         if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar("Upload success!");
+          router.push(paths.dashboard.exercise.root);
         } else {
           enqueueSnackbar("Upload failed!");
         }

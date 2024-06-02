@@ -117,7 +117,7 @@ export default function PoseListView() {
         query={search.query}
         results={search.results}
         onSearch={handleSearch}
-        hrefItem={(id: string) => paths.dashboard.exercise.pEdit(id)}
+        hrefItem={(id: string) => paths.dashboard.pose.edit(id)}
       />
 
       <Stack direction="row" spacing={1} flexShrink={0}>
@@ -164,14 +164,14 @@ export default function PoseListView() {
           { name: "Dashboard", href: paths.dashboard.root },
           {
             name: "Pose",
-            href: paths.dashboard.exercise.pose,
+            href: paths.dashboard.pose.root,
           },
           { name: "List" },
         ]}
         action={
           <Button
             component={RouterLink}
-            href={paths.dashboard.exercise.pNew}
+            href={paths.dashboard.pose.new}
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >

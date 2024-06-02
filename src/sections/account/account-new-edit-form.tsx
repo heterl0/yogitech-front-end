@@ -145,6 +145,7 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
         );
         if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar("Update success!");
+          router.push(paths.dashboard.account.root);
         } else {
           enqueueSnackbar(`Update failed! ${response.data}`, {
             variant: "error",

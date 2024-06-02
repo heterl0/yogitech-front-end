@@ -111,7 +111,7 @@ export default function PoseItem({ pose, onEdit }: Props) {
       secondary={
         <Link
           component={RouterLink}
-          href={paths.dashboard.exercise.pEdit(id + "")}
+          href={paths.dashboard.pose.edit(id + "")}
           color="inherit"
         >
           {name}

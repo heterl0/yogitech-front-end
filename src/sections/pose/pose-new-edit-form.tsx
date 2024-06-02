@@ -146,7 +146,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
         );
         if (response.status === HttpStatusCode.Created) {
           enqueueSnackbar("Create success!");
-          setTimeout(() => router.push(paths.dashboard.exercise.pose), 2000);
+          router.push(paths.dashboard.pose.root);
         } else {
           enqueueSnackbar("Create failed!");
         }
@@ -173,6 +173,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
         );
         if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar("Upload success!");
+          router.push(paths.dashboard.pose.root);
         } else {
           enqueueSnackbar("Upload failed!");
         }

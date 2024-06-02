@@ -19,7 +19,7 @@ export default function EventList({ events }: Props) {
 
   // const handleView = useCallback(
   //   (id: string) => {
-  //     router.push(paths.dashboard.exercise.pEdit(id));
+  //     router.push(paths.dashboard.pose.edit(id));
   //   },
   //   [router]
   // );

@@ -20,14 +20,14 @@ export default function PoseList({ poses }: Props) {
 
   // const handleView = useCallback(
   //   (id: string) => {
-  //     router.push(paths.dashboard.exercise.pEdit(id));
+  //     router.push(paths.dashboard.pose.edit(id));
   //   },
   //   [router]
   // );
 
   const handleEdit = useCallback(
     (id: string) => {
-      router.push(paths.dashboard.exercise.pEdit(id));
+      router.push(paths.dashboard.pose.edit(id));
     },
     [router]
   );

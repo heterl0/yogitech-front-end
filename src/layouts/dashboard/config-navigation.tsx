@@ -48,6 +48,8 @@ const ICONS = {
   analytics: icon("ic_analytics"),
   dashboard: icon("ic_dashboard"),
   bill: icon("ic_bill"),
+  exercise: icon("ic_exercise"),
+  pose: icon("ic_pose"),
 };
 
 // ----------------------------------------------------------------------
@@ -100,37 +102,6 @@ export function useNavData() {
       {
         subheader: t("management"),
         items: [
-          // USER
-          {
-            title: t("user"),
-            path: paths.dashboard.user.root,
-            icon: ICONS.userGroup,
-          },
-          {
-            title: t("account"),
-            path: paths.dashboard.account.root,
-            icon: ICONS.user,
-            children: [
-              { title: t("list"), path: paths.dashboard.account.root },
-              { title: t("create"), path: paths.dashboard.account.new },
-            ],
-          },
-
-          // Notification
-          {
-            title: t("notification"),
-            path: paths.dashboard.notification.root,
-            icon: ICONS.calendar,
-          },
-
-          // Event
-          {
-            title: t("event"),
-            path: paths.dashboard.event.root,
-            icon: ICONS.mail,
-            // children: [{ title: t("list"), path: paths.dashboard.order.root }],
-          },
-
           // INVOICE
           // {
           //   title: t("invoice"),
@@ -145,6 +116,53 @@ export function useNavData() {
           //   ],
           // },
 
+          // Pose
+          {
+            title: t("pose"),
+            path: paths.dashboard.pose.root,
+            icon: ICONS.pose,
+            children: [
+              { title: t("list"), path: paths.dashboard.pose.root },
+              { title: t("create"), path: paths.dashboard.pose.new },
+            ],
+          },
+
+          // Exercise
+          {
+            title: t("exercise"),
+            path: paths.dashboard.exercise.root,
+            icon: ICONS.exercise,
+            children: [
+              { title: t("list"), path: paths.dashboard.exercise.root },
+              { title: t("create"), path: paths.dashboard.exercise.new },
+            ],
+          },
+
+          // Event
+          {
+            title: t("event"),
+            path: paths.dashboard.event.root,
+            icon: ICONS.mail,
+            children: [
+              { title: t("list"), path: paths.dashboard.event.root },
+              { title: t("create"), path: paths.dashboard.event.new },
+            ],
+          },
+
+          // USER
+          {
+            title: t("user"),
+            path: paths.dashboard.user.root,
+            icon: ICONS.userGroup,
+          },
+
+          // Notification
+          {
+            title: t("notification"),
+            path: paths.dashboard.notification.root,
+            icon: ICONS.calendar,
+          },
+
           // BLOG
           {
             title: t("blog"),
@@ -156,17 +174,15 @@ export function useNavData() {
             ],
           },
 
-          // Exercise
           {
-            title: t("pose_exercise"),
-            path: paths.dashboard.exercise.root,
-            icon: ICONS.bill,
+            title: t("account"),
+            path: paths.dashboard.account.root,
+            icon: ICONS.user,
             children: [
-              { title: t("pose"), path: paths.dashboard.exercise.pose },
-              { title: t("exercise"), path: paths.dashboard.exercise.root },
+              { title: t("list"), path: paths.dashboard.account.root },
+              { title: t("create"), path: paths.dashboard.account.new },
             ],
           },
-
           // TOUR
           // {
           //   title: t("tour"),
