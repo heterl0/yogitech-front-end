@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
@@ -18,12 +18,7 @@ type Props = {
 export default function ExerciseList({ exercises }: Props) {
   const router = useRouter();
 
-  // const handleView = useCallback(
-  //   (id: string) => {
-  //     router.push(paths.dashboard.pose.edit(id));
-  //   },
-  //   [router]
-  // );
+  const [page, setPage] = useState(1);
 
   const handleEdit = useCallback(
     (id: string) => {
@@ -31,6 +26,8 @@ export default function ExerciseList({ exercises }: Props) {
     },
     [router]
   );
+
+  const itemsPerPage = 8;
 
   const handleDelete = useCallback((id: string) => {
     console.info("DELETE", id);
@@ -47,20 +44,24 @@ export default function ExerciseList({ exercises }: Props) {
           md: "repeat(3, 1fr)",
         }}
       >
-        {exercises.map((exercise) => (
-          <PoseItem
-            key={exercise.id}
-            exercise={exercise}
-            // onView={() => handleView(exercise.id + "")}
-            onEdit={() => handleEdit(exercise.id + "")}
-            onDelete={() => handleDelete(exercise.id + "")}
-          />
-        ))}
+        {exercises
+          .slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
+          .map((exercise) => (
+            <PoseItem
+              key={exercise.id}
+              exercise={exercise}
+              // onView={() => handleView(exercise.id + "")}
+              onEdit={() => handleEdit(exercise.id + "")}
+              onDelete={() => handleDelete(exercise.id + "")}
+            />
+          ))}
       </Box>
 
       {exercises.length > 8 && (
         <Pagination
-          count={8}
+          count={Math.ceil(exercises.length / 8)}
+          page={page}
+          onChange={(_, value) => setPage(value)}
           sx={{
             mt: 8,
             [`& .${paginationClasses.ul}`]: {

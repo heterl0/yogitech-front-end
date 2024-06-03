@@ -8,6 +8,7 @@ import { IBlog } from "@/types/blog";
 
 import PostItem from "./post-item";
 import { PostItemSkeleton } from "./post-skeleton";
+import { useState } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -28,9 +29,12 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
     </>
   );
 
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 8;
+
   const renderList = (
     <>
-      {posts.map((post, index) => (
+      {posts.slice(0, page * itemsPerPage).map((post, index) => (
         <Grid
           key={post.id}
           xs={12}
@@ -63,6 +67,7 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
             startIcon={
               <Iconify icon="svg-spinners:12-dots-scale-rotate" width={24} />
             }
+            onClick={() => setPage(page + 1)}
           >
             Load More
           </Button>

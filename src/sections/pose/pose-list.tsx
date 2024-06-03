@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
@@ -18,12 +18,7 @@ type Props = {
 export default function PoseList({ poses }: Props) {
   const router = useRouter();
 
-  // const handleView = useCallback(
-  //   (id: string) => {
-  //     router.push(paths.dashboard.pose.edit(id));
-  //   },
-  //   [router]
-  // );
+  const [page, setPage] = useState(1);
 
   const handleEdit = useCallback(
     (id: string) => {
@@ -31,6 +26,8 @@ export default function PoseList({ poses }: Props) {
     },
     [router]
   );
+
+  const itemsPerPage = 8;
 
   const handleDelete = useCallback((id: string) => {
     console.info("DELETE", id);
@@ -47,20 +44,24 @@ export default function PoseList({ poses }: Props) {
           md: "repeat(3, 1fr)",
         }}
       >
-        {poses.map((pose) => (
-          <PoseItem
-            key={pose.id}
-            pose={pose}
-            // onView={() => handleView(pose.id + "")}
-            onEdit={() => handleEdit(pose.id + "")}
-            onDelete={() => handleDelete(pose.id + "")}
-          />
-        ))}
+        {poses
+          .slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
+          .map((pose) => (
+            <PoseItem
+              key={pose.id}
+              pose={pose}
+              // onView={() => handleView(pose.id + "")}
+              onEdit={() => handleEdit(pose.id + "")}
+              onDelete={() => handleDelete(pose.id + "")}
+            />
+          ))}
       </Box>
 
       {poses.length > 8 && (
         <Pagination
-          count={8}
+          count={Math.ceil(poses.length / 8)}
+          page={page}
+          onChange={(_, value) => setPage(value)}
           sx={{
             mt: 8,
             [`& .${paginationClasses.ul}`]: {

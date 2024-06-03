@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
@@ -16,6 +16,10 @@ type Props = {
 
 export default function EventList({ events }: Props) {
   const router = useRouter();
+
+  const [page, setPage] = useState(1);
+
+  const itemsPerPage = 8;
 
   // const handleView = useCallback(
   //   (id: string) => {
@@ -46,20 +50,24 @@ export default function EventList({ events }: Props) {
           md: "repeat(3, 1fr)",
         }}
       >
-        {events.map((event) => (
-          <PoseItem
-            key={event.id}
-            event={event}
-            // onView={() => handleView(pose.id + "")}
-            onEdit={() => handleEdit(event.id + "")}
-            onDelete={() => handleDelete(event.id + "")}
-          />
-        ))}
+        {events
+          .slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
+          .map((event) => (
+            <PoseItem
+              key={event.id}
+              event={event}
+              // onView={() => handleView(pose.id + "")}
+              onEdit={() => handleEdit(event.id + "")}
+              onDelete={() => handleDelete(event.id + "")}
+            />
+          ))}
       </Box>
 
       {events.length > 8 && (
         <Pagination
-          count={8}
+          count={Math.ceil(events.length / 8)}
+          page={page}
+          onChange={(_, value) => setPage(value)}
           sx={{
             mt: 8,
             [`& .${paginationClasses.ul}`]: {

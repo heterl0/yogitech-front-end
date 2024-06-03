@@ -5,8 +5,7 @@ import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import Iconify from "@/components/iconify";
 import Markdown from "@/components/markdown";
-import { Link, alpha, useTheme } from "@mui/material";
-import { bgGradient } from "@/theme/css";
+import { Link } from "@mui/material";
 import { LEVELS } from "@/constants/level";
 import { IExercise } from "@/types/exercise";
 import Label from "@/components/label";
@@ -31,7 +30,7 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
     poses,
   } = exercise;
 
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const renderGallery = (
     <>
@@ -41,11 +40,9 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
           mb: 5,
           height: 480,
           overflow: "hidden",
-          ...bgGradient({
-            imgUrl: image_url,
-            startColor: `${alpha(theme.palette.grey[900], 0.64)} 0%`,
-            endColor: `${alpha(theme.palette.grey[900], 0.64)} 100%`,
-          }),
+          backgroundImage: `url(${image_url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       ></Box>
     </>
