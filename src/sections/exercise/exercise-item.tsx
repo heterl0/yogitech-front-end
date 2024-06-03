@@ -111,7 +111,7 @@ export default function ExerciseItem({ exercise, onEdit }: Props) {
       secondary={
         <Link
           component={RouterLink}
-          href={paths.dashboard.exercise.edit(id + "")}
+          href={paths.dashboard.exercise.details(id + "")}
           color="inherit"
         >
           {title}
