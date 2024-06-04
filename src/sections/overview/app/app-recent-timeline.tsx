@@ -81,7 +81,7 @@ function RecentItem({ item, lastTimeline }: RecentItemProps) {
         {/* {"username" in data  ? (<Typography variant="subtitle2">{type}</Typography>)} */}
         {"title" in data && (
           <Typography variant="subtitle2">
-            New {type} added
+            New {type} added{` `}
             <Link href={`${paths.dashboard.item(type)}/${data.id}`}>
               {data.title}
             </Link>
@@ -90,7 +90,7 @@ function RecentItem({ item, lastTimeline }: RecentItemProps) {
         {"username" in data && (
           <Typography variant="subtitle2">
             Welcome{" "}
-            <Link href={`${paths.dashboard.item(type)}/${data.id}`}>
+            <Link href={`${paths.dashboard.item(type)}/${data.id}/edit`}>
               {data.username}
             </Link>{" "}
             to the platform
@@ -98,7 +98,7 @@ function RecentItem({ item, lastTimeline }: RecentItemProps) {
         )}
         {"name" in data && type === "pose" && (
           <Typography variant="subtitle2">
-            New pose added
+            New pose added{` `}
             <Link href={`${paths.dashboard.item(type)}/${data.id}`}>
               {data.name}
             </Link>
