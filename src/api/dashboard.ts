@@ -10,6 +10,7 @@ import {
   IRecentActivity,
   IUserGrowth,
 } from "@/types/dashboard";
+import { IProfile } from "@/types/user";
 
 // ----------------------------------------------------------------------
 
@@ -105,6 +106,25 @@ export function useEventGrowth() {
       eventGrowthError: error,
       eventGrowthValidating: isValidating,
       eventGrowthEmpty: !isLoading && !data?.length,
+    }),
+    [data, error, isLoading, isValidating]
+  );
+
+  return memoizedValue;
+}
+
+export function useGetTopUsers() {
+  const URL = endpoints.dashboard.topProfile;
+
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+
+  const memoizedValue = useMemo(
+    () => ({
+      topProfile: (data as IProfile[]) || [],
+      topProfileLoading: isLoading,
+      topProfileError: error,
+      topProfileValidating: isValidating,
+      topProfileEmpty: !isLoading && !data?.length,
     }),
     [data, error, isLoading, isValidating]
   );
