@@ -33,7 +33,7 @@ export default function PostEditView({ id }: Props) {
           },
           {
             name: "Blog",
-            href: paths.dashboard.post.root,
+            href: paths.dashboard.blog.root,
           },
           {
             name: currentPost?.title,

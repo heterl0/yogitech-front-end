@@ -175,4 +175,5 @@ export type IAccount = {
   profile: IProfile;
   following: IFollowing[];
   last_login: null | string;
+  created_at: string;
 };

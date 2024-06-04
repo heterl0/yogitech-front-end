@@ -163,7 +163,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
         }
       }
       preview.onFalse();
-      router.push(paths.dashboard.post.root);
+      router.push(paths.dashboard.blog.root);
     } catch (error) {
       console.error(error);
     }

@@ -101,4 +101,12 @@ export const endpoints = {
     update: (id: string) => `/api/v1/events/${id}/`,
     delete: (id: string) => `/api/v1/events/${id}/`,
   },
+  dashboard: {
+    eventParticipationChart: "/api/v1/dashboard/event-participation-chart/",
+    newUsers: "/api/v1/dashboard/new-users/",
+    overview: "/api/v1/dashboard/overview/",
+    recentActivities: "/api/v1/dashboard/recent-activities/",
+    topProfile: "/api/v1/dashboard/top-profiles/",
+    userGrowthChart: "/api/v1/dashboard/user-growth-chart/",
+  },
 };

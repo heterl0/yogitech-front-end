@@ -166,11 +166,11 @@ export function useNavData() {
           // BLOG
           {
             title: t("blog"),
-            path: paths.dashboard.post.root,
+            path: paths.dashboard.blog.root,
             icon: ICONS.blog,
             children: [
-              { title: t("list"), path: paths.dashboard.post.root },
-              { title: t("create"), path: paths.dashboard.post.new },
+              { title: t("list"), path: paths.dashboard.blog.root },
+              { title: t("create"), path: paths.dashboard.blog.new },
             ],
           },
 

@@ -73,7 +73,7 @@ export default function PostDetailsView({ id }: Props) {
       action={
         <Button
           component={RouterLink}
-          href={paths.dashboard.post.root}
+          href={paths.dashboard.blog.root}
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
           sx={{ mt: 3 }}
         >
@@ -89,8 +89,8 @@ export default function PostDetailsView({ id }: Props) {
   const renderPost = post && (
     <>
       <PostDetailsToolbar
-        backLink={paths.dashboard.post.root}
-        editLink={paths.dashboard.post.edit(`${post?.id + ""}`)}
+        backLink={paths.dashboard.blog.root}
+        editLink={paths.dashboard.blog.edit(`${post?.id + ""}`)}
         liveLink={"#"}
         // liveLink={paths.post.details(`${post?.title}`)}
         publish={publish}

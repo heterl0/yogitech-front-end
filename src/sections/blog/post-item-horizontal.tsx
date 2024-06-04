@@ -82,7 +82,7 @@ export default function PostItemHorizontal({ post }: Props) {
       enqueueSnackbar("Delete fail!");
       dialog.onFalse();
     }
-    router.push(paths.dashboard.post.root);
+    router.push(paths.dashboard.blog.root);
   }, [dialog, enqueueSnackbar, id, router]);
 
   return (
@@ -124,7 +124,7 @@ export default function PostItemHorizontal({ post }: Props) {
             <Link
               color="inherit"
               component={RouterLink}
-              href={paths.dashboard.post.details(id + "")}
+              href={paths.dashboard.blog.details(id + "")}
             >
               <TextMaxLine variant="subtitle2" line={2}>
                 {title}
@@ -205,7 +205,7 @@ export default function PostItemHorizontal({ post }: Props) {
         <MenuItem
           onClick={() => {
             popover.onClose();
-            router.push(paths.dashboard.post.details(id + ""));
+            router.push(paths.dashboard.blog.details(id + ""));
           }}
         >
           <Iconify icon="solar:eye-bold" />
@@ -215,7 +215,7 @@ export default function PostItemHorizontal({ post }: Props) {
         <MenuItem
           onClick={() => {
             popover.onClose();
-            router.push(paths.dashboard.post.edit(id + ""));
+            router.push(paths.dashboard.blog.edit(id + ""));
           }}
         >
           <Iconify icon="solar:pen-bold" />

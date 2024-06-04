@@ -25,7 +25,7 @@ export default function PostCreateView() {
           },
           {
             name: "Blog",
-            href: paths.dashboard.post.root,
+            href: paths.dashboard.blog.root,
           },
           {
             name: "Create",

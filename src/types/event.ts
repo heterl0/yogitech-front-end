@@ -14,6 +14,7 @@ export type IEvent = {
   exercises: IExercise[];
   event_candidate: ICandidateEvent[];
   owner: IAccount;
+  created_at: string;
 };
 
 export type ICandidateEvent = {

@@ -87,12 +87,12 @@ export const paths = {
       details: (id: string) => `${ROOTS.DASHBOARD}/invoice/${id}`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/invoice/${id}/edit`,
     },
-    post: {
-      root: `${ROOTS.DASHBOARD}/post`,
-      new: `${ROOTS.DASHBOARD}/post/new`,
-      details: (title: string) => `${ROOTS.DASHBOARD}/post/${paramCase(title)}`,
+    blog: {
+      root: `${ROOTS.DASHBOARD}/blog`,
+      new: `${ROOTS.DASHBOARD}/blog/new`,
+      details: (title: string) => `${ROOTS.DASHBOARD}/blog/${paramCase(title)}`,
       edit: (title: string) =>
-        `${ROOTS.DASHBOARD}/post/${paramCase(title)}/edit`,
+        `${ROOTS.DASHBOARD}/blog/${paramCase(title)}/edit`,
       //   demo: {
       //     details: `${ROOTS.DASHBOARD}/post/${paramCase(MOCK_TITLE)}`,
       //     edit: `${ROOTS.DASHBOARD}/post/${paramCase(MOCK_TITLE)}/edit`,
@@ -129,5 +129,6 @@ export const paths = {
       details: (id: string) => `${ROOTS.DASHBOARD}/event/${id}`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/event/${id}/edit`,
     },
+    item: (type: string) => `${ROOTS.DASHBOARD}/${type}`,
   },
 };

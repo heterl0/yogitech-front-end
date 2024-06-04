@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Stack from "@mui/material/Stack";
@@ -6,22 +7,13 @@ import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 
-import { useMockedUser } from "@/hooks/use-mocked-user";
-
 import { SeoIllustration } from "@/assets/illustrations";
-import {
-  _appAuthors,
-  _appRelated,
-  _appFeatured,
-  _appInvoices,
-  _appInstalled,
-} from "@/_mock";
+import { _appAuthors, _appRelated, _appInvoices, _appInstalled } from "@/_mock";
 
 import { useSettingsContext } from "@/components/settings";
 
 import AppWidget from "../app-widget";
 import AppWelcome from "../app-welcome";
-import AppFeatured from "../app-featured";
 import AppNewInvoice from "../app-new-invoice";
 import AppTopAuthors from "../app-top-authors";
 import AppTopRelated from "../app-top-related";
@@ -29,34 +21,184 @@ import AppAreaInstalled from "../app-area-installed";
 import AppWidgetSummary from "../app-widget-summary";
 import AppCurrentDownload from "../app-current-download";
 import AppTopInstalledCountries from "../app-top-installed-countries";
+import { useAuthContext } from "@/auth/hooks";
+import {
+  useEventGrowth,
+  useGetOverview,
+  useGetRecentActivity,
+  useUserGrowth,
+} from "@/api/dashboard";
+import { useMemo } from "react";
+import { paths } from "@/routes/paths";
+import AppFeaturedBlog from "../app-featured-blog";
+import { useGetPosts } from "@/api/blog";
+import AnalyticsWidgetSummary from "../../analytics/analytics-widget-summary";
+import AppUserEventGrow from "../app-user-event-growth";
+import { getMonthLabel } from "@/types/dashboard";
+import AppRecentTimeline from "../app-recent-timeline";
 
 // ----------------------------------------------------------------------
 
 export default function OverviewAppView() {
-  const { user } = useMockedUser();
+  const { user } = useAuthContext();
+
+  const { recentItems } = useGetRecentActivity();
+  const { posts } = useGetPosts();
+  const { overview } = useGetOverview();
+  const { userGrowth } = useUserGrowth();
+  const { eventGrowth } = useEventGrowth();
+  const firstItem = useMemo(() => recentItems[0], [recentItems]);
 
   const theme = useTheme();
 
   const settings = useSettingsContext();
 
+  const userGrowthDataChart = useMemo(() => {
+    if (!userGrowth) return { labels: [], series: [] };
+    return {
+      labels: Array.from({ length: 12 }, (_, i) => i + 1).map((i) =>
+        getMonthLabel(i)
+      ),
+      series: Array.from({ length: 12 }, (_, i) => i + 1).map((i) =>
+        userGrowth.labels.includes(i)
+          ? userGrowth.values[userGrowth.labels.indexOf(i)]
+          : 0
+      ),
+    };
+  }, [userGrowth]);
+
+  const eventGrowthDataChart = useMemo(() => {
+    if (!eventGrowth) return { labels: [], series: [] };
+    return {
+      labels: Array.from({ length: 12 }, (_, i) => i + 1).map((i) =>
+        getMonthLabel(i)
+      ),
+      series: Array.from({ length: 12 }, (_, i) => i + 1).map((i) =>
+        eventGrowth.labels.includes(i)
+          ? eventGrowth.values[eventGrowth.labels.indexOf(i)]
+          : 0
+      ),
+    };
+  }, [eventGrowth]);
+
   return (
     <Container maxWidth={settings.themeStretch ? false : "xl"}>
       <Grid container spacing={3}>
-        <Grid xs={12} md={8}>
-          <AppWelcome
-            title={`Welcome back 👋 \n ${user?.displayName}`}
-            description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
-            img={<SeoIllustration />}
-            action={
-              <Button variant="contained" color="primary">
-                Go Now
-              </Button>
-            }
-          />
+        <Grid xs={12} md={posts.length === 0 ? 12 : 8}>
+          {firstItem && (
+            <AppWelcome
+              title={`Welcome back 👋 \n ${user?.username}`}
+              description={`Here’s what’s happening with your projects today. A new ${firstItem.type} has been added!`}
+              img={<SeoIllustration />}
+              action={
+                <Button
+                  variant="contained"
+                  color="primary"
+                  href={paths.dashboard.item(firstItem.type)}
+                >
+                  Go Now
+                </Button>
+              }
+            />
+          )}
         </Grid>
 
+        {posts.length > 0 && (
+          <Grid xs={12} md={4}>
+            <AppFeaturedBlog
+              list={posts.splice(posts.length < 4 ? 0 : posts.length - 4)}
+            />
+          </Grid>
+        )}
+        {overview && (
+          <>
+            <Grid xs={12} sm={6} md={3}>
+              <AnalyticsWidgetSummary
+                title="Upcoming Event"
+                total={overview.upcoming_events}
+                icon={
+                  <img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />
+                }
+              />
+            </Grid>
+
+            <Grid xs={12} sm={6} md={3}>
+              <AnalyticsWidgetSummary
+                title="Total Users"
+                total={overview.total_users}
+                color="info"
+                icon={
+                  <img
+                    alt="icon"
+                    src="/assets/icons/glass/ic_glass_users.png"
+                  />
+                }
+              />
+            </Grid>
+
+            <Grid xs={12} sm={6} md={3}>
+              <AnalyticsWidgetSummary
+                title="Total Poses"
+                total={overview.total_poses}
+                color="warning"
+                icon={
+                  <img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />
+                }
+              />
+            </Grid>
+
+            <Grid xs={12} sm={6} md={3}>
+              <AnalyticsWidgetSummary
+                title="Total Exercises"
+                total={overview.total_exercises}
+                color="error"
+                icon={
+                  <img
+                    alt="icon"
+                    src="/assets/icons/glass/ic_glass_message.png"
+                  />
+                }
+              />
+            </Grid>
+          </>
+        )}
+
+        {userGrowthDataChart.labels.length > 0 && (
+          <Grid xs={12} md={6} lg={8}>
+            <AppUserEventGrow
+              title="Percent Growth in Year"
+              subheader="Details of User and Event Growth in Year"
+              chart={{
+                labels: userGrowthDataChart.labels,
+                series: [
+                  {
+                    name: "New Users",
+                    type: "column",
+                    fill: "solid",
+                    data: userGrowthDataChart.series,
+                  },
+                  // {
+                  //   name: "Team B",
+                  //   type: "area",
+                  //   fill: "gradient",
+                  //   data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                  // },
+                  {
+                    name: "Event Growth",
+                    type: "line",
+                    fill: "solid",
+                    data: eventGrowthDataChart.series,
+                  },
+                ],
+              }}
+            />
+          </Grid>
+        )}
+
         <Grid xs={12} md={4}>
-          <AppFeatured list={_appFeatured} />
+          {recentItems && (
+            <AppRecentTimeline list={recentItems} title="Recent Activity" />
+          )}
         </Grid>
 
         <Grid xs={12} md={4}>

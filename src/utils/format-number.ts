@@ -80,7 +80,7 @@ export function fPercent(inputValue: InputValue) {
 
 export function fShortenNumber(inputValue: InputValue) {
   const { code } = getLocaleCode();
-
+  if (inputValue === 0) return "0";
   if (!inputValue) return "";
 
   const number = Number(inputValue);
