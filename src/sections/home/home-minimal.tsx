@@ -8,32 +8,37 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import { varFade, MotionViewport } from "@/components/animate";
+import { useMemo } from "react";
+import { useTranslate } from "@/locales";
 
 // ----------------------------------------------------------------------
-
-const CARDS = [
-  {
-    icon: " /assets/icons/home/ic_make_brand.svg",
-    title: "Enhanced Performance",
-    description:
-      "Explore how YogiTech optimizes your training process and helps you achieve maximum potential.",
-  },
-  {
-    icon: " /assets/icons/home/ic_design.svg",
-    title: "Health and Strength",
-    description:
-      "Experience balance and strength through YogiTech's health technology solutions.",
-  },
-  {
-    icon: " /assets/icons/home/ic_development.svg",
-    title: "Connected Community",
-    description: "Engage in a vibrant, connected community with YogiTech.",
-  },
-];
 
 // ----------------------------------------------------------------------
 
 export default function HomeMinimal() {
+  const { t } = useTranslate();
+
+  const CARDS = useMemo(
+    () => [
+      {
+        icon: " /assets/icons/home/ic_make_brand.svg",
+        title: t("home.minimal.card1.title"),
+        description: t("home.minimal.card1.description"),
+      },
+      {
+        icon: " /assets/icons/home/ic_design.svg",
+        title: t("home.minimal.card2.title"),
+        description: t("home.minimal.card2.description"),
+      },
+      {
+        icon: " /assets/icons/home/ic_development.svg",
+        title: t("home.minimal.card3.title"),
+        description: t("home.minimal.card3.description"),
+      },
+    ],
+    [t]
+  );
+
   return (
     <Container
       component={MotionViewport}
@@ -60,7 +65,8 @@ export default function HomeMinimal() {
 
         <m.div variants={varFade().inDown}>
           <Typography variant="h2">
-            What YogiTech <br /> helps you?
+            {t("home.minimal.description1")} <br />{" "}
+            {t("home.minimal.description2")}
           </Typography>
         </m.div>
       </Stack>
@@ -75,7 +81,7 @@ export default function HomeMinimal() {
         }}
       >
         {CARDS.map((card, index) => (
-          <m.div variants={varFade().inUp} key={card.title}>
+          <m.div variants={varFade().inUp} key={index}>
             <Card
               sx={{
                 textAlign: "center",

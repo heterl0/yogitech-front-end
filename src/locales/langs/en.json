@@ -65,6 +65,22 @@
     "hero": {
       "description": "Explore YogiTech, the premier yoga app designed for all skill levels. Experience the convenience of personalized yoga sessions anytime, anywhere, and start your journey towards better health and flexibility today!",
       "download": "Download"
+    },
+    "minimal": {
+      "description1": "What YogiTech ",
+      "description2": "helps you?",
+      "card1": {
+        "title": "Enhanced Performance",
+        "description": "Explore how YogiTech optimizes your training process and helps you achieve maximum potential."
+      },
+      "card2": {
+        "title": "Health and Strength",
+        "description": "Experience balance and strength through YogiTech's health technology solutions."
+      },
+      "card3": {
+        "title": "Connected Community",
+        "description": "Engage in a vibrant, connected community with YogiTech."
+      }
     }
   }
 }
