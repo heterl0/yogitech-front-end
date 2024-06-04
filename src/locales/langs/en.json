@@ -60,5 +60,11 @@
   "pose_exercise": "Pose & Exercise",
   "pose": "Pose",
   "exercise": "Exercise",
-  "event": "Event"
+  "event": "Event",
+  "home": {
+    "hero": {
+      "description": "Explore YogiTech, the premier yoga app designed for all skill levels. Experience the convenience of personalized yoga sessions anytime, anywhere, and start your journey towards better health and flexibility today!",
+      "download": "Download"
+    }
+  }
 }

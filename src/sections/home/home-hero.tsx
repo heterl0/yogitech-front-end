@@ -19,6 +19,7 @@ import { bgBlur, bgGradient, textGradient } from "@/theme/css";
 
 import Iconify from "@/components/iconify";
 import { varFade, MotionContainer } from "@/components/animate";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -140,6 +141,8 @@ export default function HomeHero() {
 
   const lightMode = theme.palette.mode === "light";
 
+  const { t } = useTranslation();
+
   const getScroll = useCallback(() => {
     let heroHeight = 0;
 
@@ -213,10 +216,7 @@ export default function HomeHero() {
 
       <m.div variants={varFade().in}>
         <Typography variant="body2" sx={{ textAlign: "center" }}>
-          Explore YogiTech, the premier yoga app designed for all skill levels.
-          Experience the convenience of personalized yoga sessions anytime,
-          anywhere, and start your journey towards better health and flexibility
-          today!
+          {t("home.hero.description")}
         </Typography>
       </m.div>
 
@@ -231,7 +231,7 @@ export default function HomeHero() {
               variant="contained"
               startIcon={<Iconify icon="eva:flash-fill" width={24} />}
             >
-              Download
+              {t("home.hero.download")}
             </Button>
           </Stack>
         </Stack>
