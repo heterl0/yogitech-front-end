@@ -199,29 +199,31 @@ export default function OverviewAppView() {
           )}
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
-          <Stack spacing={3}>
-            <AppWidget
-              title="Conversion - Active Users"
-              total={overview?.active_users || 0}
-              icon="solar:user-rounded-bold"
-              chart={{
-                series:
-                  (overview?.active_users / overview.total_users) * 100 || 0,
-              }}
-            />
+        {overview && (
+          <Grid xs={12} md={6} lg={4}>
+            <Stack spacing={3}>
+              <AppWidget
+                title="Conversion - Active Users"
+                total={overview?.active_users || 0}
+                icon="solar:user-rounded-bold"
+                chart={{
+                  series:
+                    (overview?.active_users / overview.total_users) * 100 || 0,
+                }}
+              />
 
-            <AppWidget
-              title="Log in Platform"
-              total={7727}
-              icon="fluent:mail-24-filled"
-              color="info"
-              chart={{
-                series: 82,
-              }}
-            />
-          </Stack>
-        </Grid>
+              <AppWidget
+                title="Log in Platform"
+                total={7727}
+                icon="fluent:mail-24-filled"
+                color="info"
+                chart={{
+                  series: 82,
+                }}
+              />
+            </Stack>
+          </Grid>
+        )}
       </Grid>
     </Container>
   );
