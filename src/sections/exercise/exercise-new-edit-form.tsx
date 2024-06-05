@@ -185,12 +185,13 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
         });
         formData.append("duration", duration + "");
         formData.append("level", data.level + "");
-        formData.append("calories", fShortenNumber(calories) + "");
+        formData.append("calories", calories.toFixed(2) + "");
         formData.append("active_status", active ? "1" : "0");
         formData.append("is_premium", isPremium ? "1" : "0");
         formData.append("point", data.point + "");
         formData.append("benefit", JSON.stringify(data.benefit));
         formData.append("number_poses", poseExercises.length + "");
+        console.log(fShortenNumber(calories));
         const response = await axiosInstance.post(
           endpoints.exercise.create,
           formData
