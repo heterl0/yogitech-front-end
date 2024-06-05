@@ -77,7 +77,6 @@ export default function NotificationQuickCreateEditForm({
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log(data);
       const fromData = new FormData();
       fromData.append("title", data.title);
       fromData.append("body", data.body);

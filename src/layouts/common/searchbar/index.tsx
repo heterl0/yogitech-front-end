@@ -47,7 +47,9 @@ function Searchbar() {
   }, [search]);
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "k" && event.metaKey) {
+    const isCtrlKWindows = event.ctrlKey && event.key === "k";
+    const isCmdKMacOS = event.metaKey && event.key === "k";
+    if (isCtrlKWindows || isCmdKMacOS) {
       search.onToggle();
       setSearchQuery("");
     }
@@ -115,7 +117,7 @@ function Searchbar() {
 
       {lgUp && (
         <Label sx={{ px: 0.75, fontSize: 12, color: "text.secondary" }}>
-          ⌘K
+          ⌘ + K
         </Label>
       )}
     </Stack>

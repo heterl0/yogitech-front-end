@@ -84,6 +84,12 @@ export const endpoints = {
     update: (id: string) => `/api/v1/exercises/${id}/`,
     delete: (id: string) => `/api/v1/exercises/${id}/`,
   },
+  comment: {
+    list: "/api/v1/exercise-comments/",
+    create: "/api/v1/exercise-comments/",
+    update: (id: string) => `/api/v1/exercise-comments/${id}/`,
+    delete: (id: string) => `/api/v1/exercise-comments/${id}/`,
+  },
   muscle: {
     list: "/api/v1/muscles/",
     create: "/api/v1/muscles/",

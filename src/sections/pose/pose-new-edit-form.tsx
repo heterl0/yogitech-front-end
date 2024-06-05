@@ -219,7 +219,6 @@ export default function PoseNewEditForm({ currentPose }: Props) {
         if (model) {
           const results = model.detect(image);
           setKeypoints(results.landmarks[0]);
-          console.log(results);
         }
       }
     },

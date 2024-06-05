@@ -14,6 +14,7 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 import { IComment } from "@/types/exercise";
 import { fDateTime } from "@/utils/format-time";
 import ExerciseCommentQuickCreateEditForm from "./exercise-details-comments-quick-create-edit-form";
+import { useState } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +35,10 @@ export default function ExerciseCommentTableRow({
 }: Props) {
   const { created_at, text, active_status, user } = row;
 
-  const status = active_status === 0 ? "Disabled" : "Active";
+  const [status, setStatus] = useState(
+    active_status === 0 ? "Disabled" : "Active"
+  );
+
   // const dateFormatted = format(new Date(time), "HH:mm dd MMM yyyy");
 
   const confirm = useBoolean();
@@ -42,6 +46,10 @@ export default function ExerciseCommentTableRow({
   const quickEdit = useBoolean();
 
   const popover = usePopover();
+
+  const handleChangeStatus = (status: number) => {
+    setStatus(status === 0 ? "Disabled" : "Active");
+  };
 
   return (
     <>
@@ -63,7 +71,6 @@ export default function ExerciseCommentTableRow({
         <TableCell sx={{ whiteSpace: "nowrap" }}>
           {fDateTime(new Date(created_at))}
         </TableCell>
-        s
         <TableCell>
           <Label
             variant="soft"
@@ -96,6 +103,7 @@ export default function ExerciseCommentTableRow({
           currentComment={row}
           open={quickEdit.value}
           onClose={quickEdit.onFalse}
+          onChangeStatus={handleChangeStatus}
         />
       )}
 

@@ -36,7 +36,6 @@ import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
 import NotificationTableToolbar from "./exercise-details-comments-table-toolbar";
 import NotificationTableRow from "./exercise-details-comments-table-row";
-import NotificationQuickCreateEditForm from "./exercise-details-comments-quick-create-edit-form";
 import {
   IComment,
   ICommentTableFilterValue,
@@ -72,8 +71,6 @@ export default function ExerciseCommentListView({
   const settings = useSettingsContext();
 
   const router = useRouter();
-
-  const quickCreate = useBoolean();
 
   const confirm = useBoolean();
 
@@ -306,10 +303,6 @@ export default function ExerciseCommentListView({
             Delete
           </Button>
         }
-      />
-      <NotificationQuickCreateEditForm
-        open={quickCreate.value}
-        onClose={quickCreate.onFalse}
       />
     </>
   );

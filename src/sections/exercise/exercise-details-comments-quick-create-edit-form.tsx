@@ -21,24 +21,25 @@ import FormProvider, {
 } from "@/components/hook-form";
 
 import { NOTIFICATION_STATUS } from "@/types/notification";
-import { usePathname, useRouter } from "next/navigation";
 import { IComment } from "@/types/exercise";
+import { useSnackbar } from "notistack";
+import axiosInstance, { endpoints } from "@/utils/axios";
 // ----------------------------------------------------------------------
 
 type Props = {
   open: boolean;
   onClose: VoidFunction;
   currentComment?: IComment;
+  onChangeStatus: (status: number) => void;
 };
 
 export default function ExerciseCommentQuickCreateEditForm({
   currentComment,
   open,
   onClose,
+  onChangeStatus,
 }: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
-  // const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const NewAccountSchema = Yup.object().shape({
     status: Yup.number().required("Status is required"),
     text: Yup.string().required("Content is required"),
@@ -65,37 +66,18 @@ export default function ExerciseCommentQuickCreateEditForm({
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log(data);
-      // const fromData = new FormData();
-      // fromData.append("title", data.title);
-      // fromData.append("body", data.body);
-      // fromData.append("time", date.toISOString());
-      // fromData.append("active_status", data.status.toString());
-      // fromData.append("is_admin", data.is_admin ? 1 + "" : 0 + "");
-      // if (currentComment) {
-      //   const res = await axiosInstance.put(
-      //     endpoints.comment.update(currentComment.id.toString()),
-      //     fromData
-      //   );
-      //   if (res.status === HttpStatusCode.Ok) {
-      //     enqueueSnackbar("Comment updated successfully", {
-      //       variant: "success",
-      //     });
-      //     onClose();
-      //   }
-      // } else {
-      //   const res = await axiosInstance.post(
-      //     endpoints.comment.create,
-      //     fromData
-      //   );
-      //   if (res.status === HttpStatusCode.Created) {
-      //     enqueueSnackbar("Comment created successfully", {
-      //       variant: "success",
-      //     });
-      //     onClose();
-      //   }
-      // }
-      router.push(pathname);
+      if (currentComment?.active_status !== data.status) {
+        await axiosInstance.patch(
+          endpoints.comment.update(currentComment?.id + ""),
+          {
+            active_status: data.status,
+            text: data.text,
+          }
+        );
+        onChangeStatus(data.status);
+        enqueueSnackbar("Comment status has been updated");
+        onClose();
+      }
     } catch (error) {
       reset();
       onClose();
@@ -139,7 +121,13 @@ export default function ExerciseCommentQuickCreateEditForm({
                 </MenuItem>
               ))}
             </RHFSelect>
-            <RHFTextField name="content" label="Content" multiline rows={4} />
+            <RHFTextField
+              name="text"
+              label="Content"
+              multiline
+              rows={4}
+              disabled
+            />
           </Box>
         </DialogContent>
 

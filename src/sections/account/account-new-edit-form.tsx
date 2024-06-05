@@ -60,8 +60,6 @@ type UpdateData = {
 
 export default function AccountNewEditForm({ currentAccount }: Props) {
   const router = useRouter();
-  console.log("currentAccount", currentAccount);
-
   const { enqueueSnackbar } = useSnackbar();
 
   const NewAccountSchema = Yup.object().shape({

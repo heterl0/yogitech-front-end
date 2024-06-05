@@ -16,7 +16,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
-import { useRouter, useSearchParams } from "@/routes/hooks";
+import { useRouter } from "@/routes/hooks";
 
 import { useBoolean } from "@/hooks/use-boolean";
 
@@ -35,13 +35,12 @@ export default function JwtRegisterView() {
   const router = useRouter();
 
   const allowRegister = ALLOW_TO_REGISTER;
-  console.log(allowRegister);
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
-  const returnTo = searchParams.get("returnTo");
+  // const returnTo = searchParams.get("returnTo");
 
   const password = useBoolean();
   const rePassword = useBoolean();
@@ -87,7 +86,7 @@ export default function JwtRegisterView() {
         data.re_password
       );
 
-      router.push(returnTo || PATH_AFTER_LOGIN);
+      router.push(PATH_AFTER_LOGIN);
     } catch (error) {
       console.error(error);
       reset();

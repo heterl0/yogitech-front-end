@@ -34,8 +34,6 @@ type Props = {
 export default function PostItem({ post, index }: Props) {
   const theme = useTheme();
 
-  console.log(post);
-
   const mdUp = useResponsive("up", "md");
 
   const { owner, title, image_url, created_at, votes } = post;

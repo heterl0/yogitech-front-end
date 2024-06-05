@@ -16,7 +16,6 @@ export default function GoogleLoginButton() {
   ) => {
     const { credential } = credentialResponse;
     try {
-      console.log(credential);
       await loginWithGoogle(credential ? credential : "");
       router.push(returnTo || PATH_AFTER_LOGIN);
       //   You can store the JWT token in localStorage or context

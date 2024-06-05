@@ -168,8 +168,6 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log(data);
-
       if (!currentExercise) {
         const formData = new FormData();
         formData.append("title", data.title);
@@ -284,8 +282,6 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       const newFile = Object.assign(file, {
         preview: URL.createObjectURL(file),
       });
-
-      console.log(newFile);
 
       if (file) {
         setCheckVideoChange(true);
