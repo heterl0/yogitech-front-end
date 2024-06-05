@@ -82,6 +82,21 @@
         "title": "Cộng Đồng Kết Nối",
         "description": "Tham gia vào một cộng đồng sôi động và kết nối với YogiTech."
       }
+    },
+    "pricing": {
+      "plans": "kế hoạch giá",
+      "rightPlan": "Kế hoạch phù hợp cho bài tập của bạn",
+      "choosePlan": "Chọn kế hoạch hoàn hảo cho nhu cầu của bạn",
+      "yogiTechPlan": {
+        "free": "Miễn phí",
+        "premium": "Trả phí",
+        "10free": "Thực hiện 10 bài tập miễn phí",
+        "options": {
+          "unlimit": "Thực hiện bất kỳ số lượng bài tập nào",
+          "adv": "Không có quảng cáo",
+          "personal": "Tạo “Bài tập cá nhân”"
+        }
+      }
     }
   },
   "download": {

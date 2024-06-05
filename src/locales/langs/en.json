@@ -82,6 +82,21 @@
         "title": "Connected Community",
         "description": "Engage in a vibrant, connected community with YogiTech."
       }
+    },
+    "pricing": {
+      "plans": "pricing plans",
+      "rightPlan": "The right plan for your exercises",
+      "choosePlan": "Choose the perfect plan for your needs",
+      "yogiTechPlan": {
+        "free": "Free",
+        "premium": "Premium",
+        "10free": "Do 10 free-exercises",
+        "options": {
+          "unlimit": "Do unlimited exercises",
+          "adv": "No advertisement",
+          "personal": "Create “Personalized Exercise”"
+        }
+      }
     }
   },
 
