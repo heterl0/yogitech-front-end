@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { useCallback } from "react";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
@@ -22,6 +20,7 @@ import { LEVELS } from "@/constants/level";
 import { MenuItem } from "@mui/material";
 import { NOTIFICATION_STATUS } from "@/types/notification";
 import Label, { LabelColor } from "@/components/label";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -52,6 +51,8 @@ export default function PoseFilters({
   //
   muscleOptions,
 }: Props) {
+  const { t } = useTranslation();
+
   const handleFilterLevel = useCallback(
     (newValue: number) => {
       onFilters("level", newValue);
@@ -81,10 +82,10 @@ export default function PoseFilters({
       sx={{ py: 2, pr: 1, pl: 2.5 }}
     >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Filters
+        {t("posePage.poseFilters.filters")}
       </Typography>
 
-      <Tooltip title="Reset">
+      <Tooltip title={t("posePage.poseFilters.reset")}>
         <IconButton onClick={onResetFilters}>
           <Badge color="error" variant="dot" invisible={!canReset}>
             <Iconify icon="solar:restart-bold" />
@@ -101,7 +102,7 @@ export default function PoseFilters({
   const renderLevel = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Levels
+        {t("posePage.poseFilters.levels")}
       </Typography>
 
       <TextField
@@ -109,13 +110,15 @@ export default function PoseFilters({
         fullWidth
         value={filters.level}
         onChange={(event) => handleFilterLevel(parseInt(event.target.value))}
-        placeholder="Select Level"
+        placeholder={t("posePage.poseFilters.selectLevel")}
       >
-        {[{ label: "All", value: -1 }, ...LEVELS].map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
+        {[{ label: t("posePage.poseFilters.all"), value: -1 }, ...LEVELS].map(
+          (option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          )
+        )}
       </TextField>
     </Stack>
   );
@@ -123,7 +126,7 @@ export default function PoseFilters({
   const renderStatus = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Status
+        {t("posePage.poseFilters.status")}
       </Typography>
 
       <TextField
@@ -131,10 +134,14 @@ export default function PoseFilters({
         fullWidth
         value={filters.status}
         onChange={(event) => handleFilterStatus(parseInt(event.target.value))}
-        placeholder="Select Status"
+        placeholder={t("posePage.poseFilters.selectStatus")}
       >
         {[
-          { label: "All", value: -1, color: "default" as LabelColor },
+          {
+            label: t("posePage.poseFilters.all"),
+            value: -1,
+            color: "default" as LabelColor,
+          },
           ...NOTIFICATION_STATUS,
         ].map((option) => (
           <MenuItem key={option.value} value={option.value}>
@@ -145,10 +152,10 @@ export default function PoseFilters({
     </Stack>
   );
 
-  const renderTourGuide = (
+  const renderMuscles = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Muscles
+        {t("posePage.poseFilters.muscles")}
       </Typography>
 
       <Autocomplete
@@ -159,7 +166,10 @@ export default function PoseFilters({
         onChange={(event, newValue) => handleFilterMuscle(newValue)}
         getOptionLabel={(option) => option.name}
         renderInput={(params) => (
-          <TextField placeholder="Select Muscles" {...params} />
+          <TextField
+            placeholder={t("posePage.poseFilters.selectMuscles")}
+            {...params}
+          />
         )}
         renderOption={(props, muscle) => (
           <li {...props} key={muscle.id}>
@@ -201,7 +211,7 @@ export default function PoseFilters({
         }
         onClick={onOpen}
       >
-        Filters
+        {t("posePage.poseFilters.filters")}
       </Button>
 
       <Drawer
@@ -221,7 +231,7 @@ export default function PoseFilters({
 
         <Scrollbar sx={{ px: 2.5, py: 3 }}>
           <Stack spacing={3}>
-            {renderTourGuide} {renderLevel} {renderStatus}
+            {renderMuscles} {renderLevel} {renderStatus}
           </Stack>
         </Scrollbar>
       </Drawer>

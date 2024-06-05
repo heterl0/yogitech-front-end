@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
-
+import { useTranslation } from "react-i18next";
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 
@@ -33,7 +33,7 @@ export default function EventItem({ event, onEdit }: Props) {
     start_date,
     expire_date,
   } = event;
-
+  const { t } = useTranslation();
   // const renderRating = (
   //   <Stack
   //     direction="row"
@@ -113,7 +113,12 @@ export default function EventItem({ event, onEdit }: Props) {
       sx={{
         p: (theme) => theme.spacing(2.5, 2.5, 2, 2.5),
       }}
-      primary={`From ${fDateTime(start_date)} to ${fDateTime(expire_date)}`}
+      primary={
+        <>
+          {t("eventPage.eventItem.from")} {fDateTime(start_date)}{" "}
+          {t("eventPage.eventItem.to")} {fDateTime(expire_date)}
+        </>
+      }
       secondary={
         <Link
           component={RouterLink}

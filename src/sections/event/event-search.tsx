@@ -14,6 +14,7 @@ import Iconify from "@/components/iconify";
 import SearchNotFound from "@/components/search-not-found";
 
 import { IEvent } from "@/types/event";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,7 @@ export default function EventSearch({
   hrefItem,
 }: Props) {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleClick = (id: string) => {
     router.push(hrefItem(id));
@@ -74,7 +76,7 @@ export default function EventSearch({
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t("eventPage.search.placeholder")}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

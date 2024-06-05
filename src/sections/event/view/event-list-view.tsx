@@ -1,5 +1,5 @@
 "use client";
-
+import { useTranslation } from "react-i18next";
 import orderBy from "lodash/orderBy";
 import { useState, useCallback } from "react";
 
@@ -49,6 +49,7 @@ export default function EventListView() {
   const [sortBy, setSortBy] = useState("latest");
 
   const { events } = useGetEvents();
+  const { t } = useTranslation();
 
   const [search, setSearch] = useState<{ query: string; results: IEvent[] }>({
     query: "",
@@ -166,14 +167,17 @@ export default function EventListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t("eventPage.listView.heading")}
         links={[
-          { name: "Dashboard", href: paths.dashboard.root },
           {
-            name: "Event",
+            name: t("eventPage.listView.breadcrumb.dashboard"),
+            href: paths.dashboard.root,
+          },
+          {
+            name: t("eventPage.listView.breadcrumb.event"),
             href: paths.dashboard.pose.root,
           },
-          { name: "List" },
+          { name: t("eventPage.listView.breadcrumb.list") },
         ]}
         action={
           <Button
@@ -182,7 +186,7 @@ export default function EventListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Event
+            {t("eventPage.listView.button.newEvent")}
           </Button>
         }
         sx={{
@@ -201,8 +205,13 @@ export default function EventListView() {
         {canReset && renderResults}
       </Stack>
 
-      {notFound && <EmptyContent title="No Data" filled sx={{ py: 10 }} />}
-
+      {notFound && (
+        <EmptyContent
+          title={t("eventPage.listView.emptyContent.noData")}
+          filled
+          sx={{ py: 10 }}
+        />
+      )}
       <EventList events={dataFiltered} />
     </Container>
   );

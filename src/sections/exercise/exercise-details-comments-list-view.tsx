@@ -43,15 +43,9 @@ import {
   ICommentTableFilters,
 } from "@/types/exercise";
 import ExerciseCommentTableFiltersResult from "./exercise-details-comments-table-filters-result";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
-
-const TABLE_HEAD = [
-  { id: "comment", label: "Comment", width: 560 },
-  { id: "time", label: "Time", width: 180 },
-  { id: "status", label: "Status", width: 110 },
-  { id: "", width: 88 },
-];
 
 const defaultFilters: ICommentTableFilters = {
   name: "",
@@ -67,6 +61,7 @@ export default function ExerciseCommentListView({
 }) {
   const { enqueueSnackbar } = useSnackbar();
 
+  const { t } = useTranslation();
   const table = useTable();
 
   const settings = useSettingsContext();
@@ -102,6 +97,25 @@ export default function ExerciseCommentListView({
   //   setTableData(comments);
   // }, [comments]);
 
+  const TABLE_HEAD = [
+    {
+      id: "comment",
+      label: t("exercisePage.exerciseCommentListView.tableHead.comment"),
+      width: 560,
+    },
+    {
+      id: "time",
+      label: t("exercisePage.exerciseCommentListView.tableHead.time"),
+      width: 180,
+    },
+    {
+      id: "status",
+      label: t("exercisePage.exerciseCommentListView.tableHead.status"),
+      width: 110,
+    },
+    { id: "", width: 88 },
+  ];
+
   const handleFilters = useCallback(
     (name: string, value: ICommentTableFilterValue) => {
       table.onResetPage();
@@ -136,11 +150,18 @@ export default function ExerciseCommentListView({
           return row;
         });
 
-        enqueueSnackbar("Ban success!");
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.banSuccess")
+        );
 
         setTableData(deleteRow);
       } else {
-        enqueueSnackbar("Ban failed!", { variant: "error" });
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.banFailed"),
+          {
+            variant: "error",
+          }
+        );
       }
 
       // table.onUpdatePageDeleteRow(dataInPage.length);
@@ -153,7 +174,9 @@ export default function ExerciseCommentListView({
       (row) => !table.selected.includes(row.id)
     );
 
-    enqueueSnackbar("Delete success!");
+    enqueueSnackbar(
+      t("exercisePage.exerciseCommentListView.snackbar.deleteSuccess")
+    );
 
     setTableData(deleteRows);
 
@@ -184,7 +207,11 @@ export default function ExerciseCommentListView({
             filters={filters}
             onFilters={handleFilters}
             //
-            StatusOptions={["Disabled", "Active"]}
+            StatusOptions={[
+              t("exercisePage.exerciseCommentListView.filters.all"),
+              "Disabled",
+              "Active",
+            ]}
           />
 
           {canReset && (
@@ -287,11 +314,13 @@ export default function ExerciseCommentListView({
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t("exercisePage.exerciseCommentListView.confirmDialog.title")}
         content={
           <>
-            Are you sure want to delete{" "}
-            <strong> {table.selected.length} </strong> items?
+            {t("exercisePage.exerciseCommentListView.confirmDialog.content", {
+              numSelected: table.selected.length,
+            })}
+            {/* Using interpolation for numSelected */}
           </>
         }
         action={
@@ -303,7 +332,7 @@ export default function ExerciseCommentListView({
               confirm.onFalse();
             }}
           >
-            Delete
+            {t("exercisePage.exerciseCommentListView.confirmDialog.delete")}
           </Button>
         }
       />

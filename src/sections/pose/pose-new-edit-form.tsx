@@ -39,6 +39,7 @@ import {
 } from "@mediapipe/tasks-vision";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
+import { useTranslation } from "react-i18next";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -46,6 +47,7 @@ type Props = {
 };
 
 export default function PoseNewEditForm({ currentPose }: Props) {
+  const { t } = useTranslation();
   const router = useRouter();
   const [keypoints, setKeypoints] = useState<NormalizedLandmark[]>([]);
   const [active, setActive] = useState(
@@ -235,10 +237,10 @@ export default function PoseNewEditForm({ currentPose }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t("posePage.poseNewEditForm.properties.title")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Title, short description, image...
+            {t("posePage.poseNewEditForm.properties.description")}
           </Typography>
         </Grid>
       )}
@@ -250,16 +252,25 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
               {/* <Typography variant="subtitle2">Name</Typography> */}
-              <RHFTextField name="name" label="Name" />
+              <RHFTextField
+                name="name"
+                label={t("posePage.poseNewEditForm.name")}
+              />
             </Stack>
 
             <Stack spacing={1.5}>
               {/* <Typography variant="subtitle2">Content</Typography> */}
-              <RHFTextField name="instruction" label="Instruction" multiline />
+              <RHFTextField
+                name="instruction"
+                label={t("posePage.poseNewEditForm.instruction")}
+                multiline
+              />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Image</Typography>
+              <Typography variant="subtitle2">
+                {t("posePage.poseNewEditForm.image")}
+              </Typography>
               <RHFUpload
                 thumbnail
                 name="image"
@@ -270,7 +281,9 @@ export default function PoseNewEditForm({ currentPose }: Props) {
               />
             </Stack>
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Keypoint</Typography>
+              <Typography variant="subtitle2">
+                {t("posePage.poseNewEditForm.keypoint")}
+              </Typography>
               <TextField
                 multiline
                 disabled
@@ -295,10 +308,10 @@ export default function PoseNewEditForm({ currentPose }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t("posePage.poseNewEditForm.properties.title")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Additional functions and attributes...
+            {t("posePage.poseNewEditForm.properties.description")}
           </Typography>
         </Grid>
       )}
@@ -312,9 +325,13 @@ export default function PoseNewEditForm({ currentPose }: Props) {
               Duration
             </Typography> */}
 
-            <RHFTextField name="duration" label="Duration" type="number" />
+            <RHFTextField
+              name="duration"
+              label={t("posePage.poseNewEditForm.duration")}
+              type="number"
+            />
 
-            <RHFSelect name="level" label="Level">
+            <RHFSelect name="level" label={t("posePage.poseNewEditForm.level")}>
               {LEVELS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
@@ -322,12 +339,16 @@ export default function PoseNewEditForm({ currentPose }: Props) {
               ))}
             </RHFSelect>
 
-            <RHFTextField name="calories" label="Calories" type="number" />
+            <RHFTextField
+              name="calories"
+              label={t("posePage.poseNewEditForm.calories")}
+              type="number"
+            />
 
             <RHFAutocomplete
               multiple
               name="muscles"
-              label="Muscles"
+              label={t("posePage.poseNewEditForm.muscles")}
               disableCloseOnSelect
               options={muscles}
               getOptionLabel={(option) => (option as IMuscle).name}
@@ -377,7 +398,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
               ) => setActive(checked)}
             />
           }
-          label="Active"
+          label={t("posePage.poseNewEditForm.active")}
           sx={{ flexGrow: 1, pl: 3 }}
         />
 
@@ -388,7 +409,9 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentPose ? "Create Pose" : "Update Pose"}
+          {!currentPose
+            ? t("posePage.poseNewEditForm.createPose")
+            : t("posePage.poseNewEditForm.updatePose")}
         </LoadingButton>
       </Grid>
     </>

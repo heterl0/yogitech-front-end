@@ -29,6 +29,7 @@ import AppUserEventGrow from "../app-user-event-growth";
 import { getMonthLabel } from "@/types/dashboard";
 import AppRecentTimeline from "../app-recent-timeline";
 import AppTopUsers from "../app-top-users";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,8 @@ export default function OverviewAppView() {
   const { eventGrowth } = useEventGrowth();
   const { topProfile } = useGetTopUsers();
   const firstItem = useMemo(() => recentItems[0], [recentItems]);
+
+  const { t } = useTranslation();
 
   const settings = useSettingsContext();
 
@@ -79,8 +82,8 @@ export default function OverviewAppView() {
         <Grid xs={12} md={posts.length === 0 ? 12 : 8}>
           {firstItem && (
             <AppWelcome
-              title={`Welcome back 👋 \n ${user?.username}`}
-              description={`Here’s what’s happening with your projects today. A new ${firstItem.type} has been added!`}
+              title={`${t("dashboard.welcomeBack")} \n ${user?.username}`}
+              description={`${t("dashboard.projectsToday", { type: firstItem.type })}`}
               img={<SeoIllustration />}
               action={
                 <Button
@@ -88,7 +91,7 @@ export default function OverviewAppView() {
                   color="primary"
                   href={paths.dashboard.item(firstItem.type)}
                 >
-                  Go Now
+                  {t("dashboard.goNow")}
                 </Button>
               }
             />
@@ -106,17 +109,16 @@ export default function OverviewAppView() {
           <>
             <Grid xs={12} sm={6} md={3}>
               <AnalyticsWidgetSummary
-                title="Upcoming Event"
+                title={t("dashboard.upcomingEvent")}
                 total={overview.upcoming_events}
                 icon={
                   <img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />
                 }
               />
             </Grid>
-
             <Grid xs={12} sm={6} md={3}>
               <AnalyticsWidgetSummary
-                title="Total Users"
+                title={t("dashboard.totalUsers")}
                 total={overview.total_users}
                 color="info"
                 icon={
@@ -130,7 +132,7 @@ export default function OverviewAppView() {
 
             <Grid xs={12} sm={6} md={3}>
               <AnalyticsWidgetSummary
-                title="Total Poses"
+                title={t("dashboard.totalPoses")}
                 total={overview.total_poses}
                 color="warning"
                 icon={
@@ -141,7 +143,7 @@ export default function OverviewAppView() {
 
             <Grid xs={12} sm={6} md={3}>
               <AnalyticsWidgetSummary
-                title="Total Exercises"
+                title={t("dashboard.totalExercises")}
                 total={overview.total_exercises}
                 color="error"
                 icon={
@@ -158,25 +160,19 @@ export default function OverviewAppView() {
         {userGrowthDataChart.labels.length > 0 && (
           <Grid xs={12} md={6} lg={8}>
             <AppUserEventGrow
-              title="Percent Growth in Year"
-              subheader="Details of User and Event Growth in Year"
+              title={t("dashboard.percentGrowthYear")}
+              subheader={t("dashboard.detailsUserEventGrowth")}
               chart={{
                 labels: userGrowthDataChart.labels,
                 series: [
                   {
-                    name: "New Users",
+                    name: t("dashboard.newUsers"),
                     type: "column",
                     fill: "solid",
                     data: userGrowthDataChart.series,
                   },
-                  // {
-                  //   name: "Team B",
-                  //   type: "area",
-                  //   fill: "gradient",
-                  //   data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-                  // },
                   {
-                    name: "Event Growth",
+                    name: t("dashboard.eventGrowth"),
                     type: "line",
                     fill: "solid",
                     data: eventGrowthDataChart.series,
@@ -189,13 +185,19 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={4}>
           {recentItems && (
-            <AppRecentTimeline list={recentItems} title="Recent Activity" />
+            <AppRecentTimeline
+              list={recentItems}
+              title={t("dashboard.recentActivity")}
+            />
           )}
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
           {topProfile && (
-            <AppTopUsers title="Top Users" list={topProfile.slice(0, 3)} />
+            <AppTopUsers
+              title={t("dashboard.topUsers")}
+              list={topProfile.slice(0, 3)}
+            />
           )}
         </Grid>
 
@@ -203,7 +205,7 @@ export default function OverviewAppView() {
           <Grid xs={12} md={6} lg={4}>
             <Stack spacing={3}>
               <AppWidget
-                title="Conversion - Active Users"
+                title={t("dashboard.conversionActiveUsers")}
                 total={overview?.active_users || 0}
                 icon="solar:user-rounded-bold"
                 chart={{
@@ -213,7 +215,7 @@ export default function OverviewAppView() {
               />
 
               <AppWidget
-                title="Log in Platform"
+                title={t("dashboard.loginPlatform")}
                 total={7727}
                 icon="fluent:mail-24-filled"
                 color="info"

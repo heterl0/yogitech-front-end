@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@mui/material/Container";
+import { useTranslation } from "react-i18next";
 
 import { paths } from "@/routes/paths";
 
@@ -18,20 +19,22 @@ type Props = {
 
 export default function ExerciseEditView({ id }: Props) {
   const settings = useSettingsContext();
+  const { t } = useTranslation();
 
   const { exercise: currentExercise } = useGetExercise(id);
   const { poses } = useGetPoses();
+
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t("exercisePage.exerciseEditView.heading")}
         links={[
           {
-            name: "Dashboard",
+            name: t("exercisePage.exerciseEditView.breadcrumb.dashboard"),
             href: paths.dashboard.root,
           },
           {
-            name: "Exercise",
+            name: t("exercisePage.exerciseEditView.breadcrumb.exercise"),
             href: paths.dashboard.exercise.root,
           },
           { name: currentExercise?.title },

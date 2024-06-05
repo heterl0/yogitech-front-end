@@ -9,6 +9,7 @@ import Iconify from "@/components/iconify";
 import { IMuscle, IPoseFilterValue, IPoseFilters } from "@/types/pose";
 import { LEVELS } from "@/constants/level";
 import { NOTIFICATION_STATUS } from "@/types/notification";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ export default function PoseFiltersResult({
   results,
   ...other
 }: Props) {
-  // const shortLabel = shortDateLabel(filters.startDate, filters.endDate);
+  const { t } = useTranslation();
 
   const handleRemoveLevel = () => {
     onFilters("level", -1);
@@ -42,11 +43,6 @@ export default function PoseFiltersResult({
     onFilters("status", -1);
   };
 
-  // const handleRemoveAvailable = () => {
-  //   onFilters("startDate", null);
-  //   onFilters("endDate", null);
-  // };
-
   const handleRemoveMuscles = (inputValue: IMuscle) => {
     const newValue = filters.muscles.filter(
       (item) => item.name !== inputValue.name
@@ -54,17 +50,12 @@ export default function PoseFiltersResult({
     onFilters("muscle", newValue);
   };
 
-  // const handleRemoveDestination = (inputValue: string) => {
-  //   const newValue = filters.destination.filter((item) => item !== inputValue);
-  //   onFilters("destination", newValue);
-  // };
-
   return (
     <Stack spacing={1.5} {...other}>
       <Box sx={{ typography: "body2" }}>
         <strong>{results}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          results found
+          {t("posePage.poseFiltersResult.resultsFound")}
         </Box>
       </Box>
 
@@ -75,18 +66,8 @@ export default function PoseFiltersResult({
         flexWrap="wrap"
         alignItems="center"
       >
-        {/* {filters.startDate && filters.endDate && (
-          <Block label="Available:">
-            <Chip
-              size="small"
-              label={shortLabel}
-              onDelete={handleRemoveAvailable}
-            />
-          </Block>
-        )} */}
-
         {!!filters.muscles.length && (
-          <Block label="Muscle:">
+          <Block label={t("posePage.poseFiltersResult.muscle")}>
             {filters.muscles.map((item) => (
               <Chip
                 key={item.id}
@@ -100,7 +81,7 @@ export default function PoseFiltersResult({
         )}
 
         {filters.level !== -1 && (
-          <Block label="Level:">
+          <Block label={t("posePage.poseFiltersResult.level")}>
             <Chip
               label={LEVELS[filters.level - 1].label}
               size="small"
@@ -110,7 +91,7 @@ export default function PoseFiltersResult({
         )}
 
         {filters.status !== -1 && (
-          <Block label="Status:">
+          <Block label={t("posePage.poseFiltersResult.status")}>
             <Chip
               label={NOTIFICATION_STATUS[filters.status].label}
               size="small"
@@ -125,7 +106,7 @@ export default function PoseFiltersResult({
             onClick={onResetFilters}
             startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
           >
-            Clear
+            {t("posePage.poseFiltersResult.clear")}
           </Button>
         )}
       </Stack>

@@ -12,6 +12,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import { useTranslation } from "react-i18next";
 
 // import { countries } from "@/assets/data";
 import FormProvider, {
@@ -56,6 +57,8 @@ export default function ExerciseCommentQuickCreateEditForm({
     resolver: yupResolver(NewAccountSchema),
     defaultValues,
   });
+
+  const { t } = useTranslation();
 
   const {
     reset,
@@ -115,12 +118,20 @@ export default function ExerciseCommentQuickCreateEditForm({
     >
       <FormProvider methods={methods} onSubmit={onSubmit}>
         <DialogTitle>
-          {currentComment ? "Edit comment" : "Create comment"}
+          {currentComment
+            ? t(
+                "exercisePage.exerciseCommentListView.quickCreateEditForm.editTitle"
+              )
+            : t(
+                "exercisePage.exerciseCommentListView.quickCreateEditForm.createTitle"
+              )}
         </DialogTitle>
 
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Comment is waiting for confirmation
+            {t(
+              "exercisePage.exerciseCommentListView.quickCreateEditForm.infoAlert"
+            )}
           </Alert>
 
           <Box
@@ -132,20 +143,34 @@ export default function ExerciseCommentQuickCreateEditForm({
               sm: "repeat(2, 1fr)",
             }}
           >
-            <RHFSelect name="status" label="Status">
+            <RHFSelect
+              name="status"
+              label={t(
+                "exerciseCommentListView.quickCreateEditForm.statusLabel"
+              )}
+            >
               {NOTIFICATION_STATUS.map(({ label, value }) => (
                 <MenuItem key={value} value={value}>
                   {label}
                 </MenuItem>
               ))}
             </RHFSelect>
-            <RHFTextField name="content" label="Content" multiline rows={4} />
+            <RHFTextField
+              name="content"
+              label={t(
+                "exerciseCommentListView.quickCreateEditForm.contentLabel"
+              )}
+              multiline
+              rows={4}
+            />
           </Box>
         </DialogContent>
 
         <DialogActions>
           <Button variant="outlined" onClick={onClose}>
-            Cancel
+            {t(
+              "exercisePage.exerciseCommentListView.quickCreateEditForm.cancelButton"
+            )}
           </Button>
 
           <LoadingButton
@@ -153,7 +178,13 @@ export default function ExerciseCommentQuickCreateEditForm({
             variant="contained"
             loading={isSubmitting}
           >
-            {currentComment ? "Update" : "Create"}
+            {currentComment
+              ? t(
+                  "exercisePage.exerciseCommentListView.quickCreateEditForm.updateButton"
+                )
+              : t(
+                  "exercisePage.exerciseCommentListView.quickCreateEditForm.createButton"
+                )}
           </LoadingButton>
         </DialogActions>
       </FormProvider>

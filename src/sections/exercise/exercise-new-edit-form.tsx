@@ -38,6 +38,7 @@ import { useSnackbar } from "notistack";
 import { paths } from "@/routes/paths";
 import { fShortenNumber } from "@/utils/format-number";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -73,7 +74,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     currentExercise?.poses || []
   );
   const [active, setActive] = useState(true);
-
+  const { t } = useTranslation();
   const [isPremium, setIsPremium] = useState(false);
 
   const handleRemovePose = useCallback(
@@ -362,28 +363,28 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t("exercisePage.details")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Title, short description, image...
+            {t("exercisePage.detailsDescription")}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Details" />}
+          {!mdUp && <CardHeader title={t("exercisePage.details")} />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
               {/* <Typography variant="subtitle2">Name</Typography> */}
-              <RHFTextField name="title" label="Title" />
+              <RHFTextField name="title" label={t("exercisePage.title")} />
             </Stack>
 
             <RHFAutocomplete
               name="benefit"
-              label="Benefits"
-              placeholder="+ Benefits"
+              label={t("exercisePage.benefits")}
+              placeholder={t("exercisePage.benefitsPlaceholder")}
               multiple
               freeSolo
               options={benefits.map((option) => option)}
@@ -408,19 +409,24 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
             />
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Description</Typography>
+              <Typography variant="subtitle2">
+                {" "}
+                {t("exercisePage.description")}
+              </Typography>
               <RHFEditor simple name="description" />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Image</Typography>
+              <Typography variant="subtitle2">
+                {t("exercisePage.image")}
+              </Typography>
               <RHFUpload
                 thumbnail
                 name="image"
                 maxSize={3145728}
                 onDrop={handleDrop}
                 onDelete={handleRemoveFile}
-                onUpload={() => console.info("ON UPLOAD")}
+                onUpload={() => console.info(t("exercisePage.upload"))}
               />
             </Stack>
           </Stack>

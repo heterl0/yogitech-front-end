@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@mui/material/Container";
+import { useTranslation } from "react-i18next";
 
 import { paths } from "@/routes/paths";
 
@@ -14,20 +15,22 @@ import { useGetPoses } from "@/api/pose";
 export default function ExerciseCreateView() {
   const settings = useSettingsContext();
   const { poses } = useGetPoses();
+  const { t } = useTranslation();
+
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="Create a new exercise"
+        heading={t("exercisePage.exerciseCreateView.heading")}
         links={[
           {
-            name: "Dashboard",
+            name: t("exercisePage.exerciseCreateView.breadcrumb.dashboard"),
             href: paths.dashboard.root,
           },
           {
-            name: "Exercise",
+            name: t("exercisePage.exerciseCreateView.breadcrumb.exercise"),
             href: paths.dashboard.tour.root,
           },
-          { name: "New Exercise" },
+          { name: t("exercisePage.exerciseCreateView.breadcrumb.newExercise") },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
