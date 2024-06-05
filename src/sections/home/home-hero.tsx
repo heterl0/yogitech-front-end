@@ -194,8 +194,7 @@ export default function HomeHero() {
             textAlign: "center",
           }}
         >
-          Yoga Mentor <br />
-          Platform
+          {t("home.hero.subtitle")}
         </Typography>
       </m.div>
 

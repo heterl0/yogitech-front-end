@@ -63,6 +63,7 @@
   "event": "Sự kiện",
   "home": {
     "hero": {
+      "subtitle": "Nền tảng hướng dẫn Yoga",
       "description": "Khám phá YogiTech, ứng dụng yoga hàng đầu được thiết kế cho mọi trình độ. Trải nghiệm sự tiện lợi của các buổi tập yoga cá nhân mọi lúc, mọi nơi và bắt đầu hành trình của bạn hướng tới sức khỏe và sự dẻo dai tốt hơn ngay hôm nay!",
       "download": "Tải xuống"
     },
@@ -82,5 +83,10 @@
         "description": "Tham gia vào một cộng đồng sôi động và kết nối với YogiTech."
       }
     }
+  },
+  "download": {
+    "getApp": "Tải ứng dụng về!",
+    "comingSoon": "Ứng dụng dành cho iOS đang được phát triển",
+    "android": "Android"
   }
 }

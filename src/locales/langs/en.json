@@ -63,6 +63,7 @@
   "event": "Event",
   "home": {
     "hero": {
+      "subtitle": "Yoga Mentor Platform",
       "description": "Explore YogiTech, the premier yoga app designed for all skill levels. Experience the convenience of personalized yoga sessions anytime, anywhere, and start your journey towards better health and flexibility today!",
       "download": "Download"
     },
@@ -82,5 +83,11 @@
         "description": "Engage in a vibrant, connected community with YogiTech."
       }
     }
+  },
+
+  "download": {
+    "getApp": "Get our app!",
+    "comingSoon": "iOS app will coming soon",
+    "android": "Android"
   }
 }
