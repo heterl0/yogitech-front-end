@@ -35,6 +35,7 @@ export default function JwtRegisterView() {
   const router = useRouter();
 
   const allowRegister = ALLOW_TO_REGISTER;
+  console.log(allowRegister);
 
   const [errorMsg, setErrorMsg] = useState("");
 

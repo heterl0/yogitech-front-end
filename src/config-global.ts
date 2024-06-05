@@ -7,9 +7,9 @@ export const HOST_API = process.env.NEXT_PUBLIC_HOST_API;
 export const ASSETS_API = process.env.NEXT_PUBLIC_ASSETS_API;
 
 export const ALLOW_TO_LOGIN_WITH_GOOGLE =
-  process.env.ALLOW_TO_LOGIN_WITH_GOOGLE === "true";
+  process.env.NEXT_PUBLIC_ALLOW_TO_LOGIN_WITH_GOOGLE;
 
-export const ALLOW_TO_REGISTER = process.env.ALLOW_TO_REGISTER === "true";
+export const ALLOW_TO_REGISTER = process.env.NEXT_PUBLIC_ALLOW_TO_REGISTER;
 
 export const FIREBASE_API = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
