@@ -285,7 +285,7 @@
     "exerciseCreateView": {
       "heading": "Tạo bài tập mới",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "exercise": "Bài tập",
         "newExercise": "Bài tập mới"
       }
@@ -293,14 +293,14 @@
     "exerciseEditView": {
       "heading": "Chỉnh sửa",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "exercise": "Bài tập"
       }
     },
     "exerciseListView": {
       "heading": "Danh sách bài tập",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "exercise": "Bài tập",
         "list": "Danh sách"
       },
@@ -391,7 +391,7 @@
     "createView": {
       "heading": "Tạo sự kiện mới",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "event": "Sự kiện",
         "newEvent": "Sự kiện mới"
       }
@@ -399,14 +399,14 @@
     "editView": {
       "heading": "Chỉnh sửa",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "event": "Sự kiện"
       }
     },
     "listView": {
       "heading": "Danh sách",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "event": "Sự kiện",
         "list": "Danh sách"
       },
@@ -456,7 +456,7 @@
     "createView": {
       "heading": "Tạo bài viết mới",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "blog": "Blog",
         "create": "Tạo"
       },
@@ -480,7 +480,7 @@
     "listView": {
       "heading": "Danh sách",
       "breadcrumb": {
-        "dashboard": "Bảng điều khiển",
+        "dashboard": "Dashboard",
         "blog": "Blog",
         "list": "Danh sách"
       },

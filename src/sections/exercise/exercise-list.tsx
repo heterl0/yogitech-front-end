@@ -6,8 +6,8 @@ import Pagination, { paginationClasses } from "@mui/material/Pagination";
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 
-import PoseItem from "./exercise-item";
 import { IExercise } from "@/types/exercise";
+import ExerciseItem from "./exercise-item";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ export default function ExerciseList({ exercises }: Props) {
 
   const handleEdit = useCallback(
     (id: string) => {
-      router.push(paths.dashboard.pose.edit(id));
+      router.push(paths.dashboard.exercise.edit(id));
     },
     [router]
   );
@@ -47,7 +47,7 @@ export default function ExerciseList({ exercises }: Props) {
         {exercises
           .slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
           .map((exercise) => (
-            <PoseItem
+            <ExerciseItem
               key={exercise.id}
               exercise={exercise}
               // onView={() => handleView(exercise.id + "")}

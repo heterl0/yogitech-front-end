@@ -28,7 +28,7 @@ export default function ExerciseCreateView() {
           },
           {
             name: t("exercisePage.exerciseCreateView.breadcrumb.exercise"),
-            href: paths.dashboard.tour.root,
+            href: paths.dashboard.exercise.root,
           },
           { name: t("exercisePage.exerciseCreateView.breadcrumb.newExercise") },
         ]}

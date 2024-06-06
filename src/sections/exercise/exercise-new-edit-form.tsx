@@ -36,7 +36,6 @@ import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
 import { useSnackbar } from "notistack";
 import { paths } from "@/routes/paths";
-import { fShortenNumber } from "@/utils/format-number";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 // ----------------------------------------------------------------------
@@ -129,6 +128,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       inSecond: 0,
       duration: 0,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       currentExercise?.benefit,
       currentExercise?.description,
@@ -162,10 +162,21 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       reset(defaultValues);
       setPoseExercises(currentExercise.poses || []);
       setPoseSelectedIndex(currentExercise.poses ? 0 : -1);
+      if (currentExercise.poses.length > 0) {
+        setValue(
+          "minute",
+          (currentExercise.poses[0].time -
+            (currentExercise.poses[0].time % 60)) /
+            60
+        );
+        setValue("second", currentExercise.poses[0].time % 60);
+        setValue("inSecond", currentExercise.poses[0].time);
+        setValue("duration", currentExercise.poses[0].duration);
+      }
       setActive(currentExercise.active_status === 1);
       setIsPremium(currentExercise.is_premium);
     }
-  }, [currentExercise, defaultValues, reset]);
+  }, [currentExercise, defaultValues, reset, setValue]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -184,7 +195,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
           duration += p.duration;
           calories += (p.pose.calories * p.duration) / p.pose.duration;
         });
-        formData.append("duration", duration + "");
+        formData.append("durations", duration + "");
         formData.append("level", data.level + "");
         formData.append("calories", calories.toFixed(2) + "");
         formData.append("active_status", active ? "1" : "0");
@@ -192,7 +203,6 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
         formData.append("point", data.point + "");
         formData.append("benefit", JSON.stringify(data.benefit));
         formData.append("number_poses", poseExercises.length + "");
-        console.log(fShortenNumber(calories));
         const response = await axiosInstance.post(
           endpoints.exercise.create,
           formData
@@ -218,9 +228,9 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
           duration += p.duration;
           calories += (p.pose.calories * p.duration) / p.pose.duration;
         });
-        formData.append("duration", duration + "");
+        formData.append("durations", duration + "");
         formData.append("level", data.level + "");
-        formData.append("calories", fShortenNumber(calories) + "");
+        formData.append("calories", calories.toFixed(2) + "");
         formData.append("active_status", active ? "1" : "0");
         formData.append("is_premium", isPremium ? "1" : "0");
         formData.append("point", data.point + "");
@@ -315,33 +325,38 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     setCheckImageChange(false);
   }, [currentExercise?.video_url, setValue]);
 
-  const handleUpdateSelectedPose = useCallback(() => {
-    const updatedPoseExercises = [...poseExercises];
-    if (values.pose) {
-      const newPoseWithTime: IPoseWithTime = {
-        duration: 0,
-        time: 0,
-        pose: values.pose,
-      };
-      if (values.duration) {
-        newPoseWithTime.duration = values.duration;
+  const handleUpdateSelectedPose = useCallback(
+    (inSecond?: number) => {
+      const updatedPoseExercises = [...poseExercises];
+      if (values.pose) {
+        const newPoseWithTime: IPoseWithTime = {
+          duration: 0,
+          time: 0,
+          pose: values.pose,
+        };
+        if (values.duration) {
+          newPoseWithTime.duration = values.duration;
+        }
+        if (inSecond) {
+          newPoseWithTime.time = inSecond;
+        } else if (values.inSecond) {
+          newPoseWithTime.time = values.inSecond;
+        }
+        updatedPoseExercises[poseSelectedIndex] = {
+          ...updatedPoseExercises[poseSelectedIndex],
+          ...newPoseWithTime,
+        };
+        setPoseExercises(updatedPoseExercises);
       }
-      if (values.inSecond) {
-        newPoseWithTime.time = values.inSecond;
-      }
-      updatedPoseExercises[poseSelectedIndex] = {
-        ...updatedPoseExercises[poseSelectedIndex],
-        ...newPoseWithTime,
-      };
-      setPoseExercises(updatedPoseExercises);
-    }
-  }, [
-    poseExercises,
-    poseSelectedIndex,
-    values.duration,
-    values.inSecond,
-    values.pose,
-  ]);
+    },
+    [
+      poseExercises,
+      poseSelectedIndex,
+      values.duration,
+      values.inSecond,
+      values.pose,
+    ]
+  );
 
   const handleInputTime = useCallback(() => {
     let inSecond = 0;
@@ -352,7 +367,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       inSecond = inSecond + values.second;
     }
     setValue("inSecond", inSecond);
-    handleUpdateSelectedPose();
+    handleUpdateSelectedPose(inSecond);
   }, [handleUpdateSelectedPose, setValue, values.minute, values.second]);
 
   const renderDetails = (
@@ -482,7 +497,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
                     name="pose"
                     label={t("exercisePage.pose")}
                     options={poses}
-                    onSelect={handleUpdateSelectedPose}
+                    onSelect={() => handleUpdateSelectedPose()}
                     getOptionLabel={(option) => (option as IPose).name}
                     isOptionEqualToValue={(option, value) =>
                       option.id === value.id
@@ -548,7 +563,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
                   type="number"
                   name="duration"
                   label={t("exercisePage.duration")}
-                  onBlur={handleUpdateSelectedPose}
+                  onBlur={() => handleUpdateSelectedPose()}
                 />
               </>
             )}
