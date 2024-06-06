@@ -148,9 +148,9 @@ export default function NotificationQuickCreateEditForm({
               sm: "repeat(2, 1fr)",
             }}
           >
-            <RHFTextField name="title" label="Title" />
+            <RHFTextField name="title" label={t("notiPage.Title")} />
             <MobileDateTimePicker
-              label="Time"
+              label={t("notiPage.Time")}
               name="time"
               value={date}
               onChange={(newValue) => {
@@ -158,14 +158,19 @@ export default function NotificationQuickCreateEditForm({
               }}
             />
 
-            <RHFSelect name="status" label="Status">
+            <RHFSelect name="status" label={t("notiPage.Status")}>
               {NOTIFICATION_STATUS.map(({ label, value }) => (
                 <MenuItem key={value} value={value}>
                   {label}
                 </MenuItem>
               ))}
             </RHFSelect>
-            <RHFTextField name="body" label="Body" multiline rows={4} />
+            <RHFTextField
+              name="body"
+              label={t("notiPage.Body")}
+              multiline
+              rows={4}
+            />
             <FormControlLabel
               labelPlacement="end"
               className="!justify-start"

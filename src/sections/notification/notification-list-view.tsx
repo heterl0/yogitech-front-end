@@ -148,16 +148,16 @@ export default function NotificationListView() {
           return row;
         });
 
-        enqueueSnackbar("Ban success!");
+        enqueueSnackbar(t("notiPage.Bansuccess"));
 
         setTableData(deleteRow);
       } else {
-        enqueueSnackbar("Ban failed!", { variant: "error" });
+        enqueueSnackbar(t("notiPage.Banfailed"), { variant: "error" });
       }
 
       // table.onUpdatePageDeleteRow(dataInPage.length);
     },
-    [enqueueSnackbar, tableData]
+    [enqueueSnackbar, t, tableData]
   );
 
   const handleDeleteRows = useCallback(() => {
@@ -165,7 +165,7 @@ export default function NotificationListView() {
       (row) => !table.selected.includes(row.id)
     );
 
-    enqueueSnackbar("Delete success!");
+    enqueueSnackbar(t("notiPage.Deletesuccess"));
 
     setTableData(deleteRows);
 
@@ -177,6 +177,7 @@ export default function NotificationListView() {
     dataFiltered.length,
     dataInPage.length,
     enqueueSnackbar,
+    t,
     table,
     tableData,
   ]);
@@ -199,11 +200,14 @@ export default function NotificationListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : "lg"}>
         <CustomBreadcrumbs
-          heading="Notification"
+          heading={t("notiPage.Notification")}
           links={[
             { name: "Dashboard", href: paths.dashboard.root },
-            { name: "Notification", href: paths.dashboard.notification.root },
-            { name: "List" },
+            {
+              name: t("notiPage.Notification"),
+              href: paths.dashboard.notification.root,
+            },
+            { name: t("notiPage.List") },
           ]}
           action={
             <Button
@@ -213,7 +217,7 @@ export default function NotificationListView() {
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              Create
+              {t("notiPage.Create")}
             </Button>
           }
           sx={{
