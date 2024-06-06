@@ -96,14 +96,14 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
   const mdUp = useResponsive("up", "md");
 
   const NewExerciseSchema = Yup.object().shape({
-    title: Yup.string().required("Name is required"),
-    benefit: Yup.array().min(1, "Must have at least 1 tag"),
-    description: Yup.string().required("Description is required"),
-    image: Yup.mixed<any>().required("Image is required"),
+    title: Yup.string().required(t("exercisePage.nameIsRequired")),
+    benefit: Yup.array().min(1, t("exercisePage.mustHaveAtLeastOneTag")),
+    description: Yup.string().required(t("exercisePage.descriptionIsRequired")),
+    image: Yup.mixed<any>().required(t("exercisePage.imageIsRequired")),
     //
-    video: Yup.mixed<any>().required("Image is required"),
-    level: Yup.number().required("Level is required"),
-    point: Yup.number().required("Point is required"),
+    video: Yup.mixed<any>().required(t("exercisePage.videoIsRequired")),
+    level: Yup.number().required(t("exercisePage.levelIsRequired")),
+    point: Yup.number().required(t("exercisePage.pointIsRequired")),
     pose: Yup.mixed<any>(),
     minute: Yup.number(),
     second: Yup.number(),
@@ -199,10 +199,10 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
           formData
         );
         if (response.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Create success!");
+          enqueueSnackbar(t("exercisePage.createSuccess"));
           router.push(paths.dashboard.exercise.root);
         } else {
-          enqueueSnackbar("Create failed!");
+          enqueueSnackbar(t("exercisePage.createFail"));
         }
       } else {
         const formData = new FormData();
@@ -232,10 +232,10 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
           formData
         );
         if (response.status === HttpStatusCode.Ok) {
-          enqueueSnackbar("Upload success!");
+          enqueueSnackbar(t("exercisePage.updateSuccess"));
           router.push(paths.dashboard.exercise.root);
         } else {
-          enqueueSnackbar("Upload failed!");
+          enqueueSnackbar(t("exercisePage.updateFail"));
         }
       }
     } catch (error) {
@@ -440,10 +440,10 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t("exercisePage.properties")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Additional functions and attributes...
+            {t("exercisePage.propertiesDescription")}
           </Typography>
         </Grid>
       )}
@@ -454,7 +454,9 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Video</Typography>
+              <Typography variant="subtitle2">
+                {t("exercisePage.video")}
+              </Typography>
               <RHFUploadVideo
                 thumbnail
                 name="video"
@@ -465,7 +467,9 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
               />
             </Stack>
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Poses</Typography>
+              <Typography variant="subtitle2">
+                {t("exercisePage.poses")}
+              </Typography>
               <ExercisePoseList
                 poseSelectedIndex={poseSelectedIndex}
                 onRemove={handleRemovePose}
@@ -479,7 +483,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
                 <Stack spacing={1.5}>
                   <RHFAutocomplete
                     name="pose"
-                    label="Pose"
+                    label={t("exercisePage.pose")}
                     options={poses}
                     onSelect={handleUpdateSelectedPose}
                     getOptionLabel={(option) => (option as IPose).name}
@@ -527,31 +531,31 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
                   <RHFTextField
                     type="number"
                     name="minute"
-                    label="Minute"
+                    label={t("exercisePage.minute")}
                     onBlur={handleInputTime}
                   />
                   <RHFTextField
                     type="number"
                     name="second"
-                    label="Second"
+                    label={t("exercisePage.second")}
                     onBlur={handleInputTime}
                   />
                   <RHFTextField
                     type="number"
                     disabled
                     name="inSecond"
-                    label="In Seconds"
+                    label={t("exercisePage.inSecond")}
                   />
                 </Box>
                 <RHFTextField
                   type="number"
                   name="duration"
-                  label="Duration"
+                  label={t("exercisePage.duration")}
                   onBlur={handleUpdateSelectedPose}
                 />
               </>
             )}
-            <RHFSelect name="level" label="Level">
+            <RHFSelect name="level" label={t("exercisePage.level")}>
               {LEVELS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
@@ -559,7 +563,11 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
               ))}
             </RHFSelect>
 
-            <RHFTextField name="point" label="Point" type="number" />
+            <RHFTextField
+              name="point"
+              label={t("exercisePage.point")}
+              type="number"
+            />
           </Stack>
         </Card>
       </Grid>
@@ -580,7 +588,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
               ) => setIsPremium(checked)}
             />
           }
-          label="Is Premium?"
+          label={t("exercisePage.isPremium")}
           sx={{ flexGrow: 1, pl: 3 }}
         />
         <FormControlLabel
@@ -593,7 +601,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
               ) => setActive(checked)}
             />
           }
-          label="Active"
+          label={t("exercisePage.active")}
           sx={{ flexGrow: 1, pl: 3 }}
         />
 
@@ -604,7 +612,9 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentExercise ? "Create Exercise" : "Update Exercise"}
+          {!currentExercise
+            ? t("exercisePage.createExercise")
+            : t("exercisePage.updateExercise")}
         </LoadingButton>
       </Grid>
     </>

@@ -4,6 +4,7 @@ import { IPoseWithTime } from "@/types/exercise";
 import { Card, Typography } from "@mui/material";
 import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +23,7 @@ export default function ExercisePoseList({
   onAppend,
   poseSelectedIndex,
 }: Props) {
+  const { t } = useTranslation();
   return (
     <>
       <div className="max-h-[512px] overflow-y-scroll rounded-md">
@@ -53,7 +55,7 @@ export default function ExercisePoseList({
               onClick={onAppend}
             >
               <Iconify icon="ic:baseline-plus" />
-              <Typography>Add pose</Typography>
+              <Typography> {t("exercisePage.addPose")}</Typography>
             </Card>
           </Box>
         </Scrollbar>

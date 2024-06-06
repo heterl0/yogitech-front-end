@@ -216,6 +216,11 @@
   },
 
   "exercisePage": {
+    "updateSuccess": "Update success!",
+    "updateFail": "Update fail!",
+    "createSuccess": "Create success!",
+    "createFail": "Create fail!",
+    "addPose": "Add pose",
     "details": "Details",
     "detailsDescription": "Title, short description, image...",
     "title": "Title",

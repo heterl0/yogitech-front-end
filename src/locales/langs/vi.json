@@ -214,6 +214,11 @@
     }
   },
   "exercisePage": {
+    "updateSuccess": "Cập nhật thành công!",
+    "updateFail": "Cập nhật thất bại!",
+    "createSuccess": "Tạo thành công!",
+    "createFail": "Tạo thất bại!",
+    "addPose": "Thêm động tác",
     "details": "Chi tiết",
     "detailsDescription": "Tiêu đề, mô tả ngắn, hình ảnh...",
     "title": "Tiêu đề",
@@ -229,7 +234,7 @@
     "pose": "Động tác",
     "minute": "Phút",
     "second": "Giây",
-    "inSecond": "Trong giây",
+    "inSecond": "Tính theo giây",
     "duration": "Thời lượng",
     "level": "Cấp độ",
     "point": "Điểm",
@@ -710,5 +715,10 @@
     "settings": "Cài đặt",
     "logout": "Đăng xuất",
     "unableToLogout": "Không thể đăng xuất!"
+  },
+  "level": {
+    "Beginner": "Dễ",
+    "Intermediate": "Cơ bản",
+    "Advanced": "Nâng cao"
   }
 }

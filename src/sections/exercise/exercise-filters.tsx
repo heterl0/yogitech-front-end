@@ -122,7 +122,7 @@ export default function ExerciseFilters({
           ...LEVELS,
         ].map((option) => (
           <MenuItem key={option.value} value={option.value}>
-            {option.label}
+            {t(`level.${option.label}`)}
           </MenuItem>
         ))}
       </TextField>
