@@ -122,7 +122,17 @@
     "topUsers": "Top Users",
     "conversionActiveUsers": "Conversion - Active Users",
     "loginPlatform": "Log in Platform",
-    "newBlog": "New Blog"
+    "newBlog": "New Blog",
+    "timeline": {
+      "new": "New",
+      "added": "added",
+      "welcome": "Welcome",
+      "toThePlatform": "to the platform",
+      "newPoseAdded": "New pose added",
+      "event": "event",
+      "exercise": "exercise",
+      "blog": "blog"
+    }
   },
   "posePage": {
     "poseList": {

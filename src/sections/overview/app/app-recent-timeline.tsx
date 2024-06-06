@@ -12,6 +12,7 @@ import { fDateTime } from "@/utils/format-time";
 import { IRecentActivity } from "@/types/dashboard";
 import { paths } from "@/routes/paths";
 import { Link } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -62,6 +63,7 @@ type RecentItemProps = {
 
 function RecentItem({ item, lastTimeline }: RecentItemProps) {
   const { type, data } = item;
+  const { t } = useTranslation();
   return (
     <TimelineItem>
       <TimelineSeparator>
@@ -81,7 +83,9 @@ function RecentItem({ item, lastTimeline }: RecentItemProps) {
         {/* {"username" in data  ? (<Typography variant="subtitle2">{type}</Typography>)} */}
         {"title" in data && (
           <Typography variant="subtitle2">
-            New {type} added{` `}
+            {t("dashboard.timeline.new")} {t(`dashboard.timeline.${type}`)}{" "}
+            {t("dashboard.timeline.added")}
+            {` `}
             <Link href={`${paths.dashboard.item(type)}/${data.id}`}>
               {data.title}
             </Link>
@@ -89,16 +93,17 @@ function RecentItem({ item, lastTimeline }: RecentItemProps) {
         )}
         {"username" in data && (
           <Typography variant="subtitle2">
-            Welcome{" "}
+            {t("dashboard.timeline.welcome")}{" "}
             <Link href={`${paths.dashboard.item(type)}/${data.id}/edit`}>
               {data.username}
             </Link>{" "}
-            to the platform
+            {t("dashboard.timeline.toThePlatform")}
           </Typography>
         )}
         {"name" in data && type === "pose" && (
           <Typography variant="subtitle2">
-            New pose added{` `}
+            {t("dashboard.timeline.newPoseAdded")}
+            {` `}
             <Link href={`${paths.dashboard.item(type)}/${data.id}`}>
               {data.name}
             </Link>

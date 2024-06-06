@@ -121,7 +121,17 @@
     "topUsers": "Người dùng hàng đầu",
     "conversionActiveUsers": "Chuyển đổi - Người dùng hoạt động",
     "loginPlatform": "Đăng nhập nền tảng",
-    "newBlog": "Bài viết mới"
+    "newBlog": "Bài viết mới",
+    "timeline": {
+      "new": "",
+      "added": "đã thêm",
+      "welcome": "Chào mừng",
+      "toThePlatform": "đến với nền tảng",
+      "newPoseAdded": "Đã thêm tư thế mới",
+      "event": "Sự kiện mới",
+      "exercise": "Bài tập mới",
+      "blog": "Bài viết mới"
+    }
   },
   "posePage": {
     "poseList": {

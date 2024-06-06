@@ -43,7 +43,7 @@ export default function PostListView() {
 
   const debouncedQuery = useDebounce(searchQuery);
 
-  const { posts, postsLoading } = useGetPosts();
+  const { posts } = useGetPosts();
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
@@ -159,7 +159,7 @@ export default function PostListView() {
         ))}
       </Tabs>
 
-      <PostListHorizontal posts={dataFiltered} loading={postsLoading} />
+      <PostListHorizontal posts={dataFiltered} />
     </Container>
   );
 }
