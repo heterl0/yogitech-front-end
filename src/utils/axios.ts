@@ -83,6 +83,7 @@ export const endpoints = {
     details: (id: string) => `/api/v1/exercises/${id}/`,
     update: (id: string) => `/api/v1/exercises/${id}/`,
     delete: (id: string) => `/api/v1/exercises/${id}/`,
+    feedback: "/api/v1/exercise-feedback/",
   },
   comment: {
     list: "/api/v1/exercise-comments/",

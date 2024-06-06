@@ -4,23 +4,28 @@ import Stack from "@mui/material/Stack";
 import { useResponsive } from "@/hooks/use-responsive";
 
 import Logo from "@/components/logo";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   DrawingUtils,
   FilesetResolver,
   PoseLandmarker,
 } from "@mediapipe/tasks-vision";
-import { Box } from "@mui/material";
+import { Box, Button, CardContent, Typography } from "@mui/material";
+import { mockPose } from "@/_mock/_pose";
+import Image from "@/components/image";
+import axiosInstance, { endpoints } from "@/utils/axios";
+import { fShortenNumber } from "@/utils/format-number";
+import { usePathname, useRouter } from "next/navigation";
 
 // ----------------------------------------------------------------------
 
-type Props = {
-  image?: string;
-  children: React.ReactNode;
-};
-
-export default function AuthModernLayout({ children, image }: Props) {
+export default function AuthModernLayout() {
   const mdUp = useResponsive("up", "md");
+  const [feedback, setFeedback] = useState<IFeedback>();
+
+  const handleSetFeedback = useCallback((data: IFeedback) => {
+    setFeedback(data);
+  }, []);
 
   const renderContent = (
     <Stack
@@ -31,24 +36,47 @@ export default function AuthModernLayout({ children, image }: Props) {
         px: { xs: 2, md: 8 },
       }}
     >
-      <Logo
-        sx={{
-          mt: { xs: 2, md: 8 },
-          mb: { xs: 10, md: 8 },
-        }}
-      />
+      <div className="flex items-center gap-2 ">
+        <Logo
+          sx={{
+            mt: { xs: 2, md: 8 },
+            mb: { xs: 10, md: 8 },
+          }}
+        />
+        <Typography variant="h4">Live Demo</Typography>
+      </div>
 
-      <Card
-        sx={{
-          py: { xs: 5, md: 0 },
-          px: { xs: 3, md: 0 },
-          boxShadow: { md: "none" },
-          overflow: { md: "unset" },
-          bgcolor: { md: "background.default" },
-        }}
-      >
-        {children}
-      </Card>
+      {feedback && (
+        <Card
+          sx={{
+            py: { xs: 5, md: 0 },
+            px: { xs: 3, md: 0 },
+            boxShadow: { md: "none" },
+            overflow: { md: "unset" },
+            // bgcolor: { md: "background.default" },
+            backgroundImage: `url("/assets/background/overlay_4.jpg")`,
+            objectFit: "cover",
+            position: "relative",
+            width: "calc(100% - 32px)",
+            height: "500px",
+          }}
+        >
+          {feedback && (
+            <Typography variant="h6">
+              Score: {feedback ? fShortenNumber(feedback.score) : ""}
+            </Typography>
+          )}
+          <CardContent>
+            {feedback
+              ? feedback.feedback.map((item, index) => {
+                  if (item.endsWith("Good alignment!")) return <></>;
+                  const content = item.split(". ");
+                  return <div key={index}>{content[content.length - 1]}</div>;
+                })
+              : ""}
+          </CardContent>
+        </Card>
+      )}
     </Stack>
   );
 
@@ -56,19 +84,21 @@ export default function AuthModernLayout({ children, image }: Props) {
     <Stack flexGrow={1} sx={{ position: "relative" }}>
       <Box
         sx={{
-          backgroundImage: `url(${image || "/assets/background/overlay_3.jpg"})`,
+          backgroundImage: `url("/assets/background/overlay_3.jpg")`,
           top: 16,
           left: 16,
           objectFit: "cover",
           position: "relative",
           width: "calc(100% - 32px)",
           height: "calc(100% - 32px)",
-          padding: { xs: 0, md: 10 },
+          padding: { xs: 0, md: 8 },
           borderRadius: { xs: 0, md: "1rem" },
           backgroundRepeat: "no-repeat",
+          gap: 2,
         }}
+        className="flex w-full flex-col items-center justify-center gap-2"
       >
-        <Test />
+        <Test setFeedback={handleSetFeedback} />
       </Box>
     </Stack>
   );
@@ -101,15 +131,35 @@ export default function AuthModernLayout({ children, image }: Props) {
   );
 }
 
-function Test() {
+type IFeedback = {
+  feedback: string[];
+  score: number;
+};
+
+type SamplePose = {
+  pose_id: number;
+  pose_name: string;
+  pose_keypoints: { x: number; y: number; z: number; visibility: number }[];
+  pose_image: string;
+};
+
+type Props = {
+  setFeedback: (data: IFeedback) => void;
+};
+
+function Test({ setFeedback }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const enableWebcamButtonRef = useRef<HTMLButtonElement | null>(null);
-
   const [webcamRunning, setWebcamRunning] = useState(true);
   const [poseLandmarker, setPoseLankmarker] = useState<PoseLandmarker | null>(
     null
   );
+
+  const [poseSelected, setPoseSelected] = useState<SamplePose>(mockPose[0]);
+  const router = useRouter();
+  const pathName = usePathname();
+
   useEffect(() => {
     if (canvasRef.current) {
       setCanvasCtx(canvasRef.current.getContext("2d"));
@@ -144,7 +194,7 @@ function Test() {
       console.log("Wait! poseLandmaker not loaded yet.");
       return;
     }
-
+    let checkTime = Date.now();
     if (!webcamRunning) {
       enableWebcamButtonRef.current!.innerText = "ENABLE PREDICTIONS";
       if (videoRef.current && videoRef.current.srcObject) {
@@ -158,6 +208,7 @@ function Test() {
         videoRef.current.srcObject = null;
       }
     } else {
+      setWebcamRunning(false);
       enableWebcamButtonRef.current!.innerText = "DISABLE PREDICTIONS";
 
       // getUsermedia parameters.
@@ -175,18 +226,17 @@ function Test() {
         console.log(webcamRunning);
         const video = videoRef.current!;
         const canvasElement = canvasRef.current!;
-        const videoHeight = "360px";
-        const videoWidth = "480px"; // replace with actual value
+        const [videoWidth, videoHeight] = [video.videoWidth, video.videoHeight];
 
-        canvasElement.style.height = videoHeight;
-        video.style.height = videoHeight;
-        canvasElement.style.width = videoWidth;
-        video.style.width = videoWidth;
+        canvasElement.style.height = videoHeight + "";
+        video.style.height = videoHeight + "";
+        canvasElement.style.width = videoWidth + "";
+        video.style.width = videoWidth + "";
 
         const startTimeMs = performance.now();
         if (lastVideoTime !== video.currentTime) {
           lastVideoTime = video.currentTime;
-          poseLandmarker.detectForVideo(video, startTimeMs, (result) => {
+          poseLandmarker.detectForVideo(video, startTimeMs, async (result) => {
             if (canvasCtx) {
               const drawingUtils = new DrawingUtils(canvasCtx);
               canvasCtx!.save();
@@ -199,7 +249,7 @@ function Test() {
               for (const landmark of result.landmarks) {
                 drawingUtils.drawLandmarks(landmark, {
                   radius: (data) =>
-                    DrawingUtils.lerp(data.from!.z, -0.15, 0.1, 5, 1),
+                    DrawingUtils.lerp(data.from!.z, -0.15, 0.1, 1, 0.2),
                 });
 
                 drawingUtils.drawConnectors(
@@ -209,36 +259,82 @@ function Test() {
               }
               canvasCtx!.restore();
             }
+
+            if (Date.now() - checkTime >= 5000) {
+              const response = await axiosInstance.post(
+                endpoints.exercise.feedback,
+                {
+                  correct_keypoint: poseSelected.pose_keypoints,
+                  user_keypoint: result.landmarks[0],
+                }
+              );
+              const data = response.data as IFeedback;
+              setFeedback(data);
+              checkTime = Date.now(); // reset the start time
+            }
           });
         }
         if (webcamRunning) window.requestAnimationFrame(predictWebcam);
       };
       // // Call this function again to keep predicting when the browser is ready.
     }
-  }, [poseLandmarker, webcamRunning, canvasCtx]);
+  }, [
+    poseLandmarker,
+    webcamRunning,
+    canvasCtx,
+    poseSelected.pose_keypoints,
+    setFeedback,
+  ]);
 
   return (
-    <div>
-      <video
-        className="absolute z-10 h-[360px] w-[480px] object-cover"
-        ref={videoRef}
-        id="webcam"
-        autoPlay
-        playsInline
-      />
-      <canvas
-        ref={canvasRef}
-        id="output_canvas"
-        className="absolute z-[11] h-[360px] w-[480px] object-cover"
-      />
-      <button
-        ref={enableWebcamButtonRef}
-        id="webcamButton"
-        onClick={enableCam}
-        className="absolute top-1"
-      >
-        ENABLE PREDICTIONS
-      </button>
-    </div>
+    <>
+      <div className="relative flex flex-col items-center gap-2">
+        <Typography variant="h4">Pose Detection</Typography>
+        <Card
+          className="relative h-[240px] w-[320px] rounded-md"
+          color="primary"
+        >
+          <video
+            className="relative z-10 h-[240px] w-[320px] scale-x-[-1] transform rounded-md"
+            ref={videoRef}
+            id="webcam"
+            autoPlay
+            playsInline
+          />
+          <canvas
+            ref={canvasRef}
+            id="output_canvas"
+            className="absolute top-0 z-10 h-[240px] w-[320px] scale-x-[-1] transform rounded-md"
+          />
+        </Card>
+        <Button
+          ref={enableWebcamButtonRef}
+          id="webcamButton"
+          onClick={webcamRunning ? enableCam : () => router.push(pathName)}
+          className=""
+          variant="contained"
+          color="primary"
+          hidden={webcamRunning}
+        >
+          Start Detect
+        </Button>
+      </div>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Typography variant="h4">Pose Selected</Typography>
+
+        <div className="relative flex w-1/2 flex-row items-center gap-2">
+          {mockPose.map((item, index) => (
+            <Card
+              onClick={() => setPoseSelected(item)}
+              className={`${item.pose_id === poseSelected.pose_id ? "border" : " "} relative w-1/3 transform-gpu rounded-md transition-transform duration-300 ease-in-out hover:scale-105`}
+              color="primary"
+              key={index}
+            >
+              <Image src={item.pose_image} alt={item.pose_name} />
+            </Card>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
