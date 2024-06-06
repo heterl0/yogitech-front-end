@@ -175,7 +175,7 @@ export default function EventListView() {
           },
           {
             name: t("eventPage.listView.breadcrumb.event"),
-            href: paths.dashboard.pose.root,
+            href: paths.dashboard.event.root,
           },
           { name: t("eventPage.listView.breadcrumb.list") },
         ]}

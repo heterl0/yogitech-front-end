@@ -27,7 +27,7 @@ export default function EventCreateView() {
           },
           {
             name: t("eventPage.createView.breadcrumb.event"),
-            href: paths.dashboard.tour.root,
+            href: paths.dashboard.event.root,
           },
           { name: t("eventPage.createView.breadcrumb.newEvent") },
         ]}
