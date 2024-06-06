@@ -11,7 +11,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Markdown from "@/components/markdown";
 import Scrollbar from "@/components/scrollbar";
 import EmptyContent from "@/components/empty-content";
-
+import { useTranslation } from "react-i18next";
 import PostDetailsHero from "./post-details-hero";
 
 // ----------------------------------------------------------------------
@@ -41,6 +41,7 @@ export default function PostDetailsPreview({
   onSubmit,
   isSubmitting,
 }: Props) {
+  const { t } = useTranslation();
   const hasContent = title || description || content || coverUrl;
 
   const hasHero = title || coverUrl;
@@ -49,11 +50,11 @@ export default function PostDetailsPreview({
     <Dialog fullScreen open={open} onClose={onClose}>
       <DialogActions sx={{ py: 2, px: 3 }}>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          Preview
+          {t("blogPage.postDetailsPreview.preview")}
         </Typography>
 
         <Button variant="outlined" color="inherit" onClick={onClose}>
-          Cancel
+          {t("blogPage.postDetailsPreview.cancel")}
         </Button>
 
         <LoadingButton
@@ -63,7 +64,7 @@ export default function PostDetailsPreview({
           loading={isSubmitting}
           onClick={onSubmit}
         >
-          Post
+          {t("blogPage.postDetailsPreview.post")}
         </LoadingButton>
       </DialogActions>
 
@@ -89,7 +90,10 @@ export default function PostDetailsPreview({
           </Container>
         </Scrollbar>
       ) : (
-        <EmptyContent filled title="Empty Content!" />
+        <EmptyContent
+          filled
+          title={t("blogPage.postDetailsPreview.emptyContent")}
+        />
       )}
     </Dialog>
   );

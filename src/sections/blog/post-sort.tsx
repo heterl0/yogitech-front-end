@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-
+import { useTranslation } from "react-i18next";
 import Iconify from "@/components/iconify";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
 
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export default function PostSort({ sort, sortOptions, onSort }: Props) {
+  const { t } = useTranslation();
   const popover = usePopover();
 
   return (
@@ -36,7 +37,7 @@ export default function PostSort({ sort, sortOptions, onSort }: Props) {
         }
         sx={{ fontWeight: "fontWeightSemiBold", textTransform: "capitalize" }}
       >
-        Sort By:
+        {t("blogPage.sort.sortBy")}
         <Box component="span" sx={{ ml: 0.5, fontWeight: "fontWeightBold" }}>
           {sort}
         </Box>

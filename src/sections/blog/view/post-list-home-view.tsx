@@ -21,11 +21,13 @@ import { IBlog } from "@/types/blog";
 import PostList from "../post-list";
 import PostSort from "../post-sort";
 import PostSearch from "../post-search";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function PostListHomeView() {
   const settings = useSettingsContext();
+  const { t } = useTranslation();
 
   const [sortBy, setSortBy] = useState("latest");
 
@@ -58,7 +60,7 @@ export default function PostListHomeView() {
           my: { xs: 3, md: 5 },
         }}
       >
-        Blog
+        {t("blogPage.listHomeView.heading")}
       </Typography>
 
       <Stack

@@ -436,5 +436,133 @@
         "loading": "Loading..."
       }
     }
+  },
+  "blogPage": {
+    "createView": {
+      "heading": "Create a new post",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "blog": "Blog",
+        "create": "Create"
+      }
+    },
+    "editView": {
+      "heading": "Edit"
+    },
+    "listHomeView": {
+      "heading": "Blog",
+      "search": {
+        "placeholder": "Search posts...",
+        "searchNotFound": "No results found for '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sort By:",
+        "latest": "Latest",
+        "oldest": "Oldest",
+        "popular": "Popular"
+      }
+    },
+    "listView": {
+      "heading": "List",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "blog": "Blog",
+        "list": "List"
+      },
+      "button": {
+        "newPost": "New Post"
+      },
+      "search": {
+        "placeholder": "Search posts...",
+        "searchNotFound": "No results found for '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sort By:",
+        "latest": "Latest",
+        "oldest": "Oldest",
+        "popular": "Popular"
+      },
+      "tabs": {
+        "all": "All",
+        "draft": "Draft",
+        "published": "Published"
+      }
+    },
+    "postCommentForm": {
+      "placeholder": "Write some of your comments...",
+      "postComment": "Post comment",
+      "commentRequired": "Comment is required",
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Email must be a valid email address"
+    },
+    "postCommentItem": {
+      "reply": "Reply",
+      "replyPlaceholder": "Write comment..."
+    },
+    "postCommentList": {
+      "comments": "Comments ({{count}})"
+    },
+    "postDetailsPreview": {
+      "preview": "Preview",
+      "cancel": "Cancel",
+      "post": "Post",
+      "emptyContent": "Empty Content!"
+    },
+    "postDetailsToolbar": {
+      "back": "Back",
+      "goLive": "Go Live",
+      "edit": "Edit",
+      "loading": "Loading...",
+      "changeStatus": "Change Status",
+      "publish": "Publish",
+      "draft": "Draft"
+    },
+    "postItemHorizontal": {
+      "published": "Published",
+      "draft": "Draft",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "deleteDialogTitle": "Do you want to delete this blog?",
+      "deleteDialogContent": "This action cannot be undone, do you really want to delete this blog?"
+    },
+    "postItem": {
+      "published": "Published",
+      "draft": "Draft"
+    },
+    "postListHorizontal": {
+      "loadMore": "More Posts"
+    },
+    "postNewEditForm": {
+      "details": "Details",
+      "detailsDescription": "Title, short description, image...",
+      "postTitle": "Post Title",
+      "description": "Description",
+      "content": "Content",
+      "cover": "Cover",
+      "properties": "Properties",
+      "propertiesDescription": "Additional functions and attributes...",
+      "benefits": "Benefits",
+      "publish": "Publish",
+      "preview": "Preview",
+      "createPost": "Create Post",
+      "saveChanges": "Save Changes",
+      "updateSuccess": "Update success!",
+      "updateFail": "Update fail!",
+      "createSuccess": "Create success!",
+      "createFail": "Create fail!"
+    },
+    "search": {
+      "placeholder": "Search...",
+      "searchNotFound": "No results found for '{{query}}'"
+    },
+    "sort": {
+      "sortBy": "Sort By:",
+      "latest": "Latest",
+      "oldest": "Oldest",
+      "popular": "Popular"
+    }
   }
 }

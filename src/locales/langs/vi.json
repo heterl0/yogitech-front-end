@@ -434,5 +434,133 @@
         "loading": "Đang tải..."
       }
     }
+  },
+  "blogPage": {
+    "createView": {
+      "heading": "Tạo bài viết mới",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "blog": "Blog",
+        "create": "Tạo"
+      },
+      "editView": {
+        "heading": "Chỉnh sửa"
+      }
+    },
+    "listHomeView": {
+      "heading": "Blog",
+      "search": {
+        "placeholder": "Tìm kiếm bài viết...",
+        "searchNotFound": "Không tìm thấy kết quả cho '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sắp xếp theo:",
+        "latest": "Mới nhất",
+        "oldest": "Cũ nhất",
+        "popular": "Phổ biến"
+      }
+    },
+    "listView": {
+      "heading": "Danh sách",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "blog": "Blog",
+        "list": "Danh sách"
+      },
+      "button": {
+        "newPost": "Bài viết mới"
+      },
+      "search": {
+        "placeholder": "Tìm kiếm bài viết...",
+        "searchNotFound": "Không tìm thấy kết quả cho '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sắp xếp theo:",
+        "latest": "Mới nhất",
+        "oldest": "Cũ nhất",
+        "popular": "Phổ biến"
+      },
+      "tabs": {
+        "all": "Tất cả",
+        "draft": "Bản nháp",
+        "published": "Đã xuất bản"
+      }
+    },
+    "postCommentForm": {
+      "placeholder": "Viết bình luận của bạn...",
+      "postComment": "Gửi bình luận",
+      "commentRequired": "Vui lòng nhập bình luận",
+      "nameRequired": "Vui lòng nhập tên",
+      "emailRequired": "Vui lòng nhập email",
+      "invalidEmail": "Email không hợp lệ"
+    },
+    "postCommentItem": {
+      "reply": "Trả lời",
+      "replyPlaceholder": "Viết bình luận..."
+    },
+    "postCommentList": {
+      "comments": "Bình luận ({{count}})"
+    },
+    "postDetailsPreview": {
+      "preview": "Xem trước",
+      "cancel": "Hủy",
+      "post": "Đăng bài",
+      "emptyContent": "Nội dung trống!"
+    },
+    "postDetailsToolbar": {
+      "back": "Quay lại",
+      "goLive": "Phát hành",
+      "edit": "Chỉnh sửa",
+      "loading": "Đang tải...",
+      "changeStatus": "Thay đổi trạng thái",
+      "publish": "Xuất bản",
+      "draft": "Bản nháp"
+    },
+    "postItemHorizontal": {
+      "published": "Đã xuất bản",
+      "draft": "Bản nháp",
+      "view": "Xem",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "cancel": "Hủy",
+      "deleteDialogTitle": "Bạn có muốn xóa blog này?",
+      "deleteDialogContent": "Thao tác này không thể hoàn tác, bạn có thực sự muốn xóa blog này?"
+    },
+    "postItem": {
+      "published": "Đã xuất bản",
+      "draft": "Bản nháp"
+    },
+    "postListHorizontal": {
+      "loadMore": "Xem thêm bài viết"
+    },
+    "postNewEditForm": {
+      "details": "Chi tiết",
+      "detailsDescription": "Tiêu đề, mô tả ngắn, hình ảnh...",
+      "postTitle": "Tiêu đề bài viết",
+      "description": "Mô tả",
+      "content": "Nội dung",
+      "cover": "Ảnh bìa",
+      "properties": "Thuộc tính",
+      "propertiesDescription": "Chức năng và thuộc tính bổ sung...",
+      "benefits": "Lợi ích",
+      "publish": "Xuất bản",
+      "preview": "Xem trước",
+      "createPost": "Tạo bài viết",
+      "saveChanges": "Lưu thay đổi",
+      "updateSuccess": "Cập nhật thành công!",
+      "updateFail": "Cập nhật thất bại!",
+      "createSuccess": "Tạo thành công!",
+      "createFail": "Tạo thất bại!"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm...",
+      "searchNotFound": "Không tìm thấy kết quả cho '{{query}}'"
+    },
+    "sort": {
+      "sortBy": "Sắp xếp theo:",
+      "latest": "Mới nhất",
+      "oldest": "Cũ nhất",
+      "popular": "Phổ biến"
+    }
   }
 }

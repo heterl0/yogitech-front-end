@@ -8,16 +8,21 @@ import LoadingButton from "@mui/lab/LoadingButton";
 
 import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function PostCommentForm() {
+  const { t } = useTranslation();
+
   const CommentSchema = Yup.object().shape({
-    comment: Yup.string().required("Comment is required"),
-    name: Yup.string().required("Name is required"),
+    comment: Yup.string().required(
+      t("blogPage.postCommentForm.commentRequired")
+    ),
+    name: Yup.string().required(t("blogPage.postCommentForm.nameRequired")),
     email: Yup.string()
-      .required("Email is required")
-      .email("Email must be a valid email address"),
+      .required(t("blogPage.postCommentForm.emailRequired"))
+      .email(t("blogPage.postCommentForm.invalidEmail")),
   });
 
   const defaultValues = {
@@ -52,7 +57,7 @@ export default function PostCommentForm() {
       <Stack spacing={3}>
         <RHFTextField
           name="comment"
-          placeholder="Write some of your comments..."
+          placeholder={t("blogPage.postCommentForm.placeholder")}
           multiline
           rows={4}
         />
@@ -77,7 +82,7 @@ export default function PostCommentForm() {
             variant="contained"
             loading={isSubmitting}
           >
-            Post comment
+            {t("blogPage.postCommentForm.postComment")}
           </LoadingButton>
         </Stack>
       </Stack>

@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-
+import { useTranslation } from "react-i18next";
 import { useBoolean } from "@/hooks/use-boolean";
 
 import { fDate } from "@/utils/format-time";
@@ -31,6 +31,7 @@ export default function PostCommentItem({
   postedAt,
   hasReply,
 }: Props) {
+  const { t } = useTranslation();
   const reply = useBoolean();
 
   return (
@@ -76,7 +77,11 @@ export default function PostCommentItem({
 
         {reply.value && (
           <Box sx={{ mt: 2 }}>
-            <TextField fullWidth autoFocus placeholder="Write comment..." />
+            <TextField
+              fullWidth
+              autoFocus
+              placeholder={t("blogPage.postCommentItem.replyPlaceholder")}
+            />
           </Box>
         )}
       </Stack>
@@ -89,7 +94,7 @@ export default function PostCommentItem({
           onClick={reply.onToggle}
           sx={{ right: 0, position: "absolute" }}
         >
-          Reply
+          {t("blogPage.postCommentItem.reply")}
         </Button>
       )}
     </ListItem>

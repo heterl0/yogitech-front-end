@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
-
+import { useTranslation } from "react-i18next";
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 import { RouterLink } from "@/routes/components";
@@ -39,6 +39,8 @@ type Props = {
 };
 
 export default function PostItemHorizontal({ post }: Props) {
+  const { t } = useTranslation();
+
   const popover = usePopover();
 
   const router = useRouter();
@@ -209,7 +211,7 @@ export default function PostItemHorizontal({ post }: Props) {
           }}
         >
           <Iconify icon="solar:eye-bold" />
-          View
+          {t("blogPage.postItemHorizontal.view")}
         </MenuItem>
 
         <MenuItem
@@ -219,7 +221,7 @@ export default function PostItemHorizontal({ post }: Props) {
           }}
         >
           <Iconify icon="solar:pen-bold" />
-          Edit
+          {t("blogPage.postItemHorizontal.edit")}
         </MenuItem>
 
         <MenuItem
@@ -230,21 +232,20 @@ export default function PostItemHorizontal({ post }: Props) {
           sx={{ color: "error.main" }}
         >
           <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
+          {t("blogPage.postItemHorizontal.delete")}
         </MenuItem>
       </CustomPopover>
       <Dialog open={dialog.value} onClose={dialog.onFalse}>
-        <DialogTitle
-          color={"error"}
-        >{`Do you want to delete this blog?`}</DialogTitle>
-
+        <DialogTitle color={"error"}>
+          {t("blogPage.postItemHorizontal.deleteDialogTitle")}
+        </DialogTitle>
         <DialogContent sx={{ color: "text.secondary" }}>
-          This action can not undo, do you really want to delete this blog?
+          {t("blogPage.postItemHorizontal.deleteDialogContent")}
         </DialogContent>
 
         <DialogActions>
           <Button variant="outlined" onClick={dialog.onFalse}>
-            Cancel
+            {t("blogPage.postItemHorizontal.cancel")}
           </Button>
           <Button
             variant="contained"
@@ -252,7 +253,7 @@ export default function PostItemHorizontal({ post }: Props) {
             onClick={handleDelete}
             autoFocus
           >
-            Delete
+            {t("blogPage.postItemHorizontal.delete")}
           </Button>
         </DialogActions>
       </Dialog>

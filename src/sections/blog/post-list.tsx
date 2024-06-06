@@ -5,7 +5,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Iconify from "@/components/iconify";
 
 import { IBlog } from "@/types/blog";
-
+import { useTranslation } from "react-i18next";
 import PostItem from "./post-item";
 import { PostItemSkeleton } from "./post-skeleton";
 import { useState } from "react";
@@ -19,6 +19,7 @@ type Props = {
 };
 
 export default function PostList({ posts, loading, disabledIndex }: Props) {
+  const { t } = useTranslation();
   const renderSkeleton = (
     <>
       {[...Array(16)].map((_, index) => (
@@ -69,7 +70,7 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
             }
             onClick={() => setPage(page + 1)}
           >
-            Load More
+            {t("blogPage.postListHorizontal.loadMore")}
           </Button>
         </Stack>
       )}

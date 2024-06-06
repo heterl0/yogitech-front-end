@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMemo, useEffect, useCallback, useState, ChangeEvent } from "react";
-
+import { useTranslation } from "react-i18next";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
@@ -52,6 +52,7 @@ export const benefits = [
 ];
 
 export default function PostNewEditForm({ currentPost }: Props) {
+  const { t } = useTranslation();
   const router = useRouter();
   const [active, setActive] = useState(false); // Default checked
 
@@ -193,30 +194,37 @@ export default function PostNewEditForm({ currentPost }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t("blogPage.postNewEditForm.details")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Title, short description, image...
+            {t("blogPage.postNewEditForm.detailsDescription")}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Details" />}
+          {!mdUp && (
+            <CardHeader title={t("blogPage.postNewEditForm.details")} />
+          )}
 
           <Stack spacing={3} sx={{ p: 3 }}>
-            <RHFTextField name="title" label="Post Title" />
+            <RHFTextField
+              name="title"
+              label={t("blogPage.postNewEditForm.postTitle")}
+            />
 
             <RHFTextField
               name="description"
-              label="Description"
+              label={t("blogPage.postNewEditForm.description")}
               multiline
               rows={3}
             />
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Content</Typography>
+              <Typography variant="subtitle2">
+                {t("blogPage.postNewEditForm.content")}
+              </Typography>
               <RHFEditor simple name="content" />
             </Stack>
 
@@ -240,22 +248,24 @@ export default function PostNewEditForm({ currentPost }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t("blogPage.postNewEditForm.properties")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Additional functions and attributes...
+            {t("blogPage.postNewEditForm.propertiesDescription")}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Properties" />}
+          {!mdUp && (
+            <CardHeader title={t("blogPage.postNewEditForm.properties")} />
+          )}
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <RHFAutocomplete
               name="benefit"
-              label="Benefits"
+              label={t("blogPage.postNewEditForm.benefits")}
               placeholder="+ Benefits"
               multiple
               freeSolo
@@ -291,7 +301,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
       <Grid xs={12} md={8} sx={{ display: "flex", alignItems: "center" }}>
         <FormControlLabel
           control={<Switch checked={active} onChange={handleChange} />}
-          label="Publish"
+          label={t("blogPage.postNewEditForm.publish")}
           name="active"
           sx={{ flexGrow: 1, pl: 3 }}
         />
@@ -302,7 +312,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
           size="large"
           onClick={preview.onTrue}
         >
-          Preview
+          {t("blogPage.postDetailsPreview.preview")}
         </Button>
 
         <LoadingButton
@@ -312,7 +322,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentPost ? "Create Post" : "Save Changes"}
+          {!currentPost
+            ? t("blogPage.postNewEditForm.createPost")
+            : t("blogPage.postNewEditForm.saveChanges")}
         </LoadingButton>
       </Grid>
     </>

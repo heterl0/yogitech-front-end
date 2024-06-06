@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Stack, { StackProps } from "@mui/material/Stack";
+import { useTranslation } from "react-i18next";
 
 import { RouterLink } from "@/routes/components";
 
@@ -35,6 +36,8 @@ export default function PostDetailsToolbar({
   sx,
   ...other
 }: Props) {
+  const { t } = useTranslation();
+
   const popover = usePopover();
 
   return (
@@ -42,10 +45,7 @@ export default function PostDetailsToolbar({
       <Stack
         spacing={1.5}
         direction="row"
-        sx={{
-          mb: { xs: 3, md: 5 },
-          ...sx,
-        }}
+        sx={{ mb: { xs: 3, md: 5 }, ...sx }}
         {...other}
       >
         <Button
@@ -53,20 +53,20 @@ export default function PostDetailsToolbar({
           href={backLink}
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
         >
-          Back
+          {t("blogPage.postDetailsToolbar.back")}
         </Button>
 
         <Box sx={{ flexGrow: 1 }} />
 
         {publish === 1 && (
-          <Tooltip title="Go Live">
+          <Tooltip title={t("blogPage.postDetailsToolbar.goLive")}>
             <IconButton component={RouterLink} href={liveLink}>
               <Iconify icon="eva:external-link-fill" />
             </IconButton>
           </Tooltip>
         )}
 
-        <Tooltip title="Edit">
+        <Tooltip title={t("blogPage.postDetailsToolbar.edit")}>
           <IconButton component={RouterLink} href={editLink}>
             <Iconify icon="solar:pen-bold" />
           </IconButton>
@@ -76,12 +76,12 @@ export default function PostDetailsToolbar({
           color={publish === 1 ? "primary" : "inherit"}
           variant="contained"
           loading={false}
-          loadingIndicator="Loading…"
+          loadingIndicator={t("blogPage.postDetailsToolbar.loading")}
           endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
           onClick={popover.onOpen}
           sx={{ textTransform: "capitalize" }}
         >
-          Change Status
+          {t("blogPage.postDetailsToolbar.changeStatus")}
         </LoadingButton>
       </Stack>
 
@@ -102,7 +102,9 @@ export default function PostDetailsToolbar({
           >
             {option.value === 1 && <Iconify icon="eva:cloud-upload-fill" />}
             {option.value === 0 && <Iconify icon="solar:file-text-bold" />}
-            {option.label}
+            {t(
+              `blogPage.postDetailsToolbar.${option.value === 1 ? "publish" : "draft"}`
+            )}
           </MenuItem>
         ))}
       </CustomPopover>

@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import InputAdornment from "@mui/material/InputAdornment";
 import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
-
+import { useTranslation } from "react-i18next";
 import { useRouter } from "@/routes/hooks";
 
 import Iconify from "@/components/iconify";
@@ -32,6 +32,7 @@ export default function PostSearch({
   hrefItem,
   loading,
 }: Props) {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const handleClick = (title: string) => {
@@ -76,7 +77,7 @@ export default function PostSearch({
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t("blogPage.search.placeholder")}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,
