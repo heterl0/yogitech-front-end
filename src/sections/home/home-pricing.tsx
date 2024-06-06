@@ -219,7 +219,7 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
           component="div"
           sx={{ color: "text.disabled" }}
         >
-          License
+          {t("home.pricing.yogiTechPlan.plan")}
         </Typography>
 
         <Box sx={{ position: "relative" }}>

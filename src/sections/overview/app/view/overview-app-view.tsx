@@ -101,7 +101,7 @@ export default function OverviewAppView() {
         {posts.length > 0 && (
           <Grid xs={12} md={4}>
             <AppFeaturedBlog
-              list={posts.splice(posts.length < 4 ? 0 : posts.length - 4)}
+              list={posts.slice(posts.length < 4 ? 0 : posts.length - 4)}
             />
           </Grid>
         )}

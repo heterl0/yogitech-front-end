@@ -14,6 +14,7 @@ import Carousel, {
   CarouselArrows,
 } from "@/components/carousel";
 import { IBlog } from "@/types/blog";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -72,7 +73,7 @@ type CarouselItemProps = {
 
 function CarouselItem({ item, active }: CarouselItemProps) {
   const theme = useTheme();
-
+  const { t } = useTranslation();
   const { image_url, title, description } = item;
 
   const renderImg = (
@@ -108,7 +109,7 @@ function CarouselItem({ item, active }: CarouselItemProps) {
       >
         <m.div variants={varFade().inRight}>
           <Typography variant="overline" sx={{ color: "primary.light" }}>
-            Featured App
+            {t("dashboard.newBlog")}
           </Typography>
         </m.div>
 

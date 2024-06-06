@@ -88,6 +88,7 @@
       "rightPlan": "Kế hoạch phù hợp cho bài tập của bạn",
       "choosePlan": "Chọn kế hoạch hoàn hảo cho nhu cầu của bạn",
       "yogiTechPlan": {
+        "plan": "Kế hoạch",
         "free": "Miễn phí",
         "premium": "Trả phí",
         "10free": "Thực hiện 10 bài tập miễn phí",
@@ -119,7 +120,8 @@
     "recentActivity": "Hoạt động gần đây",
     "topUsers": "Người dùng hàng đầu",
     "conversionActiveUsers": "Chuyển đổi - Người dùng hoạt động",
-    "loginPlatform": "Đăng nhập nền tảng"
+    "loginPlatform": "Đăng nhập nền tảng",
+    "newBlog": "Bài viết mới"
   },
   "posePage": {
     "poseList": {

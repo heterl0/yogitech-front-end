@@ -88,6 +88,7 @@
       "rightPlan": "The right plan for your exercises",
       "choosePlan": "Choose the perfect plan for your needs",
       "yogiTechPlan": {
+        "plan": "Plan",
         "free": "Free",
         "premium": "Premium",
         "10free": "Do 10 free-exercises",
@@ -120,7 +121,8 @@
     "recentActivity": "Recent Activity",
     "topUsers": "Top Users",
     "conversionActiveUsers": "Conversion - Active Users",
-    "loginPlatform": "Log in Platform"
+    "loginPlatform": "Log in Platform",
+    "newBlog": "New Blog"
   },
   "posePage": {
     "poseList": {
