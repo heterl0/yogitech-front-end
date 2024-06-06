@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 import { useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -18,11 +18,7 @@ import { useRouter } from "@/routes/hooks";
 
 import Label from "@/components/label";
 import { useSnackbar } from "@/components/snackbar";
-import FormProvider, {
-  // RHFSwitch,
-  RHFTextField,
-  RHFSelect,
-} from "@/components/hook-form";
+import FormProvider, { RHFTextField, RHFSelect } from "@/components/hook-form";
 
 import { IAccount } from "@/types/user";
 import { MenuItem } from "@mui/material";
@@ -30,7 +26,6 @@ import { USER_STATUS_OPTIONS } from "@/_mock";
 import UserCard from "../user/user-card";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
-// import { getFieldFromHeaderElem } from "@mui/x-data-grid/utils/domUtils";
 
 // ----------------------------------------------------------------------
 
@@ -59,21 +54,22 @@ type UpdateData = {
 };
 
 export default function AccountNewEditForm({ currentAccount }: Props) {
+  const { t } = useTranslation();
   const router = useRouter();
   console.log("currentAccount", currentAccount);
 
   const { enqueueSnackbar } = useSnackbar();
 
   const NewAccountSchema = Yup.object().shape({
-    username: Yup.string().required("Name is required"),
+    username: Yup.string().required(t("form.validation.name_required")),
     email: Yup.string()
-      .required("Email is required")
-      .email("Email must be a valid email address"),
-    phone: Yup.string().required("Phone number is required"),
-    status: Yup.string().required("Status is required"),
-    role: Yup.string().required("Role is required"),
-    provider: Yup.string().required("Provider is required"),
-    password: Yup.string().required("Password is required"),
+      .required(t("form.validation.email_required"))
+      .email(t("form.validation.email_invalid")),
+    phone: Yup.string().required(t("form.validation.phone_required")),
+    status: Yup.string().required(t("form.validation.status_required")),
+    role: Yup.string().required(t("form.validation.role_required")),
+    provider: Yup.string().required(t("form.validation.provider_required")),
+    password: Yup.string().required(t("form.validation.password_required")),
   });
 
   const defaultValues = useMemo(
@@ -144,10 +140,10 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
           updateData
         );
         if (response.status === HttpStatusCode.Ok) {
-          enqueueSnackbar("Update success!");
+          enqueueSnackbar(t("form.update_success"));
           router.push(paths.dashboard.account.root);
         } else {
-          enqueueSnackbar(`Update failed! ${response.data}`, {
+          enqueueSnackbar(t("form.update_failed", { data: response.data }), {
             variant: "error",
           });
         }
@@ -186,10 +182,10 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
           createData
         );
         if (response.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Create success!");
+          enqueueSnackbar(t("form.create_success"));
           router.push(paths.dashboard.account.root);
         } else {
-          enqueueSnackbar(`Create failed! ${response.data}`, {
+          enqueueSnackbar(t("form.create_failed", { data: response.data }), {
             variant: "error",
           });
         }
@@ -226,14 +222,6 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
               {currentAccount && (
                 <UserCard userProfile={currentAccount.profile} />
               )}
-
-              {/* {currentAccount && (
-              <Stack justifyContent="center" alignItems="center" sx={{ mt: 3 }}>
-                <Button variant="soft" color="error">
-                  Delete User
-                </Button>
-              </Stack>
-            )} */}
             </Card>
           </Grid>
         )}
@@ -252,23 +240,23 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
               <RHFTextField
                 name="username"
                 disabled={currentAccount ? true : false}
-                label="Username"
+                label={t("form.label.username")}
               />
               <RHFTextField
                 name="email"
                 disabled={currentAccount ? true : false}
-                label="Email Address"
+                label={t("form.label.email_address")}
               />
 
               {!currentAccount && (
                 <RHFTextField
                   name="password"
                   type="password"
-                  label="Password"
+                  label={t("form.label.password")}
                 />
               )}
 
-              <RHFSelect name="status" label="Status">
+              <RHFSelect name="status" label={t("form.label.status")}>
                 {USER_STATUS_OPTIONS.map((status) => (
                   <MenuItem key={status.value} value={status.value}>
                     {status.label}
@@ -276,25 +264,16 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="phone" label="Phone Number" />
+              <RHFTextField name="phone" label={t("form.label.phone_number")} />
 
-              {/* <RHFAutocomplete
-              name="country"
-              type="country"
-              label="Country"
-              placeholder="Choose a country"
-              fullWidth
-              options={countries.map((option) => option.label)}
-              getOptionLabel={(option) => option}
-            /> */}
-              <RHFSelect name="role" label="Role">
+              <RHFSelect name="role" label={t("form.label.role")}>
                 {["Admin", "Premium User", "User"].map((role) => (
                   <MenuItem key={role} value={role}>
                     {role}
                   </MenuItem>
                 ))}
               </RHFSelect>
-              <RHFSelect name="provider" label="Provider">
+              <RHFSelect name="provider" label={t("form.label.provider")}>
                 {["Email", "Google"].map((value) => (
                   <MenuItem key={value} value={value.toLowerCase()}>
                     {value}
@@ -323,14 +302,13 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                 label={
                   <>
                     <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Email Verified
+                      {t("form.label.email_verified")}
                     </Typography>
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary" }}
                     >
-                      Disabling this will automatically send the user a
-                      verification email
+                      {t("form.helper_text.verification_email")}
                     </Typography>
                   </>
                 }
@@ -360,13 +338,13 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                   label={
                     <>
                       <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                        Banned
+                        {t("form.label.banned")}
                       </Typography>
                       <Typography
                         variant="body2"
                         sx={{ color: "text.secondary" }}
                       >
-                        Apply disable account
+                        {t("form.helper_text.disable_account")}
                       </Typography>
                     </>
                   }
@@ -386,7 +364,9 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
                 variant="contained"
                 loading={isSubmitting}
               >
-                {!currentAccount ? "Create User" : "Save Changes"}
+                {!currentAccount
+                  ? t("form.action.create_user")
+                  : t("form.action.save_changes")}
               </LoadingButton>
             </Stack>
           </Card>

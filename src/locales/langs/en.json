@@ -608,5 +608,109 @@
     "Print": "Print",
     "Import": "Import",
     "Export": "Export"
+  },
+  "userPage": {
+    "User Cards": "User Cards",
+    "User": "User",
+    "Cards": "Cards",
+    "Profile": "Profile",
+    "Followers": "Followers",
+    "Friends": "Friends",
+    "Gallery": "Gallery",
+    "Dashboard": "Dashboard",
+    "first_name_required": "First name is required",
+    "last_name_required": "Last name is required",
+    "gender_required": "Gender is required",
+    "height_required": "Height is required",
+    "weight_required": "Weight is required",
+    "level_required": "Level is required",
+    "allowed_file_types": "Allowed *.jpeg, *.jpg, *.png, *.gif",
+    "max_size": "max size of {{size}}",
+    "exp": "EXP",
+    "point": "Point",
+    "streak": "Streak",
+    "bmi": "BMI",
+    "last_name": "Last Name",
+    "first_name": "First Name",
+    "gender": "Gender",
+    "birth_date": "Birth Date",
+    "height": "Height (cm)",
+    "weight": "Weight (kg)",
+    "level": "Level",
+    "create_user": "Create User",
+    "save_changes": "Save Changes",
+    "update_success": "Update success!",
+    "update_failed": "Update failed!",
+    "followers": "Followers",
+    "country": "Country",
+    "follow": "Follow",
+    "followed": "Followed",
+    "edit_profile": "Edit Profile",
+
+    "birthday": "Birthday",
+
+    "male": "Male",
+    "female": "Female",
+    "not_set": "Not set",
+
+    "height_weight": "Height/Weight"
+  },
+  "errorPage": {
+    "view403": {
+      "title": "No permission",
+      "message": "The page you're trying to access has restricted access. Please refer to your system administrator.",
+      "button": "Go to Home"
+    },
+    "page500": {
+      "title": "500 Internal Server Error",
+      "message": "There was an error, please try again later.",
+      "button": "Go to Home"
+    },
+    "notFoundView": {
+      "title": "Sorry, Page Not Found!",
+      "message": "Sorry, we couldn't find the page you're looking for. Perhaps you've mistyped the URL? Be sure to check your spelling.",
+      "button": "Go to Home"
+    }
+  },
+  "form": {
+    "validation": {
+      "name_required": "Name is required",
+      "email_required": "Email is required",
+      "email_invalid": "Email must be a valid email address",
+      "phone_required": "Phone number is required",
+      "status_required": "Status is required",
+      "role_required": "Role is required",
+      "provider_required": "Provider is required",
+      "password_required": "Password is required"
+    },
+    "update_success": "Update success!",
+    "update_failed": "Update failed! {{data}}",
+    "create_success": "Create success!",
+    "create_failed": "Create failed! {{data}}",
+    "helper_text": {
+      "verification_email": "Disabling this will automatically send the user a verification email",
+      "disable_account": "Apply disable account"
+    },
+    "label": {
+      "username": "Username",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "status": "Status",
+      "role": "Role",
+      "provider": "Provider",
+      "email_verified": "Email Verified",
+      "banned": "Banned"
+    },
+    "action": {
+      "create_user": "Create User",
+      "save_changes": "Save Changes"
+    }
+  },
+  "common": {
+    "home": "Home",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "unableToLogout": "Unable to logout!"
   }
 }

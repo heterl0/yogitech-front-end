@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -20,6 +21,7 @@ type Props = {
 };
 
 export default function ProfileFollowers({ followers }: Props) {
+  const { t } = useTranslation();
   const _mockFollowed = followers.slice(4, 8).map((i) => i.id);
 
   const [followed, setFollowed] = useState<string[]>(_mockFollowed);
@@ -38,7 +40,7 @@ export default function ProfileFollowers({ followers }: Props) {
   return (
     <>
       <Typography variant="h4" sx={{ my: 5 }}>
-        Followers
+        {t("userPage.followers")}
       </Typography>
 
       <Box
@@ -72,6 +74,7 @@ type FollowerItemProps = {
 };
 
 function FollowerItem({ follower, selected, onSelected }: FollowerItemProps) {
+  const { t } = useTranslation();
   const { name, country, avatarUrl } = follower;
 
   return (
@@ -97,8 +100,7 @@ function FollowerItem({ follower, selected, onSelected }: FollowerItemProps) {
               width={16}
               sx={{ flexShrink: 0, mr: 0.5 }}
             />
-            {country} country country country country country country country
-            country country
+            {country}
           </>
         }
         primaryTypographyProps={{
@@ -128,7 +130,7 @@ function FollowerItem({ follower, selected, onSelected }: FollowerItemProps) {
         onClick={onSelected}
         sx={{ flexShrink: 0, ml: 1.5 }}
       >
-        {selected ? "Followed" : "Follow"}
+        {selected ? t("userPage.followed") : t("userPage.follow")}
       </Button>
     </Card>
   );

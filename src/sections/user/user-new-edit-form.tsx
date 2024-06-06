@@ -13,7 +13,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
+import { useTranslation } from "react-i18next";
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 
@@ -39,24 +39,27 @@ type Props = {
 };
 
 export default function UserNewEditForm({ currentUser }: Props) {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string().required(t("form.validation.name_required")),
     email: Yup.string()
-      .required("Email is required")
-      .email("Email must be a valid email address"),
-    phoneNumber: Yup.string().required("Phone number is required"),
-    address: Yup.string().required("Address is required"),
-    country: Yup.string().required("Country is required"),
-    company: Yup.string().required("Company is required"),
-    state: Yup.string().required("State is required"),
-    city: Yup.string().required("City is required"),
-    role: Yup.string().required("Role is required"),
-    zipCode: Yup.string().required("Zip code is required"),
-    avatarUrl: Yup.mixed<any>().nullable().required("Avatar is required"),
+      .required(t("form.validation.email_required"))
+      .email(t("form.validation.email_invalid")),
+    phoneNumber: Yup.string().required(t("form.validation.phone_required")),
+    address: Yup.string().required(t("form.validation.address_required")),
+    country: Yup.string().required(t("form.validation.country_required")),
+    company: Yup.string().required(t("form.validation.company_required")),
+    state: Yup.string().required(t("form.validation.state_required")),
+    city: Yup.string().required(t("form.validation.city_required")),
+    role: Yup.string().required(t("form.validation.role_required")),
+    zipCode: Yup.string().required(t("form.validation.zip_required")),
+    avatarUrl: Yup.mixed<any>()
+      .nullable()
+      .required(t("form.validation.avatar_required")),
     // not required
     status: Yup.string(),
     isVerified: Yup.boolean(),
@@ -101,7 +104,9 @@ export default function UserNewEditForm({ currentUser }: Props) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar(currentUser ? "Update success!" : "Create success!");
+      enqueueSnackbar(
+        currentUser ? t("form.update_success") : t("form.create_success")
+      );
       router.push(paths.dashboard.user.list);
       console.info("DATA", data);
     } catch (error) {
@@ -158,8 +163,9 @@ export default function UserNewEditForm({ currentUser }: Props) {
                       color: "text.disabled",
                     }}
                   >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
+                    {t("form.helper_text.avatar")}
+                    <br />{" "}
+                    {t("form.helper_text.max_size", { size: fData(3145728) })}
                   </Typography>
                 }
               />
@@ -188,13 +194,13 @@ export default function UserNewEditForm({ currentUser }: Props) {
                 label={
                   <>
                     <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
+                      {t("form.label.banned")}
                     </Typography>
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary" }}
                     >
-                      Apply disable account
+                      {t("form.helper_text.disable_account")}
                     </Typography>
                   </>
                 }
@@ -208,11 +214,10 @@ export default function UserNewEditForm({ currentUser }: Props) {
               label={
                 <>
                   <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
+                    {t("form.label.email_verified")}
                   </Typography>
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    Disabling this will automatically send the user a
-                    verification email
+                    {t("form.helper_text.verification_email")}
                   </Typography>
                 </>
               }
@@ -222,7 +227,7 @@ export default function UserNewEditForm({ currentUser }: Props) {
             {currentUser && (
               <Stack justifyContent="center" alignItems="center" sx={{ mt: 3 }}>
                 <Button variant="soft" color="error">
-                  Delete User
+                  {t("form.action.delete_user")}
                 </Button>
               </Stack>
             )}
@@ -240,26 +245,32 @@ export default function UserNewEditForm({ currentUser }: Props) {
                 sm: "repeat(2, 1fr)",
               }}
             >
-              <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="name" label={t("form.label.full_name")} />
+              <RHFTextField
+                name="email"
+                label={t("form.label.email_address")}
+              />
+              <RHFTextField
+                name="phoneNumber"
+                label={t("form.label.phone_number")}
+              />
 
               <RHFAutocomplete
                 name="country"
                 type="country"
-                label="Country"
-                placeholder="Choose a country"
+                label={t("form.label.country")}
+                placeholder={t("form.placeholder.choose_country")}
                 fullWidth
                 options={countries.map((option) => option.label)}
                 getOptionLabel={(option) => option}
               />
 
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
-              <RHFTextField name="company" label="Company" />
-              <RHFTextField name="role" label="Role" />
+              <RHFTextField name="state" label={t("form.label.state_region")} />
+              <RHFTextField name="city" label={t("form.label.city")} />
+              <RHFTextField name="address" label={t("form.label.address")} />
+              <RHFTextField name="zipCode" label={t("form.label.zip_code")} />
+              <RHFTextField name="company" label={t("form.label.company")} />
+              <RHFTextField name="role" label={t("form.label.role")} />
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
@@ -268,7 +279,9 @@ export default function UserNewEditForm({ currentUser }: Props) {
                 variant="contained"
                 loading={isSubmitting}
               >
-                {!currentUser ? "Create User" : "Save Changes"}
+                {!currentUser
+                  ? t("form.action.create_user")
+                  : t("form.action.save_changes")}
               </LoadingButton>
             </Stack>
           </Card>

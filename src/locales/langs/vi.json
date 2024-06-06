@@ -606,5 +606,109 @@
     "Print": "In",
     "Import": "Nhập",
     "Export": "Xuất"
+  },
+  "userPage": {
+    "User Cards": "Thẻ Người Dùng",
+    "User": "Người Dùng",
+    "Cards": "Thẻ",
+    "Profile": "Hồ sơ",
+    "Followers": "Người theo dõi",
+    "Friends": "Bạn bè",
+    "Gallery": "Thư viện",
+    "Dashboard": "Dashboard",
+    "first_name_required": "Tên là bắt buộc",
+    "last_name_required": "Họ là bắt buộc",
+    "gender_required": "Giới tính là bắt buộc",
+    "height_required": "Chiều cao là bắt buộc",
+    "weight_required": "Cân nặng là bắt buộc",
+    "level_required": "Cấp độ là bắt buộc",
+    "allowed_file_types": "Được phép *.jpeg, *.jpg, *.png, *.gif",
+    "max_size": "kích thước tối đa là {{size}}",
+    "exp": "Điểm kinh nghiệm",
+    "point": "Điểm",
+    "streak": "Chuỗi",
+    "bmi": "BMI",
+    "last_name": "Họ",
+    "first_name": "Tên",
+    "gender": "Giới tính",
+    "birth_date": "Ngày sinh",
+    "height": "Chiều cao (cm)",
+    "weight": "Cân nặng (kg)",
+    "level": "Cấp độ",
+    "create_user": "Tạo người dùng",
+    "save_changes": "Lưu thay đổi",
+    "update_success": "Cập nhật thành công!",
+    "update_failed": "Cập nhật thất bại!",
+    "followers": "Người theo dõi",
+    "country": "Quốc gia",
+    "follow": "Theo dõi",
+    "followed": "Đã theo dõi",
+    "edit_profile": "Chỉnh sửa hồ sơ",
+
+    "birthday": "Sinh nhật",
+
+    "male": "Nam",
+    "female": "Nữ",
+    "not_set": "Chưa đặt",
+
+    "height_weight": "Cao/Nặng"
+  },
+  "errorPage": {
+    "view403": {
+      "title": "Không có quyền truy cập",
+      "message": "Bạn không có quyền truy cập vào trang này. Vui lòng liên hệ với quản trị hệ thống của bạn.",
+      "button": "Về trang chủ"
+    },
+    "page500": {
+      "title": "500 Lỗi Máy Chủ Nội Bộ",
+      "message": "Đã có lỗi xảy ra, vui lòng thử lại sau.",
+      "button": "Về trang chủ"
+    },
+    "notFoundView": {
+      "title": "Xin lỗi, Không tìm thấy trang!",
+      "message": "Xin lỗi, chúng tôi không thể tìm thấy trang bạn đang tìm kiếm. Có thể bạn đã nhập sai URL? Hãy kiểm tra lại chính tả của bạn.",
+      "button": "Về trang chủ"
+    }
+  },
+  "form": {
+    "validation": {
+      "name_required": "Tên là bắt buộc",
+      "email_required": "Email là bắt buộc",
+      "email_invalid": "Email phải là một địa chỉ email hợp lệ",
+      "phone_required": "Số điện thoại là bắt buộc",
+      "status_required": "Trạng thái là bắt buộc",
+      "role_required": "Vai trò là bắt buộc",
+      "provider_required": "Nhà cung cấp là bắt buộc",
+      "password_required": "Mật khẩu là bắt buộc"
+    },
+    "update_success": "Cập nhật thành công!",
+    "update_failed": "Cập nhật thất bại! {{data}}",
+    "create_success": "Tạo thành công!",
+    "create_failed": "Tạo thất bại! {{data}}",
+    "helper_text": {
+      "verification_email": "Vô hiệu hóa điều này sẽ tự động gửi email xác minh cho người dùng",
+      "disable_account": "Áp dụng vô hiệu hóa tài khoản"
+    },
+    "label": {
+      "username": "Tên người dùng",
+      "email_address": "Địa chỉ Email",
+      "phone_number": "Số điện thoại",
+      "status": "Trạng thái",
+      "role": "Vai trò",
+      "provider": "Nhà cung cấp",
+      "email_verified": "Email đã xác minh",
+      "banned": "Bị cấm"
+    },
+    "action": {
+      "create_user": "Tạo người dùng",
+      "save_changes": "Lưu thay đổi"
+    }
+  },
+  "common": {
+    "home": "Trang chủ",
+    "profile": "Hồ sơ",
+    "settings": "Cài đặt",
+    "logout": "Đăng xuất",
+    "unableToLogout": "Không thể đăng xuất!"
   }
 }

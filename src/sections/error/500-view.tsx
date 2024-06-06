@@ -11,22 +11,24 @@ import CompactLayout from "@/layouts/compact";
 import { SeverErrorIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function Page500() {
+  const { t } = useTranslation();
   return (
     <CompactLayout>
       <MotionContainer>
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-            500 Internal Server Error
+            {t("errorPage.page500.title")}
           </Typography>
         </m.div>
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: "text.secondary" }}>
-            There was an error, please try again later.
+            {t("errorPage.page500.message")}
           </Typography>
         </m.div>
 
@@ -40,7 +42,7 @@ export default function Page500() {
           size="large"
           variant="contained"
         >
-          Go to Home
+          {t("errorPage.notFoundView.button")}
         </Button>
       </MotionContainer>
     </CompactLayout>

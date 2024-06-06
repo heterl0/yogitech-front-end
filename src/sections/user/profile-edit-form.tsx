@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-
+import { useTranslation } from "react-i18next";
 import { useRouter } from "@/routes/hooks";
 
 import { fData } from "@/utils/format-number";
@@ -40,6 +40,7 @@ type Props = {
 };
 
 export default function ProfileEditForm({ currentProfile }: Props) {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const [date, setDate] = useState(
@@ -49,13 +50,13 @@ export default function ProfileEditForm({ currentProfile }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const ProfileSchema = Yup.object().shape({
-    first_name: Yup.string().required("First name is required"),
-    last_name: Yup.string().required("Last name is required"),
+    first_name: Yup.string().required(t("userPage.first_name_required")),
+    last_name: Yup.string().required(t("userPage.last_name_required")),
     avatar: Yup.mixed<any>().nullable(),
-    gender: Yup.number().required("Gender is require"),
-    height: Yup.number().required("Height is required"),
-    weight: Yup.number().required("Weight is required"),
-    level: Yup.number().required("Level is required"),
+    gender: Yup.number().required(t("userPage.gender_required")),
+    height: Yup.number().required(t("userPage.height_required")),
+    weight: Yup.number().required(t("userPage.weight_required")),
+    level: Yup.number().required(t("userPage.level_required")),
   });
 
   const defaultValues = useMemo(
@@ -108,10 +109,10 @@ export default function ProfileEditForm({ currentProfile }: Props) {
       );
 
       if (response.status === HttpStatusCode.Ok) {
-        enqueueSnackbar("Update success!");
+        enqueueSnackbar(t("userPage.update_success"));
         router.push(paths.dashboard.user.root);
       } else {
-        enqueueSnackbar("Update failed!", { variant: "error" });
+        enqueueSnackbar(t("userPage.update_failed"), { variant: "error" });
       }
       console.info("DATA", data);
     } catch (error) {
@@ -155,8 +156,8 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                       color: "text.disabled",
                     }}
                   >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
+                    {t("userPage.allowed_file_types")}
+                    <br /> {t("userPage.max_size", { size: fData(3145728) })}
                   </Typography>
                 }
               />
@@ -165,7 +166,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
               variant="h6"
               sx={{ color: "text.secondary", textAlign: "center" }}
             >
-              {currentProfile?.exp} EXP
+              {currentProfile?.exp} {t("userPage.exp")}
             </Typography>
             <Stack
               direction="row"
@@ -179,7 +180,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                   variant="caption"
                   sx={{ mb: 0.5, textAlign: "center" }}
                 >
-                  Point
+                  {t("userPage.point")}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -193,7 +194,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                   variant="caption"
                   sx={{ mb: 0.5, textAlign: "center" }}
                 >
-                  Streak
+                  {t("userPage.streak")}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -207,7 +208,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                   variant="caption"
                   sx={{ mb: 0.5, textAlign: "center" }}
                 >
-                  BMI
+                  {t("userPage.bmi")}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -233,9 +234,12 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                 sm: "repeat(2, 1fr)",
               }}
             >
-              <RHFTextField name="last_name" label="Last Name" />
-              <RHFTextField name="first_name" label="First Name" />
-              <RHFSelect name="gender" label="Gender">
+              <RHFTextField name="last_name" label={t("userPage.last_name")} />
+              <RHFTextField
+                name="first_name"
+                label={t("userPage.first_name")}
+              />
+              <RHFSelect name="gender" label={t("userPage.gender")}>
                 {GENDER.map(({ value, label }) => (
                   <MenuItem key={value} value={value}>
                     {label}
@@ -244,7 +248,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
               </RHFSelect>
 
               <DesktopDatePicker
-                label="Birth Date"
+                label={t("userPage.birth_date")}
                 name="birthdate"
                 value={date}
                 onChange={(value) => setDate(value as Date)}
@@ -255,9 +259,17 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                   },
                 }}
               />
-              <RHFTextField name="height" label="Height (cm)" type="number" />
-              <RHFTextField name="weight" label="Weight (kg)" type="number" />
-              <RHFSelect name="level" label="Level">
+              <RHFTextField
+                name="height"
+                label={t("userPage.height")}
+                type="number"
+              />
+              <RHFTextField
+                name="weight"
+                label={t("userPage.weight")}
+                type="number"
+              />
+              <RHFSelect name="level" label={t("userPage.level")}>
                 {LEVELS.map(({ value, label }) => (
                   <MenuItem key={value} value={value}>
                     {label}
@@ -272,7 +284,9 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                 variant="contained"
                 loading={isSubmitting}
               >
-                {!currentProfile ? "Create User" : "Save Changes"}
+                {!currentProfile
+                  ? t("userPage.create_user")
+                  : t("userPage.save_changes")}
               </LoadingButton>
             </Stack>
           </Card>

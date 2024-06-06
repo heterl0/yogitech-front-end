@@ -11,24 +11,24 @@ import CompactLayout from "@/layouts/compact";
 import { ForbiddenIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function View403() {
+  const { t } = useTranslation();
   return (
     <CompactLayout>
       <MotionContainer>
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-            No permission
+            {t("errorPage.view403.title")}
           </Typography>
         </m.div>
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: "text.secondary" }}>
-            The page you&apos;re trying access has restricted access.
-            <br />
-            Please refer to your system administrator
+            {t("errorPage.view403.message")}
           </Typography>
         </m.div>
 
@@ -42,7 +42,7 @@ export default function View403() {
           size="large"
           variant="contained"
         >
-          Go to Home
+          {t("errorPage.view403.button")}
         </Button>
       </MotionContainer>
     </CompactLayout>

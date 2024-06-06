@@ -3,24 +3,19 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-// import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import { alpha, useTheme } from "@mui/material/styles";
-
-import { fShortenNumber } from "@/utils/format-number";
-
-import { _mock } from "@/_mock";
-import { AvatarShape } from "@/assets/illustrations";
-
-import Image from "@/components/image";
-// import Iconify from "@/components/iconify";
-
-import { IProfile } from "@/types/user";
+import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 import { Link, Tooltip } from "@mui/material";
+
+import { fShortenNumber } from "@/utils/format-number";
+import { _mock } from "@/_mock";
+import { AvatarShape } from "@/assets/illustrations";
+import Image from "@/components/image";
+import { IProfile } from "@/types/user";
 import { paths } from "@/routes/paths";
-// import { stepButtonClasses } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -30,19 +25,18 @@ type Props = {
 
 export default function UserCard({ userProfile }: Props) {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const {
     first_name,
     last_name,
     id,
-    // bmi,
     avatar_url,
     birthdate,
     gender,
     streak,
     point,
     exp,
-    // user,
     height,
     weight,
   } = userProfile;
@@ -68,7 +62,7 @@ export default function UserCard({ userProfile }: Props) {
           }}
         />
         <Link href={paths.dashboard.user.edit(id)}>
-          <Tooltip title="Edit Profile" placement="left">
+          <Tooltip title={t("userPage.edit_profile")} placement="left">
             <Avatar
               alt={fullName}
               src={avatar_url || ""}
@@ -96,7 +90,7 @@ export default function UserCard({ userProfile }: Props) {
       <ListItemText
         sx={{ mt: 7, mb: 1 }}
         primary={fullName}
-        secondary={`${exp} EXP`}
+        secondary={`${exp} ${t("userPage.exp")}`}
         primaryTypographyProps={{ typography: "subtitle1" }}
         secondaryTypographyProps={{ component: "span", mt: 0.5 }}
       />
@@ -111,12 +105,16 @@ export default function UserCard({ userProfile }: Props) {
         <Typography
           variant="caption"
           sx={{ color: "text.secondary" }}
-        >{`Birthday: ${birthdateFormatted}`}</Typography>
+        >{`${t("userPage.birthday")}: ${birthdateFormatted}`}</Typography>
         <Typography
           variant="caption"
           sx={{ color: "text.secondary" }}
-        >{`Gender: ${
-          gender ? (gender === 1 ? "Male" : "Female") : "Not set"
+        >{`${t("userPage.gender")}: ${
+          gender
+            ? gender === 1
+              ? t("userPage.male")
+              : t("userPage.female")
+            : t("userPage.not_set")
         }`}</Typography>
       </Stack>
 
@@ -133,7 +131,7 @@ export default function UserCard({ userProfile }: Props) {
             component="div"
             sx={{ mb: 0.5, color: "text.secondary" }}
           >
-            Streak
+            {t("userPage.streak")}
           </Typography>
           {fShortenNumber(streak) === "" ? 0 : fShortenNumber(streak)}
         </div>
@@ -144,7 +142,7 @@ export default function UserCard({ userProfile }: Props) {
             component="div"
             sx={{ mb: 0.5, color: "text.secondary" }}
           >
-            Point
+            {t("userPage.point")}
           </Typography>
 
           {fShortenNumber(point) === "" ? 0 : fShortenNumber(point)}
@@ -156,7 +154,7 @@ export default function UserCard({ userProfile }: Props) {
             component="div"
             sx={{ mb: 0.5, color: "text.secondary" }}
           >
-            Height/Weight
+            {t("userPage.height_weight")}
           </Typography>
           {fShortenNumber(height)} / {fShortenNumber(weight)}
         </div>
