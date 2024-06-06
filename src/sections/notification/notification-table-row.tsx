@@ -6,7 +6,7 @@ import Checkbox from "@mui/material/Checkbox";
 import TableCell from "@mui/material/TableCell";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
-
+import { useTranslation } from "react-i18next";
 import { useBoolean } from "@/hooks/use-boolean";
 
 import Label from "@/components/label";
@@ -35,6 +35,7 @@ export default function NotificationTableRow({
   onSelectRow,
   onBanRow,
 }: Props) {
+  const { t } = useTranslation();
   const { title, body, active_status, time, user } = row;
 
   const status = active_status === 0 ? "Disabled" : "Active";
@@ -77,7 +78,7 @@ export default function NotificationTableRow({
           </Label>
         </TableCell>
         <TableCell align="right" sx={{ px: 1, whiteSpace: "nowrap" }}>
-          <Tooltip title="Quick Edit" placement="top" arrow>
+          <Tooltip title={t("notiPage.QuickEdit")} placement="top" arrow>
             <IconButton
               color={quickEdit.value ? "inherit" : "default"}
               onClick={quickEdit.onTrue}
@@ -117,7 +118,7 @@ export default function NotificationTableRow({
           sx={{ color: "error.main" }}
         >
           <Iconify icon="solar:close-circle-bold" />
-          Ban
+          {t("notiPage.Ban")}
         </MenuItem>
 
         <MenuItem
@@ -127,15 +128,15 @@ export default function NotificationTableRow({
           }}
         >
           <Iconify icon="solar:pen-bold" />
-          Edit
+          {t("notiPage.Edit")}
         </MenuItem>
       </CustomPopover>
 
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Ban User"
-        content="Are you sure want to ban?"
+        title={t("notiPage.BanUser")}
+        content={t("notiPage.Areyou")}
         action={
           <Button
             variant="contained"
@@ -145,7 +146,7 @@ export default function NotificationTableRow({
               confirm.onFalse();
             }}
           >
-            Ban
+            {t("notiPage.Ban")}
           </Button>
         }
       />

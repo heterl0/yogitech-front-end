@@ -47,31 +47,34 @@ import NotificationTableRow from "./notification-table-row";
 import { alpha, Tab, Tabs } from "@mui/material";
 import Label from "@/components/label";
 import NotificationQuickCreateEditForm from "./notification-quick-create-edit-form";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
-const TYPE_OPTIONS = [
-  { value: "all", label: "All" },
-  { value: "admin", label: "Admin" },
-  { value: "user", label: "User" },
-];
-
-const TABLE_HEAD = [
-  { id: "title", label: "Title", width: 560 },
-  { id: "time", label: "Time", width: 180 },
-  { id: "user", label: "From", width: 140 },
-  { id: "status", label: "Status", width: 110 },
-  { id: "", width: 88 },
-];
-
-const defaultFilters: INotificationTableFilters = {
-  name: "",
-  status: [],
-  type: "all",
-};
 
 // ----------------------------------------------------------------------
 
 export default function NotificationListView() {
+  const { t } = useTranslation();
+  const TYPE_OPTIONS = [
+    { value: "all", label: t("notiPage.All") },
+    { value: "admin", label: t("notiPage.Admin") },
+    { value: "user", label: t("notiPage.User") },
+  ];
+
+  const TABLE_HEAD = [
+    { id: "title", label: t("notiPage.Title"), width: 560 },
+    { id: "time", label: t("notiPage.Time"), width: 180 },
+    { id: "user", label: t("notiPage.User"), width: 140 },
+    { id: "status", label: t("notiPage.Status"), width: 110 },
+    { id: "", width: 88 },
+  ];
+
+  const defaultFilters: INotificationTableFilters = {
+    name: "",
+    status: [],
+    type: "all",
+  };
+
   const { enqueueSnackbar } = useSnackbar();
 
   const table = useTable();

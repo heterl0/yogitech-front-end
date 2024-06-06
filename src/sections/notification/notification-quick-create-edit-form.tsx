@@ -12,6 +12,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import { useTranslation } from "react-i18next";
 
 // import { countries } from "@/assets/data";
 import { useSnackbar } from "@/components/snackbar";
@@ -40,6 +41,7 @@ export default function NotificationQuickCreateEditForm({
   open,
   onClose,
 }: Props) {
+  const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
   const { enqueueSnackbar } = useSnackbar();
@@ -47,9 +49,9 @@ export default function NotificationQuickCreateEditForm({
     currentNotification?.time ? new Date(currentNotification?.time) : new Date()
   );
   const NewAccountSchema = Yup.object().shape({
-    status: Yup.number().required("Status is required"),
-    title: Yup.string().required("Title is required"),
-    body: Yup.string().required("Body is required"),
+    status: Yup.number().required(t("notiPage.Statusisrequired")),
+    title: Yup.string().required(t("notiPage.Titleisrequired")),
+    body: Yup.string().required(t("notiPage.Bodyisrequired")),
     is_admin: Yup.boolean(),
   });
 
@@ -90,7 +92,7 @@ export default function NotificationQuickCreateEditForm({
           fromData
         );
         if (res.status === HttpStatusCode.Ok) {
-          enqueueSnackbar("Notification updated successfully", {
+          enqueueSnackbar(t("notiPage.Notificationupdatedsuccessfully"), {
             variant: "success",
           });
           onClose();
@@ -101,7 +103,7 @@ export default function NotificationQuickCreateEditForm({
           fromData
         );
         if (res.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Notification created successfully", {
+          enqueueSnackbar(t("notiPage.Notificationcreatedsuccessfully"), {
             variant: "success",
           });
           onClose();
@@ -127,12 +129,14 @@ export default function NotificationQuickCreateEditForm({
     >
       <FormProvider methods={methods} onSubmit={onSubmit}>
         <DialogTitle>
-          {currentNotification ? "Edit notification" : "Create notification"}
+          {currentNotification
+            ? t("notiPage.Editnotification")
+            : t("notiPage.Createnotification")}
         </DialogTitle>
 
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Notification is waiting for confirmation
+            {t("notiPage.Notificationiswaitingforconfirmation")}
           </Alert>
 
           <Box
@@ -181,7 +185,7 @@ export default function NotificationQuickCreateEditForm({
               label={
                 <>
                   <Typography variant="body2" sx={{ mb: 0.5 }}>
-                    Announce to all users?
+                    {t("notiPage.Announcetoallusers")}
                   </Typography>
                 </>
               }
@@ -192,7 +196,7 @@ export default function NotificationQuickCreateEditForm({
 
         <DialogActions>
           <Button variant="outlined" onClick={onClose}>
-            Cancel
+            {t("notiPage.Cancel")}
           </Button>
 
           <LoadingButton
@@ -200,7 +204,7 @@ export default function NotificationQuickCreateEditForm({
             variant="contained"
             loading={isSubmitting}
           >
-            {currentNotification ? "Update" : "Create"}
+            {currentNotification ? t("notiPage.Update") : t("notiPage.Create")}
           </LoadingButton>
         </DialogActions>
       </FormProvider>

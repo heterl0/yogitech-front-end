@@ -5,6 +5,7 @@ import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Stack, { StackProps } from "@mui/material/Stack";
+import { useTranslation } from "react-i18next";
 
 import Iconify from "@/components/iconify";
 
@@ -33,6 +34,7 @@ export default function NotificationTableFiltersResult({
   results,
   ...other
 }: Props) {
+  const { t } = useTranslation();
   const handleRemoveKeyword = useCallback(() => {
     onFilters("name", "");
   }, [onFilters]);
@@ -57,7 +59,7 @@ export default function NotificationTableFiltersResult({
       <Box sx={{ typography: "body2" }}>
         <strong>{results}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          results found
+          {t("notiPage.results found")}
         </Box>
       </Box>
 
@@ -106,7 +108,7 @@ export default function NotificationTableFiltersResult({
           onClick={onResetFilters}
           startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
         >
-          Clear
+          {t("notiPage.Clear")}
         </Button>
       </Stack>
     </Stack>
