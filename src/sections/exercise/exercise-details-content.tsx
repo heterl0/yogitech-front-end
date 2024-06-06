@@ -9,6 +9,7 @@ import { Link } from "@mui/material";
 import { LEVELS } from "@/constants/level";
 import { IExercise } from "@/types/exercise";
 import Label from "@/components/label";
+import { useTranslation } from "react-i18next";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export default function ExerciseDetailsContent({ exercise }: Props) {
+  const { t } = useTranslation();
   const {
     title,
     level,
@@ -30,32 +32,26 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
     poses,
   } = exercise;
 
-  // const theme = useTheme();
-
   const renderGallery = (
-    <>
-      <Box
-        sx={{
-          borderRadius: "12px",
-          mb: 5,
-          height: 480,
-          overflow: "hidden",
-          backgroundImage: `url(${image_url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      ></Box>
-    </>
+    <Box
+      sx={{
+        borderRadius: "12px",
+        mb: 5,
+        height: 480,
+        overflow: "hidden",
+        backgroundImage: `url(${image_url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    ></Box>
   );
 
   const renderHead = (
-    <>
-      <Stack direction="row" sx={{ mb: 3 }}>
-        <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          {title}
-        </Typography>
-      </Stack>
-    </>
+    <Stack direction="row" sx={{ mb: 3 }}>
+      <Typography variant="h4" sx={{ flexGrow: 1 }}>
+        {title}
+      </Typography>
+    </Stack>
   );
 
   const renderOverview = (
@@ -69,38 +65,38 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
     >
       {[
         {
-          label: "Level",
+          label: t("exercisePage.exerciseDetailsContent.level"),
           value: `${LEVELS[level].label}`,
           icon: <Iconify icon="mingcute:filter-2-fill" />,
         },
         {
-          label: "Calories",
+          label: t("exercisePage.exerciseDetailsContent.calories"),
           value: `${calories} kcal`,
           icon: <Iconify icon="solar:heart-bold" />,
         },
         {
-          label: "Duration",
+          label: t("exercisePage.exerciseDetailsContent.duration"),
           value: `${durations}s`,
           icon: <Iconify icon="solar:clock-circle-bold" />,
         },
         {
-          label: "List of poses",
+          label: t("exercisePage.exerciseDetailsContent.listOfPoses"),
           value: `${poses.map((pose) => pose.pose.name).join(", ")}`,
           icon: <Iconify icon="solar:bill-list-bold" />,
         },
         {
-          label: "Point",
+          label: t("exercisePage.exerciseDetailsContent.point"),
           value: `${point}`,
           icon: <Iconify icon="eva:info-fill" />,
         },
         {
-          label: "Video URL",
+          label: t("exercisePage.exerciseDetailsContent.videoUrl"),
           value: <Link href={video_url}>{video_url}</Link>,
           icon: <Iconify icon="solar:gallery-wide-bold" />,
         },
         {
-          label: "Premium?",
-          value: `${is_premium ? "Yes" : "No"}`,
+          label: t("exercisePage.exerciseDetailsContent.premium"),
+          value: `${is_premium ? t("exercisePage.exerciseDetailsContent.yes") : t("exercisePage.exerciseDetailsContent.no")}`,
           icon: <Iconify icon="solar:lock-bold" />,
         },
       ].map((item) => (
@@ -128,16 +124,12 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
     </Box>
   );
 
-  const renderContent = (
-    <>
-      <Markdown>{description}</Markdown>
-    </>
-  );
+  const renderContent = <Markdown>{description}</Markdown>;
 
   const renderBenefit = (
     <>
       <Typography variant="h6" sx={{ mb: 2 }}>
-        Benefit
+        {t("exercisePage.exerciseDetailsContent.benefit")}
       </Typography>
       <Stack spacing={1} sx={{ mb: 2 }} flexDirection={"row"} flexWrap={"wrap"}>
         {JSON.parse(benefit).map((item: string, index: number) => (
@@ -165,7 +157,7 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
         {renderBenefit}
 
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Description
+          {t("exercisePage.exerciseDetailsContent.description")}
         </Typography>
 
         {renderContent}

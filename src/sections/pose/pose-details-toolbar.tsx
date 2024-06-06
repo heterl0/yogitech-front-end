@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Stack, { StackProps } from "@mui/material/Stack";
 import { RouterLink } from "@/routes/components";
 import Iconify from "@/components/iconify";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +18,8 @@ export default function PoseDetailsToolbar({
   sx,
   ...other
 }: Props) {
+  const { t } = useTranslation();
+
   return (
     <>
       <Stack
@@ -33,7 +36,7 @@ export default function PoseDetailsToolbar({
           href={backLink}
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
         >
-          Back
+          {t("posePage.poseDetailsToolbar.back")}
         </Button>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -45,7 +48,7 @@ export default function PoseDetailsToolbar({
           color="primary"
           startIcon={<Iconify icon="solar:pen-bold" width={16} />}
         >
-          Edit
+          {t("posePage.poseDetailsToolbar.edit")}
         </Button>
       </Stack>
     </>

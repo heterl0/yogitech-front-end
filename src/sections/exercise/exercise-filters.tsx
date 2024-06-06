@@ -23,6 +23,7 @@ import { NOTIFICATION_STATUS } from "@/types/notification";
 import Label, { LabelColor } from "@/components/label";
 import { IExerciseFilterValue, IExerciseFilters } from "@/types/exercise";
 import { benefits } from "../blog/post-new-edit-form";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -64,6 +65,8 @@ export default function ExerciseFilters({
     [onFilters]
   );
 
+  const { t } = useTranslation();
+
   const handleFilterMuscle = useCallback(
     (newValue: string[]) => {
       onFilters("benefits", newValue);
@@ -79,10 +82,12 @@ export default function ExerciseFilters({
       sx={{ py: 2, pr: 1, pl: 2.5 }}
     >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Filters
+        {t("exercisePage.exerciseCommentListView.filtersResult.filters")}
       </Typography>
 
-      <Tooltip title="Reset">
+      <Tooltip
+        title={t("exercisePage.exerciseCommentListView.filtersResult.clear")}
+      >
         <IconButton onClick={onResetFilters}>
           <Badge color="error" variant="dot" invisible={!canReset}>
             <Iconify icon="solar:restart-bold" />
@@ -99,7 +104,7 @@ export default function ExerciseFilters({
   const renderLevel = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Levels
+        {t("exercisePage.exerciseDetailsContent.level")}
       </Typography>
 
       <TextField
@@ -107,11 +112,17 @@ export default function ExerciseFilters({
         fullWidth
         value={filters.level}
         onChange={(event) => handleFilterLevel(parseInt(event.target.value))}
-        placeholder="Select Level"
+        placeholder={t("exercisePage.exerciseCommentListView.filters.all")}
       >
-        {[{ label: "All", value: -1 }, ...LEVELS].map((option) => (
+        {[
+          {
+            label: t("exercisePage.exerciseCommentListView.filters.all"),
+            value: -1,
+          },
+          ...LEVELS,
+        ].map((option) => (
           <MenuItem key={option.value} value={option.value}>
-            {option.label}
+            {t(`level.${option.label}`)}
           </MenuItem>
         ))}
       </TextField>
@@ -121,7 +132,7 @@ export default function ExerciseFilters({
   const renderStatus = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Status
+        {t("exercisePage.exerciseCommentListView.filters.status")}
       </Typography>
 
       <TextField
@@ -129,10 +140,14 @@ export default function ExerciseFilters({
         fullWidth
         value={filters.status}
         onChange={(event) => handleFilterStatus(parseInt(event.target.value))}
-        placeholder="Select Status"
+        placeholder={t("exercisePage.exerciseCommentListView.filters.status")}
       >
         {[
-          { label: "All", value: -1, color: "default" as LabelColor },
+          {
+            label: t("exercisePage.exerciseCommentListView.filters.all"),
+            value: -1,
+            color: "default" as LabelColor,
+          },
           ...NOTIFICATION_STATUS,
         ].map((option) => (
           <MenuItem key={option.value} value={option.value}>
@@ -146,7 +161,7 @@ export default function ExerciseFilters({
   const renderTourGuide = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Muscles
+        {t("exercisePage.exerciseCommentListView.filters.muscle")}
       </Typography>
 
       <Autocomplete
@@ -157,7 +172,12 @@ export default function ExerciseFilters({
         onChange={(event, newValue) => handleFilterMuscle(newValue)}
         getOptionLabel={(option) => option}
         renderInput={(params) => (
-          <TextField placeholder="Select Muscles" {...params} />
+          <TextField
+            placeholder={t(
+              "exercisePage.exerciseCommentListView.filters.searchPlaceholder"
+            )}
+            {...params}
+          />
         )}
         renderOption={(props, benefit) => (
           <li {...props} key={benefit}>
@@ -192,7 +212,7 @@ export default function ExerciseFilters({
         }
         onClick={onOpen}
       >
-        Filters
+        {t("exercisePage.exerciseCommentListView.filtersResult.filters")}
       </Button>
 
       <Drawer

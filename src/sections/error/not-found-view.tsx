@@ -9,25 +9,26 @@ import { RouterLink } from "@/routes/components";
 
 import CompactLayout from "@/layouts/compact";
 import { PageNotFoundIllustration } from "@/assets/illustrations";
+import { useTranslation } from "react-i18next";
 
 import { varBounce, MotionContainer } from "@/components/animate";
 
 // ----------------------------------------------------------------------
 
 export default function NotFoundView() {
+  const { t } = useTranslation();
   return (
     <CompactLayout>
       <MotionContainer>
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-            Sorry, Page Not Found!
+            {t("errorPage.notFoundView.title")}
           </Typography>
         </m.div>
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: "text.secondary" }}>
-            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
-            mistyped the URL? Be sure to check your spelling.
+            {t("errorPage.notFoundView.message")}
           </Typography>
         </m.div>
 
@@ -46,7 +47,7 @@ export default function NotFoundView() {
           size="large"
           variant="contained"
         >
-          Go to Home
+          {t("errorPage.notFoundView.button")}
         </Button>
       </MotionContainer>
     </CompactLayout>

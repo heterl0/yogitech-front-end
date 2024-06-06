@@ -14,7 +14,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
+import { useTranslation } from "react-i18next";
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 
@@ -47,7 +47,7 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
   const [active, setActive] = useState(
     currentEvent ? currentEvent.active_status === 1 : true
   );
-
+  const { t } = useTranslation();
   const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
 
@@ -194,26 +194,30 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t("eventPage.newEditForm.details")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Title, short description, image...
+            {t("eventPage.newEditForm.detailsDescription")}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Details" />}
+          {!mdUp && <CardHeader title={t("eventPage.newEditForm.details")} />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
-              {/* <Typography variant="subtitle2">Name</Typography> */}
-              <RHFTextField name="title" label="Title" />
+              <RHFTextField
+                name="title"
+                label={t("eventPage.newEditForm.title")}
+              />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Content</Typography>
+              <Typography variant="subtitle2">
+                {t("eventPage.newEditForm.content")}
+              </Typography>
               <RHFEditor simple name="description" />
             </Stack>
 
@@ -239,24 +243,28 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t("eventPage.newEditForm.properties")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Additional functions and attributes...
+            {t("eventPage.newEditForm.propertiesDescription")}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Properties" />}
+          {!mdUp && (
+            <CardHeader title={t("eventPage.newEditForm.properties")} />
+          )}
 
           <Stack spacing={3} sx={{ p: 3 }}>
             {/* <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
               Duration
             </Typography> */}
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Available</Typography>
+              <Typography variant="subtitle2">
+                {t("eventPage.newEditForm.available")}
+              </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                 <Controller
                   name="available.startDate"
@@ -358,7 +366,7 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
               ) => setActive(checked)}
             />
           }
-          label="Active"
+          label={t("eventPage.newEditForm.active")}
           sx={{ flexGrow: 1, pl: 3 }}
         />
 
@@ -369,7 +377,9 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentEvent ? "Create Event" : "Update Event"}
+          {!currentEvent
+            ? t("eventPage.newEditForm.createEvent")
+            : t("eventPage.newEditForm.updateEvent")}
         </LoadingButton>
       </Grid>
     </>

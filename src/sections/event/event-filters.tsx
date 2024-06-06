@@ -10,7 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
+import { useTranslation } from "react-i18next";
 import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
 
@@ -47,6 +47,7 @@ export default function EventFilters({
   dateError,
   //
 }: Props) {
+  const { t } = useTranslation();
   const handleFilterStatus = useCallback(
     (newValue: number) => {
       onFilters("status", newValue);
@@ -71,23 +72,24 @@ export default function EventFilters({
   const renderDateRange = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Durations
+        {t("eventPage.listView.filters.durations")}
       </Typography>
       <Stack spacing={2.5}>
         <DatePicker
-          label="Start date"
+          label={t("eventPage.listView.filters.startDate")}
           value={filters.startDate}
           onChange={handleFilterStartDate}
         />
 
         <DatePicker
-          label="End date"
+          label={t("eventPage.listView.filters.endDate")}
           value={filters.endDate}
           onChange={handleFilterEndDate}
           slotProps={{
             textField: {
               error: dateError,
-              helperText: dateError && "End date must be later than start date",
+              helperText:
+                dateError && t("eventPage.listView.filters.endDateError"),
             },
           }}
         />
@@ -103,10 +105,10 @@ export default function EventFilters({
       sx={{ py: 2, pr: 1, pl: 2.5 }}
     >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Filters
+        {t("eventPage.listView.filters.filters")}
       </Typography>
 
-      <Tooltip title="Reset">
+      <Tooltip title={t("eventPage.listView.filters.reset")}>
         <IconButton onClick={onResetFilters}>
           <Badge color="error" variant="dot" invisible={!canReset}>
             <Iconify icon="solar:restart-bold" />
@@ -123,7 +125,7 @@ export default function EventFilters({
   const renderStatus = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        Status
+        {t("eventPage.listView.filters.status")}
       </Typography>
 
       <TextField

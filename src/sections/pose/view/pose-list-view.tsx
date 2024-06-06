@@ -30,6 +30,7 @@ import PoseFilters from "../pose-filters";
 import PoseSearch from "../pose-search";
 import PoseSort from "../pose-sort";
 import PoseList from "../pose-list";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +44,7 @@ const defaultFilters: IPoseFilters = {
 
 export default function PoseListView() {
   const settings = useSettingsContext();
+  const { t } = useTranslation(); // Đặt namespace là "posePage"
 
   const openFilters = useBoolean();
 
@@ -159,14 +161,14 @@ export default function PoseListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t("posePage.poseListView.heading")} // Sử dụng chuỗi dịch
         links={[
           { name: "Dashboard", href: paths.dashboard.root },
           {
-            name: "Pose",
+            name: t("posePage.poseCreateView.pose"),
             href: paths.dashboard.pose.root,
           },
-          { name: "List" },
+          { name: t("posePage.poseListView.heading") }, // Sử dụng chuỗi dịch
         ]}
         action={
           <Button
@@ -175,7 +177,7 @@ export default function PoseListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Pose
+            {t("posePage.poseListView.newPose")}
           </Button>
         }
         sx={{
@@ -194,7 +196,13 @@ export default function PoseListView() {
         {canReset && renderResults}
       </Stack>
 
-      {notFound && <EmptyContent title="No Data" filled sx={{ py: 10 }} />}
+      {notFound && (
+        <EmptyContent
+          title={t("posePage.poseListView.emptyContent")}
+          filled
+          sx={{ py: 10 }}
+        /> // Sử dụng chuỗi dịch
+      )}
 
       <PoseList poses={dataFiltered} />
     </Container>

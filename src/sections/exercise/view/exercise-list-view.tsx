@@ -29,6 +29,7 @@ import ExerciseSearch from "../exercise-search";
 import ExerciseFilters from "../exercise-filters";
 import ExerciseSort from "../exercise-sort";
 import ExerciseFiltersResult from "../exericse-filters-result";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,7 @@ const defaultFilters: IExerciseFilters = {
 // ----------------------------------------------------------------------
 
 export default function ExerciseListView() {
+  const { t } = useTranslation();
   const settings = useSettingsContext();
 
   const openFilters = useBoolean();
@@ -166,14 +168,17 @@ export default function ExerciseListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t("exercisePage.exerciseListView.heading")}
         links={[
-          { name: "Dashboard", href: paths.dashboard.root },
           {
-            name: "Exercise",
+            name: t("exercisePage.exerciseListView.breadcrumb.dashboard"),
+            href: paths.dashboard.root,
+          },
+          {
+            name: t("exercisePage.exerciseListView.breadcrumb.exercise"),
             href: paths.dashboard.exercise.root,
           },
-          { name: "List" },
+          { name: t("exercisePage.exerciseListView.breadcrumb.list") },
         ]}
         action={
           <Button
@@ -182,7 +187,7 @@ export default function ExerciseListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Exercise
+            {t("exercisePage.exerciseListView.button.newExercise")}
           </Button>
         }
         sx={{
@@ -201,7 +206,13 @@ export default function ExerciseListView() {
         {canReset && renderResults}
       </Stack>
 
-      {notFound && <EmptyContent title="No Data" filled sx={{ py: 10 }} />}
+      {notFound && (
+        <EmptyContent
+          title={t("exercisePage.exerciseListView.emptyContent.noData")}
+          filled
+          sx={{ py: 10 }}
+        />
+      )}
 
       <ExerciseList exercises={dataFiltered} />
     </Container>

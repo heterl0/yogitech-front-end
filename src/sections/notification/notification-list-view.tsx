@@ -47,31 +47,34 @@ import NotificationTableRow from "./notification-table-row";
 import { alpha, Tab, Tabs } from "@mui/material";
 import Label from "@/components/label";
 import NotificationQuickCreateEditForm from "./notification-quick-create-edit-form";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
-const TYPE_OPTIONS = [
-  { value: "all", label: "All" },
-  { value: "admin", label: "Admin" },
-  { value: "user", label: "User" },
-];
-
-const TABLE_HEAD = [
-  { id: "title", label: "Title", width: 560 },
-  { id: "time", label: "Time", width: 180 },
-  { id: "user", label: "From", width: 140 },
-  { id: "status", label: "Status", width: 110 },
-  { id: "", width: 88 },
-];
-
-const defaultFilters: INotificationTableFilters = {
-  name: "",
-  status: [],
-  type: "all",
-};
 
 // ----------------------------------------------------------------------
 
 export default function NotificationListView() {
+  const { t } = useTranslation();
+  const TYPE_OPTIONS = [
+    { value: "all", label: t("notiPage.All") },
+    { value: "admin", label: t("notiPage.Admin") },
+    { value: "user", label: t("notiPage.User") },
+  ];
+
+  const TABLE_HEAD = [
+    { id: "title", label: t("notiPage.Title"), width: 560 },
+    { id: "time", label: t("notiPage.Time"), width: 180 },
+    { id: "user", label: t("notiPage.User"), width: 140 },
+    { id: "status", label: t("notiPage.Status"), width: 110 },
+    { id: "", width: 88 },
+  ];
+
+  const defaultFilters: INotificationTableFilters = {
+    name: "",
+    status: [],
+    type: "all",
+  };
+
   const { enqueueSnackbar } = useSnackbar();
 
   const table = useTable();
@@ -145,16 +148,16 @@ export default function NotificationListView() {
           return row;
         });
 
-        enqueueSnackbar("Ban success!");
+        enqueueSnackbar(t("notiPage.Bansuccess"));
 
         setTableData(deleteRow);
       } else {
-        enqueueSnackbar("Ban failed!", { variant: "error" });
+        enqueueSnackbar(t("notiPage.Banfailed"), { variant: "error" });
       }
 
       // table.onUpdatePageDeleteRow(dataInPage.length);
     },
-    [enqueueSnackbar, tableData]
+    [enqueueSnackbar, t, tableData]
   );
 
   const handleDeleteRows = useCallback(() => {
@@ -162,7 +165,7 @@ export default function NotificationListView() {
       (row) => !table.selected.includes(row.id)
     );
 
-    enqueueSnackbar("Delete success!");
+    enqueueSnackbar(t("notiPage.Deletesuccess"));
 
     setTableData(deleteRows);
 
@@ -174,6 +177,7 @@ export default function NotificationListView() {
     dataFiltered.length,
     dataInPage.length,
     enqueueSnackbar,
+    t,
     table,
     tableData,
   ]);
@@ -196,11 +200,14 @@ export default function NotificationListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : "lg"}>
         <CustomBreadcrumbs
-          heading="Notification"
+          heading={t("notiPage.Notification")}
           links={[
             { name: "Dashboard", href: paths.dashboard.root },
-            { name: "Notification", href: paths.dashboard.notification.root },
-            { name: "List" },
+            {
+              name: t("notiPage.Notification"),
+              href: paths.dashboard.notification.root,
+            },
+            { name: t("notiPage.List") },
           ]}
           action={
             <Button
@@ -210,7 +217,7 @@ export default function NotificationListView() {
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              Create
+              {t("notiPage.Create")}
             </Button>
           }
           sx={{

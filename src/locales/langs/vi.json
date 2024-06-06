@@ -63,6 +63,7 @@
   "event": "Sự kiện",
   "home": {
     "hero": {
+      "subtitle": "Nền tảng hướng dẫn Yoga",
       "description": "Khám phá YogiTech, ứng dụng yoga hàng đầu được thiết kế cho mọi trình độ. Trải nghiệm sự tiện lợi của các buổi tập yoga cá nhân mọi lúc, mọi nơi và bắt đầu hành trình của bạn hướng tới sức khỏe và sự dẻo dai tốt hơn ngay hôm nay!",
       "download": "Tải xuống"
     },
@@ -81,6 +82,643 @@
         "title": "Cộng Đồng Kết Nối",
         "description": "Tham gia vào một cộng đồng sôi động và kết nối với YogiTech."
       }
+    },
+    "pricing": {
+      "plans": "kế hoạch giá",
+      "rightPlan": "Kế hoạch phù hợp cho bài tập của bạn",
+      "choosePlan": "Chọn kế hoạch hoàn hảo cho nhu cầu của bạn",
+      "yogiTechPlan": {
+        "free": "Miễn phí",
+        "premium": "Trả phí",
+        "10free": "Thực hiện 10 bài tập miễn phí",
+        "options": {
+          "unlimit": "Thực hiện bất kỳ số lượng bài tập nào",
+          "adv": "Không có quảng cáo",
+          "personal": "Tạo “Bài tập cá nhân”"
+        }
+      }
     }
+  },
+  "download": {
+    "getApp": "Tải ứng dụng về!",
+    "comingSoon": "Ứng dụng dành cho iOS đang được phát triển",
+    "android": "Android"
+  },
+  "dashboard": {
+    "welcomeBack": "Chào mừng trở lại 👋",
+    "projectsToday": "Đây là những gì đang diễn ra với các dự án của bạn hôm nay. Một {{type}} mới đã được thêm vào!",
+    "goNow": "Đi ngay",
+    "upcomingEvent": "Sự kiện sắp tới",
+    "totalUsers": "Tổng số người dùng",
+    "totalPoses": "Tổng số tư thế",
+    "totalExercises": "Tổng số bài tập",
+    "percentGrowthYear": "Tăng trưởng phần trăm trong năm",
+    "detailsUserEventGrowth": "Chi tiết tăng trưởng người dùng và sự kiện trong năm",
+    "newUsers": "Người dùng mới",
+    "eventGrowth": "Tăng trưởng sự kiện",
+    "recentActivity": "Hoạt động gần đây",
+    "topUsers": "Người dùng hàng đầu",
+    "conversionActiveUsers": "Chuyển đổi - Người dùng hoạt động",
+    "loginPlatform": "Đăng nhập nền tảng"
+  },
+  "posePage": {
+    "poseList": {
+      "editPose": "Chỉnh sửa tư thế",
+      "deletePose": "Xóa tư thế",
+      "deleteConfirmation": "Bạn có chắc chắn muốn xóa tư thế này không?"
+    },
+    "poseDetailsContent": {
+      "muscles": "Cơ bắp",
+      "level": "Cấp độ",
+      "calories": "Calo",
+      "duration": "Thời lượng",
+      "keypointJsonFile": "Tệp Keypoint .json",
+      "instruction": "Hướng dẫn"
+    },
+    "poseDetailsToolbar": {
+      "back": "Quay lại",
+      "edit": "Chỉnh sửa"
+    },
+    "poseFiltersResult": {
+      "resultsFound": "kết quả được tìm thấy",
+      "muscle": "Cơ",
+      "level": "Cấp độ",
+      "status": "Trạng thái",
+      "clear": "Xóa"
+    },
+    "poseFilters": {
+      "filters": "Bộ lọc",
+      "reset": "Đặt lại",
+      "levels": "Cấp độ",
+      "selectLevel": "Chọn Cấp độ",
+      "status": "Trạng thái",
+      "selectStatus": "Chọn Trạng thái",
+      "muscles": "Cơ",
+      "selectMuscles": "Chọn Cơ",
+      "all": "Tất cả"
+    },
+    "poseItem": {
+      "edit": "Chỉnh sửa",
+      "level": "Cấp độ: "
+    },
+
+    "poseNewEditForm": {
+      "name": "Tên",
+      "instruction": "Hướng dẫn",
+      "image": "Hình ảnh",
+      "keypoint": "Điểm đánh dấu",
+      "duration": "Thời lượng",
+      "level": "Cấp độ",
+      "calories": "Calo",
+      "muscles": "Nhóm cơ",
+      "details": {
+        "title": "Chi tiết",
+        "description": "Tiêu đề, mô tả ngắn, hình ảnh..."
+      },
+      "properties": {
+        "title": "Thuộc tính",
+        "description": "Chức năng và thuộc tính bổ sung..."
+      },
+      "active": "Khả dụng",
+      "createPose": "Tạo tư thế",
+      "updatePose": "Cập nhật tư thế"
+    },
+    "poseSearch": {
+      "searchPlaceholder": "Tìm kiếm...",
+      "searchNotFound": "Không tìm thấy tư thế nào cho '{{query}}'",
+      "searchNotFoundTitle": "Không tìm thấy",
+      "tryChecking": "Hãy kiểm tra lỗi chính tả hoặc sử dụng các từ hoàn chỉnh.",
+      "enterKeywords": "Vui lòng nhập từ khóa"
+    },
+    "poseSort": {
+      "sortBy": "Sắp xếp theo:",
+      "nameAsc": "Tên tăng dần",
+      "nameDesc": "Tên giảm dần",
+      "newest": "Mới nhất",
+      "oldest": "Cũ nhất"
+    },
+    "poseCreateView": {
+      "heading": "Tạo tư thế mới",
+      "pose": "Tư thế",
+      "newPose": "Tư thế mới"
+    },
+    "poseEditView": {
+      "heading": "Chỉnh sửa",
+      "pose": "Tư thế"
+    },
+    "poseListView": {
+      "heading": "Danh sách",
+      "newPose": "Tư thế mới",
+      "pose": "Tư thế",
+      "emptyContent": "Không có dữ liệu"
+    }
+  },
+  "exercisePage": {
+    "updateSuccess": "Cập nhật thành công!",
+    "updateFail": "Cập nhật thất bại!",
+    "createSuccess": "Tạo thành công!",
+    "createFail": "Tạo thất bại!",
+    "addPose": "Thêm động tác",
+    "details": "Chi tiết",
+    "detailsDescription": "Tiêu đề, mô tả ngắn, hình ảnh...",
+    "title": "Tiêu đề",
+    "benefits": "Lợi ích",
+    "benefitsPlaceholder": "+ Lợi ích",
+    "description": "Mô tả",
+    "image": "Hình ảnh",
+    "upload": "TẢI LÊN",
+    "properties": "Thuộc tính",
+    "propertiesDescription": "Các chức năng và thuộc tính bổ sung...",
+    "video": "Video",
+    "poses": "Động tác",
+    "pose": "Động tác",
+    "minute": "Phút",
+    "second": "Giây",
+    "inSecond": "Tính theo giây",
+    "duration": "Thời lượng",
+    "level": "Cấp độ",
+    "point": "Điểm",
+    "isPremium": "Có trả phí?",
+    "active": "Kích hoạt",
+    "createExercise": "Tạo bài tập",
+    "updateExercise": "Cập nhật bài tập",
+    "nameIsRequired": "Tên là bắt buộc",
+    "descriptionIsRequired": "Mô tả là bắt buộc",
+    "imageIsRequired": "Hình ảnh là bắt buộc",
+    "videoIsRequired": "Video là bắt buộc",
+    "levelIsRequired": "Cấp độ là bắt buộc",
+    "pointIsRequired": "Điểm là bắt buộc",
+    "mustHaveAtLeastOneTag": "Phải có ít nhất 1 thẻ",
+    "exerciseItem": {
+      "edit": "Chỉnh sửa",
+      "level": "Cấp độ: {{level}}"
+    },
+    "exerciseDetailsToolbar": {
+      "back": "Quay lại",
+      "edit": "Chỉnh sửa"
+    },
+    "exerciseDetailsContent": {
+      "level": "Cấp độ",
+      "calories": "Calo",
+      "duration": "Thời gian",
+      "listOfPoses": "Danh sách tư thế",
+      "point": "Điểm",
+      "videoUrl": "URL video",
+      "premium": "Cao cấp?",
+      "yes": "Có",
+      "no": "Không",
+      "benefit": "Lợi ích",
+      "description": "Mô tả"
+    },
+    "exerciseCreateView": {
+      "heading": "Tạo bài tập mới",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "exercise": "Bài tập",
+        "newExercise": "Bài tập mới"
+      }
+    },
+    "exerciseEditView": {
+      "heading": "Chỉnh sửa",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "exercise": "Bài tập"
+      }
+    },
+    "exerciseListView": {
+      "heading": "Danh sách bài tập",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "exercise": "Bài tập",
+        "list": "Danh sách"
+      },
+      "button": {
+        "newExercise": "Bài tập mới"
+      },
+      "emptyContent": {
+        "noData": "Không có dữ liệu"
+      }
+    },
+    "exerciseCommentListView": {
+      "tableRow": {
+        "quickEdit": "Chỉnh sửa nhanh",
+        "ban": "Cấm",
+        "edit": "Chỉnh sửa",
+        "confirmBanTitle": "Cấm người dùng",
+        "confirmBanContent": "Bạn có chắc chắn muốn cấm?"
+      },
+      "tableHead": {
+        "comment": "Bình luận",
+        "time": "Thời gian",
+        "status": "Trạng thái"
+      },
+      "confirmDialog": {
+        "title": "Xóa",
+        "content": "Bạn có chắc chắn muốn xóa {{numSelected}} mục?",
+        "delete": "Xóa"
+      },
+      "snackbar": {
+        "deleteSuccess": "Xóa thành công!",
+        "banSuccess": "Cấm thành công!",
+        "banFailed": "Cấm thất bại!"
+      },
+      "filtersResult": {
+        "resultsFound": "kết quả được tìm thấy",
+        "role": "Vai trò:",
+        "keyword": "Từ khóa:",
+        "clear": "Xóa",
+        "filters": "Bộ lọc"
+      },
+      "filters": {
+        "searchPlaceholder": "Tìm kiếm...",
+        "status": "Trạng thái",
+        "all": "Tất cả",
+        "muscle": "Cơ bắp"
+      },
+      "quickCreateEditForm": {
+        "editTitle": "Chỉnh sửa bình luận",
+        "createTitle": "Tạo bình luận",
+        "infoAlert": "Bình luận đang chờ xác nhận",
+        "statusLabel": "Trạng thái",
+        "contentLabel": "Nội dung",
+        "cancelButton": "Hủy bỏ",
+        "updateButton": "Cập nhật",
+        "createButton": "Tạo"
+      }
+    }
+  },
+  "eventPage": {
+    "sort": {
+      "sortBy": "Sắp xếp theo:",
+      "latest": "Mới nhất",
+      "oldest": "Cũ nhất"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm...",
+      "searchNotFound": "Không tìm thấy kết quả cho '{{query}}'"
+    },
+    "newEditForm": {
+      "details": "Chi tiết",
+      "detailsDescription": "Tiêu đề, mô tả ngắn, hình ảnh...",
+      "title": "Tiêu đề",
+      "content": "Nội dung",
+      "image": "Hình ảnh",
+      "properties": "Thuộc tính",
+      "propertiesDescription": "Chức năng và thuộc tính bổ sung...",
+      "available": "Thời gian diễn ra",
+      "status": "Trạng thái",
+      "exercise": "Bài tập",
+      "createEvent": "Tạo sự kiện",
+      "updateEvent": "Cập nhật sự kiện",
+      "active": "Hoạt động"
+    },
+    "eventItem": {
+      "from": "Từ",
+      "to": "đến"
+    },
+    "createView": {
+      "heading": "Tạo sự kiện mới",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "event": "Sự kiện",
+        "newEvent": "Sự kiện mới"
+      }
+    },
+    "editView": {
+      "heading": "Chỉnh sửa",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "event": "Sự kiện"
+      }
+    },
+    "listView": {
+      "heading": "Danh sách",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "event": "Sự kiện",
+        "list": "Danh sách"
+      },
+      "button": {
+        "newEvent": "Sự kiện mới"
+      },
+      "emptyContent": {
+        "noData": "Không có dữ liệu"
+      },
+      "filtersResult": {
+        "resultsFound": "kết quả được tìm thấy",
+        "clear": "Xóa",
+        "available": "Có hiệu lực:",
+        "status": "Trạng thái:"
+      },
+      "filters": {
+        "searchPlaceholder": "Tìm kiếm...",
+        "filters": "Bộ lọc",
+        "reset": "Đặt lại",
+        "durations": "Thời gian",
+        "startDate": "Ngày bắt đầu",
+        "endDate": "Ngày kết thúc",
+        "endDateError": "Ngày kết thúc phải sau ngày bắt đầu",
+        "status": "Trạng thái",
+        "all": "Tất cả"
+      }
+    },
+    "eventDetails": {
+      "candidates": {
+        "points": "điểm",
+        "firstPlace": "Nhất",
+        "secondPlace": "Nhì",
+        "thirdPlace": "Ba",
+        "otherPlace": "Thứ {{place}}"
+      },
+      "available": "Có hiệu lực",
+      "numberOfPeople": "Số lượng người tham gia",
+      "createdBy": "Tạo bởi",
+      "toolbar": {
+        "back": "Quay lại",
+        "edit": "Chỉnh sửa",
+        "loading": "Đang tải..."
+      }
+    }
+  },
+  "blogPage": {
+    "createView": {
+      "heading": "Tạo bài viết mới",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "blog": "Blog",
+        "create": "Tạo"
+      },
+      "editView": {
+        "heading": "Chỉnh sửa"
+      }
+    },
+    "listHomeView": {
+      "heading": "Blog",
+      "search": {
+        "placeholder": "Tìm kiếm bài viết...",
+        "searchNotFound": "Không tìm thấy kết quả cho '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sắp xếp theo:",
+        "latest": "Mới nhất",
+        "oldest": "Cũ nhất",
+        "popular": "Phổ biến"
+      }
+    },
+    "listView": {
+      "heading": "Danh sách",
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển",
+        "blog": "Blog",
+        "list": "Danh sách"
+      },
+      "button": {
+        "newPost": "Bài viết mới"
+      },
+      "search": {
+        "placeholder": "Tìm kiếm bài viết...",
+        "searchNotFound": "Không tìm thấy kết quả cho '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sắp xếp theo:",
+        "latest": "Mới nhất",
+        "oldest": "Cũ nhất",
+        "popular": "Phổ biến"
+      },
+      "tabs": {
+        "all": "Tất cả",
+        "draft": "Bản nháp",
+        "published": "Đã xuất bản"
+      }
+    },
+    "postCommentForm": {
+      "placeholder": "Viết bình luận của bạn...",
+      "postComment": "Gửi bình luận",
+      "commentRequired": "Vui lòng nhập bình luận",
+      "nameRequired": "Vui lòng nhập tên",
+      "emailRequired": "Vui lòng nhập email",
+      "invalidEmail": "Email không hợp lệ"
+    },
+    "postCommentItem": {
+      "reply": "Trả lời",
+      "replyPlaceholder": "Viết bình luận..."
+    },
+    "postCommentList": {
+      "comments": "Bình luận ({{count}})"
+    },
+    "postDetailsPreview": {
+      "preview": "Xem trước",
+      "cancel": "Hủy",
+      "post": "Đăng bài",
+      "emptyContent": "Nội dung trống!"
+    },
+    "postDetailsToolbar": {
+      "back": "Quay lại",
+      "goLive": "Phát hành",
+      "edit": "Chỉnh sửa",
+      "loading": "Đang tải...",
+      "changeStatus": "Thay đổi trạng thái",
+      "publish": "Xuất bản",
+      "draft": "Bản nháp"
+    },
+    "postItemHorizontal": {
+      "published": "Đã xuất bản",
+      "draft": "Bản nháp",
+      "view": "Xem",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "cancel": "Hủy",
+      "deleteDialogTitle": "Bạn có muốn xóa blog này?",
+      "deleteDialogContent": "Thao tác này không thể hoàn tác, bạn có thực sự muốn xóa blog này?"
+    },
+    "postItem": {
+      "published": "Đã xuất bản",
+      "draft": "Bản nháp"
+    },
+    "postListHorizontal": {
+      "loadMore": "Xem thêm bài viết"
+    },
+    "postNewEditForm": {
+      "details": "Chi tiết",
+      "detailsDescription": "Tiêu đề, mô tả ngắn, hình ảnh...",
+      "postTitle": "Tiêu đề bài viết",
+      "description": "Mô tả",
+      "content": "Nội dung",
+      "cover": "Ảnh bìa",
+      "properties": "Thuộc tính",
+      "propertiesDescription": "Chức năng và thuộc tính bổ sung...",
+      "benefits": "Lợi ích",
+      "publish": "Xuất bản",
+      "preview": "Xem trước",
+      "createPost": "Tạo bài viết",
+      "saveChanges": "Lưu thay đổi",
+      "updateSuccess": "Cập nhật thành công!",
+      "updateFail": "Cập nhật thất bại!",
+      "createSuccess": "Tạo thành công!",
+      "createFail": "Tạo thất bại!"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm...",
+      "searchNotFound": "Không tìm thấy kết quả cho '{{query}}'"
+    },
+    "sort": {
+      "sortBy": "Sắp xếp theo:",
+      "latest": "Mới nhất",
+      "oldest": "Cũ nhất",
+      "popular": "Phổ biến"
+    }
+  },
+  "notiPage": {
+    "Title": "Tiêu đề",
+    "Time": "Thời gian",
+    "From": "Từ",
+    "Status": "Trạng thái",
+    "All": "Tất cả",
+    "Admin": "Quản trị viên",
+    "User": "Người dùng",
+    "Notification": "Thông báo",
+    "List": "Danh sách",
+    "Create": "Tạo mới",
+    "Delete": "Xóa",
+    "Bansuccess!": "Cấm thành công!",
+    "Banfailed!": "Cấm thất bại!",
+    "Deletesuccess!": "Xóa thành công!",
+    "Editnotification": "Chỉnh sửa thông báo",
+    "Createnotification": "Tạo thông báo",
+    "Notificationiswaitingforconfirmation": "Thông báo đang chờ xác nhận",
+    "Body": "Nội dung",
+    "Announcetoallusers": "Thông báo đến tất cả người dùng?",
+    "Cancel": "Hủy bỏ",
+    "Update": "Cập nhật",
+    "Notificationupdatedsuccessfully": "Cập nhật thông báo thành công",
+    "Notificationcreatedsuccessfully": "Tạo thông báo thành công",
+    "Statusisrequired": "Trạng thái là bắt buộc",
+    "Titleisrequired": "Tiêu đề là bắt buộc",
+    "Bodyisrequired": "Nội dung là bắt buộc",
+    "results found": "kết quả được tìm thấy",
+    "Type:": "Loại:",
+    "Role:": "Vai trò:",
+    "Keyword:": "Từ khóa:",
+    "Clear": "Xóa",
+    "Disabled": "Vô hiệu hóa",
+    "Active": "Hoạt động",
+    "QuickEdit": "Chỉnh sửa nhanh",
+    "BanUser": "Cấm người dùng",
+    "Areyou": "Bạn có chắc chắn muốn cấm?",
+    "Ban": "Cấm",
+    "Edit": "Chỉnh sửa",
+    "Search...": "Tìm kiếm...",
+    "Print": "In",
+    "Import": "Nhập",
+    "Export": "Xuất"
+  },
+  "userPage": {
+    "User Cards": "Thẻ Người Dùng",
+    "User": "Người Dùng",
+    "Cards": "Thẻ",
+    "Profile": "Hồ sơ",
+    "Followers": "Người theo dõi",
+    "Friends": "Bạn bè",
+    "Gallery": "Thư viện",
+    "Dashboard": "Dashboard",
+    "first_name_required": "Tên là bắt buộc",
+    "last_name_required": "Họ là bắt buộc",
+    "gender_required": "Giới tính là bắt buộc",
+    "height_required": "Chiều cao là bắt buộc",
+    "weight_required": "Cân nặng là bắt buộc",
+    "level_required": "Cấp độ là bắt buộc",
+    "allowed_file_types": "Được phép *.jpeg, *.jpg, *.png, *.gif",
+    "max_size": "kích thước tối đa là {{size}}",
+    "exp": "Điểm kinh nghiệm",
+    "point": "Điểm",
+    "streak": "Chuỗi",
+    "bmi": "BMI",
+    "last_name": "Họ",
+    "first_name": "Tên",
+    "gender": "Giới tính",
+    "birth_date": "Ngày sinh",
+    "height": "Chiều cao (cm)",
+    "weight": "Cân nặng (kg)",
+    "level": "Cấp độ",
+    "create_user": "Tạo người dùng",
+    "save_changes": "Lưu thay đổi",
+    "update_success": "Cập nhật thành công!",
+    "update_failed": "Cập nhật thất bại!",
+    "followers": "Người theo dõi",
+    "country": "Quốc gia",
+    "follow": "Theo dõi",
+    "followed": "Đã theo dõi",
+    "edit_profile": "Chỉnh sửa hồ sơ",
+
+    "birthday": "Sinh nhật",
+
+    "male": "Nam",
+    "female": "Nữ",
+    "not_set": "Chưa đặt",
+
+    "height_weight": "Cao/Nặng"
+  },
+  "errorPage": {
+    "view403": {
+      "title": "Không có quyền truy cập",
+      "message": "Bạn không có quyền truy cập vào trang này. Vui lòng liên hệ với quản trị hệ thống của bạn.",
+      "button": "Về trang chủ"
+    },
+    "page500": {
+      "title": "500 Lỗi Máy Chủ Nội Bộ",
+      "message": "Đã có lỗi xảy ra, vui lòng thử lại sau.",
+      "button": "Về trang chủ"
+    },
+    "notFoundView": {
+      "title": "Xin lỗi, Không tìm thấy trang!",
+      "message": "Xin lỗi, chúng tôi không thể tìm thấy trang bạn đang tìm kiếm. Có thể bạn đã nhập sai URL? Hãy kiểm tra lại chính tả của bạn.",
+      "button": "Về trang chủ"
+    }
+  },
+  "form": {
+    "validation": {
+      "name_required": "Tên là bắt buộc",
+      "email_required": "Email là bắt buộc",
+      "email_invalid": "Email phải là một địa chỉ email hợp lệ",
+      "phone_required": "Số điện thoại là bắt buộc",
+      "status_required": "Trạng thái là bắt buộc",
+      "role_required": "Vai trò là bắt buộc",
+      "provider_required": "Nhà cung cấp là bắt buộc",
+      "password_required": "Mật khẩu là bắt buộc"
+    },
+    "update_success": "Cập nhật thành công!",
+    "update_failed": "Cập nhật thất bại! {{data}}",
+    "create_success": "Tạo thành công!",
+    "create_failed": "Tạo thất bại! {{data}}",
+    "helper_text": {
+      "verification_email": "Vô hiệu hóa điều này sẽ tự động gửi email xác minh cho người dùng",
+      "disable_account": "Áp dụng vô hiệu hóa tài khoản"
+    },
+    "label": {
+      "username": "Tên người dùng",
+      "email_address": "Địa chỉ Email",
+      "phone_number": "Số điện thoại",
+      "status": "Trạng thái",
+      "role": "Vai trò",
+      "provider": "Nhà cung cấp",
+      "email_verified": "Email đã xác minh",
+      "banned": "Bị cấm"
+    },
+    "action": {
+      "create_user": "Tạo người dùng",
+      "save_changes": "Lưu thay đổi"
+    }
+  },
+  "common": {
+    "home": "Trang chủ",
+    "profile": "Hồ sơ",
+    "settings": "Cài đặt",
+    "logout": "Đăng xuất",
+    "unableToLogout": "Không thể đăng xuất!"
+  },
+  "level": {
+    "Beginner": "Dễ",
+    "Intermediate": "Cơ bản",
+    "Advanced": "Nâng cao"
   }
 }

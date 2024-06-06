@@ -10,6 +10,8 @@ import { IEvent } from "@/types/event";
 import { Link, alpha, useTheme } from "@mui/material";
 import { bgGradient } from "@/theme/css";
 import { paths } from "@/routes/paths";
+import { useTranslation } from "react-i18next";
+
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -20,6 +22,7 @@ export default function EventDetailsContent({ event }: Props) {
   const { title, image_url, start_date, expire_date, description } = event;
 
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const renderGallery = (
     <>
@@ -60,7 +63,7 @@ export default function EventDetailsContent({ event }: Props) {
             component="span"
             sx={{ typography: "body2", color: "text.secondary" }}
           >
-            Created by{" "}
+            {t("eventPage.eventDetails.createdBy")}{" "}
             <Link
               href={paths.dashboard.user.edit(event.owner.profile.id)}
               className="flex flex-row gap-2"
@@ -84,12 +87,12 @@ export default function EventDetailsContent({ event }: Props) {
     >
       {[
         {
-          label: "Available",
+          label: t("eventPage.eventDetails.available"),
           value: `${fDate(start_date)} - ${fDate(expire_date)}`,
           icon: <Iconify icon="solar:calendar-date-bold" />,
         },
         {
-          label: "Number of people",
+          label: t("eventPage.eventDetails.numberOfPeople"),
           value: event.event_candidate.length,
           icon: <Iconify icon="solar:user-rounded-bold" />,
         },

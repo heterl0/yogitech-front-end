@@ -8,6 +8,7 @@ import { alpha } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
@@ -22,24 +23,10 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
-const OPTIONS = (id: number, profileId: number) => [
-  {
-    label: "Home",
-    linkTo: "/",
-  },
-  {
-    label: "Profile",
-    linkTo: paths.dashboard.user.edit(profileId),
-  },
-  {
-    label: "Settings",
-    linkTo: paths.dashboard.account.edit(id),
-  },
-];
-
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const { t } = useTranslation();
   const router = useRouter();
 
   // const { user } = useMockedUser();
@@ -50,6 +37,21 @@ export default function AccountPopover() {
 
   const popover = usePopover();
 
+  const OPTIONS = (id: number, profileId: number) => [
+    {
+      label: t("common.home"),
+      linkTo: "/",
+    },
+    {
+      label: t("common.profile"),
+      linkTo: paths.dashboard.user.edit(profileId),
+    },
+    {
+      label: t("common.settings"),
+      linkTo: paths.dashboard.account.edit(id),
+    },
+  ];
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -57,7 +59,7 @@ export default function AccountPopover() {
       router.replace("/");
     } catch (error) {
       console.error(error);
-      enqueueSnackbar("Unable to logout!", { variant: "error" });
+      enqueueSnackbar(t("common.unableToLogout"), { variant: "error" });
     }
   };
 
@@ -131,7 +133,7 @@ export default function AccountPopover() {
           onClick={handleLogout}
           sx={{ m: 1, fontWeight: "fontWeightBold", color: "error.main" }}
         >
-          Logout
+          {t("common.logout")}
         </MenuItem>
       </CustomPopover>
     </>

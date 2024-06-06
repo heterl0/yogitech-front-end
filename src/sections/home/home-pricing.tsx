@@ -12,23 +12,9 @@ import Stack, { StackProps } from "@mui/material/Stack";
 import { useResponsive } from "@/hooks/use-responsive";
 import Iconify from "@/components/iconify";
 import { varFade, MotionViewport } from "@/components/animate";
+import { useTranslate } from "@/locales";
 
 // ----------------------------------------------------------------------
-
-export const _yogiTechPlan = [...Array(2)].map((_, index) => ({
-  license: ["Free", "Premium"][index],
-  commons: ["Do 10 free-exercises"],
-  options: [
-    "Do unlimited exercises",
-    "No advertisement",
-    "Create “Personalized Exercise”",
-  ],
-  icons: [
-    "/assets/icons/platforms/ic_js.svg",
-    "/assets/icons/platforms/ic_ts.svg",
-    "/assets/icons/platforms/ic_figma.svg",
-  ],
-}));
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +22,8 @@ export default function HomePricing() {
   const mdUp = useResponsive("up", "md");
 
   const [currentTab, setCurrentTab] = useState("Standard");
+
+  const { t } = useTranslate();
 
   const handleChangeTab = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
@@ -52,24 +40,39 @@ export default function HomePricing() {
           variant="overline"
           sx={{ mb: 2, color: "text.disabled" }}
         >
-          pricing plans
+          {t("home.pricing.plans")}
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inDown}>
-        <Typography variant="h2">
-          The right plan
-          <br /> for your exercises
-        </Typography>
+        <Typography variant="h2">{t("home.pricing.rightPlan")}</Typography>
       </m.div>
 
       <m.div variants={varFade().inDown}>
         <Typography sx={{ color: "text.secondary" }}>
-          Choose the perfect plan for your needs
+          {t("home.pricing.choosePlan")}
         </Typography>
       </m.div>
     </Stack>
   );
+
+  const _yogiTechPlan = [...Array(2)].map((_, index) => ({
+    license: [
+      t("home.pricing.yogiTechPlan.free"),
+      t("home.pricing.yogiTechPlan.premium"),
+    ][index],
+    commons: [t("home.pricing.yogiTechPlan.10free")],
+    options: [
+      t("home.pricing.yogiTechPlan.options.unlimit"),
+      t("home.pricing.yogiTechPlan.options.adv"),
+      t("home.pricing.yogiTechPlan.options.personal"),
+    ],
+    icons: [
+      "/assets/icons/platforms/ic_js.svg",
+      "/assets/icons/platforms/ic_ts.svg",
+      "/assets/icons/platforms/ic_figma.svg",
+    ],
+  }));
 
   const renderContent = (
     <>
@@ -82,8 +85,8 @@ export default function HomePricing() {
             border: (theme) => `dashed 1px ${theme.palette.divider}`,
           }}
         >
-          {_yogiTechPlan.map((plan) => (
-            <m.div key={plan.license} variants={varFade().in}>
+          {_yogiTechPlan.map((plan, index) => (
+            <m.div key={index} variants={varFade().in}>
               <PlanCard key={plan.license} plan={plan} />
             </m.div>
           ))}
@@ -109,10 +112,10 @@ export default function HomePricing() {
             }}
           >
             {_yogiTechPlan.map(
-              (tab) =>
+              (tab, index) =>
                 tab.license === currentTab && (
                   <PlanCard
-                    key={tab.license}
+                    key={index}
                     plan={tab}
                     sx={{
                       borderLeft: (theme) =>
@@ -190,9 +193,11 @@ interface PlanCardProps extends StackProps {
 function PlanCard({ plan, sx, ...other }: PlanCardProps) {
   const { license, commons, options } = plan;
 
-  const standardLicense = license === "Free";
+  const { t } = useTranslate();
 
-  const plusLicense = license === "Premium";
+  const standardLicense = license === t("home.pricing.yogiTechPlan.free");
+
+  const plusLicense = license === t("home.pricing.yogiTechPlan.premium");
 
   return (
     <Stack

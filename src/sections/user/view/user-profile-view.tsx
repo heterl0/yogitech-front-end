@@ -28,35 +28,14 @@ import ProfileCover from "../profile-cover";
 import ProfileFriends from "../profile-friends";
 import ProfileGallery from "../profile-gallery";
 import ProfileFollowers from "../profile-followers";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
-
-const TABS = [
-  {
-    value: "profile",
-    label: "Profile",
-    icon: <Iconify icon="solar:user-id-bold" width={24} />,
-  },
-  {
-    value: "followers",
-    label: "Followers",
-    icon: <Iconify icon="solar:heart-bold" width={24} />,
-  },
-  {
-    value: "friends",
-    label: "Friends",
-    icon: <Iconify icon="solar:users-group-rounded-bold" width={24} />,
-  },
-  {
-    value: "gallery",
-    label: "Gallery",
-    icon: <Iconify icon="solar:gallery-wide-bold" width={24} />,
-  },
-];
 
 // ----------------------------------------------------------------------
 
 export default function UserProfileView() {
+  const { t } = useTranslation();
   const settings = useSettingsContext();
 
   const { user } = useMockedUser();
@@ -72,6 +51,29 @@ export default function UserProfileView() {
     []
   );
 
+  const TABS = [
+    {
+      value: "profile",
+      label: t("userPage.Profile"),
+      icon: <Iconify icon="solar:user-id-bold" width={24} />,
+    },
+    {
+      value: "followers",
+      label: t("userPage.Followers"),
+      icon: <Iconify icon="solar:heart-bold" width={24} />,
+    },
+    {
+      value: "friends",
+      label: t("userPage.Friends"),
+      icon: <Iconify icon="solar:users-group-rounded-bold" width={24} />,
+    },
+    {
+      value: "gallery",
+      label: t("userPage.Gallery"),
+      icon: <Iconify icon="solar:gallery-wide-bold" width={24} />,
+    },
+  ];
+
   const handleSearchFriends = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearchFriends(event.target.value);
@@ -82,10 +84,10 @@ export default function UserProfileView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="Profile"
+        heading={t("userPage.Profile")}
         links={[
-          { name: "Dashboard", href: paths.dashboard.root },
-          { name: "User", href: paths.dashboard.user.root },
+          { name: t("userPage.Dashboard"), href: paths.dashboard.root },
+          { name: t("userPage.User"), href: paths.dashboard.user.root },
           { name: user?.displayName },
         ]}
         sx={{

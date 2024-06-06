@@ -10,11 +10,14 @@ import { bgGradient } from "@/theme/css";
 
 import Iconify from "@/components/iconify";
 import { varFade, MotionViewport } from "@/components/animate";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function DownloadAdvertisement() {
   const theme = useTheme();
+
+  const { t } = useTranslation();
 
   const renderDescription = (
     <Box
@@ -30,7 +33,7 @@ export default function DownloadAdvertisement() {
         variants={varFade().inDown}
         sx={{ color: "common.white", mb: 2, typography: "h2" }}
       >
-        Get our app!
+        {t("download.getApp")}
       </Box>
 
       <Box
@@ -38,7 +41,7 @@ export default function DownloadAdvertisement() {
         variants={varFade().inDown}
         sx={{ color: "common.white", mb: 3 }}
       >
-        iOS app will coming soon
+        {t("download.comingSoon")}
       </Box>
 
       <Stack
@@ -68,7 +71,7 @@ export default function DownloadAdvertisement() {
               />
             }
           >
-            Android
+            {t("download.android")}
           </Button>
         </m.div>
       </Stack>

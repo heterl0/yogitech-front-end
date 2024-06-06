@@ -1,4 +1,3 @@
-// import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
@@ -12,10 +11,10 @@ import { fSeconds } from "@/utils/format-number";
 
 import Image from "@/components/image";
 import Iconify from "@/components/iconify";
-// import { shortDateLabel } from "@/components/custom-date-range-picker";
 import { IPose } from "@/types/pose";
 import { LEVELS } from "@/constants/level";
 import { Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -27,26 +26,7 @@ type Props = {
 
 export default function PoseItem({ pose, onEdit }: Props) {
   const { id, name, image_url, duration, level } = pose;
-
-  // const renderRating = (
-  //   <Stack
-  //     direction="row"
-  //     alignItems="center"
-  //     sx={{
-  //       top: 8,
-  //       right: 8,
-  //       zIndex: 9,
-  //       borderRadius: 1,
-  //       position: "absolute",
-  //       p: "2px 6px 2px 4px",
-  //       typography: "subtitle2",
-  //       bgcolor: "warning.lighter",
-  //     }}
-  //   >
-  //     <Iconify icon="eva:star-fill" sx={{ color: "warning.main", mr: 0.25 }} />{" "}
-  //     {ratingNumber}
-  //   </Stack>
-  // );
+  const { t } = useTranslation();
 
   const renderPrice = (
     <Stack
@@ -78,27 +58,12 @@ export default function PoseItem({ pose, onEdit }: Props) {
     >
       <Stack flexGrow={1} sx={{ position: "relative" }}>
         {renderPrice}
-        {/* {renderRating} */}
         <Image
           alt={image_url}
           src={image_url}
           sx={{ borderRadius: 1, height: 164, width: 1 }}
         />
       </Stack>
-      {/* <Stack spacing={0.5}>
-        <Image
-          alt={images[1]}
-          src={images[1]}
-          ratio="1/1"
-          sx={{ borderRadius: 1, width: 80 }}
-        />
-        <Image
-          alt={images[2]}
-          src={images[2]}
-          ratio="1/1"
-          sx={{ borderRadius: 1, width: 80 }}
-        />
-      </Stack> */}
     </Stack>
   );
 
@@ -107,7 +72,6 @@ export default function PoseItem({ pose, onEdit }: Props) {
       sx={{
         p: (theme) => theme.spacing(2.5, 2.5, 2, 2.5),
       }}
-      // primary={`Posted date: ${fDateTime(created_at)}`}
       secondary={
         <Link
           component={RouterLink}
@@ -139,34 +103,18 @@ export default function PoseItem({ pose, onEdit }: Props) {
         p: (theme) => theme.spacing(0, 2.5, 2.5, 2.5),
       }}
     >
-      {/* <IconButton
-        onClick={popover.onOpen}
-        sx={{ position: "absolute", bottom: 20, right: 8 }}
-      >
-        <Iconify icon="eva:more-vertical-fill" />
-      </IconButton> */}
-
       <IconButton
         onClick={() => onEdit()}
         sx={{ position: "absolute", bottom: 20, right: 8 }}
       >
-        <Tooltip title="Edit">
+        <Tooltip title={t("posePage.poseItem.edit")}>
           <Iconify icon="solar:pen-bold" />
         </Tooltip>
       </IconButton>
 
       {[
-        // {
-        //   label: duration,
-        //   icon: (
-        //     <Iconify
-        //       icon="mingcute:location-fill"
-        //       sx={{ color: "error.main" }}
-        //     />
-        //   ),
-        // },
         {
-          label: `Level: ${LEVELS[level - 1].label}`,
+          label: `${t("posePage.poseItem.level")}${LEVELS[level - 1].label}`,
           icon: (
             <Iconify
               icon="mingcute:filter-2-fill"
@@ -174,15 +122,6 @@ export default function PoseItem({ pose, onEdit }: Props) {
             />
           ),
         },
-        // {
-        //   label: `${bookers.length} Booked`,
-        //   icon: (
-        //     <Iconify
-        //       icon="solar:users-group-rounded-bold"
-        //       sx={{ color: "primary.main" }}
-        //     />
-        //   ),
-        // },
       ].map((item) => (
         <Stack
           key={item.label}
@@ -199,52 +138,10 @@ export default function PoseItem({ pose, onEdit }: Props) {
   );
 
   return (
-    <>
-      <Card>
-        {renderImages}
-
-        {renderTexts}
-
-        {renderInfo}
-      </Card>
-
-      {/* <CustomPopover
-        open={popover.open}
-        onClose={popover.onClose}
-        arrow="right-top"
-        sx={{ width: 140 }}
-      >
-        <MenuItem
-          onClick={() => {
-            popover.onClose();
-            onView();
-          }}
-        >
-          <Iconify icon="solar:eye-bold" />
-          View
-        </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            popover.onClose();
-            onEdit();
-          }}
-        >
-          <Iconify icon="solar:pen-bold" />
-          Edit
-        </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            popover.onClose();
-            onDelete();
-          }}
-          sx={{ color: "error.main" }}
-        >
-          <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
-        </MenuItem>
-      </CustomPopover> */}
-    </>
+    <Card>
+      {renderImages}
+      {renderTexts}
+      {renderInfo}
+    </Card>
   );
 }

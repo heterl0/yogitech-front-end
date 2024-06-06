@@ -27,6 +27,7 @@ import { IBlog, ActiveStatus } from "@/types/blog";
 import PostSort from "../post-sort";
 import PostSearch from "../post-search";
 import PostListHorizontal from "../post-list-horizontal";
+import { useTranslation } from "react-i18next";
 // import { flatMap } from "lodash";
 
 // ----------------------------------------------------------------------
@@ -51,6 +52,7 @@ export default function PostListView() {
     filter,
     sortBy,
   });
+  const { t } = useTranslation();
 
   const handleSortBy = useCallback((newValue: string) => {
     setSortBy(newValue);
@@ -70,19 +72,17 @@ export default function PostListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t("blogPage.listView.heading")}
         links={[
           {
-            name: "Dashboard",
+            name: t("blogPage.listView.breadcrumb.dashboard"),
             href: paths.dashboard.root,
           },
           {
-            name: "Blog",
+            name: t("blogPage.listView.breadcrumb.blog"),
             href: paths.dashboard.blog.root,
           },
-          {
-            name: "List",
-          },
+          { name: t("blogPage.listView.breadcrumb.list") },
         ]}
         action={
           <Button
@@ -91,7 +91,7 @@ export default function PostListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Post
+            {t("blogPage.listView.button.newPost")}
           </Button>
         }
         sx={{

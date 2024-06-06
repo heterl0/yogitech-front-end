@@ -14,6 +14,7 @@ import Iconify from "@/components/iconify";
 import SearchNotFound from "@/components/search-not-found";
 
 import { IPose } from "@/types/pose";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,8 @@ export default function PoseSearch({
   hrefItem,
 }: Props) {
   const router = useRouter();
+
+  const { t } = useTranslation();
 
   const handleClick = (id: string) => {
     router.push(hrefItem(id));
@@ -74,7 +77,7 @@ export default function PoseSearch({
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t("posePage.poseSearch.searchPlaceholder")}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

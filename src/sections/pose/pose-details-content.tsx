@@ -8,6 +8,8 @@ import Markdown from "@/components/markdown";
 import { Avatar, AvatarGroup, Link } from "@mui/material";
 import { IPose } from "@/types/pose";
 import { LEVELS } from "@/constants/level";
+import { useTranslation } from "react-i18next";
+
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -26,7 +28,7 @@ export default function PoseDetailsContent({ pose }: Props) {
     muscles,
   } = pose;
 
-  // const theme = useTheme();
+  const { t } = useTranslation();
 
   const renderGallery = (
     <>
@@ -52,7 +54,7 @@ export default function PoseDetailsContent({ pose }: Props) {
         </Typography>
       </Stack>
       <Typography variant="h6" sx={{ mb: 2 }}>
-        Muscles
+        {t("posePage.poseDetailsContent.muscles")}
       </Typography>
       <div className="flex flex-row">
         <AvatarGroup>
@@ -83,22 +85,22 @@ export default function PoseDetailsContent({ pose }: Props) {
     >
       {[
         {
-          label: "Level",
+          label: t("posePage.poseDetailsContent.level"),
           value: `${LEVELS[level].label}`,
           icon: <Iconify icon="mingcute:filter-2-fill" />,
         },
         {
-          label: "Calories",
+          label: t("posePage.poseDetailsContent.calories"),
           value: `${calories} kcal`,
           icon: <Iconify icon="solar:heart-bold" />,
         },
         {
-          label: "Duration",
+          label: t("posePage.poseDetailsContent.duration"),
           value: `${duration}s`,
           icon: <Iconify icon="solar:clock-circle-bold" />,
         },
         {
-          label: "Keypoint .json file",
+          label: t("posePage.poseDetailsContent.keypointJsonFile"),
           value: <Link href={keypoint_url}>{keypoint_url}</Link>,
           icon: <Iconify icon="solar:file-text-bold" />,
         },
@@ -145,7 +147,7 @@ export default function PoseDetailsContent({ pose }: Props) {
 
         <Divider sx={{ borderStyle: "dashed", my: 5 }} />
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Instruction
+          {t("posePage.poseDetailsContent.instruction")}
         </Typography>
 
         {renderContent}

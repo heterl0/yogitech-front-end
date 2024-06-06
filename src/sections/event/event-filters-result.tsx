@@ -3,7 +3,7 @@ import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Stack, { StackProps } from "@mui/material/Stack";
-
+import { useTranslation } from "react-i18next";
 import Iconify from "@/components/iconify";
 import { EVENT_STATUS, IEventFilterValue, IEventFilters } from "@/types/event";
 import { shortDateLabel } from "@/components/custom-date-range-picker";
@@ -30,6 +30,7 @@ export default function EventFiltersResult({
   results,
   ...other
 }: Props) {
+  const { t } = useTranslation();
   // const shortLabel = shortDateLabel(filters.startDate, filters.endDate);
 
   const handleRemoveStatus = () => {
@@ -52,7 +53,7 @@ export default function EventFiltersResult({
       <Box sx={{ typography: "body2" }}>
         <strong>{results}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          results found
+          {t("eventPage.filtersResult.resultsFound")}
         </Box>
       </Box>
 
@@ -64,7 +65,7 @@ export default function EventFiltersResult({
         alignItems="center"
       >
         {filters.startDate && filters.endDate && (
-          <Block label="Available:">
+          <Block label={t("eventPage.filtersResult.available")}>
             <Chip
               size="small"
               label={shortLabel}
@@ -74,7 +75,7 @@ export default function EventFiltersResult({
         )}
 
         {filters.status !== -1 && (
-          <Block label="Status:">
+          <Block label={t("eventPage.filtersResult.status")}>
             <Chip
               label={EVENT_STATUS[filters.status].label}
               size="small"
@@ -89,7 +90,7 @@ export default function EventFiltersResult({
             onClick={onResetFilters}
             startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
           >
-            Clear
+            {t("eventPage.filtersResult.clear")}
           </Button>
         )}
       </Stack>

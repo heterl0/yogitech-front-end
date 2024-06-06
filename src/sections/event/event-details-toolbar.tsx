@@ -12,6 +12,7 @@ import Iconify from "@/components/iconify";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
 import { LabelColor } from "@/components/label";
 import { EVENT_STATUS } from "@/types/event";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +37,7 @@ export default function EventDetailsToolbar({
   sx,
   ...other
 }: Props) {
+  const { t } = useTranslation();
   const popover = usePopover();
 
   return (
@@ -54,12 +56,12 @@ export default function EventDetailsToolbar({
           href={backLink}
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
         >
-          Back
+          {t("eventPage.eventDetails.toolbar.back")}
         </Button>
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Tooltip title="Edit">
+        <Tooltip title={t("eventPage.eventDetails.toolbar.edit")}>
           <IconButton component={RouterLink} href={editLink}>
             <Iconify icon="solar:pen-bold" />
           </IconButton>
@@ -69,7 +71,7 @@ export default function EventDetailsToolbar({
           color="inherit"
           variant="contained"
           // loading={!status}
-          loadingIndicator="Loading…"
+          loadingIndicator={t("eventPage.eventDetails.toolbar.loading")}
           endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
           onClick={popover.onOpen}
           sx={{ textTransform: "capitalize" }}

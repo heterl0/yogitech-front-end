@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import Stack from "@mui/material/Stack";
 import MenuItem from "@mui/material/MenuItem";
@@ -34,6 +35,7 @@ export default function ExerciseCommentTableToolbar({
   //
   StatusOptions,
 }: Props) {
+  const { t } = useTranslation();
   const popover = usePopover();
 
   const handleFilterName = useCallback(
@@ -75,13 +77,19 @@ export default function ExerciseCommentTableToolbar({
             width: { xs: 1, md: 200 },
           }}
         >
-          <InputLabel>Status</InputLabel>
+          <InputLabel>
+            {t("exercisePage.exerciseCommentListView.filters.status")}
+          </InputLabel>
 
           <Select
             multiple
             value={filters.status}
             onChange={handleFilterStatus}
-            input={<OutlinedInput label="Status" />}
+            input={
+              <OutlinedInput
+                label={t("exercisePage.exerciseCommentListView.filters.status")}
+              />
+            }
             renderValue={(selected) =>
               selected.map((value) => value).join(", ")
             }
@@ -115,7 +123,9 @@ export default function ExerciseCommentTableToolbar({
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder="Search..."
+            placeholder={t(
+              "exercisePage.exerciseCommentListView.filters.searchPlaceholder"
+            )}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -146,7 +156,7 @@ export default function ExerciseCommentTableToolbar({
           }}
         >
           <Iconify icon="solar:printer-minimalistic-bold" />
-          Print
+          {t("exercisePage.exerciseCommentListView.tableRow.quickEdit")}
         </MenuItem>
 
         <MenuItem
@@ -155,7 +165,7 @@ export default function ExerciseCommentTableToolbar({
           }}
         >
           <Iconify icon="solar:import-bold" />
-          Import
+          {t("exercisePage.exerciseCommentListView.tableRow.edit")}
         </MenuItem>
 
         <MenuItem
@@ -164,7 +174,7 @@ export default function ExerciseCommentTableToolbar({
           }}
         >
           <Iconify icon="solar:export-bold" />
-          Export
+          {t("exercisePage.exerciseCommentListView.tableRow.ban")}
         </MenuItem>
       </CustomPopover>
     </>

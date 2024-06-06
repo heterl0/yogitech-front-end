@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Iconify from "@/components/iconify";
 
 import { ICandidateEvent } from "@/types/event";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -59,22 +60,33 @@ type BookerItemProps = {
 };
 
 function CandidateItem({ candidate, ranking }: BookerItemProps) {
+  const { t } = useTranslation();
   const getRankingLabelByIndex = (index: number): JSX.Element => {
     switch (index) {
       case 0:
         return (
-          <span className="text-2xl font-bold text-primary-main">1st</span>
+          <span className="text-2xl font-bold text-primary-main">
+            {t("eventPage.eventDetails.candidates.firstPlace")}
+          </span>
         );
       case 1:
         return (
-          <span className="text-2xl font-bold text-secondary-main">2nd</span>
+          <span className="text-2xl font-bold text-secondary-main">
+            {t("eventPage.eventDetails.candidates.secondPlace")}
+          </span>
         );
       case 2:
-        return <span className="text-disabled  text-2xl font-bold">3rd</span>;
+        return (
+          <span className="text-disabled text-2xl font-bold">
+            {t("eventPage.eventDetails.candidates.thirdPlace")}
+          </span>
+        );
       default:
         return (
-          <span className="text-disabled  text-2xl font-bold">
-            {index + 1}th
+          <span className="text-disabled text-2xl font-bold">
+            {t("eventPage.eventDetails.candidates.otherPlace", {
+              place: index + 1,
+            })}
           </span>
         );
     }
@@ -99,7 +111,8 @@ function CandidateItem({ candidate, ranking }: BookerItemProps) {
           secondary={
             <Stack direction="row" alignItems="center" spacing={0.5}>
               <Iconify icon="mingcute:flash-fill" width={16} />
-              {candidate.event_point} points
+              {candidate.event_point}{" "}
+              {t("eventPage.eventDetails.candidates.points")}
             </Stack>
           }
           secondaryTypographyProps={{

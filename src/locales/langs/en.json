@@ -63,6 +63,7 @@
   "event": "Event",
   "home": {
     "hero": {
+      "subtitle": "Yoga Mentor Platform",
       "description": "Explore YogiTech, the premier yoga app designed for all skill levels. Experience the convenience of personalized yoga sessions anytime, anywhere, and start your journey towards better health and flexibility today!",
       "download": "Download"
     },
@@ -81,6 +82,640 @@
         "title": "Connected Community",
         "description": "Engage in a vibrant, connected community with YogiTech."
       }
+    },
+    "pricing": {
+      "plans": "pricing plans",
+      "rightPlan": "The right plan for your exercises",
+      "choosePlan": "Choose the perfect plan for your needs",
+      "yogiTechPlan": {
+        "free": "Free",
+        "premium": "Premium",
+        "10free": "Do 10 free-exercises",
+        "options": {
+          "unlimit": "Do unlimited exercises",
+          "adv": "No advertisement",
+          "personal": "Create “Personalized Exercise”"
+        }
+      }
     }
+  },
+
+  "download": {
+    "getApp": "Get our app!",
+    "comingSoon": "iOS app will coming soon",
+    "android": "Android"
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back 👋",
+    "projectsToday": "Here’s what’s happening with your projects today. A new {{type}} has been added!",
+    "goNow": "Go Now",
+    "upcomingEvent": "Upcoming Event",
+    "totalUsers": "Total Users",
+    "totalPoses": "Total Poses",
+    "totalExercises": "Total Exercises",
+    "percentGrowthYear": "Percent Growth in Year",
+    "detailsUserEventGrowth": "Details of User and Event Growth in Year",
+    "newUsers": "New Users",
+    "eventGrowth": "Event Growth",
+    "recentActivity": "Recent Activity",
+    "topUsers": "Top Users",
+    "conversionActiveUsers": "Conversion - Active Users",
+    "loginPlatform": "Log in Platform"
+  },
+  "posePage": {
+    "poseList": {
+      "editPose": "Edit Pose",
+      "deletePose": "Delete Pose",
+      "deleteConfirmation": "Are you sure you want to delete this pose?"
+    },
+    "poseDetailsContent": {
+      "muscles": "Muscles",
+      "level": "Level",
+      "calories": "Calories",
+      "duration": "Duration",
+      "keypointJsonFile": "Keypoint .json file",
+      "instruction": "Instruction"
+    },
+    "poseDetailsToolbar": {
+      "back": "Back",
+      "edit": "Edit"
+    },
+    "poseFiltersResult": {
+      "resultsFound": "results found",
+      "muscle": "Muscle",
+      "level": "Level",
+      "status": "Status",
+      "clear": "Clear"
+    },
+    "poseFilters": {
+      "filters": "Filters",
+      "reset": "Reset",
+      "levels": "Levels",
+      "selectLevel": "Select Level",
+      "status": "Status",
+      "selectStatus": "Select Status",
+      "muscles": "Muscles",
+      "selectMuscles": "Select Muscles",
+      "all": "All"
+    },
+    "poseItem": {
+      "edit": "Edit",
+      "level": "Level: "
+    },
+
+    "poseNewEditForm": {
+      "name": "Name",
+      "instruction": "Instruction",
+      "image": "Image",
+      "keypoint": "Keypoint",
+      "duration": "Duration",
+      "level": "Level",
+      "calories": "Calories",
+      "muscles": "Muscles",
+      "details": {
+        "title": "Details",
+        "description": "Title, short description, image..."
+      },
+      "properties": {
+        "title": "Properties",
+        "description": "Additional functions and attributes..."
+      },
+      "active": "Active",
+      "createPose": "Create Pose",
+      "updatePose": "Update Pose"
+    },
+    "poseSearch": {
+      "searchPlaceholder": "Search...",
+      "searchNotFound": "No poses found for '{{query}}'",
+      "searchNotFoundTitle": "Not Found",
+      "tryChecking": "Try checking for typos or using complete words.",
+      "enterKeywords": "Please enter keywords"
+    },
+    "poseSort": {
+      "sortBy": "Sort By:",
+      "nameAsc": "Name Ascending",
+      "nameDesc": "Name Descending",
+      "newest": "Newest",
+      "oldest": "Oldest"
+    },
+    "poseCreateView": {
+      "heading": "Create a new pose",
+      "pose": "Pose",
+      "newPose": "New pose"
+    },
+    "poseEditView": {
+      "heading": "Edit",
+      "pose": "Pose"
+    },
+    "poseListView": {
+      "heading": "List",
+      "pose": "Pose",
+      "newPose": "New Pose",
+      "emptyContent": "No Data"
+    }
+  },
+
+  "exercisePage": {
+    "updateSuccess": "Update success!",
+    "updateFail": "Update fail!",
+    "createSuccess": "Create success!",
+    "createFail": "Create fail!",
+    "addPose": "Add pose",
+    "details": "Details",
+    "detailsDescription": "Title, short description, image...",
+    "title": "Title",
+    "benefits": "Benefits",
+    "benefitsPlaceholder": "+ Benefits",
+    "description": "Description",
+    "image": "Image",
+    "upload": "ON UPLOAD",
+    "properties": "Properties",
+    "propertiesDescription": "Additional functions and attributes...",
+    "video": "Video",
+    "poses": "Poses",
+    "pose": "Pose",
+    "minute": "Minute",
+    "second": "Second",
+    "inSecond": "In Seconds",
+    "duration": "Duration",
+    "level": "Level",
+    "point": "Point",
+    "isPremium": "Is Premium?",
+    "active": "Active",
+    "createExercise": "Create Exercise",
+    "updateExercise": "Update Exercise",
+    "nameIsRequired": "Name is required",
+    "descriptionIsRequired": "Description is required",
+    "imageIsRequired": "Image is required",
+    "videoIsRequired": "Video is required",
+    "levelIsRequired": "Level is required",
+    "pointIsRequired": "Point is required",
+    "mustHaveAtLeastOneTag": "Must have at least 1 tag",
+    "exerciseItem": {
+      "edit": "Edit",
+      "level": "Level: {{level}}"
+    },
+    "exerciseDetailsToolbar": {
+      "back": "Back",
+      "edit": "Edit"
+    },
+    "exerciseDetailsContent": {
+      "level": "Level",
+      "calories": "Calories",
+      "duration": "Duration",
+      "listOfPoses": "List of poses",
+      "point": "Point",
+      "videoUrl": "Video URL",
+      "premium": "Premium?",
+      "yes": "Yes",
+      "no": "No",
+      "benefit": "Benefit",
+      "description": "Description"
+    },
+    "exerciseCreateView": {
+      "heading": "Create a new exercise",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "exercise": "Exercise",
+        "newExercise": "New Exercise"
+      }
+    },
+    "exerciseEditView": {
+      "heading": "Edit",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "exercise": "Exercise"
+      }
+    },
+    "exerciseListView": {
+      "heading": "Exercise List",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "exercise": "Exercise",
+        "list": "List"
+      },
+      "button": {
+        "newExercise": "New Exercise"
+      },
+      "emptyContent": {
+        "noData": "No Data"
+      }
+    },
+    "exerciseCommentListView": {
+      "tableRow": {
+        "quickEdit": "Quick Edit",
+        "ban": "Ban",
+        "edit": "Edit",
+        "confirmBanTitle": "Ban User",
+        "confirmBanContent": "Are you sure want to ban?"
+      },
+      "tableHead": {
+        "comment": "Comment",
+        "time": "Time",
+        "status": "Status"
+      },
+      "confirmDialog": {
+        "title": "Delete",
+        "content": "Are you sure want to delete {{numSelected}} items?",
+        "delete": "Delete"
+      },
+      "snackbar": {
+        "deleteSuccess": "Delete success!",
+        "banSuccess": "Ban success!",
+        "banFailed": "Ban failed!"
+      },
+      "filtersResult": {
+        "resultsFound": "results found",
+        "role": "Role:",
+        "keyword": "Keyword:",
+        "clear": "Clear",
+        "filters": "Filters"
+      },
+      "filters": {
+        "searchPlaceholder": "Search...",
+        "status": "Status",
+        "all": "All",
+        "muscle": "Muscle"
+      },
+      "quickCreateEditForm": {
+        "editTitle": "Edit comment",
+        "createTitle": "Create comment",
+        "infoAlert": "Comment is waiting for confirmation",
+        "statusLabel": "Status",
+        "contentLabel": "Content",
+        "cancelButton": "Cancel",
+        "updateButton": "Update",
+        "createButton": "Create"
+      }
+    }
+  },
+  "eventPage": {
+    "sort": {
+      "sortBy": "Sort By:",
+      "latest": "Latest",
+      "oldest": "Oldest"
+    },
+    "search": {
+      "placeholder": "Search...",
+      "searchNotFound": "No results found for '{{query}}'"
+    },
+    "newEditForm": {
+      "details": "Details",
+      "detailsDescription": "Title, short description, image...",
+      "title": "Title",
+      "content": "Content",
+      "image": "Image",
+      "properties": "Properties",
+      "propertiesDescription": "Additional functions and attributes...",
+      "available": "Available",
+      "status": "Status",
+      "exercise": "Exercise",
+      "createEvent": "Create Event",
+      "updateEvent": "Update Event",
+      "active": "Active"
+    },
+    "eventItem": {
+      "from": "From",
+      "to": "to"
+    },
+    "createView": {
+      "heading": "Create a new event",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "event": "Event",
+        "newEvent": "New event"
+      }
+    },
+    "editView": {
+      "heading": "Edit",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "event": "Event"
+      }
+    },
+    "listView": {
+      "heading": "List",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "event": "Event",
+        "list": "List"
+      },
+      "button": {
+        "newEvent": "New Event"
+      },
+      "emptyContent": {
+        "noData": "No Data"
+      },
+      "filtersResult": {
+        "resultsFound": "results found",
+        "clear": "Clear",
+        "available": "Available:",
+        "status": "Status:"
+      },
+      "filters": {
+        "searchPlaceholder": "Search...",
+        "filters": "Filters",
+        "reset": "Reset",
+        "durations": "Durations",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "endDateError": "End date must be later than start date",
+        "status": "Status",
+        "all": "All"
+      }
+    },
+    "eventDetails": {
+      "candidates": {
+        "points": "points",
+        "firstPlace": "1st",
+        "secondPlace": "2nd",
+        "thirdPlace": "3rd",
+        "otherPlace": "{{place}}th"
+      },
+      "available": "Available",
+      "numberOfPeople": "Number of people",
+      "createdBy": "Created by",
+      "toolbar": {
+        "back": "Back",
+        "edit": "Edit",
+        "loading": "Loading..."
+      }
+    }
+  },
+  "blogPage": {
+    "createView": {
+      "heading": "Create a new post",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "blog": "Blog",
+        "create": "Create"
+      }
+    },
+    "editView": {
+      "heading": "Edit"
+    },
+    "listHomeView": {
+      "heading": "Blog",
+      "search": {
+        "placeholder": "Search posts...",
+        "searchNotFound": "No results found for '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sort By:",
+        "latest": "Latest",
+        "oldest": "Oldest",
+        "popular": "Popular"
+      }
+    },
+    "listView": {
+      "heading": "List",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "blog": "Blog",
+        "list": "List"
+      },
+      "button": {
+        "newPost": "New Post"
+      },
+      "search": {
+        "placeholder": "Search posts...",
+        "searchNotFound": "No results found for '{{query}}'"
+      },
+      "sort": {
+        "sortBy": "Sort By:",
+        "latest": "Latest",
+        "oldest": "Oldest",
+        "popular": "Popular"
+      },
+      "tabs": {
+        "all": "All",
+        "draft": "Draft",
+        "published": "Published"
+      }
+    },
+    "postCommentForm": {
+      "placeholder": "Write some of your comments...",
+      "postComment": "Post comment",
+      "commentRequired": "Comment is required",
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Email must be a valid email address"
+    },
+    "postCommentItem": {
+      "reply": "Reply",
+      "replyPlaceholder": "Write comment..."
+    },
+    "postCommentList": {
+      "comments": "Comments ({{count}})"
+    },
+    "postDetailsPreview": {
+      "preview": "Preview",
+      "cancel": "Cancel",
+      "post": "Post",
+      "emptyContent": "Empty Content!"
+    },
+    "postDetailsToolbar": {
+      "back": "Back",
+      "goLive": "Go Live",
+      "edit": "Edit",
+      "loading": "Loading...",
+      "changeStatus": "Change Status",
+      "publish": "Publish",
+      "draft": "Draft"
+    },
+    "postItemHorizontal": {
+      "published": "Published",
+      "draft": "Draft",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "deleteDialogTitle": "Do you want to delete this blog?",
+      "deleteDialogContent": "This action cannot be undone, do you really want to delete this blog?"
+    },
+    "postItem": {
+      "published": "Published",
+      "draft": "Draft"
+    },
+    "postListHorizontal": {
+      "loadMore": "More Posts"
+    },
+    "postNewEditForm": {
+      "details": "Details",
+      "detailsDescription": "Title, short description, image...",
+      "postTitle": "Post Title",
+      "description": "Description",
+      "content": "Content",
+      "cover": "Cover",
+      "properties": "Properties",
+      "propertiesDescription": "Additional functions and attributes...",
+      "benefits": "Benefits",
+      "publish": "Publish",
+      "preview": "Preview",
+      "createPost": "Create Post",
+      "saveChanges": "Save Changes",
+      "updateSuccess": "Update success!",
+      "updateFail": "Update fail!",
+      "createSuccess": "Create success!",
+      "createFail": "Create fail!"
+    },
+    "search": {
+      "placeholder": "Search...",
+      "searchNotFound": "No results found for '{{query}}'"
+    },
+    "sort": {
+      "sortBy": "Sort By:",
+      "latest": "Latest",
+      "oldest": "Oldest",
+      "popular": "Popular"
+    }
+  },
+  "notiPage": {
+    "Title": "Title",
+    "Time": "Time",
+    "From": "From",
+    "Status": "Status",
+    "All": "All",
+    "Admin": "Admin",
+    "User": "User",
+    "Notification": "Notification",
+    "List": "List",
+    "Create": "Create",
+    "Delete": "Delete",
+    "Bansuccess!": "Ban success!",
+    "Banfailed!": "Ban failed!",
+    "Deletesuccess!": "Delete success!",
+    "Editnotification": "Edit notification",
+    "Createnotification": "Create notification",
+    "Notificationiswaitingforconfirmation": "Notification is waiting for confirmation",
+    "Body": "Body",
+    "Announcetoallusers": "Announce to all users?",
+    "Cancel": "Cancel",
+    "Update": "Update",
+    "Notificationupdatedsuccessfully": "Notification updated successfully",
+    "Notificationcreatedsuccessfully": "Notification created successfully",
+    "Statusisrequired": "Status is required",
+    "Titleisrequired": "Title is required",
+    "Bodyisrequired": "Body is required",
+    "results found": "results found",
+    "Type:": "Type:",
+    "Role:": "Role:",
+    "Keyword:": "Keyword:",
+    "Clear": "Clear",
+    "Disabled": "Disabled",
+    "Active": "Active",
+    "QuickEdit": "Quick Edit",
+    "BanUser": "Ban User",
+    "Areyou": "Are you sure want to ban?",
+    "Ban": "Ban",
+    "Edit": "Edit",
+    "Search...": "Search...",
+    "Print": "Print",
+    "Import": "Import",
+    "Export": "Export"
+  },
+  "userPage": {
+    "User Cards": "User Cards",
+    "User": "User",
+    "Cards": "Cards",
+    "Profile": "Profile",
+    "Followers": "Followers",
+    "Friends": "Friends",
+    "Gallery": "Gallery",
+    "Dashboard": "Dashboard",
+    "first_name_required": "First name is required",
+    "last_name_required": "Last name is required",
+    "gender_required": "Gender is required",
+    "height_required": "Height is required",
+    "weight_required": "Weight is required",
+    "level_required": "Level is required",
+    "allowed_file_types": "Allowed *.jpeg, *.jpg, *.png, *.gif",
+    "max_size": "max size of {{size}}",
+    "exp": "EXP",
+    "point": "Point",
+    "streak": "Streak",
+    "bmi": "BMI",
+    "last_name": "Last Name",
+    "first_name": "First Name",
+    "gender": "Gender",
+    "birth_date": "Birth Date",
+    "height": "Height (cm)",
+    "weight": "Weight (kg)",
+    "level": "Level",
+    "create_user": "Create User",
+    "save_changes": "Save Changes",
+    "update_success": "Update success!",
+    "update_failed": "Update failed!",
+    "followers": "Followers",
+    "country": "Country",
+    "follow": "Follow",
+    "followed": "Followed",
+    "edit_profile": "Edit Profile",
+
+    "birthday": "Birthday",
+
+    "male": "Male",
+    "female": "Female",
+    "not_set": "Not set",
+
+    "height_weight": "Height/Weight"
+  },
+  "errorPage": {
+    "view403": {
+      "title": "No permission",
+      "message": "The page you're trying to access has restricted access. Please refer to your system administrator.",
+      "button": "Go to Home"
+    },
+    "page500": {
+      "title": "500 Internal Server Error",
+      "message": "There was an error, please try again later.",
+      "button": "Go to Home"
+    },
+    "notFoundView": {
+      "title": "Sorry, Page Not Found!",
+      "message": "Sorry, we couldn't find the page you're looking for. Perhaps you've mistyped the URL? Be sure to check your spelling.",
+      "button": "Go to Home"
+    }
+  },
+  "form": {
+    "validation": {
+      "name_required": "Name is required",
+      "email_required": "Email is required",
+      "email_invalid": "Email must be a valid email address",
+      "phone_required": "Phone number is required",
+      "status_required": "Status is required",
+      "role_required": "Role is required",
+      "provider_required": "Provider is required",
+      "password_required": "Password is required"
+    },
+    "update_success": "Update success!",
+    "update_failed": "Update failed! {{data}}",
+    "create_success": "Create success!",
+    "create_failed": "Create failed! {{data}}",
+    "helper_text": {
+      "verification_email": "Disabling this will automatically send the user a verification email",
+      "disable_account": "Apply disable account"
+    },
+    "label": {
+      "username": "Username",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "status": "Status",
+      "role": "Role",
+      "provider": "Provider",
+      "email_verified": "Email Verified",
+      "banned": "Banned"
+    },
+    "action": {
+      "create_user": "Create User",
+      "save_changes": "Save Changes"
+    }
+  },
+  "common": {
+    "home": "Home",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "unableToLogout": "Unable to logout!"
   }
 }

@@ -10,6 +10,7 @@ import {
   ICommentTableFilterValue,
   ICommentTableFilters,
 } from "@/types/exercise";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,7 @@ export default function ExerciseCommentTableFiltersResult({
     onFilters("name", "");
   }, [onFilters]);
 
+  const { t } = useTranslation();
   const handleRemoveStatus = useCallback(
     (inputValue: string) => {
       const newValue = filters.status.filter(
@@ -51,7 +53,7 @@ export default function ExerciseCommentTableFiltersResult({
       <Box sx={{ typography: "body2" }}>
         <strong>{results}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          results found
+          {t("exercisePage.exerciseCommentListView.filtersResult.resultsFound")}
         </Box>
       </Box>
 
@@ -63,7 +65,9 @@ export default function ExerciseCommentTableFiltersResult({
         alignItems="center"
       >
         {!!filters.status.length && (
-          <Block label="Role:">
+          <Block
+            label={t("exercisePage.exerciseCommentListView.filtersResult.role")}
+          >
             {filters.status.map((item: string) => (
               <Chip
                 key={item}
@@ -76,7 +80,11 @@ export default function ExerciseCommentTableFiltersResult({
         )}
 
         {!!filters.name && (
-          <Block label="Keyword:">
+          <Block
+            label={t(
+              "exercisePage.exerciseCommentListView.filtersResult.keyword"
+            )}
+          >
             <Chip
               label={filters.name}
               size="small"
@@ -90,7 +98,7 @@ export default function ExerciseCommentTableFiltersResult({
           onClick={onResetFilters}
           startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
         >
-          Clear
+          {t("exercisePage.exerciseCommentListView.filtersResult.clear")}
         </Button>
       </Stack>
     </Stack>

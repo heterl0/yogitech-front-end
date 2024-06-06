@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-
+import { useTranslation } from "react-i18next";
 import Iconify from "@/components/iconify";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
 
@@ -34,6 +34,7 @@ export default function NotificationTableToolbar({
   //
   StatusOptions,
 }: Props) {
+  const { t } = useTranslation();
   const popover = usePopover();
 
   const handleFilterName = useCallback(
@@ -48,7 +49,7 @@ export default function NotificationTableToolbar({
       onFilters(
         "status",
         typeof event.target.value === "string"
-          ? event.target.value.split(",")
+          ? event.target.value.split("notiPage.,")
           : event.target.value
       );
     },
@@ -75,13 +76,13 @@ export default function NotificationTableToolbar({
             width: { xs: 1, md: 200 },
           }}
         >
-          <InputLabel>Status</InputLabel>
+          <InputLabel>{t("notiPage.Status")}</InputLabel>
 
           <Select
             multiple
             value={filters.status}
             onChange={handleFilterStatus}
-            input={<OutlinedInput label="Status" />}
+            input={<OutlinedInput label={t("notiPage.Status")} />}
             renderValue={(selected) =>
               selected.map((value) => value).join(", ")
             }
@@ -115,7 +116,7 @@ export default function NotificationTableToolbar({
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder="Search..."
+            placeholder={t("notiPage.Search...")}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -146,7 +147,7 @@ export default function NotificationTableToolbar({
           }}
         >
           <Iconify icon="solar:printer-minimalistic-bold" />
-          Print
+          {t("notiPage.Print")}
         </MenuItem>
 
         <MenuItem
@@ -155,7 +156,7 @@ export default function NotificationTableToolbar({
           }}
         >
           <Iconify icon="solar:import-bold" />
-          Import
+          {t("notiPage.Import")}
         </MenuItem>
 
         <MenuItem
@@ -164,7 +165,7 @@ export default function NotificationTableToolbar({
           }}
         >
           <Iconify icon="solar:export-bold" />
-          Export
+          {t("notiPage.Export")}
         </MenuItem>
       </CustomPopover>
     </>

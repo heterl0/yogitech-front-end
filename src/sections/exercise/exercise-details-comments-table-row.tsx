@@ -15,6 +15,7 @@ import { IComment } from "@/types/exercise";
 import { fDateTime } from "@/utils/format-time";
 import ExerciseCommentQuickCreateEditForm from "./exercise-details-comments-quick-create-edit-form";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,7 @@ export default function ExerciseCommentTableRow({
   onBanRow,
 }: Props) {
   const { created_at, text, active_status, user } = row;
+  const { t } = useTranslation();
 
   const [status, setStatus] = useState(
     active_status === 0 ? "Disabled" : "Active"
@@ -80,7 +82,11 @@ export default function ExerciseCommentTableRow({
           </Label>
         </TableCell>
         <TableCell align="right" sx={{ px: 1, whiteSpace: "nowrap" }}>
-          <Tooltip title="Quick Edit" placement="top" arrow>
+          <Tooltip
+            title={t("exercisePage.exerciseCommentListView.tableRow.quickEdit")}
+            placement="top"
+            arrow
+          >
             <IconButton
               color={quickEdit.value ? "inherit" : "default"}
               onClick={quickEdit.onTrue}
@@ -121,7 +127,7 @@ export default function ExerciseCommentTableRow({
           sx={{ color: "error.main" }}
         >
           <Iconify icon="solar:close-circle-bold" />
-          Ban
+          {t("exercisePage.exerciseCommentListView.tableRow.ban")}
         </MenuItem>
 
         <MenuItem
@@ -131,15 +137,19 @@ export default function ExerciseCommentTableRow({
           }}
         >
           <Iconify icon="solar:pen-bold" />
-          Edit
+          {t("exercisePage.exerciseCommentListView.tableRow.edit")}
         </MenuItem>
       </CustomPopover>
 
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Ban User"
-        content="Are you sure want to ban?"
+        title={t(
+          "exercisePage.exerciseCommentListView.tableRow.confirmBanTitle"
+        )}
+        content={t(
+          "exercisePage.exerciseCommentListView.tableRow.confirmBanContent"
+        )}
         action={
           <Button
             variant="contained"
@@ -149,7 +159,7 @@ export default function ExerciseCommentTableRow({
               confirm.onFalse();
             }}
           >
-            Ban
+            {t("exercisePage.exerciseCommentListView.tableRow.ban")}
           </Button>
         }
       />
