@@ -163,7 +163,7 @@ export default function ExerciseCommentListView({
 
       // table.onUpdatePageDeleteRow(dataInPage.length);
     },
-    [enqueueSnackbar, tableData]
+    [enqueueSnackbar, t, tableData]
   );
 
   const handleDeleteRows = useCallback(() => {
@@ -185,6 +185,7 @@ export default function ExerciseCommentListView({
     dataFiltered.length,
     dataInPage.length,
     enqueueSnackbar,
+    t,
     table,
     tableData,
   ]);

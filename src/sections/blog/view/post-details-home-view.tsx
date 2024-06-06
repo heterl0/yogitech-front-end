@@ -35,7 +35,7 @@ type Props = {
   title: string;
 };
 
-export default function PostDetailsHomeView({ title }: Props) {
+export default function PostDetailsHomeView({}: Props) {
   // const { post, postError, postLoading } = useGetPost(title);
 
   // const { latestPosts, latestPostsLoading } = useGetLatestPosts(title);

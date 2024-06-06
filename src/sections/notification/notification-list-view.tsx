@@ -2,7 +2,7 @@
 "use client";
 
 import isEqual from "lodash/isEqual";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 
 import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
@@ -69,11 +69,13 @@ export default function NotificationListView() {
     { id: "", width: 88 },
   ];
 
-  const defaultFilters: INotificationTableFilters = {
-    name: "",
-    status: [],
-    type: "all",
-  };
+  const defaultFilters: INotificationTableFilters = useMemo(() => {
+    return {
+      name: "",
+      status: [],
+      type: "all",
+    };
+  }, []);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -127,7 +129,7 @@ export default function NotificationListView() {
 
   const handleResetFilters = useCallback(() => {
     setFilters(defaultFilters);
-  }, []);
+  }, [defaultFilters]);
 
   const handleBanRow = useCallback(
     async (id: number) => {
