@@ -31,7 +31,7 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
   );
 
   const [page, setPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
 
   const renderList = (
     <>

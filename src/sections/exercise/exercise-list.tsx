@@ -27,7 +27,7 @@ export default function ExerciseList({ exercises }: Props) {
     [router]
   );
 
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
 
   const handleDelete = useCallback((id: string) => {
     console.info("DELETE", id);

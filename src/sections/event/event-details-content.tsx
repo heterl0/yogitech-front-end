@@ -7,8 +7,7 @@ import { fDate } from "@/utils/format-time";
 import Iconify from "@/components/iconify";
 import Markdown from "@/components/markdown";
 import { IEvent } from "@/types/event";
-import { Link, alpha, useTheme } from "@mui/material";
-import { bgGradient } from "@/theme/css";
+import { Link } from "@mui/material";
 import { paths } from "@/routes/paths";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +20,6 @@ type Props = {
 export default function EventDetailsContent({ event }: Props) {
   const { title, image_url, start_date, expire_date, description } = event;
 
-  const theme = useTheme();
   const { t } = useTranslation();
 
   const renderGallery = (
@@ -32,11 +30,9 @@ export default function EventDetailsContent({ event }: Props) {
           mb: 5,
           height: 480,
           overflow: "hidden",
-          ...bgGradient({
-            imgUrl: image_url,
-            startColor: `${alpha(theme.palette.grey[900], 0.64)} 0%`,
-            endColor: `${alpha(theme.palette.grey[900], 0.64)} 100%`,
-          }),
+          backgroundImage: `url(${image_url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       ></Box>
     </>

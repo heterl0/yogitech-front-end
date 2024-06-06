@@ -19,7 +19,7 @@ export default function EventList({ events }: Props) {
 
   const [page, setPage] = useState(1);
 
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
 
   // const handleView = useCallback(
   //   (id: string) => {
