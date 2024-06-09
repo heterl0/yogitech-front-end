@@ -91,8 +91,6 @@ export default function PostDetailsView({ id }: Props) {
       <PostDetailsToolbar
         backLink={paths.dashboard.blog.root}
         editLink={paths.dashboard.blog.edit(`${post?.id + ""}`)}
-        liveLink={"#"}
-        // liveLink={paths.post.details(`${post?.title}`)}
         publish={publish}
         onChangePublish={handleChangePublish}
         publishOptions={POST_PUBLISH_OPTIONS}
@@ -119,7 +117,7 @@ export default function PostDetailsView({ id }: Props) {
           {post.description}
         </Typography>
 
-        <Markdown children={post.content} />
+        <Markdown children={post.content} sx={{ mb: 5 }} />
 
         <Stack
           spacing={3}

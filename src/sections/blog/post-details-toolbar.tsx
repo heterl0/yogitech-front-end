@@ -17,7 +17,6 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 type Props = StackProps & {
   backLink: string;
   editLink: string;
-  liveLink: string;
   publish: number;
   onChangePublish: (newValue: number) => void;
   publishOptions: {
@@ -30,7 +29,6 @@ export default function PostDetailsToolbar({
   publish,
   backLink,
   editLink,
-  liveLink,
   publishOptions,
   onChangePublish,
   sx,
@@ -58,13 +56,13 @@ export default function PostDetailsToolbar({
 
         <Box sx={{ flexGrow: 1 }} />
 
-        {publish === 1 && (
+        {/* {publish === 1 && (
           <Tooltip title={t("blogPage.postDetailsToolbar.goLive")}>
             <IconButton component={RouterLink} href={liveLink}>
               <Iconify icon="eva:external-link-fill" />
             </IconButton>
           </Tooltip>
-        )}
+        )} */}
 
         <Tooltip title={t("blogPage.postDetailsToolbar.edit")}>
           <IconButton component={RouterLink} href={editLink}>
