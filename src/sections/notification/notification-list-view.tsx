@@ -14,7 +14,6 @@ import IconButton from "@mui/material/IconButton";
 import TableContainer from "@mui/material/TableContainer";
 
 import { paths } from "@/routes/paths";
-import { useRouter } from "@/routes/hooks";
 import { useBoolean } from "@/hooks/use-boolean";
 import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
@@ -83,13 +82,11 @@ export default function NotificationListView() {
 
   const settings = useSettingsContext();
 
-  const router = useRouter();
-
   const quickCreate = useBoolean();
 
   const confirm = useBoolean();
 
-  const { notifications } = useGetNotifications();
+  const { notifications, notificationsMutate } = useGetNotifications();
 
   const [tableData, setTableData] = useState<INotification[]>([]);
 
@@ -184,18 +181,31 @@ export default function NotificationListView() {
     tableData,
   ]);
 
-  const handleEditRow = useCallback(
-    (id: number) => {
-      router.push(paths.dashboard.account.edit(id));
-    },
-    [router]
-  );
-
   const handleFilterType = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
       handleFilters("type", newValue);
     },
     [handleFilters]
+  );
+
+  const handleMutation = useCallback(
+    (data: INotification, isCreated: boolean) => {
+      if (isCreated) {
+        notificationsMutate(
+          (notifications: INotification[]) => [data, ...notifications],
+          false
+        );
+      } else {
+        notificationsMutate(
+          (notifications: INotification[]) =>
+            notifications.map((notification) =>
+              notification.id === data.id ? data : notification
+            ),
+          false
+        );
+      }
+    },
+    [notificationsMutate]
   );
 
   return (
@@ -343,7 +353,7 @@ export default function NotificationListView() {
                         selected={table.selected.includes(row.id)}
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onBanRow={() => handleBanRow(row.id)}
-                        onEditRow={() => handleEditRow(row.id)}
+                        onEditRow={handleMutation}
                       />
                     ))}
 
@@ -401,6 +411,7 @@ export default function NotificationListView() {
       <NotificationQuickCreateEditForm
         open={quickCreate.value}
         onClose={quickCreate.onFalse}
+        onMutate={handleMutation}
       />
     </>
   );

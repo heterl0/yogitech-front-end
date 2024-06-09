@@ -9,7 +9,7 @@ import { INotification } from "@/types/notification";
 export function useGetNotifications() {
   const URL = endpoints.notification.list;
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating, mutate } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
@@ -18,8 +18,9 @@ export function useGetNotifications() {
       notificationsError: error,
       notificationsValidating: isValidating,
       notificationsEmpty: !isLoading && !data?.length,
+      notificationsMutate: mutate,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating, mutate]
   );
 
   return memoizedValue;

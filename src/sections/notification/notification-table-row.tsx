@@ -22,7 +22,7 @@ import NotificationQuickCreateEditForm from "./notification-quick-create-edit-fo
 
 type Props = {
   selected: boolean;
-  onEditRow: VoidFunction;
+  onEditRow: (data: INotification, isCreated: boolean) => void;
   row: INotification;
   onSelectRow: VoidFunction;
   onBanRow: VoidFunction;
@@ -101,6 +101,7 @@ export default function NotificationTableRow({
           currentNotification={row}
           open={quickEdit.value}
           onClose={quickEdit.onFalse}
+          onMutate={onEditRow}
         />
       )}
 
@@ -123,7 +124,6 @@ export default function NotificationTableRow({
 
         <MenuItem
           onClick={() => {
-            onEditRow();
             popover.onClose();
           }}
         >

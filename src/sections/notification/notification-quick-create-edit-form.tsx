@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -28,20 +28,25 @@ import { INotification, NOTIFICATION_STATUS } from "@/types/notification";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import { FormControlLabel, Switch, Typography } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
+import { format } from "date-fns";
+import { useLocales } from "@/locales";
 // ----------------------------------------------------------------------
 
 type Props = {
   open: boolean;
   onClose: VoidFunction;
   currentNotification?: INotification;
+  onMutate: (data: INotification, isCreated: boolean) => void;
 };
 
 export default function NotificationQuickCreateEditForm({
   currentNotification,
   open,
   onClose,
+  onMutate,
 }: Props) {
   const { t } = useTranslation();
+  const { currentLang } = useLocales();
   const router = useRouter();
   const pathname = usePathname();
   const { enqueueSnackbar } = useSnackbar();
@@ -95,6 +100,8 @@ export default function NotificationQuickCreateEditForm({
             variant: "success",
           });
           onClose();
+          onMutate(res.data as INotification, false);
+          console.log(res.data);
         }
       } else {
         const res = await axiosInstance.post(
@@ -106,6 +113,7 @@ export default function NotificationQuickCreateEditForm({
             variant: "success",
           });
           onClose();
+          onMutate(res.data as INotification, true);
         }
       }
       router.push(pathname);
@@ -115,6 +123,12 @@ export default function NotificationQuickCreateEditForm({
       console.error(error);
     }
   });
+
+  const dateFormatter = useCallback(
+    (weekday: Date) =>
+      format(weekday, "iiiiii", { locale: currentLang.adapterLocale }),
+    [currentLang]
+  );
 
   return (
     <Dialog
@@ -155,6 +169,7 @@ export default function NotificationQuickCreateEditForm({
               onChange={(newValue) => {
                 setDate(newValue as Date);
               }}
+              dayOfWeekFormatter={dateFormatter}
             />
 
             <RHFSelect name="status" label={t("notiPage.Status")}>

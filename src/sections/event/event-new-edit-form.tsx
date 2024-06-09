@@ -35,6 +35,8 @@ import { HttpStatusCode } from "axios";
 import { IEvent, getStatusLabel } from "@/types/event";
 import { IExercise } from "@/types/exercise";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useLocales } from "@/locales";
+import { format } from "date-fns";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -50,7 +52,7 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
   const { t } = useTranslation();
   const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
-
+  const { currentLang } = useLocales();
   const { enqueueSnackbar } = useSnackbar();
 
   const NewTourSchema = Yup.object().shape({
@@ -90,6 +92,12 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
       status: currentEvent?.status || 0,
     }),
     [currentEvent]
+  );
+
+  const dateFormatter = useCallback(
+    (weekday: Date) =>
+      format(weekday, "iiiiii", { locale: currentLang.adapterLocale }),
+    [currentLang]
   );
 
   const methods = useForm({
@@ -280,6 +288,7 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
                           helperText: error?.message,
                         },
                       }}
+                      dayOfWeekFormatter={dateFormatter}
                     />
                   )}
                 />
