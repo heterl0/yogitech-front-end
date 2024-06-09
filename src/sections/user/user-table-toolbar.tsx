@@ -5,16 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-import IconButton from "@mui/material/IconButton";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-
 import Iconify from "@/components/iconify";
-import CustomPopover, { usePopover } from "@/components/custom-popover";
-
 import { IUserTableFilters, IUserTableFilterValue } from "@/types/user";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -31,8 +28,7 @@ export default function UserTableToolbar({
   //
   roleOptions,
 }: Props) {
-  const popover = usePopover();
-
+  const { t } = useTranslation();
   const handleFilterName = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       onFilters("name", event.target.value);
@@ -72,13 +68,13 @@ export default function UserTableToolbar({
             width: { xs: 1, md: 200 },
           }}
         >
-          <InputLabel>Role</InputLabel>
+          <InputLabel>{t("tableHead.role")}</InputLabel>
 
           <Select
             multiple
             value={filters.role}
             onChange={handleFilterRole}
-            input={<OutlinedInput label="Role" />}
+            input={<OutlinedInput label={t("tableHead.role")} />}
             renderValue={(selected) =>
               selected.map((value) => value).join(", ")
             }
@@ -112,7 +108,7 @@ export default function UserTableToolbar({
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder="Search..."
+            placeholder={t("posePage.poseSearch.searchPlaceholder")}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -124,14 +120,14 @@ export default function UserTableToolbar({
               ),
             }}
           />
-
+          {/* 
           <IconButton onClick={popover.onOpen}>
             <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
+          </IconButton> */}
         </Stack>
       </Stack>
 
-      <CustomPopover
+      {/* <CustomPopover
         open={popover.open}
         onClose={popover.onClose}
         arrow="right-top"
@@ -163,7 +159,7 @@ export default function UserTableToolbar({
           <Iconify icon="solar:export-bold" />
           Export
         </MenuItem>
-      </CustomPopover>
+      </CustomPopover> */}
     </>
   );
 }

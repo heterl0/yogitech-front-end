@@ -710,6 +710,7 @@
       "username": "Tên người dùng",
       "email_address": "Địa chỉ Email",
       "phone_number": "Số điện thoại",
+      "password": "Mật khẩu",
       "status": "Trạng thái",
       "role": "Vai trò",
       "provider": "Nhà cung cấp",
@@ -797,5 +798,35 @@
     "redirectHomepage": "Chúng tôi sẽ chuyển hướng bạn đến trang chủ.",
     "errorOccurred": "Đã xảy ra lỗi!!!",
     "errorMessage": "Tài khoản của bạn có thể đã được kích hoạt hoặc không tồn tại trong cơ sở dữ liệu của chúng tôi! Chúng tôi sẽ chuyển hướng bạn đến trang chủ."
+  },
+  "accountListView": {
+    "list": "Danh sách",
+    "dashboard": "Bảng điều khiển",
+    "account": "Tài khoản",
+    "newUser": "Người dùng mới",
+    "banSuccess": "Cấm thành công!",
+    "banFailed": "Cấm thất bại!",
+    "deleteSuccess": "Xóa thành công!",
+    "delete": "Xóa",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa {count} mục?",
+    "statusOptions": {
+      "all": "Tất cả",
+      "active": "Hoạt động",
+      "pending": "Đang chờ",
+      "banned": "Bị cấm"
+    },
+    "tabs": {
+      "all": "Tất cả",
+      "active": "Hoạt động",
+      "pending": "Đang chờ",
+      "banned": "Bị cấm"
+    }
+  },
+  "tableHead": {
+    "username": "Tên người dùng",
+    "phoneNumber": "Số điện thoại",
+    "status": "Trạng thái",
+    "role": "Vai trò",
+    "auth_provider": "Provider"
   }
 }

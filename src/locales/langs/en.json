@@ -712,6 +712,7 @@
       "username": "Username",
       "email_address": "Email Address",
       "phone_number": "Phone Number",
+      "password": "Password",
       "status": "Status",
       "role": "Role",
       "provider": "Provider",
@@ -794,5 +795,35 @@
     "redirectHomepage": "We will redirect you to the homepage.",
     "errorOccurred": "An error has occurred!!!",
     "errorMessage": "Your account may already be activated, or there is no such account in our database! We will redirect you to the homepage."
+  },
+  "accountListView": {
+    "list": "List",
+    "dashboard": "Dashboard",
+    "account": "Account",
+    "newUser": "New User",
+    "banSuccess": "Ban success!",
+    "banFailed": "Ban failed!",
+    "deleteSuccess": "Delete success!",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete {count} items?",
+    "statusOptions": {
+      "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "banned": "Banned"
+    },
+    "tabs": {
+      "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "banned": "Banned"
+    }
+  },
+  "tableHead": {
+    "username": "Username",
+    "phoneNumber": "Phone Number",
+    "status": "Status",
+    "role": "Role",
+    "auth_provider": "Provider"
   }
 }

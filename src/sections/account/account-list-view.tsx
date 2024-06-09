@@ -10,7 +10,6 @@ import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import TableBody from "@mui/material/TableBody";
 import IconButton from "@mui/material/IconButton";
@@ -22,7 +21,7 @@ import { RouterLink } from "@/routes/components";
 
 import { useBoolean } from "@/hooks/use-boolean";
 
-import { _yogitechRole, USER_STATUS_OPTIONS } from "@/_mock";
+import { _yogitechRole } from "@/_mock";
 
 import Label from "@/components/label";
 import Iconify from "@/components/iconify";
@@ -52,20 +51,11 @@ import UserTableFiltersResult from "../user/user-table-filters-result";
 import UserTableRow from "../user/user-table-row";
 import { useGetAccounts } from "@/api/account";
 import axiosInstance, { endpoints } from "@/utils/axios";
-import { HttpStatusCode } from "axios";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: "all", label: "All" }, ...USER_STATUS_OPTIONS];
-
-const TABLE_HEAD = [
-  { id: "username", label: "Username" },
-  { id: "phoneNumber", label: "Phone Number", width: 180 },
-  { id: "status", label: "Status", width: 220 },
-  { id: "role", label: "Role", width: 180 },
-  { id: "auth_provider", label: "Provider", width: 100 },
-  { id: "", width: 88 },
-];
+// const STATUS_OPTIONS = [{ value: "all", label: "All" }, ...USER_STATUS_OPTIONS];
 
 const defaultFilters: IUserTableFilters = {
   name: "",
@@ -76,20 +66,16 @@ const defaultFilters: IUserTableFilters = {
 // ----------------------------------------------------------------------
 
 export default function AccountListView() {
+  const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
 
   const table = useTable();
-
   const settings = useSettingsContext();
-
   const router = useRouter();
-
   const confirm = useBoolean();
-
   const { accounts } = useGetAccounts();
 
   const [tableData, setTableData] = useState<IAccount[]>([]);
-
   const [filters, setFilters] = useState(defaultFilters);
 
   const dataFiltered = applyFilter({
@@ -104,9 +90,7 @@ export default function AccountListView() {
   );
 
   const denseHeight = table.dense ? 56 : 56 + 20;
-
   const canReset = !isEqual(defaultFilters, filters);
-
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   useEffect(() => {
@@ -124,6 +108,15 @@ export default function AccountListView() {
     [table]
   );
 
+  const TABLE_HEAD = [
+    { id: "username", label: t("tableHead.username") },
+    { id: "phoneNumber", label: t("tableHead.phoneNumber"), width: 180 },
+    { id: "status", label: t("tableHead.status"), width: 220 },
+    { id: "role", label: t("tableHead.role"), width: 180 },
+    { id: "auth_provider", label: t("tableHead.auth_provider"), width: 100 },
+    { id: "", width: 88 },
+  ];
+
   const handleResetFilters = useCallback(() => {
     setFilters(defaultFilters);
   }, []);
@@ -136,8 +129,8 @@ export default function AccountListView() {
           active_status: 0,
         }
       );
-      if (response.status === HttpStatusCode.Ok) {
-        const deleteRow = tableData.map((row) => {
+      if (response.status === 200) {
+        const updatedRows = tableData.map((row) => {
           if (row.id === id) {
             return {
               ...row,
@@ -147,16 +140,14 @@ export default function AccountListView() {
           return row;
         });
 
-        enqueueSnackbar("Ban success!");
+        enqueueSnackbar(t("accountListView.banSuccess"));
 
-        setTableData(deleteRow);
+        setTableData(updatedRows);
       } else {
-        enqueueSnackbar("Ban failed!", { variant: "error" });
+        enqueueSnackbar(t("accountListView.banFailed"), { variant: "error" });
       }
-
-      // table.onUpdatePageDeleteRow(dataInPage.length);
     },
-    [enqueueSnackbar, tableData]
+    [enqueueSnackbar, tableData, t]
   );
 
   const handleDeleteRows = useCallback(() => {
@@ -164,7 +155,7 @@ export default function AccountListView() {
       (row) => !table.selected.includes(row.id)
     );
 
-    enqueueSnackbar("Delete success!");
+    enqueueSnackbar(t("accountListView.deleteSuccess"));
 
     setTableData(deleteRows);
 
@@ -178,6 +169,7 @@ export default function AccountListView() {
     enqueueSnackbar,
     table,
     tableData,
+    t,
   ]);
 
   const handleEditRow = useCallback(
@@ -198,11 +190,17 @@ export default function AccountListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : "lg"}>
         <CustomBreadcrumbs
-          heading="List"
+          heading={t("accountListView.list")}
           links={[
-            { name: "Dashboard", href: paths.dashboard.root },
-            { name: "Account", href: paths.dashboard.account.root },
-            { name: "List" },
+            {
+              name: t("accountListView.dashboard"),
+              href: paths.dashboard.root,
+            },
+            {
+              name: t("accountListView.account"),
+              href: paths.dashboard.account.root,
+            },
+            { name: t("accountListView.list") },
           ]}
           action={
             <Button
@@ -211,12 +209,10 @@ export default function AccountListView() {
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              New User
+              {t("accountListView.newUser")}
             </Button>
           }
-          sx={{
-            mb: { xs: 3, md: 5 },
-          }}
+          sx={{ mb: { xs: 3, md: 5 } }}
         />
 
         <Card>
@@ -226,42 +222,42 @@ export default function AccountListView() {
             sx={{
               px: 2.5,
               boxShadow: (theme) =>
-                `inset 0 -2px 0 0 ${alpha(theme.palette.grey[500], 0.08)}`,
+                `inset 0 -2px 0 0 ${theme.palette.grey[500]}80`,
             }}
           >
-            {STATUS_OPTIONS.map((tab) => (
+            {["all", "active", "pending", "banned"].map((tab) => (
               <Tab
-                key={tab.value}
+                key={tab}
                 iconPosition="end"
-                value={tab.value}
-                label={tab.label}
+                value={tab}
+                label={t(`accountListView.tabs.${tab}`)}
                 icon={
                   <Label
                     variant={
-                      ((tab.value === "all" || tab.value === filters.status) &&
-                        "filled") ||
-                      "soft"
+                      tab === "all" || tab === filters.status
+                        ? "filled"
+                        : "soft"
                     }
                     color={
-                      (tab.value === "active" && "success") ||
-                      (tab.value === "pending" && "warning") ||
-                      (tab.value === "banned" && "error") ||
+                      (tab === "active" && "success") ||
+                      (tab === "pending" && "warning") ||
+                      (tab === "banned" && "error") ||
                       "default"
                     }
                   >
-                    {["active", "pending", "banned"].includes(tab.value)
-                      ? tab.value === "active"
+                    {tab === "active"
+                      ? tableData.filter(
+                          (user) => user.is_active && user.active_status === 1
+                        ).length
+                      : tab === "pending"
                         ? tableData.filter(
-                            (user) => user.is_active && user.active_status === 1
+                            (user) =>
+                              !user.is_active && user.active_status === 1
                           ).length
-                        : tab.value === "pending"
-                          ? tableData.filter(
-                              (user) =>
-                                !user.is_active && user.active_status === 1
-                            ).length
-                          : tableData.filter((user) => user.active_status === 0)
+                        : tab === "banned"
+                          ? tableData.filter((user) => user.active_status === 0)
                               .length
-                      : tableData.length}
+                          : tableData.length}
                   </Label>
                 }
               />
@@ -271,7 +267,6 @@ export default function AccountListView() {
           <UserTableToolbar
             filters={filters}
             onFilters={handleFilters}
-            //
             roleOptions={_yogitechRole}
           />
 
@@ -279,9 +274,7 @@ export default function AccountListView() {
             <UserTableFiltersResult
               filters={filters}
               onFilters={handleFilters}
-              //
               onResetFilters={handleResetFilters}
-              //
               results={dataFiltered.length}
               sx={{ p: 2.5, pt: 0 }}
             />
@@ -299,7 +292,7 @@ export default function AccountListView() {
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title={t("accountListView.delete")}>
                   <IconButton color="primary" onClick={confirm.onTrue}>
                     <Iconify icon="solar:trash-bin-trash-bold" />
                   </IconButton>
@@ -365,7 +358,6 @@ export default function AccountListView() {
             rowsPerPage={table.rowsPerPage}
             onPageChange={table.onChangePage}
             onRowsPerPageChange={table.onChangeRowsPerPage}
-            //
             dense={table.dense}
             onChangeDense={table.onChangeDense}
           />
@@ -375,11 +367,12 @@ export default function AccountListView() {
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t("accountListView.delete")}
         content={
           <>
-            Are you sure want to delete{" "}
-            <strong> {table.selected.length} </strong> items?
+            {t("accountListView.deleteConfirm", {
+              count: table.selected.length,
+            })}
           </>
         }
         action={
@@ -391,7 +384,7 @@ export default function AccountListView() {
               confirm.onFalse();
             }}
           >
-            Delete
+            {t("accountListView.delete")}
           </Button>
         }
       />

@@ -15,12 +15,14 @@ import { typography } from "./typography";
 import { customShadows } from "./custom-shadows";
 import { componentsOverrides } from "./overrides";
 import NextAppDirEmotionCacheProvider from "./next-emotion-cache";
+import { useLocales } from "@/locales";
 
 type Props = {
   children: React.ReactNode;
 };
 
 export default function ThemeProvider({ children }: Props) {
+  const { currentLang } = useLocales();
   const memoizedValue = useMemo(
     () => ({
       palette: palette("light"), // or palette('dark')
@@ -36,10 +38,15 @@ export default function ThemeProvider({ children }: Props) {
 
   theme.components = componentsOverrides(theme);
 
+  const themeWithLocale = useMemo(
+    () => createTheme(theme, currentLang.systemValue),
+    [currentLang.systemValue, theme]
+  );
+
   const options = useMemo(() => ({ key: "css" }), []);
   return (
     <NextAppDirEmotionCacheProvider options={options}>
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={themeWithLocale}>
         <CssBaseline />
         {children}
       </MuiThemeProvider>
