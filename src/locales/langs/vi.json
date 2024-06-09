@@ -732,5 +732,70 @@
     "Beginner": "Dễ",
     "Intermediate": "Cơ bản",
     "Advanced": "Nâng cao"
+  },
+  "login": {
+    "title": "Đăng nhập vào YogiTech",
+    "newUser": "Người dùng mới?",
+    "createAccount": "Tạo tài khoản",
+    "emailLabel": "Địa chỉ email",
+    "passwordLabel": "Mật khẩu",
+    "forgotPassword": "Quên mật khẩu?",
+    "loginButton": "Đăng nhập",
+    "onlyAdmin": "Chỉ Quản trị viên mới có thể đăng nhập vào Trang web.",
+    "error": {
+      "emailRequired": "Yêu cầu nhập email",
+      "emailInvalid": "Email phải là địa chỉ email hợp lệ",
+      "passwordRequired": "Yêu cầu nhập mật khẩu",
+      "notCredentialAvailable": "Không có thông tin đăng nhập",
+      "genericError": "Lỗi"
+    },
+    "googleButton": "Đăng nhập bằng Google"
+  },
+  "register": {
+    "heading": "Bắt đầu hoàn toàn miễn phí",
+    "alreadyHaveAccount": "Đã có tài khoản?",
+    "signIn": "Đăng nhập",
+    "username": "Tên người dùng",
+    "email": "Địa chỉ email",
+    "password": "Mật khẩu",
+    "rePassword": "Nhập lại mật khẩu",
+    "createAccount": "Tạo tài khoản",
+    "terms": "Bằng cách đăng ký, tôi đồng ý với",
+    "termsOfService": "Điều khoản dịch vụ",
+    "privacyPolicy": "Chính sách bảo mật",
+    "error": "Lỗi"
+  },
+  "forgotPassword": {
+    "emailRequired": "Yêu cầu email",
+    "emailInvalid": "Email phải là một địa chỉ email hợp lệ",
+    "sendRequest": "Gửi Yêu Cầu",
+    "returnToSignIn": "Trở lại đăng nhập",
+    "forgotPassword": "Quên mật khẩu của bạn?",
+    "enterEmail": "Vui lòng nhập địa chỉ email liên kết với tài khoản của bạn và chúng tôi sẽ gửi email cho bạn một liên kết để đặt lại mật khẩu của bạn.",
+    "sendRequestSuccess": "Gửi yêu cầu thành công!",
+    "checkMail": "Kiểm tra lại email của bạn! Chúng tôi sẽ chuyển hướng bạn đến trang chủ.",
+    "email": "Vui lòng nhập email của bạn"
+  },
+  "forgotPasswordRetype": {
+    "passwordRequired": "Yêu cầu mật khẩu",
+    "passwordMin": "Mật khẩu phải có ít nhất 8 ký tự",
+    "passwordsMustMatch": "Mật khẩu phải trùng khớp",
+    "updatePassword": "Cập nhật Mật khẩu",
+    "returnToSignIn": "Trở lại đăng nhập",
+    "requestSentSuccess": "Yêu cầu đã được gửi thành công!",
+    "enterNewPassword": "Vui lòng nhập mật khẩu mới mà bạn muốn đặt lại.",
+    "updateSuccess": "Cập nhật thành công!",
+    "redirectToLogin": "Chúng tôi sẽ chuyển hướng bạn đến trang đăng nhập.",
+    "errorOccurred": "Đã xảy ra lỗi!!!",
+    "expiredLink": "Liên kết đặt lại mật khẩu của bạn đã hết hạn! Vui lòng gửi yêu cầu đặt lại mật khẩu khác."
+  },
+  "activateView": {
+    "activate": "Kích hoạt",
+    "welcome": "Chào mừng đến với YogiTect",
+    "confirmEmail": "Xin lỗi vì sự phiền hà, chúng tôi chỉ muốn xác nhận đây là email thực của bạn để đảm bảo an ninh.",
+    "activationSuccess": "Kích hoạt thành công!",
+    "redirectHomepage": "Chúng tôi sẽ chuyển hướng bạn đến trang chủ.",
+    "errorOccurred": "Đã xảy ra lỗi!!!",
+    "errorMessage": "Tài khoản của bạn có thể đã được kích hoạt hoặc không tồn tại trong cơ sở dữ liệu của chúng tôi! Chúng tôi sẽ chuyển hướng bạn đến trang chủ."
   }
 }

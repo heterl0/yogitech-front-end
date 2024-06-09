@@ -16,10 +16,13 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useBoolean } from "@/hooks/use-boolean";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function ActivateView() {
+  const { t } = useTranslation();
+
   const path = usePathname().split("/");
   const router = useRouter();
   const pathLength = path.length;
@@ -71,7 +74,7 @@ export default function ActivateView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Activate
+        {t("activateView.activate")}
       </LoadingButton>
     </Stack>
   );
@@ -81,11 +84,10 @@ export default function ActivateView() {
       <SentIcon sx={{ height: 96 }} />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">Welcome to YogiTect</Typography>
+        <Typography variant="h3">{t("activateView.welcome")}</Typography>
 
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Sorry for bother you, we just want to confirm that is your real email,
-          ensure your sure.
+          {t("activateView.confirmEmail")}
         </Typography>
       </Stack>
     </>
@@ -95,15 +97,14 @@ export default function ActivateView() {
     <>
       <FormProvider methods={methods} onSubmit={onSubmit}>
         {renderHead}
-
         {renderForm}
       </FormProvider>
       <Dialog open={dialog.value} onClose={dialog.onFalse}>
-        <DialogTitle>{`Activation Successfully!`}</DialogTitle>
+        <DialogTitle>{t("activateView.activationSuccess")}</DialogTitle>
 
         <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
           <div className="flex flex-col items-center justify-center gap-8">
-            <Typography>We will redirect you to the homepage.</Typography>
+            <Typography>{t("activateView.redirectHomepage")}</Typography>
             <div>
               <CircularProgress color="primary" size={32} />
             </div>
@@ -111,17 +112,13 @@ export default function ActivateView() {
         </DialogContent>
       </Dialog>
       <Dialog open={errorDialog.value} onClose={errorDialog.onFalse}>
-        <DialogTitle
-          className="text-error-main"
-          sx={{ color: "text.error" }}
-        >{`Error have been happened!!!`}</DialogTitle>
+        <DialogTitle className="text-error-main" sx={{ color: "text.error" }}>
+          {t("activateView.errorOccurred")}
+        </DialogTitle>
 
         <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
           <div className="flex flex-col items-center justify-center gap-8">
-            <Typography>
-              You account have been activated or there is no account in
-              databases! We will redirect you to the homepage.
-            </Typography>
+            <Typography>{t("activateView.errorMessage")}</Typography>
             <div className="p-2">
               <CircularProgress color="error" size={32} />
             </div>

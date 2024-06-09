@@ -729,5 +729,70 @@
     "settings": "Settings",
     "logout": "Logout",
     "unableToLogout": "Unable to logout!"
+  },
+  "login": {
+    "title": "Sign in to YogiTech",
+    "newUser": "New user?",
+    "createAccount": "Create an account",
+    "emailLabel": "Email address",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot password?",
+    "loginButton": "Login",
+    "onlyAdmin": "Only Administrator can log in to Website.",
+    "error": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Email must be a valid email address",
+      "passwordRequired": "Password is required",
+      "notCredentialAvailable": "Not Credential Available",
+      "genericError": "Error"
+    },
+    "googleButton": "Login with Google"
+  },
+  "register": {
+    "heading": "Get started absolutely free",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "username": "Username",
+    "email": "Email address",
+    "password": "Password",
+    "rePassword": "Re-password",
+    "createAccount": "Create account",
+    "terms": "By signing up, I agree to",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "error": "Error"
+  },
+  "forgotPassword": {
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email must be a valid email address",
+    "sendRequest": "Send Request",
+    "returnToSignIn": "Return to sign in",
+    "forgotPassword": "Forgot your password?",
+    "enterEmail": "Please enter the email address associated with your account and we will email you a link to reset your password.",
+    "sendRequestSuccess": "Send Request Successfully!",
+    "checkMail": "Check your mail again! We will redirect you to the homepage.",
+    "email": "Please enter your email"
+  },
+  "forgotPasswordRetype": {
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 8 characters long",
+    "passwordsMustMatch": "Passwords must match",
+    "updatePassword": "Update Password",
+    "returnToSignIn": "Return to sign in",
+    "requestSentSuccess": "Request sent successfully!",
+    "enterNewPassword": "Please enter your new password you want to reset.",
+    "updateSuccess": "Update Successfully!",
+    "redirectToLogin": "We will redirect you to login page.",
+    "errorOccurred": "An error has occurred!!!",
+    "expiredLink": "Your reset password link has expired! Please send another reset password request."
+  },
+  "activateView": {
+    "activate": "Activate",
+    "welcome": "Welcome to YogiTect",
+    "confirmEmail": "Sorry for the bother, we just want to confirm that this is your real email to ensure your security.",
+    "activationSuccess": "Activation Successfully!",
+    "redirectHomepage": "We will redirect you to the homepage.",
+    "errorOccurred": "An error has occurred!!!",
+    "errorMessage": "Your account may already be activated, or there is no such account in our database! We will redirect you to the homepage."
   }
 }

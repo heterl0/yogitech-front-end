@@ -25,15 +25,19 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function JwtForgotPasswordView() {
+  const { t } = useTranslation();
+
   const ForgotPasswordSchema = Yup.object().shape({
     email: Yup.string()
-      .required("Email is required")
-      .email("Email must be a valid email address"),
+      .required(t("forgotPassword.emailRequired"))
+      .email(t("forgotPassword.emailInvalid")),
   });
+
   const dialog = useBoolean();
   const router = useRouter();
   const defaultValues = {
@@ -66,7 +70,7 @@ export default function JwtForgotPasswordView() {
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
-      <RHFTextField name="email" label="Email address" />
+      <RHFTextField name="email" label={t("forgotPassword.email")} />
 
       <LoadingButton
         fullWidth
@@ -75,7 +79,7 @@ export default function JwtForgotPasswordView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Send Request
+        {t("forgotPassword.sendRequest")}
       </LoadingButton>
 
       <Link
@@ -89,7 +93,7 @@ export default function JwtForgotPasswordView() {
         }}
       >
         <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-        Return to sign in
+        {t("forgotPassword.returnToSignIn")}
       </Link>
     </Stack>
   );
@@ -99,11 +103,12 @@ export default function JwtForgotPasswordView() {
       <PasswordIcon sx={{ height: 96 }} />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">Forgot your password?</Typography>
+        <Typography variant="h3">
+          {t("forgotPassword.forgotPassword")}
+        </Typography>
 
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Please enter the email address associated with your account and We
-          will email you a link to reset your password.
+          {t("forgotPassword.enterEmail")}
         </Typography>
       </Stack>
     </>
@@ -117,13 +122,11 @@ export default function JwtForgotPasswordView() {
         {renderForm}
       </FormProvider>
       <Dialog open={dialog.value} onClose={dialog.onFalse}>
-        <DialogTitle>{`Send Request Successfully!`}</DialogTitle>
+        <DialogTitle>{t("forgotPassword.sendRequestSuccess")}</DialogTitle>
 
         <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
           <div className="flex flex-col items-center justify-center gap-8">
-            <Typography>
-              Check your mail again! We will redirect you to the homepage.
-            </Typography>
+            <Typography>{t("forgotPassword.checkMail")}</Typography>
             <div>
               <CircularProgress color="primary" size={32} />
             </div>

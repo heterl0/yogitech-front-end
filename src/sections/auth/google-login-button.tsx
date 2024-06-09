@@ -4,8 +4,10 @@ import { PATH_AFTER_LOGIN } from "@/config-global";
 import { Button } from "@mui/material";
 import { CredentialResponse, useGoogleLogin } from "@react-oauth/google";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function GoogleLoginButton() {
+  const { t } = useTranslation();
   const { loginWithGoogle } = useAuthContext();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -27,5 +29,5 @@ export default function GoogleLoginButton() {
   const login = useGoogleLogin({
     onSuccess: () => handleGoogleLoginSuccess,
   });
-  return <Button onClick={() => login()}>Login with Google</Button>;
+  return <Button onClick={() => login()}>{t("login.googleButton")}</Button>;
 }

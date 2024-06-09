@@ -26,36 +26,30 @@ import { ALLOW_TO_REGISTER, PATH_AFTER_LOGIN } from "@/config-global";
 import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
 import { notFound } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function JwtRegisterView() {
+  const { t } = useTranslation();
   const { register } = useAuthContext();
-
   const router = useRouter();
-
   const allowRegister = ALLOW_TO_REGISTER;
-
   const [errorMsg, setErrorMsg] = useState("");
-
-  // const searchParams = useSearchParams();
-
-  // const returnTo = searchParams.get("returnTo");
-
   const password = useBoolean();
   const rePassword = useBoolean();
 
   const RegisterSchema = Yup.object().shape({
-    username: Yup.string().required("Username is required"),
+    username: Yup.string().required(t("register.usernameRequired")),
     email: Yup.string()
-      .required("Email is required")
-      .email("Email must be a valid email address"),
+      .required(t("register.emailRequired"))
+      .email(t("register.emailInvalid")),
     password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters long"),
+      .required(t("register.passwordRequired"))
+      .min(8, t("register.passwordMin")),
     re_password: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Re-entering password is required"),
+      .oneOf([Yup.ref("password")], t("register.passwordsMustMatch"))
+      .required(t("register.rePasswordRequired")),
   });
 
   const defaultValues = {
@@ -85,28 +79,27 @@ export default function JwtRegisterView() {
         data.password,
         data.re_password
       );
-
       router.push(PATH_AFTER_LOGIN);
     } catch (error) {
       console.error(error);
       reset();
-      setErrorMsg(typeof error === "string" ? error : "Error");
+      setErrorMsg(typeof error === "string" ? error : t("register.error"));
     }
   });
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: "relative" }}>
-      <Typography variant="h4">Get started absolutely free</Typography>
-
+      <Typography variant="h4">{t("register.heading")}</Typography>
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2"> Already have an account? </Typography>
-
+        <Typography variant="body2">
+          {t("register.alreadyHaveAccount")}
+        </Typography>
         <Link
           href={paths.auth.jwt.login}
           component={RouterLink}
           variant="subtitle2"
         >
-          Sign in
+          {t("register.signIn")}
         </Link>
       </Stack>
     </Stack>
@@ -122,13 +115,13 @@ export default function JwtRegisterView() {
         color: "text.secondary",
       }}
     >
-      {"By signing up, I agree to "}
+      {t("register.terms")}{" "}
       <Link underline="always" color="text.primary">
-        Terms of Service
-      </Link>
-      {" and "}
+        {t("register.termsOfService")}
+      </Link>{" "}
+      {t("register.and")}{" "}
       <Link underline="always" color="text.primary">
-        Privacy Policy
+        {t("register.privacyPolicy")}
       </Link>
       .
     </Typography>
@@ -136,13 +129,11 @@ export default function JwtRegisterView() {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      <RHFTextField name="username" label="Username" />
-
-      <RHFTextField name="email" label="Email address" />
-
+      <RHFTextField name="username" label={t("register.username")} />
+      <RHFTextField name="email" label={t("register.email")} />
       <RHFTextField
         name="password"
-        label="Password"
+        label={t("register.password")}
         type={password.value ? "text" : "password"}
         InputProps={{
           endAdornment: (
@@ -158,10 +149,9 @@ export default function JwtRegisterView() {
           ),
         }}
       />
-
       <RHFTextField
         name="re_password"
-        label="Re-password"
+        label={t("register.rePassword")}
         type={rePassword.value ? "text" : "password"}
         InputProps={{
           endAdornment: (
@@ -179,7 +169,6 @@ export default function JwtRegisterView() {
           ),
         }}
       />
-
       <LoadingButton
         fullWidth
         color="inherit"
@@ -188,7 +177,7 @@ export default function JwtRegisterView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Create account
+        {t("register.createAccount")}
       </LoadingButton>
     </Stack>
   );
@@ -200,17 +189,14 @@ export default function JwtRegisterView() {
   return (
     <>
       {renderHead}
-
       {!!errorMsg && (
         <Alert severity="error" sx={{ m: 3 }}>
           {errorMsg}
         </Alert>
       )}
-
       <FormProvider methods={methods} onSubmit={onSubmit}>
         {renderForm}
       </FormProvider>
-
       {renderTerms}
     </>
   );

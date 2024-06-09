@@ -25,10 +25,13 @@ import Iconify from "@/components/iconify";
 import axiosInstance from "@/utils/axios";
 import { RouterLink } from "@/routes/components";
 import { paths } from "@/routes/paths";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function ForgetPasswordRetypeView() {
+  const { t } = useTranslation();
+
   const path = usePathname().split("/");
   const router = useRouter();
   const pathLength = path.length;
@@ -47,11 +50,14 @@ export default function ForgetPasswordRetypeView() {
 
   const ChangePasswordSchema = Yup.object().shape({
     new_password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters long"),
+      .required(t("forgotPasswordRetype.passwordRequired"))
+      .min(8, t("forgotPasswordRetype.passwordMin")),
     re_password: Yup.string()
-      .oneOf([Yup.ref("new_password")], "Passwords must match")
-      .required("Re-entering password is required"),
+      .oneOf(
+        [Yup.ref("new_password")],
+        t("forgotPasswordRetype.passwordsMustMatch")
+      )
+      .required(t("forgotPasswordRetype.passwordRequired")),
     uid: Yup.string(),
     token: Yup.string(),
   });
@@ -94,7 +100,7 @@ export default function ForgetPasswordRetypeView() {
 
       <RHFTextField
         name="new_password"
-        label="New Password"
+        label={t("forgotPasswordRetype.newPassword")}
         type={password.value ? "text" : "password"}
         InputProps={{
           endAdornment: (
@@ -113,7 +119,7 @@ export default function ForgetPasswordRetypeView() {
 
       <RHFTextField
         name="re_password"
-        label="Re-password"
+        label={t("forgotPasswordRetype.rePassword")}
         type={rePassword.value ? "text" : "password"}
         InputProps={{
           endAdornment: (
@@ -140,7 +146,7 @@ export default function ForgetPasswordRetypeView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Update Password
+        {t("forgotPasswordRetype.updatePassword")}
       </LoadingButton>
       <Link
         component={RouterLink}
@@ -153,7 +159,7 @@ export default function ForgetPasswordRetypeView() {
         }}
       >
         <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-        Return to sign in
+        {t("forgotPasswordRetype.returnToSignIn")}
       </Link>
     </Stack>
   );
@@ -163,10 +169,12 @@ export default function ForgetPasswordRetypeView() {
       <SentIcon sx={{ height: 96 }} />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">Request sent successfully!</Typography>
+        <Typography variant="h3">
+          {t("forgotPasswordRetype.requestSentSuccess")}
+        </Typography>
 
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Please enter your new password you want to reset.
+          {t("forgotPasswordRetype.enterNewPassword")}
         </Typography>
       </Stack>
     </>
@@ -180,11 +188,11 @@ export default function ForgetPasswordRetypeView() {
         {renderForm}
       </FormProvider>
       <Dialog open={dialog.value} onClose={dialog.onFalse}>
-        <DialogTitle>{`Update Successfully!`}</DialogTitle>
+        <DialogTitle>{t("forgotPasswordRetype.updateSuccess")}</DialogTitle>
 
         <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
           <div className="flex flex-col items-center justify-center gap-8">
-            <Typography>We will redirect you to login page.</Typography>
+            <Typography>{t("forgotPasswordRetype.redirectToLogin")}</Typography>
             <div>
               <CircularProgress color="primary" size={32} />
             </div>
@@ -192,17 +200,13 @@ export default function ForgetPasswordRetypeView() {
         </DialogContent>
       </Dialog>
       <Dialog open={errorDialog.value} onClose={errorDialog.onFalse}>
-        <DialogTitle
-          className="text-error-main"
-          sx={{ color: "text.error" }}
-        >{`Error have been happened!!!`}</DialogTitle>
+        <DialogTitle className="text-error-main" sx={{ color: "text.error" }}>
+          {t("forgotPasswordRetype.errorOccurred")}
+        </DialogTitle>
 
         <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
           <div className="flex flex-col items-center justify-center gap-8">
-            <Typography>
-              Your resend password link have been expired!
-              <br /> Please send another reset password request!
-            </Typography>
+            <Typography>{t("forgotPasswordRetype.expiredLink")}</Typography>
             <div className="p-2">
               <CircularProgress color="error" size={32} />
             </div>
