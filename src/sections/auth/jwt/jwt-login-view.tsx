@@ -153,6 +153,7 @@ export default function JwtLoginView() {
       </LoadingButton>
     </Stack>
   );
+  console.log(ALLOW_TO_LOGIN_WITH_GOOGLE);
 
   return (
     <>
