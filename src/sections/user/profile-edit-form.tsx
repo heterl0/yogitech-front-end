@@ -33,6 +33,7 @@ import BmiScore from "../../constants/bmi-score";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
 import { paths } from "@/routes/paths";
+import { useBoolean } from "@/hooks/use-boolean";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -46,6 +47,8 @@ export default function ProfileEditForm({ currentProfile }: Props) {
   const [date, setDate] = useState(
     currentProfile?.birthdate ? new Date(currentProfile?.birthdate) : new Date()
   );
+
+  const changeImage = useBoolean(false);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -64,7 +67,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
       first_name: currentProfile?.first_name || "",
       last_name: currentProfile?.last_name || "",
       avatar: currentProfile?.avatar_url || "",
-      gender: currentProfile?.gender || -1,
+      gender: currentProfile?.gender || 0,
       height: currentProfile?.height || 0,
       weight: currentProfile?.weight || 0,
       level: currentProfile?.level || 1,
@@ -101,8 +104,8 @@ export default function ProfileEditForm({ currentProfile }: Props) {
       formData.append("weight", data.weight + "");
       formData.append("level", data.level + "");
       formData.append("birthdate", date.toISOString());
-      formData.append("avatar", data.avatar);
-      formData.append("bmi", fShortenNumber(bmi) + "");
+      if (changeImage.value) formData.append("avatar", data.avatar);
+      formData.append("bmi", bmi.toFixed(2) + "");
       const response = await axiosInstance.patch(
         endpoints.profile.details(currentProfile?.id + ""),
         formData
@@ -129,10 +132,11 @@ export default function ProfileEditForm({ currentProfile }: Props) {
       });
 
       if (file) {
+        changeImage.onTrue();
         setValue("avatar", newFile, { shouldValidate: true });
       }
     },
-    [setValue]
+    [changeImage, setValue]
   );
 
   return (
