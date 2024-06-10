@@ -100,8 +100,11 @@ export default function PostDetailsToolbar({
           >
             {option.value === 1 && <Iconify icon="eva:cloud-upload-fill" />}
             {option.value === 0 && <Iconify icon="solar:file-text-bold" />}
+            {option.value === 2 && (
+              <Iconify icon="solar:trash-bin-trash-bold" />
+            )}
             {t(
-              `blogPage.postDetailsToolbar.${option.value === 1 ? "publish" : "draft"}`
+              `blogPage.postDetailsToolbar.${option.value === 1 ? "publish" : option.value === 0 ? "draft" : "trash"}`
             )}
           </MenuItem>
         ))}

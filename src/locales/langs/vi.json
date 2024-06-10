@@ -500,7 +500,8 @@
       "tabs": {
         "all": "Tất cả",
         "draft": "Bản nháp",
-        "published": "Đã xuất bản"
+        "published": "Đã xuất bản",
+        "trash": "Thùng rác"
       }
     },
     "postCommentForm": {
@@ -531,7 +532,8 @@
       "loading": "Đang tải...",
       "changeStatus": "Thay đổi trạng thái",
       "publish": "Xuất bản",
-      "draft": "Bản nháp"
+      "draft": "Bản nháp",
+      "trash": "Thùng rác"
     },
     "postItemHorizontal": {
       "published": "Đã xuất bản",

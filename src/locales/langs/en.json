@@ -502,7 +502,8 @@
       "tabs": {
         "all": "All",
         "draft": "Draft",
-        "published": "Published"
+        "published": "Published",
+        "trash": "Trash"
       }
     },
     "postCommentForm": {
@@ -533,7 +534,8 @@
       "loading": "Loading...",
       "changeStatus": "Change Status",
       "publish": "Publish",
-      "draft": "Draft"
+      "draft": "Draft",
+      "trash": "Trash"
     },
     "postItemHorizontal": {
       "published": "Published",

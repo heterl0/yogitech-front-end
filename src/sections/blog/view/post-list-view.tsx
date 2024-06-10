@@ -135,16 +135,27 @@ export default function PostListView() {
           mb: { xs: 3, md: 5 },
         }}
       >
-        {[-1, 0, 1].map((tab) => (
+        {[-1, 1, 0, 2].map((tab) => (
           <Tab
             key={tab}
             iconPosition="end"
             value={tab}
-            label={tab === -1 ? "All" : tab === 0 ? "Draft" : "Published"}
+            label={
+              tab === -1
+                ? t("blogPage.listView.tabs.all")
+                : tab === 0
+                  ? t("blogPage.listView.tabs.draft")
+                  : tab === 1
+                    ? t("blogPage.listView.tabs.published")
+                    : t("blogPage.listView.tabs.trash")
+            }
             icon={
               <Label
                 variant={((tab === -1 || filter === tab) && "filled") || "soft"}
-                color={(tab === 1 && "info") || "default"}
+                color={
+                  (tab === 1 ? "info" : tab === 2 ? "error" : "default") ||
+                  "default"
+                }
               >
                 {tab === -1 && posts.length}
 
@@ -156,6 +167,11 @@ export default function PostListView() {
                 {tab === 0 &&
                   posts.filter(
                     (post) => post.active_status === ActiveStatus.Disable
+                  ).length}
+
+                {tab === 2 &&
+                  posts.filter(
+                    (post) => post.active_status === ActiveStatus.Trash
                   ).length}
               </Label>
             }

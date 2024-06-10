@@ -7,6 +7,10 @@ export const POST_PUBLISH_OPTIONS = [
     value: 0,
     label: "Draft",
   },
+  {
+    value: 2,
+    label: "Trash",
+  },
 ];
 
 export const POST_SORT_OPTIONS = [

@@ -109,9 +109,23 @@ export default function PostItemHorizontal({ post }: Props) {
           >
             <Label
               variant="soft"
-              color={(active_status === 1 && "info") || "default"}
+              color={
+                (active_status === 1
+                  ? "info"
+                  : active_status === 2
+                    ? "error"
+                    : "default") || "default"
+              }
             >
-              {active_status === 1 ? "published" : "draft"}
+              {t(
+                `blogPage.postDetailsToolbar.${
+                  active_status === 1
+                    ? "publish"
+                    : active_status === 0
+                      ? "draft"
+                      : "trash"
+                }`
+              )}
             </Label>
 
             <Box

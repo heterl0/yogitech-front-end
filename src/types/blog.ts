@@ -92,4 +92,5 @@ export type IBlog = {
 export enum ActiveStatus {
   Active = 1,
   Disable = 0,
+  Trash = 2,
 }
