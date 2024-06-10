@@ -833,7 +833,8 @@
   "sort": {
     "sortBy": "Sắp xếp theo:",
     "latest": "Mới nhất",
-    "oldest": "Cũ nhất"
+    "oldest": "Cũ nhất",
+    "popular": "Phổ biến"
   },
   "filterResults": {
     "resultsFound": "kết quả được tìm thấy",

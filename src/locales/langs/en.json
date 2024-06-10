@@ -829,7 +829,8 @@
   "sort": {
     "sortBy": "Sort By:",
     "latest": "Latest",
-    "oldest": "Oldest"
+    "oldest": "Oldest",
+    "popular": "Popular"
   },
   "level": {
     "all": "All",

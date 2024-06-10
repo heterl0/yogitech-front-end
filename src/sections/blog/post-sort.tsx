@@ -39,7 +39,7 @@ export default function PostSort({ sort, sortOptions, onSort }: Props) {
       >
         {t("blogPage.sort.sortBy")}
         <Box component="span" sx={{ ml: 0.5, fontWeight: "fontWeightBold" }}>
-          {sort}
+          {t("sort." + sort.toLowerCase())}
         </Box>
       </Button>
 

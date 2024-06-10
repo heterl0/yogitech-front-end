@@ -14,7 +14,6 @@ import { RouterLink } from "@/routes/components";
 
 import { useDebounce } from "@/hooks/use-debounce";
 
-import { POST_SORT_OPTIONS } from "@/_mock";
 import { useGetPosts, useSearchPosts } from "@/api/blog";
 
 import Label from "@/components/label";
@@ -53,6 +52,12 @@ export default function PostListView() {
     sortBy,
   });
   const { t } = useTranslation();
+
+  const POST_SORT_OPTIONS = [
+    { value: "latest", label: t("sort.latest") },
+    { value: "oldest", label: t("sort.oldest") },
+    { value: "popular", label: t("sort.popular") },
+  ];
 
   const handleSortBy = useCallback((newValue: string) => {
     setSortBy(newValue);
