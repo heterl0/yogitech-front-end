@@ -451,6 +451,10 @@
         "back": "Back",
         "edit": "Edit",
         "loading": "Loading..."
+      },
+      "tabs": {
+        "detail": "Event Detail",
+        "ranking": "Ranking"
       }
     }
   },

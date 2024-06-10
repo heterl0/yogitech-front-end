@@ -7,12 +7,13 @@ import Container from "@mui/material/Container";
 import { paths } from "@/routes/paths";
 import { useSettingsContext } from "@/components/settings";
 import { useGetEvent } from "@/api/event";
-import { EVENT_DETAILS_TABS, EVENT_STATUS } from "@/types/event";
+import { EVENT_STATUS } from "@/types/event";
 import EventDetailsContent from "../event-details-content";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import Label from "@/components/label";
 import EventDetailsCandidates from "../event-details-candidates";
 import EventDetailsToolbar from "../event-details-toolbar";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,13 @@ export default function EventDetailsView({ id }: Props) {
   const [status, setStatus] = useState(0);
 
   const [currentTab, setCurrentTab] = useState("detail");
+
+  const { t } = useTranslation();
+
+  const EVENT_DETAILS_TABS = [
+    { value: "detail", label: t("eventPage.tabs.detail") },
+    { value: "ranking", label: t("eventPage.tabs.ranking") },
+  ];
 
   useEffect(() => {
     if (currentEvent) {

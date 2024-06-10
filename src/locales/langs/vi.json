@@ -450,6 +450,10 @@
         "edit": "Chỉnh sửa",
         "loading": "Đang tải..."
       }
+    },
+    "tabs": {
+      "detail": "Chi tiết sự kiện",
+      "ranking": "Xếp hạng"
     }
   },
   "blogPage": {
