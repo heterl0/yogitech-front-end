@@ -347,7 +347,7 @@
         "searchPlaceholder": "Search...",
         "status": "Status",
         "all": "All",
-        "muscle": "Muscle"
+        "benefit": "Benefit"
       },
       "quickCreateEditForm": {
         "editTitle": "Edit comment",
@@ -825,5 +825,26 @@
     "status": "Status",
     "role": "Role",
     "auth_provider": "Provider"
+  },
+  "sort": {
+    "sortBy": "Sort By:",
+    "latest": "Latest",
+    "oldest": "Oldest"
+  },
+  "level": {
+    "all": "All",
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced"
+  },
+  "filterResults": {
+    "resultsFound": "results found",
+    "clear": "Clear",
+    "status": "Status:",
+    "role": "Role",
+    "keyword": "Keyword",
+    "benefit": "Benefit:",
+    "level": "Level:",
+    "available": "Available:"
   }
 }

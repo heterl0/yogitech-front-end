@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import Iconify from "@/components/iconify";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +19,7 @@ type Props = {
 
 export default function ExerciseSort({ sort, onSort, sortOptions }: Props) {
   const popover = usePopover();
-
+  const { t } = useTranslation();
   return (
     <>
       <Button
@@ -36,7 +37,7 @@ export default function ExerciseSort({ sort, onSort, sortOptions }: Props) {
         }
         sx={{ fontWeight: "fontWeightSemiBold" }}
       >
-        Sort By:
+        {t("sort.sortBy")}
         <Box
           component="span"
           sx={{
@@ -45,7 +46,7 @@ export default function ExerciseSort({ sort, onSort, sortOptions }: Props) {
             textTransform: "capitalize",
           }}
         >
-          {sort}
+          {t(`sort.${sort.toLowerCase()}`)}
         </Box>
       </Button>
 

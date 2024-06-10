@@ -116,7 +116,7 @@ export default function ExerciseFilters({
       >
         {[
           {
-            label: t("exercisePage.exerciseCommentListView.filters.all"),
+            label: "all",
             value: -1,
           },
           ...LEVELS,
@@ -161,7 +161,7 @@ export default function ExerciseFilters({
   const renderTourGuide = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-        {t("exercisePage.exerciseCommentListView.filters.muscle")}
+        {t("exercisePage.exerciseCommentListView.filters.benefit")}
       </Typography>
 
       <Autocomplete

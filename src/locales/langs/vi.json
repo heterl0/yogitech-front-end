@@ -345,7 +345,7 @@
         "searchPlaceholder": "Tìm kiếm...",
         "status": "Trạng thái",
         "all": "Tất cả",
-        "muscle": "Cơ bắp"
+        "benefit": "Lợi ích"
       },
       "quickCreateEditForm": {
         "editTitle": "Chỉnh sửa bình luận",
@@ -730,9 +730,10 @@
     "unableToLogout": "Không thể đăng xuất!"
   },
   "level": {
-    "Beginner": "Dễ",
-    "Intermediate": "Cơ bản",
-    "Advanced": "Nâng cao"
+    "all": "Tất cả",
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced"
   },
   "login": {
     "title": "Đăng nhập vào YogiTech",
@@ -801,7 +802,7 @@
   },
   "accountListView": {
     "list": "Danh sách",
-    "dashboard": "Bảng điều khiển",
+    "dashboard": "Dashboard",
     "account": "Tài khoản",
     "newUser": "Người dùng mới",
     "banSuccess": "Cấm thành công!",
@@ -828,5 +829,20 @@
     "status": "Trạng thái",
     "role": "Vai trò",
     "auth_provider": "Provider"
+  },
+  "sort": {
+    "sortBy": "Sắp xếp theo:",
+    "latest": "Mới nhất",
+    "oldest": "Cũ nhất"
+  },
+  "filterResults": {
+    "resultsFound": "kết quả được tìm thấy",
+    "clear": "Xóa",
+    "status": "Trạng thái:",
+    "role": "Vai trò",
+    "keyword": "Từ khóa",
+    "benefit": "Lợi ích:",
+    "level": "Cấp độ:",
+    "available": "Thời gian diễn ra:"
   }
 }

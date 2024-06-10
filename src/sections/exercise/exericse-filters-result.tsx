@@ -8,6 +8,7 @@ import Iconify from "@/components/iconify";
 import { LEVELS } from "@/constants/level";
 import { NOTIFICATION_STATUS } from "@/types/notification";
 import { IExerciseFilterValue, IExerciseFilters } from "@/types/exercise";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,8 @@ export default function ExerciseFiltersResult({
   ...other
 }: Props) {
   // const shortLabel = shortDateLabel(filters.startDate, filters.endDate);
+
+  const { t } = useTranslation();
 
   const handleRemoveLevel = () => {
     onFilters("level", -1);
@@ -61,7 +64,7 @@ export default function ExerciseFiltersResult({
       <Box sx={{ typography: "body2" }}>
         <strong>{results}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          results found
+          {t("filterResults.resultsFound")}
         </Box>
       </Box>
 
@@ -83,7 +86,7 @@ export default function ExerciseFiltersResult({
         )} */}
 
         {!!filters.benefits.length && (
-          <Block label="Benefits:">
+          <Block label={t("filterResults.benefit")}>
             {filters.benefits.map((item) => (
               <Chip
                 key={item}
@@ -97,7 +100,7 @@ export default function ExerciseFiltersResult({
         )}
 
         {filters.level !== -1 && (
-          <Block label="Level:">
+          <Block label={t("filterResults.level")}>
             <Chip
               label={LEVELS[filters.level - 1].label}
               size="small"
@@ -107,7 +110,7 @@ export default function ExerciseFiltersResult({
         )}
 
         {filters.status !== -1 && (
-          <Block label="Status:">
+          <Block label={t("filterResults.status")}>
             <Chip
               label={NOTIFICATION_STATUS[filters.status].label}
               size="small"
@@ -122,7 +125,7 @@ export default function ExerciseFiltersResult({
             onClick={onResetFilters}
             startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
           >
-            Clear
+            {t("filterResults.clear")}
           </Button>
         )}
       </Stack>

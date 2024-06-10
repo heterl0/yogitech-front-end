@@ -168,6 +168,7 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
         );
         if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar("Upload success!");
+          router.push(paths.dashboard.event.root);
         } else {
           enqueueSnackbar("Upload failed!");
         }

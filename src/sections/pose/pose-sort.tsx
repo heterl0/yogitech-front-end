@@ -47,7 +47,7 @@ export default function PoseSort({ sort, onSort, sortOptions }: Props) {
             textTransform: "capitalize",
           }}
         >
-          {sort}
+          {t(`sort.${sort.toLowerCase()}`)}
         </Box>
       </Button>
 

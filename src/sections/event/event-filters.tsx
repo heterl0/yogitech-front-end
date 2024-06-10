@@ -18,6 +18,8 @@ import { MenuItem } from "@mui/material";
 import Label, { LabelColor } from "@/components/label";
 import { EVENT_STATUS, IEventFilterValue, IEventFilters } from "@/types/event";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useLocales } from "@/locales";
+import { format } from "date-fns";
 
 // ----------------------------------------------------------------------
 
@@ -48,6 +50,15 @@ export default function EventFilters({
   //
 }: Props) {
   const { t } = useTranslation();
+
+  const { currentLang } = useLocales();
+
+  const dateFormatter = useCallback(
+    (weekday: Date) =>
+      format(weekday, "iiiiii", { locale: currentLang.adapterLocale }),
+    [currentLang]
+  );
+
   const handleFilterStatus = useCallback(
     (newValue: number) => {
       onFilters("status", newValue);
@@ -79,12 +90,14 @@ export default function EventFilters({
           label={t("eventPage.listView.filters.startDate")}
           value={filters.startDate}
           onChange={handleFilterStartDate}
+          dayOfWeekFormatter={dateFormatter}
         />
 
         <DatePicker
           label={t("eventPage.listView.filters.endDate")}
           value={filters.endDate}
           onChange={handleFilterEndDate}
+          dayOfWeekFormatter={dateFormatter}
           slotProps={{
             textField: {
               error: dateError,
@@ -159,7 +172,7 @@ export default function EventFilters({
         }
         onClick={onOpen}
       >
-        Filters
+        {t("eventPage.listView.filters.filters")}
       </Button>
 
       <Drawer

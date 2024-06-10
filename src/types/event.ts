@@ -35,11 +35,6 @@ export type IEventFilters = {
 
 export type IEventFilterValue = number | Date | null;
 
-export const EVENT_SORT_OPTIONS = [
-  { value: "latest", label: "Latest" },
-  { value: "oldest", label: "Oldest" },
-];
-
 export const EVENT_STATUS = [
   { label: "Inactive", color: "default" as LabelColor, value: 0 },
   { label: "Not Start", color: "success" as LabelColor, value: 1 },

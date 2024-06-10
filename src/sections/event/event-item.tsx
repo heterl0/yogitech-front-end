@@ -161,51 +161,10 @@ export default function EventItem({ event, onEdit }: Props) {
         onClick={() => onEdit()}
         sx={{ position: "absolute", bottom: 20, right: 8 }}
       >
-        <Tooltip title="Edit">
+        <Tooltip title={t("eventPage.editView.heading")}>
           <Iconify icon="solar:pen-bold" />
         </Tooltip>
       </IconButton>
-
-      {/* {[
-        {
-          label: duration,
-          icon: (
-            <Iconify
-              icon="mingcute:location-fill"
-              sx={{ color: "error.main" }}
-            />
-          ),
-        },
-        {
-          label: `Level: ${LEVELS[level - 1].label}`,
-          icon: (
-            <Iconify
-              icon="mingcute:filter-2-fill"
-              sx={{ color: "info.main" }}
-            />
-          ),
-        },
-        {
-          label: `${bookers.length} Booked`,
-          icon: (
-            <Iconify
-              icon="solar:users-group-rounded-bold"
-              sx={{ color: "primary.main" }}
-            />
-          ),
-        },
-      ].map((item) => (
-        <Stack
-          key={item.label}
-          spacing={1}
-          direction="row"
-          alignItems="center"
-          sx={{ typography: "body2" }}
-        >
-          {item.icon}
-          {item.label}
-        </Stack>
-      ))} */}
     </Stack>
   );
 
@@ -218,44 +177,6 @@ export default function EventItem({ event, onEdit }: Props) {
 
         {renderInfo}
       </Card>
-
-      {/* <CustomPopover
-        open={popover.open}
-        onClose={popover.onClose}
-        arrow="right-top"
-        sx={{ width: 140 }}
-      >
-        <MenuItem
-          onClick={() => {
-            popover.onClose();
-            onView();
-          }}
-        >
-          <Iconify icon="solar:eye-bold" />
-          View
-        </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            popover.onClose();
-            onEdit();
-          }}
-        >
-          <Iconify icon="solar:pen-bold" />
-          Edit
-        </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            popover.onClose();
-            onDelete();
-          }}
-          sx={{ color: "error.main" }}
-        >
-          <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
-        </MenuItem>
-      </CustomPopover> */}
     </>
   );
 }

@@ -18,7 +18,6 @@ import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
 import {
-  EXERCISE_SORT_OPTIONS,
   IExercise,
   IExerciseFilterValue,
   IExerciseFilters,
@@ -51,6 +50,11 @@ export default function ExerciseListView() {
   const [sortBy, setSortBy] = useState("latest");
 
   const { exercises } = useGetExercises();
+
+  const EXERCISE_SORT_OPTIONS = [
+    { value: "latest", label: t("sort.latest") },
+    { value: "oldest", label: t("sort.oldest") },
+  ];
 
   const [search, setSearch] = useState<{ query: string; results: IExercise[] }>(
     {

@@ -46,7 +46,7 @@ export default function EventSort({ sort, onSort, sortOptions }: Props) {
             textTransform: "capitalize",
           }}
         >
-          {sort}
+          {t(`sort.${sort.toLowerCase()}`)}
         </Box>
       </Button>
 

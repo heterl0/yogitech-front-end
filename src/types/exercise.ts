@@ -64,11 +64,6 @@ export type ICommentTableFilterValue = string | string[];
 
 export type IExerciseFilterValue = number | string[] | null;
 
-export const EXERCISE_SORT_OPTIONS = [
-  { value: "latest", label: "Latest" },
-  { value: "oldest", label: "Oldest" },
-];
-
 export const EXERCISE_DETAILS_TABS = [
   { value: "detail", label: "Exercise Detail" },
   { value: "comment", label: "Comments" },

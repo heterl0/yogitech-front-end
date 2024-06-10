@@ -63,10 +63,10 @@ export default function PoseDetailsContent({ pose }: Props) {
               alt={muscle.name}
               src={muscle.image}
               key={muscle.id}
-              sx={{
-                width: 24,
-                height: 24,
-              }}
+              // sx={{
+              //   width: 24,
+              //   height: 24,
+              // }}
             />
           ))}
         </AvatarGroup>

@@ -17,12 +17,7 @@ import EmptyContent from "@/components/empty-content";
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
-import {
-  IPose,
-  IPoseFilterValue,
-  IPoseFilters,
-  POSE_SORT_OPTIONS,
-} from "@/types/pose";
+import { IPose, IPoseFilterValue, IPoseFilters } from "@/types/pose";
 import { useGetPoses } from "@/api/pose";
 import PoseFiltersResult from "../pose-filters-result";
 import { useGetMuscles } from "@/api/muscle";
@@ -57,6 +52,11 @@ export default function PoseListView() {
     query: "",
     results: [],
   });
+
+  const POSE_SORT_OPTIONS = [
+    { value: "latest", label: t("sort.latest") },
+    { value: "oldest", label: t("sort.oldest") },
+  ];
 
   const [filters, setFilters] = useState(defaultFilters);
 

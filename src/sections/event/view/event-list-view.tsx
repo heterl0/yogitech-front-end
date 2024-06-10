@@ -17,12 +17,7 @@ import EmptyContent from "@/components/empty-content";
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
-import {
-  IEvent,
-  IEventFilterValue,
-  IEventFilters,
-  EVENT_SORT_OPTIONS,
-} from "@/types/event";
+import { IEvent, IEventFilterValue, IEventFilters } from "@/types/event";
 import { useGetEvents } from "@/api/event";
 import { isBetween, isAfter } from "@/utils/format-time";
 import EventSearch from "../event-search";
@@ -51,6 +46,10 @@ export default function EventListView() {
   const { events } = useGetEvents();
   const { t } = useTranslation();
 
+  const EVENT_SORT_OPTIONS = [
+    { value: "latest", label: t("sort.latest") },
+    { value: "oldest", label: t("sort.oldest") },
+  ];
   const [search, setSearch] = useState<{ query: string; results: IEvent[] }>({
     query: "",
     results: [],

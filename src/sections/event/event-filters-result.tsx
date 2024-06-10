@@ -20,7 +20,7 @@ type Props = StackProps & {
   results: number;
 };
 
-export default function EventFiltersResult({
+export default function EventfilterResults({
   filters,
   onFilters,
   //
@@ -53,7 +53,7 @@ export default function EventFiltersResult({
       <Box sx={{ typography: "body2" }}>
         <strong>{results}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          {t("eventPage.filtersResult.resultsFound")}
+          {t("filterResults.resultsFound")}
         </Box>
       </Box>
 
@@ -65,7 +65,7 @@ export default function EventFiltersResult({
         alignItems="center"
       >
         {filters.startDate && filters.endDate && (
-          <Block label={t("eventPage.filtersResult.available")}>
+          <Block label={t("filterResults.available")}>
             <Chip
               size="small"
               label={shortLabel}
@@ -75,7 +75,7 @@ export default function EventFiltersResult({
         )}
 
         {filters.status !== -1 && (
-          <Block label={t("eventPage.filtersResult.status")}>
+          <Block label={t("filterResults.status")}>
             <Chip
               label={EVENT_STATUS[filters.status].label}
               size="small"
@@ -90,7 +90,7 @@ export default function EventFiltersResult({
             onClick={onResetFilters}
             startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
           >
-            {t("eventPage.filtersResult.clear")}
+            {t("filterResults.clear")}
           </Button>
         )}
       </Stack>
