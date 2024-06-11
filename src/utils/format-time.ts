@@ -17,8 +17,8 @@ export function fTime(date: InputValue, newFormat?: string) {
 
 export function fDateTime(
   date: InputValue,
-  newFormat?: string,
-  local?: Locale
+  local?: Locale,
+  newFormat?: string
 ) {
   const fm = newFormat || "dd MMM yyyy p";
 

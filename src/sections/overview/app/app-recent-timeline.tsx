@@ -13,6 +13,7 @@ import { IRecentActivity } from "@/types/dashboard";
 import { paths } from "@/routes/paths";
 import { Link } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -64,6 +65,8 @@ type RecentItemProps = {
 function RecentItem({ item, lastTimeline }: RecentItemProps) {
   const { type, data } = item;
   const { t } = useTranslation();
+  const { currentLang } = useLocales();
+
   return (
     <TimelineItem>
       <TimelineSeparator>
@@ -110,7 +113,7 @@ function RecentItem({ item, lastTimeline }: RecentItemProps) {
           </Typography>
         )}
         <Typography variant="caption" sx={{ color: "text.disabled" }}>
-          {fDateTime(data.created_at)}
+          {fDateTime(data.created_at, currentLang.adapterLocale)}
         </Typography>
       </TimelineContent>
     </TimelineItem>

@@ -16,6 +16,7 @@ import { fDateTime } from "@/utils/format-time";
 import ExerciseCommentQuickCreateEditForm from "./exercise-details-comments-quick-create-edit-form";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +37,7 @@ export default function ExerciseCommentTableRow({
 }: Props) {
   const { created_at, text, active_status, user } = row;
   const { t } = useTranslation();
+  const { currentLang } = useLocales();
 
   const [status, setStatus] = useState(
     active_status === 0 ? "Disabled" : "Active"
@@ -71,7 +73,7 @@ export default function ExerciseCommentTableRow({
           />
         </TableCell>
         <TableCell sx={{ whiteSpace: "nowrap" }}>
-          {fDateTime(new Date(created_at))}
+          {fDateTime(new Date(created_at), currentLang.adapterLocale)}
         </TableCell>
         <TableCell>
           <Label
