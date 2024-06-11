@@ -17,6 +17,7 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 import { format } from "date-fns";
 import { INotification } from "@/types/notification";
 import NotificationQuickCreateEditForm from "./notification-quick-create-edit-form";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -37,9 +38,11 @@ export default function NotificationTableRow({
 }: Props) {
   const { t } = useTranslation();
   const { title, body, active_status, time, user } = row;
-
+  const { currentLang } = useLocales();
   const status = active_status === 0 ? "Disabled" : "Active";
-  const dateFormatted = format(new Date(time), "HH:mm dd MMM yyyy");
+  const dateFormatted = format(new Date(time), "HH:mm dd MMM yyyy", {
+    locale: currentLang.adapterLocale,
+  });
 
   const confirm = useBoolean();
 

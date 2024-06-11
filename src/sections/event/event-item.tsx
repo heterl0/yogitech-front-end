@@ -13,7 +13,7 @@ import Iconify from "@/components/iconify";
 // import { shortDateLabel } from "@/components/custom-date-range-picker";
 import { Tooltip } from "@mui/material";
 import { IEvent, getStatusLabel } from "@/types/event";
-import { fDateTime } from "@/utils/format-time";
+import { fDate } from "@/utils/format-time";
 import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
@@ -118,9 +118,9 @@ export default function EventItem({ event, onEdit }: Props) {
       primary={
         <>
           {t("eventPage.eventItem.from")}{" "}
-          {fDateTime(start_date, currentLang.adapterLocale)}{" "}
+          {fDate(start_date, currentLang.adapterLocale)}{" "}
           {t("eventPage.eventItem.to")}{" "}
-          {fDateTime(expire_date, currentLang.adapterLocale)}
+          {fDate(expire_date, currentLang.adapterLocale)}
         </>
       }
       secondary={
