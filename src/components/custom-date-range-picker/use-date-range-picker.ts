@@ -67,7 +67,7 @@ export default function useDateRangePicker(
     error,
     //
     label: `${fDate(startDate, currentLang.adapterLocale)} - ${fDate(endDate, currentLang.adapterLocale)}`,
-    shortLabel: shortDateLabel(startDate, endDate),
+    shortLabel: shortDateLabel(startDate, endDate, currentLang.adapterLocale),
     //
     setStartDate,
     setEndDate,

@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Iconify from "@/components/iconify";
 import { EVENT_STATUS, IEventFilterValue, IEventFilters } from "@/types/event";
 import { shortDateLabel } from "@/components/custom-date-range-picker";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -45,9 +46,13 @@ export default function EventfilterResults({
   //   const newValue = filters.destination.filter((item) => item !== inputValue);
   //   onFilters("destination", newValue);
   // };
+  const { currentLang } = useLocales();
 
-  const shortLabel = shortDateLabel(filters.startDate, filters.endDate);
-
+  const shortLabel = shortDateLabel(
+    filters.startDate,
+    filters.endDate,
+    currentLang.adapterLocale
+  );
   return (
     <Stack spacing={1.5} {...other}>
       <Box sx={{ typography: "body2" }}>
