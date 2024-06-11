@@ -12,14 +12,17 @@ export function fDate(date: InputValue, newFormat?: string) {
 
 export function fTime(date: InputValue, newFormat?: string) {
   const fm = newFormat || "p";
-
   return date ? format(new Date(date), fm) : "";
 }
 
-export function fDateTime(date: InputValue, newFormat?: string) {
+export function fDateTime(
+  date: InputValue,
+  newFormat?: string,
+  local?: Locale
+) {
   const fm = newFormat || "dd MMM yyyy p";
 
-  return date ? format(new Date(date), fm) : "";
+  return date ? format(new Date(date), fm, { locale: local }) : "";
 }
 
 export function fTimestamp(date: InputValue) {
