@@ -51,7 +51,7 @@ export default function ActivateView() {
       dialog.onTrue();
       setTimeout(() => {
         router.push("/");
-      }, 3000);
+      }, 1000);
     } catch (error) {
       console.error(error);
       errorDialog.onTrue();

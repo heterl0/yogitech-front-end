@@ -799,7 +799,7 @@
   },
   "activateView": {
     "activate": "Kích hoạt",
-    "welcome": "Chào mừng đến với YogiTect",
+    "welcome": "Chào mừng đến với YogiTech",
     "confirmEmail": "Xin lỗi vì sự phiền hà, chúng tôi chỉ muốn xác nhận đây là email thực của bạn để đảm bảo an ninh.",
     "activationSuccess": "Kích hoạt thành công!",
     "redirectHomepage": "Chúng tôi sẽ chuyển hướng bạn đến trang chủ.",
@@ -809,6 +809,7 @@
   "accountListView": {
     "list": "Danh sách",
     "dashboard": "Dashboard",
+    "createANewUser": "Tạo một tài khoản mới",
     "account": "Tài khoản",
     "newUser": "Người dùng mới",
     "banSuccess": "Cấm thành công!",

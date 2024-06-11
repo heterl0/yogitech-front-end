@@ -11,7 +11,7 @@ import { IAccount } from "@/types/user";
 export function useGetAccounts() {
   const URL = endpoints.account.list;
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating, mutate } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
@@ -20,8 +20,9 @@ export function useGetAccounts() {
       accountsError: error,
       accountsValidating: isValidating,
       accountsEmpty: !isLoading && !data?.length,
+      accountsMutate: mutate,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating, mutate]
   );
 
   return memoizedValue;

@@ -795,7 +795,7 @@
   },
   "activateView": {
     "activate": "Activate",
-    "welcome": "Welcome to YogiTect",
+    "welcome": "Welcome to YogiTech",
     "confirmEmail": "Sorry for the bother, we just want to confirm that this is your real email to ensure your security.",
     "activationSuccess": "Activation Successfully!",
     "redirectHomepage": "We will redirect you to the homepage.",
@@ -804,6 +804,7 @@
   },
   "accountListView": {
     "list": "List",
+    "createANewUser": "Create a new user",
     "dashboard": "Dashboard",
     "account": "Account",
     "newUser": "New User",

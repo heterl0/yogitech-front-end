@@ -11,6 +11,7 @@ import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
 import AccountNewEditForm from "./account-new-edit-form";
 import { useGetAccount } from "@/api/account";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -21,18 +22,19 @@ type Props = {
 export default function AccountEditView({ id }: Props) {
   const settings = useSettingsContext();
   const { account: currentAccount } = useGetAccount(id + "");
+  const { t } = useTranslation();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t("posePage.poseDetailsToolbar.edit")}
         links={[
           {
             name: "Dashboard",
             href: paths.dashboard.root,
           },
           {
-            name: "Account",
+            name: t("accountListView.Account"),
             href: paths.dashboard.account.root,
           },
           { name: currentAccount?.username },

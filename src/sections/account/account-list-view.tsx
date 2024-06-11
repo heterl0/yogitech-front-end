@@ -73,7 +73,7 @@ export default function AccountListView() {
   const settings = useSettingsContext();
   const router = useRouter();
   const confirm = useBoolean();
-  const { accounts } = useGetAccounts();
+  const { accounts, accountsMutate } = useGetAccounts();
 
   const [tableData, setTableData] = useState<IAccount[]>([]);
   const [filters, setFilters] = useState(defaultFilters);
@@ -184,6 +184,26 @@ export default function AccountListView() {
       handleFilters("status", newValue);
     },
     [handleFilters]
+  );
+
+  const handleMutation = useCallback(
+    (data: IAccount, isCreated: boolean) => {
+      if (isCreated) {
+        accountsMutate(
+          (notifications: IAccount[]) => [data, ...notifications],
+          false
+        );
+      } else {
+        accountsMutate(
+          (notifications: IAccount[]) =>
+            notifications.map((notification) =>
+              notification.id === data.id ? data : notification
+            ),
+          false
+        );
+      }
+    },
+    [accountsMutate]
   );
 
   return (
@@ -334,6 +354,7 @@ export default function AccountListView() {
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onBanRow={() => handleBanRow(row.id)}
                         onEditRow={() => handleEditRow(row.id)}
+                        onQuickEdit={handleMutation}
                       />
                     ))}
 

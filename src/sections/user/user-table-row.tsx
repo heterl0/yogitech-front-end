@@ -23,6 +23,7 @@ import UserQuickEditForm from "./user-quick-edit-form";
 
 type Props = {
   selected: boolean;
+  onQuickEdit: (data: IAccount, isCreated: boolean) => void;
   onEditRow: VoidFunction;
   row: IAccount;
   onSelectRow: VoidFunction;
@@ -35,6 +36,7 @@ export default function UserTableRow({
   onEditRow,
   onSelectRow,
   onBanRow,
+  onQuickEdit,
 }: Props) {
   const {
     username,
@@ -136,6 +138,7 @@ export default function UserTableRow({
         currentUser={row}
         open={quickEdit.value}
         onClose={quickEdit.onFalse}
+        onQuickEdit={onQuickEdit}
       />
 
       <CustomPopover

@@ -33,6 +33,7 @@ type Props = {
   open: boolean;
   onClose: VoidFunction;
   currentUser?: IAccount;
+  onQuickEdit: (data: IAccount, isCreated: boolean) => void;
 };
 
 type UpdateData = {
@@ -47,6 +48,7 @@ export default function UserQuickEditForm({
   currentUser,
   open,
   onClose,
+  onQuickEdit,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -126,6 +128,7 @@ export default function UserQuickEditForm({
       if (response.status === HttpStatusCode.Ok) {
         onClose();
         enqueueSnackbar("Update success!");
+        onQuickEdit(response.data, false);
         reset();
       } else {
         enqueueSnackbar("Update failed!", { variant: "error" });
