@@ -14,6 +14,7 @@ import Iconify from "@/components/iconify";
 import { Tooltip } from "@mui/material";
 import { IEvent, getStatusLabel } from "@/types/event";
 import { fDateTime } from "@/utils/format-time";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,7 @@ export default function EventItem({ event, onEdit }: Props) {
     expire_date,
   } = event;
   const { t } = useTranslation();
+  const { currentLang } = useLocales();
   // const renderRating = (
   //   <Stack
   //     direction="row"
@@ -115,8 +117,10 @@ export default function EventItem({ event, onEdit }: Props) {
       }}
       primary={
         <>
-          {t("eventPage.eventItem.from")} {fDateTime(start_date)}{" "}
-          {t("eventPage.eventItem.to")} {fDateTime(expire_date)}
+          {t("eventPage.eventItem.from")}{" "}
+          {fDateTime(start_date, currentLang.adapterLocale)}{" "}
+          {t("eventPage.eventItem.to")}{" "}
+          {fDateTime(expire_date, currentLang.adapterLocale)}
         </>
       }
       secondary={

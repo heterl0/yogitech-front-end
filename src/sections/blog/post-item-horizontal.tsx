@@ -31,6 +31,7 @@ import { useBoolean } from "@/hooks/use-boolean";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import { HttpStatusCode } from "axios";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -50,6 +51,8 @@ export default function PostItemHorizontal({ post }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const dialog = useBoolean();
+
+  const { currentLang } = useLocales();
 
   const {
     id,
@@ -132,7 +135,7 @@ export default function PostItemHorizontal({ post }: Props) {
               component="span"
               sx={{ typography: "caption", color: "text.disabled" }}
             >
-              {fDate(created_at)}
+              {fDate(created_at, currentLang.adapterLocale)}
             </Box>
           </Stack>
 

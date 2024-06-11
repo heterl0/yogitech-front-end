@@ -10,6 +10,7 @@ import { IEvent } from "@/types/event";
 import { Link } from "@mui/material";
 import { paths } from "@/routes/paths";
 import { useTranslation } from "react-i18next";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ export default function EventDetailsContent({ event }: Props) {
   const { title, image_url, start_date, expire_date, description } = event;
 
   const { t } = useTranslation();
-
+  const { currentLang } = useLocales();
   const renderGallery = (
     <>
       <Box
@@ -84,7 +85,7 @@ export default function EventDetailsContent({ event }: Props) {
       {[
         {
           label: t("eventPage.eventDetails.available"),
-          value: `${fDate(start_date)} - ${fDate(expire_date)}`,
+          value: `${fDate(start_date, currentLang.adapterLocale)} - ${fDate(expire_date, currentLang.adapterLocale)}`,
           icon: <Iconify icon="solar:calendar-date-bold" />,
         },
         {

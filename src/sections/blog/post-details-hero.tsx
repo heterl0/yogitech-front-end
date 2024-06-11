@@ -11,6 +11,7 @@ import { fDate } from "@/utils/format-time";
 import { bgGradient } from "@/theme/css";
 
 import { IPostHero } from "@/types/blog";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ export default function PostDetailsHero({
   createdAt,
 }: IPostHero) {
   const theme = useTheme();
-
+  const { currentLang } = useLocales();
   return (
     <Box
       sx={{
@@ -75,7 +76,7 @@ export default function PostDetailsHero({
               <ListItemText
                 sx={{ color: "common.white" }}
                 primary={author.name}
-                secondary={fDate(createdAt)}
+                secondary={fDate(createdAt, currentLang.adapterLocale)}
                 primaryTypographyProps={{ typography: "subtitle1", mb: 0.5 }}
                 secondaryTypographyProps={{
                   color: "inherit",

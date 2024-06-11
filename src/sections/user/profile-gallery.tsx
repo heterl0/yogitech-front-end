@@ -12,6 +12,7 @@ import Iconify from "@/components/iconify";
 import Lightbox, { useLightBox } from "@/components/lightbox";
 
 import { IUserProfileGallery } from "@/types/user";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default function ProfileGallery({ gallery }: Props) {
   }));
 
   const lightbox = useLightBox(slides);
+  const { currentLang } = useLocales();
 
   return (
     <>
@@ -65,7 +67,7 @@ export default function ProfileGallery({ gallery }: Props) {
                 position: "absolute",
               }}
               primary={image.title}
-              secondary={fDate(image.postedAt)}
+              secondary={fDate(image.postedAt, currentLang.adapterLocale)}
               primaryTypographyProps={{
                 noWrap: true,
                 typography: "subtitle1",

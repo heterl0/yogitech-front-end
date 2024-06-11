@@ -4,10 +4,10 @@ import { format, getTime, formatDistanceToNow } from "date-fns";
 
 type InputValue = Date | string | number | null | undefined;
 
-export function fDate(date: InputValue, newFormat?: string) {
+export function fDate(date: InputValue, local?: Locale, newFormat?: string) {
   const fm = newFormat || "dd MMM yyyy";
 
-  return date ? format(new Date(date), fm) : "";
+  return date ? format(new Date(date), fm, { locale: local }) : "";
 }
 
 export function fTime(date: InputValue, newFormat?: string) {

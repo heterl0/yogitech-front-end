@@ -25,6 +25,7 @@ import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 
 import { IUserProfilePost } from "@/types/user";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -60,6 +61,8 @@ export default function ProfilePostItem({ post }: Props) {
     }
   }, []);
 
+  const { currentLang } = useLocales();
+
   const renderHead = (
     <CardHeader
       disableTypography
@@ -75,7 +78,7 @@ export default function ProfilePostItem({ post }: Props) {
       }
       subheader={
         <Box sx={{ color: "text.disabled", typography: "caption", mt: 0.5 }}>
-          {fDate(post.createdAt)}
+          {fDate(post.createdAt, currentLang.adapterLocale)}
         </Box>
       }
       action={

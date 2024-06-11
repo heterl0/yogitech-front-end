@@ -23,6 +23,7 @@ import TextMaxLine from "@/components/text-max-line";
 
 import { IBlog } from "@/types/blog";
 import { useMemo } from "react";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -143,6 +144,8 @@ export function PostContent({
 
   const latestPostSmall = index === 1 || index === 2;
 
+  const { currentLang } = useLocales();
+
   return (
     <CardContent
       sx={{
@@ -169,7 +172,7 @@ export function PostContent({
           }),
         }}
       >
-        {fDate(createdAt)}
+        {fDate(createdAt, currentLang.adapterLocale)}
       </Typography>
 
       <Link color="inherit" component={RouterLink} href={"#"}>

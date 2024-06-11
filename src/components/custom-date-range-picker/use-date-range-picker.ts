@@ -4,6 +4,7 @@ import { fDate } from "@/utils/format-time";
 
 import { shortDateLabel } from "./utils";
 import { DateRangePickerProps } from "./types";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -49,6 +50,8 @@ export default function useDateRangePicker(
     setEndDate(null);
   }, []);
 
+  const { currentLang } = useLocales();
+
   return {
     startDate,
     endDate,
@@ -63,7 +66,7 @@ export default function useDateRangePicker(
     selected: !!startDate && !!endDate,
     error,
     //
-    label: `${fDate(startDate)} - ${fDate(endDate)}`,
+    label: `${fDate(startDate, currentLang.adapterLocale)} - ${fDate(endDate, currentLang.adapterLocale)}`,
     shortLabel: shortDateLabel(startDate, endDate),
     //
     setStartDate,

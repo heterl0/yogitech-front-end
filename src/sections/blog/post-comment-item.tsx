@@ -11,6 +11,7 @@ import { useBoolean } from "@/hooks/use-boolean";
 import { fDate } from "@/utils/format-time";
 
 import Iconify from "@/components/iconify";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +34,7 @@ export default function PostCommentItem({
 }: Props) {
   const { t } = useTranslation();
   const reply = useBoolean();
-
+  const { currentLang } = useLocales();
   return (
     <ListItem
       sx={{
@@ -63,7 +64,7 @@ export default function PostCommentItem({
         </Typography>
 
         <Typography variant="caption" sx={{ color: "text.disabled" }}>
-          {fDate(postedAt)}
+          {fDate(postedAt, currentLang.adapterLocale)}
         </Typography>
 
         <Typography variant="body2" sx={{ mt: 1 }}>
