@@ -34,7 +34,7 @@ export default function AccountEditView({ id }: Props) {
             href: paths.dashboard.root,
           },
           {
-            name: t("accountListView.Account"),
+            name: t("accountListView.account"),
             href: paths.dashboard.account.root,
           },
           { name: currentAccount?.username },

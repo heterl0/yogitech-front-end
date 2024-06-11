@@ -26,6 +26,7 @@ import FormProvider, {
 import { IAccount } from "@/types/user";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -50,17 +51,16 @@ export default function UserQuickEditForm({
   onClose,
   onQuickEdit,
 }: Props) {
+  const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
 
   const NewAccountSchema = Yup.object().shape({
-    username: Yup.string().required("Name is required"),
-    email: Yup.string()
-      .required("Email is required")
-      .email("Email must be a valid email address"),
-    phone: Yup.string().required("Phone number is required"),
-    status: Yup.string().required("Status is required"),
-    role: Yup.string().required("Role is required"),
-    provider: Yup.string().required("Provider is required"),
+    username: Yup.string().required(t("name_required")),
+    email: Yup.string().required(t("email_required")).email(t("email_invalid")),
+    phone: Yup.string().required(t("phone_required")),
+    status: Yup.string().required(t("status_required")),
+    role: Yup.string().required(t("role_required")),
+    provider: Yup.string().required(t("provider_required")),
   });
 
   const defaultValues = useMemo(
@@ -127,11 +127,11 @@ export default function UserQuickEditForm({
       );
       if (response.status === HttpStatusCode.Ok) {
         onClose();
-        enqueueSnackbar("Update success!");
+        enqueueSnackbar(t("update_success"));
         onQuickEdit(response.data, false);
         reset();
       } else {
-        enqueueSnackbar("Update failed!", { variant: "error" });
+        enqueueSnackbar(t("update_failed"), { variant: "error" });
       }
     } catch (error) {
       reset();
@@ -151,11 +151,11 @@ export default function UserQuickEditForm({
       }}
     >
       <FormProvider methods={methods} onSubmit={onSubmit}>
-        <DialogTitle>Quick Update</DialogTitle>
+        <DialogTitle>{t("quick_update")}</DialogTitle>
 
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Account is waiting for confirmation
+            {t("account_waiting_confirmation")}
           </Alert>
 
           <Box
@@ -167,36 +167,27 @@ export default function UserQuickEditForm({
               sm: "repeat(2, 1fr)",
             }}
           >
-            <RHFTextField name="username" disabled label="Username" />
-            <RHFTextField name="email" disabled label="Email Address" />
+            <RHFTextField name="username" disabled label={t("username")} />
+            <RHFTextField name="email" disabled label={t("email_address")} />
 
-            <RHFSelect name="status" label="Status">
+            <RHFSelect name="status" label={t("status")}>
               {USER_STATUS_OPTIONS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
-                  {status.label}
+                  {t(`accountListView.tabs.${status.value}`)}
                 </MenuItem>
               ))}
             </RHFSelect>
 
-            <RHFTextField name="phone" label="Phone Number" />
+            <RHFTextField name="phone" label={t("phone_number")} />
 
-            {/* <RHFAutocomplete
-              name="country"
-              type="country"
-              label="Country"
-              placeholder="Choose a country"
-              fullWidth
-              options={countries.map((option) => option.label)}
-              getOptionLabel={(option) => option}
-            /> */}
-            <RHFSelect name="role" label="Role">
-              {["Admin", "Premium User", "User"].map((role) => (
+            <RHFSelect name="role" label={t("role")}>
+              {["Admin", "Người dùng cao cấp", "Người dùng"].map((role) => (
                 <MenuItem key={role} value={role}>
                   {role}
                 </MenuItem>
               ))}
             </RHFSelect>
-            <RHFSelect name="provider" label="Provider" disabled>
+            <RHFSelect name="provider" label={t("provider")} disabled>
               {["Email", "Google"].map((value) => (
                 <MenuItem key={value} value={value.toLowerCase()}>
                   {value}
@@ -208,7 +199,7 @@ export default function UserQuickEditForm({
 
         <DialogActions>
           <Button variant="outlined" onClick={onClose}>
-            Cancel
+            {t("cancel")}
           </Button>
 
           <LoadingButton
@@ -216,7 +207,7 @@ export default function UserQuickEditForm({
             variant="contained"
             loading={isSubmitting}
           >
-            Update
+            {t("update")}
           </LoadingButton>
         </DialogActions>
       </FormProvider>

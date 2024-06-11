@@ -854,5 +854,24 @@
     "benefit": "Benefit:",
     "level": "Level:",
     "available": "Available:"
-  }
+  },
+  "name_required": "Name is required",
+  "email_required": "Email is required",
+  "email_invalid": "Email must be a valid email address",
+  "phone_required": "Phone number is required",
+  "status_required": "Status is required",
+  "role_required": "Role is required",
+  "provider_required": "Provider is required",
+  "update_success": "Update success!",
+  "update_failed": "Update failed!",
+  "quick_update": "Quick Update",
+  "account_waiting_confirmation": "Account is waiting for confirmation",
+  "username": "Username",
+  "email_address": "Email Address",
+  "status": "Status",
+  "phone_number": "Phone Number",
+  "role": "Role",
+  "provider": "Provider",
+  "cancel": "Cancel",
+  "update": "Update"
 }

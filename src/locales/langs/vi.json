@@ -852,5 +852,24 @@
     "benefit": "Lợi ích:",
     "level": "Cấp độ:",
     "available": "Thời gian diễn ra:"
-  }
+  },
+  "name_required": "Tên là bắt buộc",
+  "email_required": "Email là bắt buộc",
+  "email_invalid": "Email phải là một địa chỉ email hợp lệ",
+  "phone_required": "Số điện thoại là bắt buộc",
+  "status_required": "Trạng thái là bắt buộc",
+  "role_required": "Vai trò là bắt buộc",
+  "provider_required": "Nhà cung cấp là bắt buộc",
+  "update_success": "Cập nhật thành công!",
+  "update_failed": "Cập nhật thất bại!",
+  "quick_update": "Cập nhật nhanh",
+  "account_waiting_confirmation": "Tài khoản đang chờ xác nhận",
+  "username": "Tên người dùng",
+  "email_address": "Địa chỉ Email",
+  "status": "Trạng thái",
+  "phone_number": "Số điện thoại",
+  "role": "Vai trò",
+  "provider": "Nhà cung cấp",
+  "cancel": "Hủy",
+  "update": "Cập nhật"
 }
