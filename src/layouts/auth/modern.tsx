@@ -32,15 +32,21 @@ export default function AuthModernLayout() {
       sx={{
         width: 1,
         mx: "auto",
-        maxWidth: 480,
-        px: { xs: 2, md: 8 },
+        maxWidth: {
+          xs: "100%",
+          md: "calc(100% - 80px)",
+          lg: "calc(100% - 80px)",
+        },
+        px: { xs: 2, md: 2 },
       }}
+      justifyContent={"center"}
+      alignItems={"center"}
     >
-      <div className="flex items-center gap-2 ">
+      <div className="flex items-center gap-2">
         <Logo
           sx={{
             mt: { xs: 2, md: 8 },
-            mb: { xs: 10, md: 8 },
+            mb: { xs: 2, md: 8 },
           }}
         />
         <Typography variant="h4">Live Demo</Typography>
@@ -49,7 +55,7 @@ export default function AuthModernLayout() {
       {feedback && (
         <Card
           sx={{
-            py: { xs: 5, md: 0 },
+            py: { xs: 5, md: 2 },
             px: { xs: 3, md: 0 },
             boxShadow: { md: "none" },
             overflow: { md: "unset" },
@@ -57,21 +63,24 @@ export default function AuthModernLayout() {
             backgroundImage: `url("/assets/background/overlay_4.jpg")`,
             objectFit: "cover",
             position: "relative",
-            width: "calc(100% - 32px)",
             height: "500px",
           }}
         >
           {feedback && (
-            <Typography variant="h6">
+            <Typography variant="h6" className="text-center">
               Score: {feedback ? fShortenNumber(feedback.score) : ""}
             </Typography>
           )}
           <CardContent>
             {feedback
-              ? feedback.feedback.map((item, index) => {
+              ? Object.entries(feedback.feedback).map(([key, item], index) => {
                   if (item.endsWith("Good alignment!")) return <></>;
                   const content = item.split(". ");
-                  return <div key={index}>{content[content.length - 1]}</div>;
+                  return (
+                    <div
+                      key={index}
+                    >{`${key}: ${content[content.length - 1]}`}</div>
+                  );
                 })
               : ""}
           </CardContent>
@@ -156,10 +165,9 @@ function Test({ setFeedback }: Props) {
     null
   );
 
-  const [poseSelected, setPoseSelected] = useState<SamplePose>(mockPose[0]);
   const router = useRouter();
-  const pathName = usePathname();
-
+  const pathname = usePathname();
+  const [poseSelected, setPoseSelected] = useState<SamplePose>(mockPose[0]);
   useEffect(() => {
     if (canvasRef.current) {
       setCanvasCtx(canvasRef.current.getContext("2d"));
@@ -310,7 +318,14 @@ function Test({ setFeedback }: Props) {
         <Button
           ref={enableWebcamButtonRef}
           id="webcamButton"
-          onClick={webcamRunning ? enableCam : () => router.push(pathName)}
+          onClick={
+            webcamRunning
+              ? enableCam
+              : () => {
+                  router.push(pathname);
+                  setWebcamRunning(true);
+                }
+          }
           className=""
           variant="contained"
           color="primary"

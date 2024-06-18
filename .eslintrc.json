@@ -14,6 +14,7 @@
         "trailingComma": "es5"
       }
     ],
+
     // "@typescript-eslint/ban-types": "off",
     // "@typescript-eslint/no-namespace": "off",
     "array-callback-return": "error",
