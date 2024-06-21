@@ -168,8 +168,8 @@ export default function PostDetailsView({ id }: Props) {
               {post.votes.map((vote) => (
                 <Avatar
                   key={vote.id}
-                  alt={vote.user}
-                  src={vote.user_id || ""}
+                  alt={vote.user_id}
+                  src={vote.user || ""}
                 />
               ))}
             </AvatarGroup>
