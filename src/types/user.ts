@@ -174,6 +174,7 @@ export type IAccount = {
   auth_provider: string;
   profile: IProfile;
   following: IFollowing[];
+  followers: IFollowing[];
   last_login: null | string;
   created_at: string;
 };
