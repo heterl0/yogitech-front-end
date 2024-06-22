@@ -787,11 +787,12 @@
     "updatePassword": "Update Password",
     "returnToSignIn": "Return to sign in",
     "requestSentSuccess": "Request sent successfully!",
-    "enterNewPassword": "Please enter your new password you want to reset.",
+    "newPassword": "Please enter your new password you want to reset.",
     "updateSuccess": "Update Successfully!",
     "redirectToLogin": "We will redirect you to login page.",
     "errorOccurred": "An error has occurred!!!",
-    "expiredLink": "Your reset password link has expired! Please send another reset password request."
+    "expiredLink": "Your reset password link has expired! Please send another reset password request.",
+    "rePassword": "Please re-enter your password"
   },
   "activateView": {
     "activate": "Activate",

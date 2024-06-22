@@ -791,11 +791,12 @@
     "updatePassword": "Cập nhật Mật khẩu",
     "returnToSignIn": "Trở lại đăng nhập",
     "requestSentSuccess": "Yêu cầu đã được gửi thành công!",
-    "enterNewPassword": "Vui lòng nhập mật khẩu mới mà bạn muốn đặt lại.",
+    "newPassword": "Vui lòng nhập mật khẩu mới mà bạn muốn đặt lại.",
     "updateSuccess": "Cập nhật thành công!",
     "redirectToLogin": "Chúng tôi sẽ chuyển hướng bạn đến trang đăng nhập.",
     "errorOccurred": "Đã xảy ra lỗi!!!",
-    "expiredLink": "Liên kết đặt lại mật khẩu của bạn đã hết hạn! Vui lòng gửi yêu cầu đặt lại mật khẩu khác."
+    "expiredLink": "Liên kết đặt lại mật khẩu của bạn đã hết hạn! Vui lòng gửi yêu cầu đặt lại mật khẩu khác.",
+    "rePassword": "Nhập lại mật khẩu"
   },
   "activateView": {
     "activate": "Kích hoạt",
