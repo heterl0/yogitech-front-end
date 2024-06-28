@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Stack from "@mui/material/Stack";
@@ -210,7 +209,12 @@ export default function OverviewAppView() {
                 icon="solar:user-rounded-bold"
                 chart={{
                   series:
-                    (overview?.active_users / overview.total_users) * 100 || 0,
+                    Number.parseFloat(
+                      (
+                        (overview?.active_users / overview.total_users) *
+                        100
+                      ).toFixed(2)
+                    ) || 0,
                 }}
               />
 
