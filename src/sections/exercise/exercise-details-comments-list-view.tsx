@@ -350,7 +350,6 @@ function applyFilter({
   filters: ICommentTableFilters;
 }) {
   const { name, status } = filters;
-  const { t } = useTranslation();
   const stabilizedThis = inputData.map((el, index) => [el, index] as const);
 
   stabilizedThis.sort((a, b) => {
@@ -367,10 +366,7 @@ function applyFilter({
     );
   }
 
-  if (
-    status.length &&
-    !status.includes(t("exercisePage.exerciseCommentListView.filters.all"))
-  ) {
+  if (status.length && !(status.includes("Tất cả") || status.includes("All"))) {
     const statuses: string[] = inputData.map((comment) =>
       comment.active_status === 1 ? "Active" : "Disabled"
     );
