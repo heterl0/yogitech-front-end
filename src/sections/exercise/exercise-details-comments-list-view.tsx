@@ -35,7 +35,6 @@ import {
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
 import NotificationTableToolbar from "./exercise-details-comments-table-toolbar";
-import NotificationTableRow from "./exercise-details-comments-table-row";
 import {
   IComment,
   ICommentTableFilterValue,
@@ -43,6 +42,7 @@ import {
 } from "@/types/exercise";
 import ExerciseCommentTableFiltersResult from "./exercise-details-comments-table-filters-result";
 import { useTranslation } from "react-i18next";
+import ExerciseCommentTableRow from "./exercise-details-comments-table-row";
 
 // ----------------------------------------------------------------------
 
@@ -271,7 +271,7 @@ export default function ExerciseCommentListView({
                       table.page * table.rowsPerPage + table.rowsPerPage
                     )
                     .map((row) => (
-                      <NotificationTableRow
+                      <ExerciseCommentTableRow
                         key={row.id}
                         row={row}
                         selected={table.selected.includes(row.id)}
@@ -350,7 +350,7 @@ function applyFilter({
   filters: ICommentTableFilters;
 }) {
   const { name, status } = filters;
-
+  const { t } = useTranslation();
   const stabilizedThis = inputData.map((el, index) => [el, index] as const);
 
   stabilizedThis.sort((a, b) => {
@@ -367,7 +367,10 @@ function applyFilter({
     );
   }
 
-  if (status.length) {
+  if (
+    status.length &&
+    !status.includes(t("exercisePage.exerciseCommentListView.filters.all"))
+  ) {
     const statuses: string[] = inputData.map((comment) =>
       comment.active_status === 1 ? "Active" : "Disabled"
     );

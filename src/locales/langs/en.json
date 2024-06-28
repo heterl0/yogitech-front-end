@@ -313,6 +313,10 @@
         "noData": "No Data"
       }
     },
+    "tabs": {
+      "detail": "Exercise Detail",
+      "comment": "Comments"
+    },
     "exerciseCommentListView": {
       "tableRow": {
         "quickEdit": "Quick Edit",

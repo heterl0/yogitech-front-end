@@ -311,6 +311,10 @@
         "noData": "Không có dữ liệu"
       }
     },
+    "tabs": {
+      "detail": "Chi tiết bài tập",
+      "comment": "Bình luận"
+    },
     "exerciseCommentListView": {
       "tableRow": {
         "quickEdit": "Chỉnh sửa nhanh",

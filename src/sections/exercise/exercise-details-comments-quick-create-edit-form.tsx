@@ -128,7 +128,7 @@ export default function ExerciseCommentQuickCreateEditForm({
             <RHFSelect
               name="status"
               label={t(
-                "exerciseCommentListView.quickCreateEditForm.statusLabel"
+                "exercisePage.exerciseCommentListView.quickCreateEditForm.statusLabel"
               )}
             >
               {NOTIFICATION_STATUS.map(({ label, value }) => (
@@ -140,7 +140,7 @@ export default function ExerciseCommentQuickCreateEditForm({
             <RHFTextField
               name="text"
               label={t(
-                "exerciseCommentListView.quickCreateEditForm.contentLabel"
+                "exercisePage.exerciseCommentListView.quickCreateEditForm.contentLabel"
               )}
               multiline
               rows={4}

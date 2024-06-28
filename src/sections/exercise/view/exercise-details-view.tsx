@@ -7,10 +7,10 @@ import ExerciseDetailsToolbar from "../exercise-details-toolbar";
 import { useGetExercise } from "@/api/exercise";
 import ExerciseDetailsContent from "../exercise-details-content";
 import { Tab, Tabs } from "@mui/material";
-import { EXERCISE_DETAILS_TABS } from "@/types/exercise";
 import Label from "@/components/label";
 import ExerciseCommentListView from "../exercise-details-comments-list-view";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -25,12 +25,19 @@ export default function ExerciseDetailsView({ id }: Props) {
 
   const [currentTab, setCurrentTab] = useState("detail");
 
+  const { t } = useTranslation();
+
   const handleChangeTab = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
       setCurrentTab(newValue);
     },
     []
   );
+
+  const EXERCISE_DETAILS_TABS = [
+    { value: "detail", label: t("exercisePage.tabs.detail") },
+    { value: "comment", label: t("exercisePage.tabs.comment") },
+  ];
 
   const renderTabs = (
     <Tabs
@@ -47,7 +54,7 @@ export default function ExerciseDetailsView({ id }: Props) {
           value={tab.value}
           label={tab.label}
           icon={
-            tab.value === "ranking" ? (
+            tab.value === "comment" ? (
               <Label variant="filled">{currentExercise?.comments.length}</Label>
             ) : (
               ""
