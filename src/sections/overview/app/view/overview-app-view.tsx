@@ -222,11 +222,11 @@ export default function OverviewAppView() {
 
               <AppWidget
                 title={t("dashboard.loginPlatform")}
-                total={loginToday.users_logged_in_today || 0}
+                total={loginToday?.users_logged_in_today || 0}
                 icon="fluent:mail-24-filled"
                 color="info"
                 chart={{
-                  series: loginToday.percent_logged_in_today || 0,
+                  series: loginToday?.percent_logged_in_today || 0,
                 }}
               />
             </Stack>
