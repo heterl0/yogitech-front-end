@@ -25,7 +25,6 @@ import { IProfile } from "@/types/user";
 import { Grid, MenuItem } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LEVELS } from "@/constants/level";
-import { GENDER } from "@/constants/gender";
 // import { set } from "lodash";
 import { fShortenNumber } from "@/utils/format-number";
 import Label from "@/components/label";
@@ -34,19 +33,37 @@ import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
 import { paths } from "@/routes/paths";
 import { useBoolean } from "@/hooks/use-boolean";
+import { KeyedMutator } from "swr";
+import { useLocales } from "@/locales";
+import { format } from "date-fns";
 // ----------------------------------------------------------------------
 
 type Props = {
   currentProfile?: IProfile;
+  mutate: KeyedMutator<any>;
 };
 
-export default function ProfileEditForm({ currentProfile }: Props) {
+export default function ProfileEditForm({ currentProfile, mutate }: Props) {
   const { t } = useTranslation();
   const router = useRouter();
 
   const [date, setDate] = useState(
     currentProfile?.birthdate ? new Date(currentProfile?.birthdate) : new Date()
   );
+
+  const { currentLang } = useLocales();
+
+  const dateFormatter = useCallback(
+    (weekday: Date) =>
+      format(weekday, "iiiiii", { locale: currentLang.adapterLocale }),
+    [currentLang]
+  );
+
+  const GENDER = [
+    { label: t("userPage.male"), value: 1 },
+    { label: t("userPage.female"), value: 0 },
+    { label: t("userPage.other"), value: 2 },
+  ];
 
   const changeImage = useBoolean(false);
 
@@ -113,6 +130,10 @@ export default function ProfileEditForm({ currentProfile }: Props) {
 
       if (response.status === HttpStatusCode.Ok) {
         enqueueSnackbar(t("userPage.update_success"));
+        mutate({
+          ...currentProfile,
+          ...response.data,
+        });
         router.push(paths.dashboard.user.root);
       } else {
         enqueueSnackbar(t("userPage.update_failed"), { variant: "error" });
@@ -262,6 +283,7 @@ export default function ProfileEditForm({ currentProfile }: Props) {
                     fullWidth: true,
                   },
                 }}
+                dayOfWeekFormatter={dateFormatter}
               />
               <RHFTextField
                 name="height"

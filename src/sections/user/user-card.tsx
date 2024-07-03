@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { alpha, useTheme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
-import { Link, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 
 import { fShortenNumber } from "@/utils/format-number";
 import { _mock } from "@/_mock";
@@ -16,6 +16,8 @@ import { AvatarShape } from "@/assets/illustrations";
 import Image from "@/components/image";
 import { IProfile } from "@/types/user";
 import { paths } from "@/routes/paths";
+import { useLocales } from "@/locales";
+import { useRouter } from "next/navigation";
 
 // ----------------------------------------------------------------------
 
@@ -39,14 +41,29 @@ export default function UserCard({ userProfile }: Props) {
     exp,
     height,
     weight,
+    user,
   } = userProfile;
 
-  const fullName = `${first_name} ${last_name}`;
+  const { currentLang } = useLocales();
+
+  let fullName =
+    currentLang.value === "vi"
+      ? `${last_name} ${first_name}`
+      : `${first_name} ${last_name}`;
+  if (!first_name && !last_name) {
+    fullName = user;
+  }
 
   const birthdateFormatted = format(
     birthdate ? new Date(birthdate) : new Date(),
     "dd/MM/yyyy"
   );
+
+  const router = useRouter();
+
+  const handleGoToProfile = () => {
+    router.push(paths.dashboard.user.edit(id));
+  };
 
   return (
     <Card sx={{ textAlign: "center" }}>
@@ -61,24 +78,24 @@ export default function UserCard({ userProfile }: Props) {
             position: "absolute",
           }}
         />
-        <Link href={paths.dashboard.user.edit(id)}>
-          <Tooltip title={t("userPage.edit_profile")} placement="left">
-            <Avatar
-              alt={fullName}
-              src={avatar_url || ""}
-              sx={{
-                width: 64,
-                height: 64,
-                zIndex: 11,
-                left: 0,
-                right: 0,
-                bottom: -32,
-                mx: "auto",
-                position: "absolute",
-              }}
-            />
-          </Tooltip>
-        </Link>
+        <Tooltip title={t("userPage.edit_profile")} placement="left">
+          <Avatar
+            alt={fullName}
+            src={avatar_url || ""}
+            sx={{
+              width: 64,
+              height: 64,
+              zIndex: 11,
+              left: 0,
+              right: 0,
+              bottom: -32,
+              mx: "auto",
+              position: "absolute",
+              cursor: "pointer",
+            }}
+            onClick={handleGoToProfile}
+          />
+        </Tooltip>
         <Image
           src={_mock.image.cover(id % 30)}
           alt={fullName}
@@ -113,7 +130,9 @@ export default function UserCard({ userProfile }: Props) {
           gender
             ? gender === 1
               ? t("userPage.male")
-              : t("userPage.female")
+              : gender === 0
+                ? t("userPage.female")
+                : t("userPage.other")
             : t("userPage.not_set")
         }`}</Typography>
       </Stack>
@@ -156,7 +175,8 @@ export default function UserCard({ userProfile }: Props) {
           >
             {t("userPage.height_weight")}
           </Typography>
-          {fShortenNumber(height)} / {fShortenNumber(weight)}
+          {fShortenNumber(height) === "" ? 0 : fShortenNumber(height)} /{" "}
+          {fShortenNumber(weight) === "" ? 0 : fShortenNumber(weight)}
         </div>
       </Box>
     </Card>

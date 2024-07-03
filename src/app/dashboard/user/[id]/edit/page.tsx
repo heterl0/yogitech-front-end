@@ -18,11 +18,3 @@ export default function UserEditPage({ params }: Props) {
 
   return <UserEditView id={id} />;
 }
-
-// export async function generateStaticParams() {
-//   const res = await axiosInstance.get(endpoints.account.list);
-//   const data = res.data as IAccount[];
-//   return data.map((account) => ({
-//     id: account.id + "",
-//   }));
-// }

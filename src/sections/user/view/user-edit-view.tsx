@@ -20,7 +20,7 @@ type Props = {
 export default function UserEditView({ id }: Props) {
   const settings = useSettingsContext();
   const { t } = useTranslation();
-  const { profile: currentProfile } = useGetProfile(id + "");
+  const { profile: currentProfile, profileMutate } = useGetProfile(id + "");
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
@@ -46,7 +46,12 @@ export default function UserEditView({ id }: Props) {
         }}
       />
 
-      {currentProfile && <ProfileEditForm currentProfile={currentProfile} />}
+      {currentProfile && (
+        <ProfileEditForm
+          currentProfile={currentProfile}
+          mutate={profileMutate}
+        />
+      )}
     </Container>
   );
 }

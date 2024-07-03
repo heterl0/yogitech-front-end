@@ -678,6 +678,7 @@
 
     "male": "Male",
     "female": "Female",
+    "other": "Other",
     "not_set": "Not set",
 
     "height_weight": "Height/Weight"

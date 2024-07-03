@@ -30,7 +30,7 @@ export function useGetUserProfiles() {
 export function useGetProfile(id: string) {
   const URL = id ? [endpoints.profile.details(id)] : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating, mutate } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
@@ -38,6 +38,7 @@ export function useGetProfile(id: string) {
       profileLoading: isLoading,
       profileError: error,
       profileValidating: isValidating,
+      profileMutate: mutate,
     }),
     [data, error, isLoading, isValidating]
   );
