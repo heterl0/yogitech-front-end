@@ -257,7 +257,7 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
               <RHFSelect name="status" label={t("form.label.status")}>
                 {USER_STATUS_OPTIONS.map((status) => (
                   <MenuItem key={status.value} value={status.value}>
-                    {status.label}
+                    {t(`accountListView.tabs.${status.value}`)}
                   </MenuItem>
                 ))}
               </RHFSelect>
