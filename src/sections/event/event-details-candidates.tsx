@@ -101,13 +101,13 @@ function CandidateItem({ candidate, ranking }: BookerItemProps) {
       sx={{ p: 3 }}
     >
       <Avatar
-        alt={candidate.user.username}
-        src={candidate.user.profile.avatar_url || candidate.user.username}
+        alt={candidate.profile.username}
+        src={candidate.profile.avatar || candidate.profile.username}
         sx={{ width: 48, height: 48 }}
       />
       <Stack spacing={2} flexGrow={1}>
         <ListItemText
-          primary={`${candidate.user.username}`}
+          primary={`${candidate.profile.username}`}
           secondary={
             <Stack direction="row" alignItems="center" spacing={0.5}>
               <Iconify icon="mingcute:flash-fill" width={16} />
