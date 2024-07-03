@@ -704,6 +704,7 @@
       "email_required": "Email là bắt buộc",
       "email_invalid": "Email phải là một địa chỉ email hợp lệ",
       "phone_required": "Số điện thoại là bắt buộc",
+      "phone_format": "Số điện thoại không hợp lệ",
       "status_required": "Trạng thái là bắt buộc",
       "role_required": "Vai trò là bắt buộc",
       "provider_required": "Nhà cung cấp là bắt buộc",

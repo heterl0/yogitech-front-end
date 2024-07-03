@@ -33,7 +33,7 @@ export function useGetAccounts() {
 export function useGetAccount(id: string) {
   const URL = id ? [`${endpoints.account.details}${id}/`] : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating, mutate } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
@@ -41,8 +41,9 @@ export function useGetAccount(id: string) {
       accountLoading: isLoading,
       accountError: error,
       accountValidating: isValidating,
+      accountMutate: mutate,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating, mutate]
   );
 
   return memoizedValue;

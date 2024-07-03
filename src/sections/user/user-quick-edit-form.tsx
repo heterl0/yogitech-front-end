@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -57,7 +57,12 @@ export default function UserQuickEditForm({
   const NewAccountSchema = Yup.object().shape({
     username: Yup.string().required(t("name_required")),
     email: Yup.string().required(t("email_required")).email(t("email_invalid")),
-    phone: Yup.string().required(t("phone_required")),
+    phone: Yup.string()
+      .required(t("phone_required"))
+      .matches(
+        /^\+?[0-9]{1,3}?[-. ]?([0-9]{2,3}[-. ]?){2,3}[0-9]$/,
+        t("form.validation.phone_format")
+      ),
     status: Yup.string().required(t("status_required")),
     role: Yup.string().required(t("role_required")),
     provider: Yup.string().required(t("provider_required")),
@@ -87,6 +92,12 @@ export default function UserQuickEditForm({
     resolver: yupResolver(NewAccountSchema),
     defaultValues,
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      methods.reset(defaultValues);
+    }
+  }, [defaultValues]);
 
   const {
     reset,

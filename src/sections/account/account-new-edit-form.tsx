@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 import { useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -26,11 +27,13 @@ import { USER_STATUS_OPTIONS } from "@/_mock";
 import UserCard from "../user/user-card";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
+import { KeyedMutator } from "swr";
 
 // ----------------------------------------------------------------------
 
 type Props = {
   currentAccount?: IAccount;
+  mutate?: KeyedMutator<any>;
 };
 
 type CreateData = {
@@ -53,7 +56,7 @@ type UpdateData = {
   active_status?: number;
 };
 
-export default function AccountNewEditForm({ currentAccount }: Props) {
+export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
   const { t } = useTranslation();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
@@ -63,7 +66,12 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
     email: Yup.string()
       .required(t("form.validation.email_required"))
       .email(t("form.validation.email_invalid")),
-    phone: Yup.string().required(t("form.validation.phone_required")),
+    phone: Yup.string()
+      .required(t("form.validation.phone_required"))
+      .matches(
+        /^\+?[0-9]{1,3}?[-. ]?([0-9]{2,3}[-. ]?){2,3}[0-9]$/,
+        t("form.validation.phone_format")
+      ),
     status: Yup.string().required(t("form.validation.status_required")),
     role: Yup.string().required(t("form.validation.role_required")),
     provider: Yup.string().required(t("form.validation.provider_required")),
@@ -139,6 +147,10 @@ export default function AccountNewEditForm({ currentAccount }: Props) {
         );
         if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar(t("form.update_success"));
+          mutate?.({
+            ...currentAccount,
+            ...updateData,
+          });
           router.push(paths.dashboard.account.root);
         } else {
           enqueueSnackbar(t("form.update_failed", { data: response.data }), {

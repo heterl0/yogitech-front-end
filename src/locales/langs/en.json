@@ -706,6 +706,7 @@
       "email_required": "Email is required",
       "email_invalid": "Email must be a valid email address",
       "phone_required": "Phone number is required",
+      "phone_format": "Phone number must be valid",
       "status_required": "Status is required",
       "role_required": "Role is required",
       "provider_required": "Provider is required",

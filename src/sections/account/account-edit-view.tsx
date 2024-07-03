@@ -21,7 +21,7 @@ type Props = {
 
 export default function AccountEditView({ id }: Props) {
   const settings = useSettingsContext();
-  const { account: currentAccount } = useGetAccount(id + "");
+  const { account: currentAccount, accountMutate } = useGetAccount(id + "");
   const { t } = useTranslation();
 
   return (
@@ -44,7 +44,12 @@ export default function AccountEditView({ id }: Props) {
         }}
       />
 
-      {currentAccount && <AccountNewEditForm currentAccount={currentAccount} />}
+      {currentAccount && (
+        <AccountNewEditForm
+          currentAccount={currentAccount}
+          mutate={accountMutate}
+        />
+      )}
     </Container>
   );
 }
