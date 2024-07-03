@@ -1,6 +1,6 @@
 import { LabelColor } from "@/components/label";
 import { IExercise } from "./exercise";
-import { IAccount } from "./user";
+import { IAccount, ISocialProfile } from "./user";
 
 export type IEvent = {
   id: number;
@@ -19,7 +19,8 @@ export type IEvent = {
 
 export type ICandidateEvent = {
   id: number;
-  user: IAccount;
+  user: number;
+  profile: ISocialProfile;
   event_point: number;
   active_status: number;
   join_at: string;

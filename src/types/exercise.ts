@@ -48,6 +48,30 @@ export type IComment = {
   exercise: number;
 };
 
+export type IExerciseLog = {
+  id: number;
+  exercise: number;
+  user: number;
+  process: string;
+  complete_pose: number;
+  result: string;
+  point: number;
+  exp?: number;
+  calories: string;
+  exercise_pose_results: IExercisePoseResult[];
+  total_time_finish?: number;
+  created_at: string;
+  updated_at: string;
+  event?: number;
+  active_status: number;
+};
+
+export type IExercisePoseResult = {
+  pose: number;
+  score: string;
+  time_finish: number;
+};
+
 export type IExerciseFilters = {
   benefits: string[];
   status: number;

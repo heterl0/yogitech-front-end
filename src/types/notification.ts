@@ -1,8 +1,10 @@
 import { LabelColor } from "@/components/label";
+import { ISocialProfile } from "./user";
 
 export type INotification = {
   id: number;
   user: number;
+  profile: ISocialProfile;
   title: string;
   body: string;
   time: string;

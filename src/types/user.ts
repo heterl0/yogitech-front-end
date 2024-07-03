@@ -178,3 +178,14 @@ export type IAccount = {
   last_login: null | string;
   created_at: string;
 };
+
+export type ISocialProfile = {
+  user_id: number;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  streak: number;
+  avatar?: string;
+  exp: number;
+  level: number;
+};
