@@ -9,6 +9,7 @@ import {
   IEventGrowth,
   IRecentActivity,
   IUserGrowth,
+  IUserLoginToday,
 } from "@/types/dashboard";
 import { IProfile } from "@/types/user";
 
@@ -125,6 +126,24 @@ export function useGetTopUsers() {
       topProfileError: error,
       topProfileValidating: isValidating,
       topProfileEmpty: !isLoading && !data?.length,
+    }),
+    [data, error, isLoading, isValidating]
+  );
+
+  return memoizedValue;
+}
+
+export function useLoginToday() {
+  const URL = endpoints.dashboard.loginToday;
+
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+
+  const memoizedValue = useMemo(
+    () => ({
+      loginToday: data as IUserLoginToday,
+      loginTodayLoading: isLoading,
+      loginTodayError: error,
+      loginTodayValidating: isValidating,
     }),
     [data, error, isLoading, isValidating]
   );

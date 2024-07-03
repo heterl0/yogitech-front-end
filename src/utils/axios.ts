@@ -115,5 +115,6 @@ export const endpoints = {
     recentActivities: "/api/v1/dashboard/recent-activities/",
     topProfile: "/api/v1/dashboard/top-profiles/",
     userGrowthChart: "/api/v1/dashboard/user-growth-chart/",
+    loginToday: "/api/v1/dashboard/user-login-today/",
   },
 };

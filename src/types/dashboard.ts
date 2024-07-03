@@ -48,3 +48,9 @@ export function getMonthLabel(month: number) {
   ];
   return months[month - 1];
 }
+
+export type IUserLoginToday = {
+  users_logged_in_today: number;
+  total_users: number;
+  percent_logged_in_today: number;
+};

@@ -17,6 +17,7 @@ import {
   useGetOverview,
   useGetRecentActivity,
   useGetTopUsers,
+  useLoginToday,
   useUserGrowth,
 } from "@/api/dashboard";
 import { useMemo } from "react";
@@ -41,6 +42,7 @@ export default function OverviewAppView() {
   const { userGrowth } = useUserGrowth();
   const { eventGrowth } = useEventGrowth();
   const { topProfile } = useGetTopUsers();
+  const { loginToday } = useLoginToday();
   const firstItem = useMemo(() => recentItems[0], [recentItems]);
 
   const { t } = useTranslation();
@@ -220,11 +222,11 @@ export default function OverviewAppView() {
 
               <AppWidget
                 title={t("dashboard.loginPlatform")}
-                total={7727}
+                total={loginToday.users_logged_in_today || 0}
                 icon="fluent:mail-24-filled"
                 color="info"
                 chart={{
-                  series: 82,
+                  series: loginToday.percent_logged_in_today || 0,
                 }}
               />
             </Stack>

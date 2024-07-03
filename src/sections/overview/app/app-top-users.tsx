@@ -1,5 +1,4 @@
 import orderBy from "lodash/orderBy";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
@@ -7,11 +6,9 @@ import { alpha } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import Card, { CardProps } from "@mui/material/Card";
-
-import { fShortenNumber } from "@/utils/format-number";
-
 import Iconify from "@/components/iconify";
 import { IProfile } from "@/types/user";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +45,14 @@ type AuthorItemProps = {
 };
 
 function AuthorItem({ profile, index }: AuthorItemProps) {
-  const fullName = `${profile.last_name} ${profile.first_name}`;
+  const { currentLang } = useLocales();
+  let fullName =
+    currentLang.value === "vi"
+      ? `${profile.last_name} ${profile.first_name}`
+      : `${profile.first_name} ${profile.last_name}`;
+  if (!profile.first_name && !profile.last_name) {
+    fullName = profile.user;
+  }
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
       <Avatar alt={fullName} src={profile.avatar_url || ""} />
@@ -65,11 +69,17 @@ function AuthorItem({ profile, index }: AuthorItemProps) {
             color: "text.secondary",
           }}
         >
-          <Iconify icon="solar:heart-bold" width={14} sx={{ mr: 0.5 }} />
-          {fShortenNumber(profile.point || 0)}
+          <Iconify
+            icon="fluent:arrow-growth-20-filled"
+            width={14}
+            sx={{ mr: 0.5 }}
+          />
+          {profile.exp || 0}
+          <Typography variant="caption" sx={{ ml: 1, color: "text.secondary" }}>
+            EXP
+          </Typography>
         </Typography>
       </Box>
-
       <Iconify
         icon="solar:cup-star-bold"
         sx={{
