@@ -189,15 +189,12 @@ export default function AccountListView() {
   const handleMutation = useCallback(
     (data: IAccount, isCreated: boolean) => {
       if (isCreated) {
-        accountsMutate(
-          (notifications: IAccount[]) => [data, ...notifications],
-          false
-        );
+        accountsMutate((accounts: IAccount[]) => [data, ...accounts], false);
       } else {
         accountsMutate(
-          (notifications: IAccount[]) =>
-            notifications.map((notification) =>
-              notification.id === data.id ? data : notification
+          (accounts: IAccount[]) =>
+            accounts.map((account) =>
+              account.id === data.id ? data : account
             ),
           false
         );

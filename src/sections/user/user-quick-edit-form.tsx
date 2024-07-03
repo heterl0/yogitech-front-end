@@ -62,7 +62,6 @@ export default function UserQuickEditForm({
     role: Yup.string().required(t("role_required")),
     provider: Yup.string().required(t("provider_required")),
   });
-
   const defaultValues = useMemo(
     () => ({
       username: currentUser?.username || "",
@@ -129,7 +128,6 @@ export default function UserQuickEditForm({
         onClose();
         enqueueSnackbar(t("update_success"));
         onQuickEdit(response.data, false);
-        reset();
       } else {
         enqueueSnackbar(t("update_failed"), { variant: "error" });
       }
@@ -181,7 +179,7 @@ export default function UserQuickEditForm({
             <RHFTextField name="phone" label={t("phone_number")} />
 
             <RHFSelect name="role" label={t("role")}>
-              {["Admin", "Người dùng cao cấp", "Người dùng"].map((role) => (
+              {["Admin", "Premium User", "User"].map((role) => (
                 <MenuItem key={role} value={role}>
                   {role}
                 </MenuItem>
