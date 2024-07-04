@@ -204,7 +204,7 @@ export default function PoseListView() {
         /> // Sử dụng chuỗi dịch
       )}
 
-      <PoseList poses={dataFiltered} />
+      <PoseList poses={dataFiltered} isFilter={canReset} />
     </Container>
   );
 }

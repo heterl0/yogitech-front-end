@@ -72,25 +72,23 @@ export default function PoseNewEditForm({ currentPose }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewTourSchema = Yup.object().shape({
-    name: Yup.string().required(
-      t("posePage.poseNewEditForm.form.nameRequired")
-    ),
+    name: Yup.string().required(t("posePage.poseNewEditForm.form.nameRequire")),
     instruction: Yup.string().required(
-      t("posePage.poseNewEditForm.form.instructionRequired")
+      t("posePage.poseNewEditForm.form.instructionRequire")
     ),
     image: Yup.mixed<any>().required(
-      t("posePage.poseNewEditForm.form.imageRequired")
+      t("posePage.poseNewEditForm.form.imageRequire")
     ),
     //
     muscles: Yup.array().min(1, t("posePage.poseNewEditForm.form.musclesMin")),
     duration: Yup.number()
-      .required(t("posePage.poseNewEditForm.form.durationRequired"))
+      .required(t("posePage.poseNewEditForm.form.durationRequire"))
       .min(1, t("posePage.poseNewEditForm.form.durationMin")),
     level: Yup.number().required(
-      t("posePage.poseNewEditForm.form.levelRequired")
+      t("posePage.poseNewEditForm.form.levelRequire")
     ),
     calories: Yup.number()
-      .required(t("posePage.poseNewEditForm.form.caloriesRequired"))
+      .required(t("posePage.poseNewEditForm.form.caloriesRequire"))
       .min(1, t("posePage.poseNewEditForm.form.caloriesMin")),
   });
 

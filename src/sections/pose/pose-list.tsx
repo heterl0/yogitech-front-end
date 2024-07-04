@@ -13,9 +13,10 @@ import PoseItem from "./pose-item";
 
 type Props = {
   poses: IPose[];
+  isFilter: boolean;
 };
 
-export default function PoseList({ poses }: Props) {
+export default function PoseList({ poses, isFilter }: Props) {
   const router = useRouter();
 
   const [page, setPage] = useState(1);
@@ -28,7 +29,9 @@ export default function PoseList({ poses }: Props) {
   );
 
   useEffect(() => {
-    setPage(1);
+    if (isFilter) {
+      setPage(1);
+    }
   }, [poses]);
 
   const itemsPerPage = 9;
@@ -61,9 +64,9 @@ export default function PoseList({ poses }: Props) {
           ))}
       </Box>
 
-      {poses.length > 8 && (
+      {poses.length > 9 && (
         <Pagination
-          count={Math.ceil(poses.length / 8)}
+          count={Math.ceil(poses.length / 9)}
           page={page}
           onChange={(_, value) => setPage(value)}
           sx={{
