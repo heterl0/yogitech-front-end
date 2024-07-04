@@ -211,7 +211,7 @@ export default function EventListView() {
           sx={{ py: 10 }}
         />
       )}
-      <EventList events={dataFiltered} />
+      <EventList events={dataFiltered} isFilter={canReset} />
     </Container>
   );
 }
