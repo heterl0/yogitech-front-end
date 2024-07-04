@@ -218,7 +218,7 @@ export default function ExerciseListView() {
         />
       )}
 
-      <ExerciseList exercises={dataFiltered} />
+      <ExerciseList exercises={dataFiltered} isFilter={canReset} />
     </Container>
   );
 }

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
@@ -13,9 +13,10 @@ import ExerciseItem from "./exercise-item";
 
 type Props = {
   exercises: IExercise[];
+  isFilter: boolean;
 };
 
-export default function ExerciseList({ exercises }: Props) {
+export default function ExerciseList({ exercises, isFilter }: Props) {
   const router = useRouter();
 
   const [page, setPage] = useState(1);
@@ -26,6 +27,12 @@ export default function ExerciseList({ exercises }: Props) {
     },
     [router]
   );
+
+  useEffect(() => {
+    if (isFilter) {
+      setPage(1);
+    }
+  }, [exercises]);
 
   const itemsPerPage = 9;
 
@@ -57,9 +64,9 @@ export default function ExerciseList({ exercises }: Props) {
           ))}
       </Box>
 
-      {exercises.length > 8 && (
+      {exercises.length > 9 && (
         <Pagination
-          count={Math.ceil(exercises.length / 8)}
+          count={Math.ceil(exercises.length / 9)}
           page={page}
           onChange={(_, value) => setPage(value)}
           sx={{
