@@ -274,6 +274,12 @@
     "levelIsRequired": "Level is required",
     "pointIsRequired": "Point is required",
     "mustHaveAtLeastOneTag": "Must have at least 1 tag",
+    "durationIsRequired": "Duration is required",
+    "durationMustBeGreaterThanZero": "Duration must be greater than 0",
+    "pointMustBeGreaterThanZero": "Point must be greater than 0",
+    "poseIsRequired": "Pose is required",
+    "secondIsRequired": "Second is required",
+    "inSecondIsRequired": "In Second is required",
     "exerciseItem": {
       "edit": "Edit",
       "level": "Level: {{level}}"

@@ -272,6 +272,12 @@
     "levelIsRequired": "Cấp độ là bắt buộc",
     "pointIsRequired": "Điểm là bắt buộc",
     "mustHaveAtLeastOneTag": "Phải có ít nhất 1 thẻ",
+    "durationIsRequired": "Thời lượng là bắt buộc",
+    "durationMustBeGreaterThanZero": "Thời lượng phải lớn hơn 0",
+    "pointMustBeGreaterThanZero": "Điểm phải lớn hơn 0",
+    "secondIsRequired": "Giây là bắt buộc",
+    "inSecondIsRequired": "Tính theo giây là bắt buộc",
+    "poseIsRequired": "Động tác là bắt buộc",
     "exerciseItem": {
       "edit": "Chỉnh sửa",
       "level": "Cấp độ: {{level}}"

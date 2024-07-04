@@ -103,12 +103,16 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     // video: Yup.mixed<any>().required(t("exercisePage.videoIsRequired")),
     video: Yup.mixed<any>(),
     level: Yup.number().required(t("exercisePage.levelIsRequired")),
-    point: Yup.number().required(t("exercisePage.pointIsRequired")),
-    pose: Yup.mixed<any>(),
+    point: Yup.number()
+      .required(t("exercisePage.pointIsRequired"))
+      .min(1, t("exercisePage.pointMustBeGreaterThanZero")),
+    pose: Yup.mixed<any>().required(t("exercisePage.poseIsRequired")),
     minute: Yup.number(),
-    second: Yup.number(),
-    inSecond: Yup.number(),
-    duration: Yup.number(),
+    second: Yup.number().required(t("exercisePage.secondIsRequired")),
+    inSecond: Yup.number().required(t("exercisePage.inSecondIsRequired")),
+    duration: Yup.number()
+      .required(t("exercisePage.durationIsRequired"))
+      .min(1, t("exercisePage.durationMustBeGreaterThanZero")),
   });
 
   const defaultValues = useMemo(
@@ -184,8 +188,8 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
         const formData = new FormData();
         formData.append("title", data.title);
         formData.append("description", data.description);
-        formData.append("image", data.image);
-        formData.append("video", data.video);
+        if (data.image instanceof File) formData.append("image", data.image);
+        if (data.video instanceof File) formData.append("video", data.video);
         let duration = 0;
         let calories = 0;
         poseExercises.forEach((p) => {
