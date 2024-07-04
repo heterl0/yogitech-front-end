@@ -72,14 +72,26 @@ export default function PoseNewEditForm({ currentPose }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewTourSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    instruction: Yup.string().required("Content is required"),
-    image: Yup.mixed<any>().required("Image is required"),
+    name: Yup.string().required(
+      t("posePage.poseNewEditForm.form.nameRequired")
+    ),
+    instruction: Yup.string().required(
+      t("posePage.poseNewEditForm.form.instructionRequired")
+    ),
+    image: Yup.mixed<any>().required(
+      t("posePage.poseNewEditForm.form.imageRequired")
+    ),
     //
-    muscles: Yup.array().min(1, "Must have at least 1 guide"),
-    duration: Yup.number().required("Duration is required"),
-    level: Yup.number().required("Level is required"),
-    calories: Yup.number().required("Calories is required"),
+    muscles: Yup.array().min(1, t("posePage.poseNewEditForm.form.musclesMin")),
+    duration: Yup.number()
+      .required(t("posePage.poseNewEditForm.form.durationRequired"))
+      .min(1, t("posePage.poseNewEditForm.form.durationMin")),
+    level: Yup.number().required(
+      t("posePage.poseNewEditForm.form.levelRequired")
+    ),
+    calories: Yup.number()
+      .required(t("posePage.poseNewEditForm.form.caloriesRequired"))
+      .min(1, t("posePage.poseNewEditForm.form.caloriesMin")),
   });
 
   const defaultValues = useMemo(

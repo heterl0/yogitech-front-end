@@ -193,7 +193,18 @@
       },
       "active": "Khả dụng",
       "createPose": "Tạo tư thế",
-      "updatePose": "Cập nhật tư thế"
+      "updatePose": "Cập nhật tư thế",
+      "form": {
+        "nameRequire": "Tên là bắt buộc",
+        "instructionRequire": "Hướng dẫn là bắt buộc",
+        "imageRequire": "Hình ảnh là bắt buộc",
+        "musclesMin": "Cơ bắp phải có ít nhất 1 mục",
+        "durationRequire": "Thời lượng là bắt buộc",
+        "levelRequire": "Cấp độ là bắt buộc",
+        "caloriesRequire": "Calo là bắt buộc",
+        "durationMin": "Thời lượng phải lớn hơn 0",
+        "caloriesMin": "Calo phải lớn hơn 0"
+      }
     },
     "poseSearch": {
       "searchPlaceholder": "Tìm kiếm...",

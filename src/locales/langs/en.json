@@ -194,7 +194,18 @@
       },
       "active": "Active",
       "createPose": "Create Pose",
-      "updatePose": "Update Pose"
+      "updatePose": "Update Pose",
+      "form": {
+        "nameRequire": "Name is required",
+        "instructionRequire": "Instruction is required",
+        "imageRequire": "Image is required",
+        "musclesMin": "Muscles must have at least 1 item",
+        "durationRequire": "Duration is required",
+        "levelRequire": "Level is required",
+        "caloriesRequire": "Calories is required",
+        "durationMin": "Duration must be greater than 0",
+        "caloriesMin": "Calories must be greater than 0"
+      }
     },
     "poseSearch": {
       "searchPlaceholder": "Search...",
