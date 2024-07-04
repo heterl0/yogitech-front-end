@@ -47,7 +47,7 @@ export default function PoseFiltersResult({
     const newValue = filters.muscles.filter(
       (item) => item.name !== inputValue.name
     );
-    onFilters("muscle", newValue);
+    onFilters("muscles", newValue);
   };
 
   return (
