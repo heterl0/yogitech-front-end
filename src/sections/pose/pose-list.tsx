@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
@@ -26,6 +26,10 @@ export default function PoseList({ poses }: Props) {
     },
     [router]
   );
+
+  useEffect(() => {
+    setPage(1);
+  }, [poses]);
 
   const itemsPerPage = 9;
 
