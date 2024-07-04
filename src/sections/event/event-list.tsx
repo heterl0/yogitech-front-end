@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
@@ -12,9 +12,10 @@ import { IEvent } from "@/types/event";
 
 type Props = {
   events: IEvent[];
+  isFilter: boolean;
 };
 
-export default function EventList({ events }: Props) {
+export default function EventList({ events, isFilter }: Props) {
   const router = useRouter();
 
   const [page, setPage] = useState(1);
@@ -27,6 +28,12 @@ export default function EventList({ events }: Props) {
   //   },
   //   [router]
   // );
+
+  useEffect(() => {
+    if (isFilter) {
+      setPage(1);
+    }
+  }, [events]);
 
   const handleEdit = useCallback(
     (id: string) => {
@@ -63,13 +70,13 @@ export default function EventList({ events }: Props) {
           ))}
       </Box>
 
-      {events.length > 8 && (
+      {events.length > 9 && (
         <Pagination
           count={Math.ceil(events.length / 8)}
           page={page}
           onChange={(_, value) => setPage(value)}
           sx={{
-            mt: 8,
+            mt: 9,
             [`& .${paginationClasses.ul}`]: {
               justifyContent: "center",
             },
