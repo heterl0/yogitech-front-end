@@ -100,7 +100,8 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     description: Yup.string().required(t("exercisePage.descriptionIsRequired")),
     image: Yup.mixed<any>().required(t("exercisePage.imageIsRequired")),
     //
-    video: Yup.mixed<any>().required(t("exercisePage.videoIsRequired")),
+    // video: Yup.mixed<any>().required(t("exercisePage.videoIsRequired")),
+    video: Yup.mixed<any>(),
     level: Yup.number().required(t("exercisePage.levelIsRequired")),
     point: Yup.number().required(t("exercisePage.pointIsRequired")),
     pose: Yup.mixed<any>(),
@@ -128,7 +129,6 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       inSecond: 0,
       duration: 0,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       currentExercise?.benefit,
       currentExercise?.description,
@@ -312,7 +312,6 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       setValue("inSecond", poseWithTime.time);
       setValue("duration", poseWithTime.duration);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [poseSelectedIndex]);
 
   const handleRemoveFile = useCallback(() => {
