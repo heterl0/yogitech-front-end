@@ -119,10 +119,10 @@ export default function NotificationTableRow({
             confirm.onTrue();
             popover.onClose();
           }}
-          sx={{ color: "error.main" }}
+          sx={{ color: active_status === 1 ? "error.main" : "primary.main" }}
         >
           <Iconify icon="solar:close-circle-bold" />
-          {t("notiPage.Ban")}
+          {active_status === 0 ? t("notiPage.Enable") : t("notiPage.Disable")}
         </MenuItem>
 
         <MenuItem
@@ -138,18 +138,24 @@ export default function NotificationTableRow({
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title={t("notiPage.BanUser")}
-        content={t("notiPage.Areyou")}
+        title={
+          active_status === 1
+            ? t("notiPage.DisableNotification")
+            : t("notiPage.EnableNotification")
+        }
+        content={
+          active_status === 1 ? t("notiPage.Areyou") : t("notiPage.Areyou2")
+        }
         action={
           <Button
             variant="contained"
-            color="error"
+            color={active_status === 1 ? "error" : "primary"}
             onClick={() => {
               onBanRow();
               confirm.onFalse();
             }}
           >
-            {t("notiPage.Ban")}
+            {active_status === 1 ? t("notiPage.Disable") : t("notiPage.Enable")}
           </Button>
         }
       />

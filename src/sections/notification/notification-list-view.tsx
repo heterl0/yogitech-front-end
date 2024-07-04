@@ -131,9 +131,10 @@ export default function NotificationListView() {
   const handleBanRow = useCallback(
     async (id: number) => {
       const response = await axiosInstance.patch(
-        `${endpoints.account.details}${id}/`,
+        `${endpoints.notification.update(id.toString())}`,
         {
-          active_status: 0,
+          active_status:
+            tableData.find((row) => row.id === id)?.active_status === 0 ? 1 : 0,
         }
       );
       if (response.status === HttpStatusCode.Ok) {
@@ -146,12 +147,17 @@ export default function NotificationListView() {
           }
           return row;
         });
+        handleMutation(response.data, false);
 
-        enqueueSnackbar(t("notiPage.Bansuccess"));
+        enqueueSnackbar(
+          response.data.active_status === 0
+            ? t("notiPage.Disablesuccess")
+            : t("notiPage.Enablesuccess")
+        );
 
         setTableData(deleteRow);
       } else {
-        enqueueSnackbar(t("notiPage.Banfailed"), { variant: "error" });
+        enqueueSnackbar(t("notiPage.Error"), { variant: "error" });
       }
 
       // table.onUpdatePageDeleteRow(dataInPage.length);

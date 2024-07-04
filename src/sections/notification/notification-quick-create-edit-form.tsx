@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -81,6 +81,10 @@ export default function NotificationQuickCreateEditForm({
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  useEffect(() => {
+    reset(defaultValues);
+  }, [defaultValues]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
