@@ -1,5 +1,6 @@
 {
   "app": "app",
+  "activity": "Activity",
   "job": "job",
   "user": "user",
   "list": "list",

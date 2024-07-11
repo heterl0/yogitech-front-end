@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { useLocales } from "@/locales";
 import { IExerciseLog } from "@/types/exercise";
 import { useRouter } from "next/navigation";
+import { LinearProgress } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +49,15 @@ export default function ActivityTableRow({ row }: Props) {
         <TableCell onClick={handleUserClick} sx={{ whiteSpace: "nowrap" }}>
           {user}
         </TableCell>
-        <TableCell sx={{ whiteSpace: "nowrap" }}>{process}</TableCell>
+        <TableCell sx={{ whiteSpace: "nowrap" }}>
+          {`${Number.parseFloat(process) * 100}%`}
+
+          <LinearProgress
+            variant="determinate"
+            value={Number.parseFloat(process) * 100}
+            color={Number.parseFloat(process) * 100 < 100 ? "error" : "primary"}
+          />
+        </TableCell>
         <TableCell sx={{ whiteSpace: "nowrap" }}>{complete_pose}</TableCell>
         <TableCell sx={{ whiteSpace: "nowrap" }}>{result}</TableCell>
         <TableCell sx={{ whiteSpace: "nowrap" }}>{point}</TableCell>

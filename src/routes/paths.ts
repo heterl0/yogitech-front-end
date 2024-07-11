@@ -70,6 +70,9 @@ export const paths = {
       account: `${ROOTS.DASHBOARD}/user/account`,
       edit: (id: number) => `${ROOTS.DASHBOARD}/user/${id}/edit`,
     },
+    activity: {
+      root: `${ROOTS.DASHBOARD}/activity`,
+    },
     account: {
       root: `${ROOTS.DASHBOARD}/account`,
       new: `${ROOTS.DASHBOARD}/account/new`,

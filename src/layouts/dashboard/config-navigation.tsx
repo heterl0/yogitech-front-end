@@ -50,6 +50,7 @@ const ICONS = {
   bill: icon("ic_bill"),
   exercise: icon("ic_exercise"),
   pose: icon("ic_pose"),
+  activity: icon("ic_activity"),
 };
 
 // ----------------------------------------------------------------------
@@ -154,6 +155,13 @@ export function useNavData() {
             title: t("user"),
             path: paths.dashboard.user.root,
             icon: ICONS.userGroup,
+          },
+
+          // Activity
+          {
+            title: t("activity"),
+            path: paths.dashboard.activity.root,
+            icon: ICONS.activity,
           },
 
           // Notification
