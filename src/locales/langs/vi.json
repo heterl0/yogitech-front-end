@@ -904,5 +904,19 @@
   "role": "Vai trò",
   "provider": "Nhà cung cấp",
   "cancel": "Hủy",
-  "update": "Cập nhật"
+  "update": "Cập nhật",
+  "activityPage": {
+    "exerciseId": "ID bài tập",
+    "userId": "ID người dùng",
+    "process": "Tiến trình",
+    "completePose": "Số tư thế hoàn thành",
+    "result": "Kết quả",
+    "point": "Điểm",
+    "exp": "Kinh nghiệm",
+    "calories": "Calo",
+    "ttf": "Thời gian hoàn thành",
+    "createdAt": "Ngày tạo",
+    "activity": "Hoạt động",
+    "search": "Tìm kiếm với id bài tập hoặc người dùng..."
+  }
 }

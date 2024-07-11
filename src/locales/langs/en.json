@@ -906,5 +906,19 @@
   "role": "Role",
   "provider": "Provider",
   "cancel": "Cancel",
-  "update": "Update"
+  "update": "Update",
+  "activityPage": {
+    "exerciseId": "Exercise ID",
+    "userId": "User ID",
+    "process": "Process",
+    "completePose": "Complete pose",
+    "result": "Result",
+    "point": "Point",
+    "exp": "EXP",
+    "calories": "Calories",
+    "ttf": "Time to finish",
+    "createdAt": "Created At",
+    "activity": "Activity",
+    "search": "Search with ids..."
+  }
 }

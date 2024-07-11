@@ -86,7 +86,7 @@ export default function ActivityTableToolbar({
             fullWidth
             value={filters.id}
             onChange={handleFilterName}
-            placeholder={t("notiPage.Search...")}
+            placeholder={t("activityPage.search")}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

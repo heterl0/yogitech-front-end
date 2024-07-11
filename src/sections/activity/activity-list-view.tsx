@@ -6,14 +6,11 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 
 import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 
 import { paths } from "@/routes/paths";
-import { useBoolean } from "@/hooks/use-boolean";
-import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
@@ -45,16 +42,16 @@ export default function ActivityListView() {
   const { t } = useTranslation();
 
   const TABLE_HEAD = [
-    { id: "exerciseId", label: "Exercise ID", width: 140 },
-    { id: "userId", label: "User ID", width: 180 },
-    { id: "process", label: "Process", width: 140 },
-    { id: "completePose", label: "Complete Pose", width: 110 },
-    { id: "result", label: "Result", width: 110 },
-    { id: "point", label: "Point", width: 110 },
-    { id: "exp", label: "Exp", width: 110 },
-    { id: "calories", label: "Calories", width: 110 },
-    { id: "ttf", label: "Total Time Finish", width: 110 },
-    { id: "createdAt", label: "Created At", width: 110 },
+    { id: "exerciseId", label: t("activityPage.exerciseId"), width: 140 },
+    { id: "userId", label: t("activityPage.userId"), width: 180 },
+    { id: "process", label: t("activityPage.process"), width: 140 },
+    { id: "completePose", label: t("activityPage.completePose"), width: 110 },
+    { id: "result", label: t("activityPage.result"), width: 110 },
+    { id: "point", label: t("activityPage.point"), width: 110 },
+    { id: "exp", label: t("activityPage.exp"), width: 110 },
+    { id: "calories", label: t("activityPage.calories"), width: 110 },
+    { id: "ttf", label: t("activityPage.ttf"), width: 110 },
+    { id: "createdAt", label: t("activityPage.createdAt"), width: 110 },
   ];
 
   const defaultFilters: IExerciseLogTableFilters = useMemo(() => {
@@ -68,8 +65,6 @@ export default function ActivityListView() {
   const table = useTable();
 
   const settings = useSettingsContext();
-
-  const quickCreate = useBoolean();
 
   const { activities } = useGetActivities();
 
@@ -115,26 +110,15 @@ export default function ActivityListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : "lg"}>
         <CustomBreadcrumbs
-          heading={t("notiPage.Notification")}
+          heading={t("activityPage.activity")}
           links={[
             { name: "Dashboard", href: paths.dashboard.root },
             {
-              name: t("notiPage.Notification"),
+              name: t("activityPage.activity"),
               href: paths.dashboard.notification.root,
             },
             { name: t("notiPage.List") },
           ]}
-          action={
-            <Button
-              // component={RouterLink}
-              // href={paths.dashboard.account.new}
-              onClick={quickCreate.onTrue}
-              variant="contained"
-              startIcon={<Iconify icon="mingcute:add-line" />}
-            >
-              {t("notiPage.Create")}
-            </Button>
-          }
           sx={{
             mb: { xs: 3, md: 5 },
           }}
