@@ -159,12 +159,15 @@ export function AuthProvider({ children }: Props) {
     });
 
     const user = resUser.data;
+    if (user.is_staff === false) {
+      throw new Error("You are not admin!");
+    }
 
     setSession(access);
     // setSession(refresh);
 
     dispatch({
-      type: Types.LOGINGOOGLE,
+      type: Types.LOGIN,
       payload: {
         user: {
           ...user,

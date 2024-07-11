@@ -210,13 +210,12 @@ export default function OverviewAppView() {
                 total={overview?.active_users || 0}
                 icon="solar:user-rounded-bold"
                 chart={{
-                  series:
-                    Number.parseFloat(
-                      (
-                        (overview?.active_users / overview.total_users) *
-                        100
-                      ).toFixed(2)
-                    ) || 0,
+                  series: Number.parseFloat(
+                    (
+                      (overview?.active_users / overview.total_users) *
+                      100
+                    ).toFixed(2) || "0"
+                  ),
                 }}
               />
 
@@ -226,7 +225,10 @@ export default function OverviewAppView() {
                 icon="fluent:mail-24-filled"
                 color="info"
                 chart={{
-                  series: loginToday?.percent_logged_in_today || 0,
+                  series:
+                    Number.parseFloat(
+                      loginToday?.percent_logged_in_today.toFixed(2)
+                    ) || 0,
                 }}
               />
             </Stack>
