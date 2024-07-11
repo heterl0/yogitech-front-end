@@ -5,25 +5,27 @@ import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Stack, { StackProps } from "@mui/material/Stack";
+import { useTranslation } from "react-i18next";
 import Iconify from "@/components/iconify";
 import {
-  ICommentTableFilterValue,
-  ICommentTableFilters,
+  IExerciseLogTableFilters,
+  IExerciseLogTableFilterValue,
 } from "@/types/exercise";
-import { useTranslation } from "react-i18next";
+import { shortDateLabel } from "@/components/custom-date-range-picker";
+import { useLocales } from "@/locales";
 
 // ----------------------------------------------------------------------
 
 type Props = StackProps & {
-  filters: ICommentTableFilters;
-  onFilters: (name: string, value: ICommentTableFilterValue) => void;
+  filters: IExerciseLogTableFilters;
+  onFilters: (name: string, value: IExerciseLogTableFilterValue) => void;
   //
   onResetFilters: VoidFunction;
   //
   results: number;
 };
 
-export default function ExerciseCommentTableFiltersResult({
+export default function ActivityTableFiltersResult({
   filters,
   onFilters,
   //
@@ -32,28 +34,29 @@ export default function ExerciseCommentTableFiltersResult({
   results,
   ...other
 }: Props) {
+  const { t } = useTranslation();
   const handleRemoveKeyword = useCallback(() => {
-    onFilters("name", "");
+    onFilters("id", "");
   }, [onFilters]);
 
-  const { t } = useTranslation();
-  const handleRemoveStatus = useCallback(
-    (inputValue: string) => {
-      const newValue = filters.status.filter(
-        (item: string) => item !== inputValue
-      );
+  const handleRemoveAvailable = () => {
+    onFilters("startDate", null);
+    onFilters("endDate", null);
+  };
 
-      onFilters("status", newValue);
-    },
-    [filters.status, onFilters]
+  const { currentLang } = useLocales();
+
+  const shortLabel = shortDateLabel(
+    filters.startDate,
+    filters.endDate,
+    currentLang.adapterLocale
   );
-
   return (
     <Stack spacing={1.5} {...other}>
       <Box sx={{ typography: "body2" }}>
         <strong>{`${results} `}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          {t("exercisePage.exerciseCommentListView.filtersResult.resultsFound")}
+          {t("notiPage.results found")}
         </Box>
       </Box>
 
@@ -64,31 +67,22 @@ export default function ExerciseCommentTableFiltersResult({
         flexWrap="wrap"
         alignItems="center"
       >
-        {!!filters.status.length && (
-          <Block
-            label={t("exercisePage.exerciseCommentListView.filtersResult.role")}
-          >
-            {filters.status.map((item: string) => (
-              <Chip
-                key={item}
-                label={item}
-                size="small"
-                onDelete={() => handleRemoveStatus(item)}
-              />
-            ))}
+        {!!filters.id && (
+          <Block label="Ids:">
+            <Chip
+              label={filters.id}
+              size="small"
+              onDelete={handleRemoveKeyword}
+            />
           </Block>
         )}
 
-        {!!filters.name && (
-          <Block
-            label={t(
-              "exercisePage.exerciseCommentListView.filtersResult.keyword"
-            )}
-          >
+        {filters.startDate && filters.endDate && (
+          <Block label={t("filterResults.available")}>
             <Chip
-              label={filters.name}
               size="small"
-              onDelete={handleRemoveKeyword}
+              label={shortLabel}
+              onDelete={handleRemoveAvailable}
             />
           </Block>
         )}
@@ -98,7 +92,7 @@ export default function ExerciseCommentTableFiltersResult({
           onClick={onResetFilters}
           startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
         >
-          {t("exercisePage.exerciseCommentListView.filtersResult.clear")}
+          {t("notiPage.Clear")}
         </Button>
       </Stack>
     </Stack>

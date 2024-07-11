@@ -1,4 +1,4 @@
-import { format, getTime, formatDistanceToNow } from "date-fns";
+import { format, getTime, formatDistanceToNow, isValid } from "date-fns";
 
 // ----------------------------------------------------------------------
 
@@ -6,7 +6,9 @@ type InputValue = Date | string | number | null | undefined;
 
 export function fDate(date: InputValue, local?: Locale, newFormat?: string) {
   const fm = newFormat || "dd MMM yyyy";
-
+  if (date && !isValid(new Date(date))) {
+    return "Invalid Date";
+  }
   return date ? format(new Date(date), fm, { locale: local }) : "";
 }
 

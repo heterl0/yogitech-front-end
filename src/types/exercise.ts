@@ -49,7 +49,6 @@ export type IComment = {
 };
 
 export type IExerciseLog = {
-  id: number;
   exercise: number;
   user: number;
   process: string;
@@ -65,6 +64,14 @@ export type IExerciseLog = {
   event?: number;
   active_status: number;
 };
+
+export type IExerciseLogTableFilters = {
+  id: string;
+  startDate: Date | null;
+  endDate: Date | null;
+};
+
+export type IExerciseLogTableFilterValue = string | Date | null;
 
 export type IExercisePoseResult = {
   pose: number;
