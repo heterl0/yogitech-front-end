@@ -135,6 +135,10 @@ export default function UserQuickEditForm({
         `${endpoints.account.details}${currentUser?.id}/`,
         updateData
       );
+      await axiosInstance.patch(
+        `${endpoints.profile.details}${currentUser?.profile.id}/`,
+        { active_status: updateData.active_status }
+      );
       if (response.status === HttpStatusCode.Ok) {
         onClose();
         enqueueSnackbar(t("update_success"));
