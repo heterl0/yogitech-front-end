@@ -195,10 +195,7 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={6} lg={4}>
           {topProfile && (
-            <AppTopUsers
-              title={t("dashboard.topUsers")}
-              list={topProfile.slice(0, 3)}
-            />
+            <AppTopUsers title={t("dashboard.topUsers")} list={topProfile} />
           )}
         </Grid>
 

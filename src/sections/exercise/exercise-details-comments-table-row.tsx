@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
 import TableCell from "@mui/material/TableCell";
@@ -10,7 +9,6 @@ import { useBoolean } from "@/hooks/use-boolean";
 import Label from "@/components/label";
 import Iconify from "@/components/iconify";
 import { ConfirmDialog } from "@/components/custom-dialog";
-import CustomPopover, { usePopover } from "@/components/custom-popover";
 import { IComment } from "@/types/exercise";
 import { fDateTime } from "@/utils/format-time";
 import ExerciseCommentQuickCreateEditForm from "./exercise-details-comments-quick-create-edit-form";
@@ -22,11 +20,12 @@ import { useLocales } from "@/locales";
 
 type Props = {
   selected: boolean;
-  onEditRow: VoidFunction;
+  onEditRow: (data: { active_status: number; text: string }) => void;
   row: IComment;
   onSelectRow: VoidFunction;
   onBanRow: VoidFunction;
   onActiveRow: VoidFunction;
+  onCreate: (text: string) => void;
 };
 
 export default function ExerciseCommentTableRow({
@@ -35,6 +34,8 @@ export default function ExerciseCommentTableRow({
   onSelectRow,
   onBanRow,
   onActiveRow,
+  onCreate,
+  onEditRow,
 }: Props) {
   const { created_at, text, active_status, user, votes } = row;
   const { t } = useTranslation();
@@ -54,11 +55,7 @@ export default function ExerciseCommentTableRow({
 
   const quickEdit = useBoolean();
 
-  const popover = usePopover();
-
-  const handleChangeStatus = (status: number) => {
-    setStatus(status === 0 ? "Disabled" : "Active");
-  };
+  const quickCreate = useBoolean();
 
   return (
     <>
@@ -104,7 +101,13 @@ export default function ExerciseCommentTableRow({
           </Tooltip>
 
           <Tooltip
-            title={t("exercisePage.exerciseCommentListView.tableRow.ban")}
+            title={
+              active_status === 1
+                ? t("exercisePage.exerciseCommentListView.tableRow.ban")
+                : t("exercisePage.exerciseCommentListView.tableRow.active")
+            }
+            placement="top"
+            arrow
           >
             <IconButton
               color={active_status === 1 ? "error" : "primary"}
@@ -117,6 +120,16 @@ export default function ExerciseCommentTableRow({
               )}
             </IconButton>
           </Tooltip>
+
+          <Tooltip
+            title={t("exercisePage.exerciseCommentListView.tableRow.response")}
+            placement="top"
+            arrow
+          >
+            <IconButton onClick={quickCreate.onTrue}>
+              <Iconify icon="solar:chat-square-arrow-bold" />
+            </IconButton>
+          </Tooltip>
         </TableCell>
       </TableRow>
 
@@ -125,27 +138,15 @@ export default function ExerciseCommentTableRow({
           currentComment={row}
           open={quickEdit.value}
           onClose={quickEdit.onFalse}
-          onChangeStatus={handleChangeStatus}
+          onEditRow={onEditRow}
         />
       )}
 
-      <CustomPopover
-        open={popover.open}
-        onClose={popover.onClose}
-        arrow="right-top"
-        sx={{ width: 140 }}
-      >
-        <MenuItem
-          onClick={() => {
-            confirm.onTrue();
-            popover.onClose();
-          }}
-          sx={{ color: "error.main" }}
-        >
-          <Iconify icon="solar:close-circle-bold" />
-          {t("exercisePage.exerciseCommentListView.tableRow.ban")}
-        </MenuItem>
-      </CustomPopover>
+      <ExerciseCommentQuickCreateEditForm
+        open={quickCreate.value}
+        onClose={quickCreate.onFalse}
+        onCreate={onCreate}
+      />
 
       <ConfirmDialog
         open={confirm.value}

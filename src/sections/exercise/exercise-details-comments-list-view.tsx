@@ -13,8 +13,6 @@ import TableBody from "@mui/material/TableBody";
 import IconButton from "@mui/material/IconButton";
 import TableContainer from "@mui/material/TableContainer";
 
-import { paths } from "@/routes/paths";
-import { useRouter } from "@/routes/hooks";
 import { useBoolean } from "@/hooks/use-boolean";
 import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
@@ -39,6 +37,7 @@ import {
   IComment,
   ICommentTableFilterValue,
   ICommentTableFilters,
+  IRequestComment,
 } from "@/types/exercise";
 import ExerciseCommentTableFiltersResult from "./exercise-details-comments-table-filters-result";
 import { useTranslation } from "react-i18next";
@@ -56,6 +55,7 @@ const defaultFilters: ICommentTableFilters = {
 export default function ExerciseCommentListView({
   comments,
   mutate,
+  exerciseId,
 }: {
   comments: IComment[];
   mutate: (
@@ -64,15 +64,13 @@ export default function ExerciseCommentListView({
     isBatch: boolean,
     ids: number[]
   ) => void;
+  exerciseId: number;
 }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const { t } = useTranslation();
   const table = useTable();
-
   const settings = useSettingsContext();
-
-  const router = useRouter();
 
   const confirm = useBoolean();
 
@@ -235,13 +233,6 @@ export default function ExerciseCommentListView({
     tableData,
   ]);
 
-  const handleEditRow = useCallback(
-    (id: number) => {
-      router.push(paths.dashboard.account.edit(id));
-    },
-    [router]
-  );
-
   const batchInactive = useCallback(async () => {
     const response = await axiosInstance.post(
       `${endpoints.exercise.comment.batchInactive}`,
@@ -274,6 +265,57 @@ export default function ExerciseCommentListView({
       totalRowsFiltered: dataFiltered.length,
     });
   }, [confirm, handleDeleteRows]);
+
+  const handleResponse = useCallback(
+    async (data: IRequestComment) => {
+      const response = await axiosInstance.post(
+        `${endpoints.exercise.comment.create}`,
+        {
+          ...data,
+          exercise: exerciseId,
+        }
+      );
+      if (response.status === HttpStatusCode.Created) {
+        mutate(response.data, true, false, []);
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.createSuccess")
+        );
+      } else {
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.createFailed"),
+          {
+            variant: "error",
+          }
+        );
+      }
+    },
+    [mutate]
+  );
+
+  const handleEditResponse = useCallback(
+    async (id: string, data: { active_status: number; text: string }) => {
+      const response = await axiosInstance.patch(
+        `${endpoints.exercise.comment.details(id)}`,
+        {
+          ...data,
+        }
+      );
+      if (response.status === HttpStatusCode.Ok) {
+        mutate(response.data, false, false, []);
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.updateSuccess")
+        );
+      } else {
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.updateFailed"),
+          {
+            variant: "error",
+          }
+        );
+      }
+    },
+    [mutate]
+  );
 
   return (
     <>
@@ -356,7 +398,13 @@ export default function ExerciseCommentListView({
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onBanRow={() => handleBanRow(row.id)}
                         onActiveRow={() => handleActive(row.id)}
-                        onEditRow={() => handleEditRow(row.id)}
+                        onEditRow={(data: {
+                          active_status: number;
+                          text: string;
+                        }) => handleEditResponse(row.id.toString(), data)}
+                        onCreate={(text: string) =>
+                          handleResponse({ parent_comment: row.id, text })
+                        }
                       />
                     ))}
 

@@ -48,6 +48,11 @@ export type IComment = {
   exercise: number;
 };
 
+export type IRequestComment = {
+  text: string;
+  parent_comment: number;
+};
+
 export type IExerciseLog = {
   exercise: number;
   user: number;

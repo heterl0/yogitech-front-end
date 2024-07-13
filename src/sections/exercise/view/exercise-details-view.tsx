@@ -120,6 +120,7 @@ export default function ExerciseDetailsView({ id }: Props) {
         <ExerciseCommentListView
           comments={currentExercise.comments}
           mutate={handleMutation}
+          exerciseId={currentExercise.id}
         />
       )}
     </Container>

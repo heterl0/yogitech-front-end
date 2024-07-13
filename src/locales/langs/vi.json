@@ -339,6 +339,7 @@
         "ban": "Vô hiệu hoá",
         "active": "Mở khoá",
         "edit": "Chỉnh sửa",
+        "response": "Phản hồi",
         "confirmBanTitle": "Vô hiệu hoá bình luận",
         "confirmBanContent": "Bạn có chắc chắn muốn vô hiệu hoá bình luận này?",
         "confirmBanContents": "Bạn có chắc chắn muốn vô hiệu hoá các bình luận này?",
@@ -361,11 +362,15 @@
         "banSuccess": "Vô hiệu hoá thành công!",
         "banFailed": "Vô hiệu hoá thất bại!",
         "activeSuccess": "Mở khoá thành công!",
-        "activeFailed": "Mở khoá thất bại!"
+        "activeFailed": "Mở khoá thất bại!",
+        "updateSuccess": "Cập nhật thành công!",
+        "createSuccess": "Gửi phản hồi thành công!",
+        "createFail": "Gửi phản hồi thất bại!",
+        "updateFail": "Cập nhật thất bại!"
       },
       "filtersResult": {
         "resultsFound": "kết quả được tìm thấy",
-        "role": "Vai trò:",
+        "status": "Trạng thái:",
         "keyword": "Từ khóa:",
         "clear": "Xóa",
         "filters": "Bộ lọc"
@@ -378,13 +383,15 @@
       },
       "quickCreateEditForm": {
         "editTitle": "Chỉnh sửa bình luận",
-        "createTitle": "Tạo bình luận",
+        "createTitle": "Phản hồi bình luận",
         "infoAlert": "Bình luận đang chờ xác nhận",
         "statusLabel": "Trạng thái",
         "contentLabel": "Nội dung",
         "cancelButton": "Hủy bỏ",
         "updateButton": "Cập nhật",
-        "createButton": "Tạo"
+        "createButton": "Gửi phản hồi",
+        "updateSuccess": "Cập nhật thành công!",
+        "createSuccess": "Gửi phản hồi thành công!"
       }
     }
   },

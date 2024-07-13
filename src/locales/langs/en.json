@@ -341,6 +341,7 @@
         "ban": "Disable",
         "active": "Enable",
         "edit": "Edit",
+        "response": "Response",
         "confirmBanTitle": "Disable comment",
         "confirmBanContent": "Are you sure want to disable this comment?",
         "confirmBanContents": "Are you sure want to disable these comments?",
@@ -363,11 +364,15 @@
         "banSuccess": "Disable success!",
         "banFailed": "Disable failed!",
         "activeSuccess": "Enable success!",
-        "activeFailed": "Enable failed!"
+        "activeFailed": "Enable failed!",
+        "createSuccess": "Create success!",
+        "updateSuccess": "Update success!",
+        "updateFailed": "Update failed!",
+        "createFailed": "Create failed!"
       },
       "filtersResult": {
         "resultsFound": "results found",
-        "role": "Role:",
+        "status": "Status:",
         "keyword": "Keyword:",
         "clear": "Clear",
         "filters": "Filters"
@@ -380,13 +385,15 @@
       },
       "quickCreateEditForm": {
         "editTitle": "Edit comment",
-        "createTitle": "Create comment",
+        "createTitle": "Response comment",
         "infoAlert": "Comment is waiting for confirmation",
         "statusLabel": "Status",
         "contentLabel": "Content",
         "cancelButton": "Cancel",
         "updateButton": "Update",
-        "createButton": "Create"
+        "createButton": "Response",
+        "updateSuccess": "Update success!",
+        "createSuccess": "Response success!"
       }
     }
   },

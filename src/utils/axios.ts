@@ -88,6 +88,7 @@ export const endpoints = {
     comment: {
       batchInactive: "/api/v1/exercise-comments/batch-inactive/",
       details: (id: string) => `/api/v1/exercise-comments/${id}/`,
+      create: "/api/v1/exercise-comments/",
     },
   },
   comment: {

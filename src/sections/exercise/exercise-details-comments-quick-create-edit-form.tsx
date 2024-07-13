@@ -23,24 +23,24 @@ import FormProvider, {
 
 import { NOTIFICATION_STATUS } from "@/types/notification";
 import { IComment } from "@/types/exercise";
-import { useSnackbar } from "notistack";
-import axiosInstance, { endpoints } from "@/utils/axios";
 // ----------------------------------------------------------------------
 
 type Props = {
   open: boolean;
   onClose: VoidFunction;
   currentComment?: IComment;
-  onChangeStatus: (status: number) => void;
+  onCreate?: (text: string) => void;
+  onEditRow?: (data: { active_status: number; text: string }) => void;
 };
 
 export default function ExerciseCommentQuickCreateEditForm({
   currentComment,
   open,
+
+  onEditRow,
   onClose,
-  onChangeStatus,
+  onCreate,
 }: Props) {
-  const { enqueueSnackbar } = useSnackbar();
   const NewAccountSchema = Yup.object().shape({
     status: Yup.number().required("Status is required"),
     text: Yup.string().required("Content is required"),
@@ -69,17 +69,14 @@ export default function ExerciseCommentQuickCreateEditForm({
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (currentComment?.active_status !== data.status) {
-        await axiosInstance.patch(
-          endpoints.comment.update(currentComment?.id + ""),
-          {
-            active_status: data.status,
-            text: data.text,
-          }
-        );
-        onChangeStatus(data.status);
-        enqueueSnackbar("Comment status has been updated");
+      if (!currentComment) {
+        onCreate?.(data.text);
         onClose();
+      } else {
+        onEditRow?.({
+          active_status: data.status,
+          text: data.text,
+        });
       }
     } catch (error) {
       reset();

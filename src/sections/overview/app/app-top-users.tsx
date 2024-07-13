@@ -29,9 +29,11 @@ export default function AppTopUsers({
       <CardHeader title={title} subheader={subheader} />
 
       <Stack spacing={3} sx={{ p: 3 }}>
-        {orderBy(list, ["exp"], ["desc"]).map((profile, index) => (
-          <AuthorItem key={profile.id} profile={profile} index={index} />
-        ))}
+        {orderBy(list, ["exp"], ["desc"])
+          .slice(0, 3)
+          .map((profile, index) => (
+            <AuthorItem key={profile.id} profile={profile} index={index} />
+          ))}
       </Stack>
     </Card>
   );

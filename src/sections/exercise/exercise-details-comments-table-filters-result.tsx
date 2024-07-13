@@ -66,7 +66,9 @@ export default function ExerciseCommentTableFiltersResult({
       >
         {!!filters.status.length && (
           <Block
-            label={t("exercisePage.exerciseCommentListView.filtersResult.role")}
+            label={t(
+              "exercisePage.exerciseCommentListView.filtersResult.status"
+            )}
           >
             {filters.status.map((item: string) => (
               <Chip
