@@ -14,7 +14,7 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 import { IComment } from "@/types/exercise";
 import { fDateTime } from "@/utils/format-time";
 import ExerciseCommentQuickCreateEditForm from "./exercise-details-comments-quick-create-edit-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocales } from "@/locales";
 
@@ -26,22 +26,27 @@ type Props = {
   row: IComment;
   onSelectRow: VoidFunction;
   onBanRow: VoidFunction;
+  onActiveRow: VoidFunction;
 };
 
 export default function ExerciseCommentTableRow({
   row,
   selected,
-  onEditRow,
   onSelectRow,
   onBanRow,
+  onActiveRow,
 }: Props) {
-  const { created_at, text, active_status, user } = row;
+  const { created_at, text, active_status, user, votes } = row;
   const { t } = useTranslation();
   const { currentLang } = useLocales();
 
   const [status, setStatus] = useState(
     active_status === 0 ? "Disabled" : "Active"
   );
+
+  useEffect(() => {
+    setStatus(active_status === 0 ? "Disabled" : "Active");
+  }, [row]);
 
   // const dateFormatted = format(new Date(time), "HH:mm dd MMM yyyy");
 
@@ -72,6 +77,7 @@ export default function ExerciseCommentTableRow({
             }}
           />
         </TableCell>
+        <TableCell>{votes.length}</TableCell>
         <TableCell sx={{ whiteSpace: "nowrap" }}>
           {fDateTime(new Date(created_at), currentLang.adapterLocale)}
         </TableCell>
@@ -97,12 +103,20 @@ export default function ExerciseCommentTableRow({
             </IconButton>
           </Tooltip>
 
-          <IconButton
-            color={popover.open ? "inherit" : "default"}
-            onClick={popover.onOpen}
+          <Tooltip
+            title={t("exercisePage.exerciseCommentListView.tableRow.ban")}
           >
-            <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
+            <IconButton
+              color={active_status == 1 ? "error" : "primary"}
+              onClick={confirm.onTrue}
+            >
+              {active_status === 1 ? (
+                <Iconify icon="solar:close-circle-bold" />
+              ) : (
+                <Iconify icon="solar:check-circle-bold" />
+              )}
+            </IconButton>
+          </Tooltip>
         </TableCell>
       </TableRow>
 
@@ -131,37 +145,43 @@ export default function ExerciseCommentTableRow({
           <Iconify icon="solar:close-circle-bold" />
           {t("exercisePage.exerciseCommentListView.tableRow.ban")}
         </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            onEditRow();
-            popover.onClose();
-          }}
-        >
-          <Iconify icon="solar:pen-bold" />
-          {t("exercisePage.exerciseCommentListView.tableRow.edit")}
-        </MenuItem>
       </CustomPopover>
 
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title={t(
-          "exercisePage.exerciseCommentListView.tableRow.confirmBanTitle"
-        )}
-        content={t(
-          "exercisePage.exerciseCommentListView.tableRow.confirmBanContent"
-        )}
+        title={
+          active_status === 1
+            ? t("exercisePage.exerciseCommentListView.tableRow.confirmBanTitle")
+            : t(
+                "exercisePage.exerciseCommentListView.tableRow.confirmActiveTitle"
+              )
+        }
+        content={
+          active_status === 1
+            ? t(
+                "exercisePage.exerciseCommentListView.tableRow.confirmBanContent"
+              )
+            : t(
+                "exercisePage.exerciseCommentListView.tableRow.confirmActiveContent"
+              )
+        }
         action={
           <Button
             variant="contained"
-            color="error"
+            color={active_status === 1 ? "error" : "primary"}
             onClick={() => {
-              onBanRow();
+              if (active_status === 1) {
+                onBanRow();
+              } else {
+                onActiveRow();
+              }
               confirm.onFalse();
             }}
           >
-            {t("exercisePage.exerciseCommentListView.tableRow.ban")}
+            {active_status === 1
+              ? t("exercisePage.exerciseCommentListView.tableRow.ban")
+              : t("exercisePage.exerciseCommentListView.tableRow.active")}
           </Button>
         }
       />

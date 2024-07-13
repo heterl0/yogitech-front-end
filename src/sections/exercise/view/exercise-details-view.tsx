@@ -11,6 +11,7 @@ import Label from "@/components/label";
 import ExerciseCommentListView from "../exercise-details-comments-list-view";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { IComment } from "@/types/exercise";
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ type Props = {
 export default function ExerciseDetailsView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const { exercise: currentExercise } = useGetExercise(id);
+  const { exercise: currentExercise, exerciseMutation } = useGetExercise(id);
 
   const [currentTab, setCurrentTab] = useState("detail");
 
@@ -65,6 +66,43 @@ export default function ExerciseDetailsView({ id }: Props) {
     </Tabs>
   );
 
+  const handleMutation = useCallback(
+    (
+      data: IComment | null,
+      isCreated: boolean,
+      isBatch: boolean = false,
+      ids: number[] = []
+    ) => {
+      if (isBatch) {
+        exerciseMutation(
+          {
+            ...currentExercise,
+            comments: currentExercise.comments.map((item) =>
+              ids.includes(item.id) ? { ...item, active_status: 0 } : item
+            ),
+          },
+          false
+        );
+      } else if (isCreated) {
+        exerciseMutation({
+          ...currentExercise,
+          comments: [...currentExercise.comments, data],
+        });
+      } else if (data) {
+        exerciseMutation(
+          {
+            ...currentExercise,
+            comments: currentExercise.comments.map((item) =>
+              item.id === data.id ? data : item
+            ),
+          },
+          false
+        );
+      }
+    },
+    [currentExercise, exerciseMutation]
+  );
+
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <ExerciseDetailsToolbar
@@ -79,7 +117,10 @@ export default function ExerciseDetailsView({ id }: Props) {
       )}
 
       {currentTab === "comment" && currentExercise.comments && (
-        <ExerciseCommentListView comments={currentExercise.comments} />
+        <ExerciseCommentListView
+          comments={currentExercise.comments}
+          mutate={handleMutation}
+        />
       )}
     </Container>
   );

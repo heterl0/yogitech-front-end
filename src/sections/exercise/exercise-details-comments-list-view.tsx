@@ -2,7 +2,7 @@
 "use client";
 
 import isEqual from "lodash/isEqual";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
@@ -55,8 +55,15 @@ const defaultFilters: ICommentTableFilters = {
 
 export default function ExerciseCommentListView({
   comments,
+  mutate,
 }: {
   comments: IComment[];
+  mutate: (
+    data: IComment | null,
+    isCreated: boolean,
+    isBatch: boolean,
+    ids: number[]
+  ) => void;
 }) {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -72,6 +79,10 @@ export default function ExerciseCommentListView({
   const [tableData, setTableData] = useState<IComment[]>(comments);
 
   const [filters, setFilters] = useState(defaultFilters);
+
+  useEffect(() => {
+    setTableData(comments);
+  }, [comments]);
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -90,15 +101,16 @@ export default function ExerciseCommentListView({
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
-  // useEffect(() => {
-  //   setTableData(comments);
-  // }, [comments]);
-
   const TABLE_HEAD = [
     {
       id: "comment",
       label: t("exercisePage.exerciseCommentListView.tableHead.comment"),
       width: 560,
+    },
+    {
+      id: "vote",
+      label: t("exercisePage.exerciseCommentListView.tableHead.vote"),
+      width: 110,
     },
     {
       id: "time",
@@ -128,12 +140,12 @@ export default function ExerciseCommentListView({
     setFilters(defaultFilters);
   }, []);
 
-  const handleBanRow = useCallback(
+  const handleActive = useCallback(
     async (id: number) => {
       const response = await axiosInstance.patch(
-        `${endpoints.account.details}${id}/`,
+        `${endpoints.exercise.comment.details(id.toString())}`,
         {
-          active_status: 0,
+          active_status: 1,
         }
       );
       if (response.status === HttpStatusCode.Ok) {
@@ -141,20 +153,20 @@ export default function ExerciseCommentListView({
           if (row.id === id) {
             return {
               ...row,
-              active_status: row.active_status === 0 ? 1 : 0,
+              active_status: 1,
             };
           }
           return row;
         });
 
         enqueueSnackbar(
-          t("exercisePage.exerciseCommentListView.snackbar.banSuccess")
+          t("exercisePage.exerciseCommentListView.snackbar.activeSuccess")
         );
 
         setTableData(deleteRow);
       } else {
         enqueueSnackbar(
-          t("exercisePage.exerciseCommentListView.snackbar.banFailed"),
+          t("exercisePage.exerciseCommentListView.snackbar.activeFailed"),
           {
             variant: "error",
           }
@@ -165,6 +177,39 @@ export default function ExerciseCommentListView({
     },
     [enqueueSnackbar, t, tableData]
   );
+
+  const handleBanRow = useCallback(async (id: number) => {
+    const response = await axiosInstance.patch(
+      `${endpoints.exercise.comment.details(id.toString())}`,
+      {
+        active_status: 0,
+      }
+    );
+    if (response.status === HttpStatusCode.Ok) {
+      const deleteRow = tableData.map((row) => {
+        if (row.id === id) {
+          return {
+            ...row,
+            active_status: 0,
+          };
+        }
+        return row;
+      });
+
+      enqueueSnackbar(
+        t("exercisePage.exerciseCommentListView.snackbar.banSuccess")
+      );
+
+      setTableData(deleteRow);
+    } else {
+      enqueueSnackbar(
+        t("exercisePage.exerciseCommentListView.snackbar.banFailed"),
+        {
+          variant: "error",
+        }
+      );
+    }
+  }, []);
 
   const handleDeleteRows = useCallback(() => {
     const deleteRows = tableData.filter(
@@ -196,6 +241,39 @@ export default function ExerciseCommentListView({
     },
     [router]
   );
+
+  const batchInactive = useCallback(async () => {
+    const response = await axiosInstance.post(
+      `${endpoints.exercise.comment.batchInactive}`,
+      {
+        ids: table.selected,
+      }
+    );
+
+    if (response.status === HttpStatusCode.Ok) {
+      mutate(null, false, true, table.selected);
+      enqueueSnackbar(
+        t("exercisePage.exerciseCommentListView.snackbar.banSuccess")
+      );
+      // comments = comments.map((comment) =>
+      //   table.selected.includes(comment.id)
+      //     ? { ...comment, active_status: 0 }
+      //     : comment
+      // );
+    } else {
+      enqueueSnackbar(
+        t("exercisePage.exerciseCommentListView.snackbar.banFailed"),
+        {
+          variant: "error",
+        }
+      );
+    }
+
+    table.onUpdatePageDeleteRows({
+      totalRowsInPage: dataInPage.length,
+      totalRowsFiltered: dataFiltered.length,
+    });
+  }, [confirm, handleDeleteRows]);
 
   return (
     <>
@@ -236,9 +314,9 @@ export default function ExerciseCommentListView({
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title={t("notiPage.Disable")}>
                   <IconButton color="primary" onClick={confirm.onTrue}>
-                    <Iconify icon="solar:trash-bin-trash-bold" />
+                    <Iconify icon="solar:close-circle-bold" />
                   </IconButton>
                 </Tooltip>
               }
@@ -277,6 +355,7 @@ export default function ExerciseCommentListView({
                         selected={table.selected.includes(row.id)}
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onBanRow={() => handleBanRow(row.id)}
+                        onActiveRow={() => handleActive(row.id)}
                         onEditRow={() => handleEditRow(row.id)}
                       />
                     ))}
@@ -326,7 +405,7 @@ export default function ExerciseCommentListView({
             variant="contained"
             color="error"
             onClick={() => {
-              handleDeleteRows();
+              batchInactive();
               confirm.onFalse();
             }}
           >

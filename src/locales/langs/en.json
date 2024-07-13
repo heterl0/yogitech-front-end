@@ -338,25 +338,32 @@
     "exerciseCommentListView": {
       "tableRow": {
         "quickEdit": "Quick Edit",
-        "ban": "Ban",
+        "ban": "Disable",
+        "active": "Enable",
         "edit": "Edit",
-        "confirmBanTitle": "Ban User",
-        "confirmBanContent": "Are you sure want to ban?"
+        "confirmBanTitle": "Disable comment",
+        "confirmBanContent": "Are you sure want to disable this comment?",
+        "confirmBanContents": "Are you sure want to disable these comments?",
+        "confirmActiveTitle": "Enable comment",
+        "confirmActiveContent": "Are you sure want to enable this comment?"
       },
       "tableHead": {
         "comment": "Comment",
+        "vote": "Vote",
         "time": "Time",
         "status": "Status"
       },
       "confirmDialog": {
-        "title": "Delete",
-        "content": "Are you sure want to delete {{numSelected}} items?",
-        "delete": "Delete"
+        "title": "Disable comment",
+        "content": "Are you sure want to disable {{numSelected}} items?",
+        "delete": "Disable"
       },
       "snackbar": {
         "deleteSuccess": "Delete success!",
-        "banSuccess": "Ban success!",
-        "banFailed": "Ban failed!"
+        "banSuccess": "Disable success!",
+        "banFailed": "Disable failed!",
+        "activeSuccess": "Enable success!",
+        "activeFailed": "Enable failed!"
       },
       "filtersResult": {
         "resultsFound": "results found",
@@ -920,5 +927,8 @@
     "createdAt": "Created At",
     "activity": "Activity",
     "search": "Search with ids..."
+  },
+  "table": {
+    "selected": "{{ numSelected }} selected"
   }
 }

@@ -336,25 +336,32 @@
     "exerciseCommentListView": {
       "tableRow": {
         "quickEdit": "Chỉnh sửa nhanh",
-        "ban": "Cấm",
+        "ban": "Vô hiệu hoá",
+        "active": "Mở khoá",
         "edit": "Chỉnh sửa",
-        "confirmBanTitle": "Cấm người dùng",
-        "confirmBanContent": "Bạn có chắc chắn muốn cấm?"
+        "confirmBanTitle": "Vô hiệu hoá bình luận",
+        "confirmBanContent": "Bạn có chắc chắn muốn vô hiệu hoá bình luận này?",
+        "confirmBanContents": "Bạn có chắc chắn muốn vô hiệu hoá các bình luận này?",
+        "confirmActiveTitle": "Mở khoá bình luận",
+        "confirmActiveContent": "Bạn có chắc chắn muốn mở khoá bình luận này?"
       },
       "tableHead": {
         "comment": "Bình luận",
+        "vote": "Bình chọn",
         "time": "Thời gian",
         "status": "Trạng thái"
       },
       "confirmDialog": {
-        "title": "Xóa",
-        "content": "Bạn có chắc chắn muốn xóa {{numSelected}} mục?",
-        "delete": "Xóa"
+        "title": "Vô hiệu hoá bình luận",
+        "content": "Bạn có chắc chắn muốn vô hiệu hoá {{numSelected}} mục?",
+        "delete": "Vô hiệu hoá"
       },
       "snackbar": {
         "deleteSuccess": "Xóa thành công!",
-        "banSuccess": "Cấm thành công!",
-        "banFailed": "Cấm thất bại!"
+        "banSuccess": "Vô hiệu hoá thành công!",
+        "banFailed": "Vô hiệu hoá thất bại!",
+        "activeSuccess": "Mở khoá thành công!",
+        "activeFailed": "Mở khoá thất bại!"
       },
       "filtersResult": {
         "resultsFound": "kết quả được tìm thấy",
@@ -918,5 +925,8 @@
     "createdAt": "Ngày tạo",
     "activity": "Hoạt động",
     "search": "Tìm kiếm với id bài tập hoặc người dùng..."
+  },
+  "table": {
+    "selected": "Đã chọn {{ numSelected }} "
   }
 }

@@ -30,7 +30,7 @@ export function useGetExercises() {
 export function useGetExercise(id: string) {
   const URL = id ? [`${endpoints.exercise.details(id)}`] : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating, mutate } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
@@ -38,6 +38,7 @@ export function useGetExercise(id: string) {
       exerciseLoading: isLoading,
       exerciseError: error,
       exerciseValidating: isValidating,
+      exerciseMutation: mutate,
     }),
     [data, error, isLoading, isValidating]
   );
