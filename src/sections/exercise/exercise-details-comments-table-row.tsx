@@ -107,7 +107,7 @@ export default function ExerciseCommentTableRow({
             title={t("exercisePage.exerciseCommentListView.tableRow.ban")}
           >
             <IconButton
-              color={active_status == 1 ? "error" : "primary"}
+              color={active_status === 1 ? "error" : "primary"}
               onClick={confirm.onTrue}
             >
               {active_status === 1 ? (
