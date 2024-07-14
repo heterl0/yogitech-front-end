@@ -8,6 +8,8 @@ import Iconify from "@/components/iconify";
 
 import { ICandidateEvent } from "@/types/event";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
+import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
 
@@ -92,6 +94,11 @@ function CandidateItem({ candidate, ranking }: BookerItemProps) {
     }
   };
 
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(paths.dashboard.account.edit(candidate.profile.user_id));
+  };
+
   return (
     <Stack
       component={Card}
@@ -102,8 +109,9 @@ function CandidateItem({ candidate, ranking }: BookerItemProps) {
     >
       <Avatar
         alt={candidate.profile.username}
-        src={candidate.profile.avatar || candidate.profile.username}
-        sx={{ width: 48, height: 48 }}
+        src={candidate.profile.avatar || ""}
+        sx={{ width: 48, height: 48, cursor: "pointer" }}
+        onClick={handleClick}
       />
       <Stack spacing={2} flexGrow={1}>
         <ListItemText
