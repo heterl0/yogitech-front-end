@@ -20,53 +20,6 @@ export type IPostHero = {
   };
 };
 
-export type IPostComment = {
-  id: string;
-  name: string;
-  avatarUrl: string;
-  message: string;
-  postedAt: Date;
-  users: {
-    id: string;
-    name: string;
-    avatarUrl: string;
-  }[];
-  replyComment: {
-    id: string;
-    userId: string;
-    message: string;
-    postedAt: Date;
-    tagUser?: string;
-  }[];
-};
-
-export type IPostItem = {
-  id: string;
-  title: string;
-  tags: string[];
-  publish: string;
-  content: string;
-  image_url: string;
-  metaTitle: string;
-  totalViews: number;
-  totalShares: number;
-  description: string;
-  totalComments: number;
-  totalFavorites: number;
-  metaKeywords: string[];
-  metaDescription: string;
-  comments: IPostComment[];
-  createdAt: Date;
-  favoritePerson: {
-    name: string;
-    avatarUrl: string;
-  }[];
-  author: {
-    name: string;
-    avatarUrl: string;
-  };
-};
-
 export type IBlogVote = {
   id: number;
   user: string;
