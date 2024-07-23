@@ -145,10 +145,10 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
           `${endpoints.account.details}${currentAccount?.id}/`,
           updateData
         );
-        await axiosInstance.patch(
-          `${endpoints.profile.details}${currentAccount?.profile.id}/`,
-          { active_status: updateData.active_status }
-        );
+        // await axiosInstance.patch(
+        //   `${endpoints.profile.details}${currentAccount?.profile.id}/`,
+        //   { active_status: updateData.active_status }
+        // );
         if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar(t("form.update_success"));
           mutate?.({
