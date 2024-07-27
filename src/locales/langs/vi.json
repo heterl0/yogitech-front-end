@@ -660,9 +660,11 @@
     "Active": "Hoạt động",
     "QuickEdit": "Chỉnh sửa nhanh",
     "BanUser": "Cấm người dùng",
+    "UnBanUser": "Bỏ cấm người dùng",
     "Areyou": "Bạn có chắc chắn muốn vô hiệu hoá thông báo này?",
     "Areyou2": "Bạn có chắc chắn muốn kích hoạt thông báo này?",
     "Ban": "Cấm",
+    "Unban": "Bỏ cấm",
     "Edit": "Chỉnh sửa",
     "Search...": "Tìm kiếm...",
     "Print": "In",
@@ -875,7 +877,9 @@
       "active": "Hoạt động",
       "pending": "Đang chờ",
       "banned": "Bị cấm"
-    }
+    },
+    "sureBan": "Bạn có chắc muốn cấm người dùng này?",
+    "sureUnban": "Bạn có chắc muốn bỏ cấm người dùng này?"
   },
   "tableHead": {
     "username": "Tên người dùng",

@@ -110,9 +110,9 @@ export default function AccountListView() {
 
   const TABLE_HEAD = [
     { id: "username", label: t("tableHead.username") },
-    { id: "phoneNumber", label: t("tableHead.phoneNumber"), width: 180 },
-    { id: "status", label: t("tableHead.status"), width: 220 },
-    { id: "role", label: t("tableHead.role"), width: 180 },
+    { id: "phone", label: t("tableHead.phoneNumber"), width: 180 },
+    { id: "active_status", label: t("tableHead.status"), width: 160 },
+    { id: "is_staff", label: t("tableHead.role"), width: 180 },
     { id: "auth_provider", label: t("tableHead.auth_provider"), width: 100 },
     { id: "", width: 88 },
   ];
@@ -126,7 +126,8 @@ export default function AccountListView() {
       const response = await axiosInstance.patch(
         `${endpoints.account.details}${id}/`,
         {
-          active_status: 0,
+          active_status:
+            tableData.find((row) => row.id === id)?.active_status === 0 ? 1 : 0,
         }
       );
       if (response.status === 200) {

@@ -662,9 +662,11 @@
     "Active": "Active",
     "QuickEdit": "Quick Edit",
     "BanUser": "Ban User",
+    "UnBanUser": "UnBan User",
     "Areyou": "Are you sure want to disable?",
     "Areyou2": "Are you sure want to enable?",
     "Ban": "Ban",
+    "Unban": "UnBan",
     "Edit": "Edit",
     "Search...": "Search...",
     "Print": "Print",
@@ -871,7 +873,9 @@
       "active": "Active",
       "pending": "Pending",
       "banned": "Banned"
-    }
+    },
+    "sureBan": "Are you sure want to ban?",
+    "sureUnban": "Are you sure want to remove ban?"
   },
   "tableHead": {
     "username": "Username",

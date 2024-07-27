@@ -38,7 +38,7 @@ type Props = {
 };
 
 type UpdateData = {
-  phone: string;
+  phone?: string;
   is_active?: boolean;
   is_staff?: boolean;
   is_premium?: boolean;
@@ -58,9 +58,9 @@ export default function UserQuickEditForm({
     username: Yup.string().required(t("name_required")),
     email: Yup.string().required(t("email_required")).email(t("email_invalid")),
     phone: Yup.string()
-      .required(t("phone_required"))
+      // .required(t("phone_required"))
       .matches(
-        /^\+?[0-9]{1,3}?[-. ]?([0-9]{2,3}[-. ]?){2,3}[0-9]$/,
+        /^(\+?[0-9]{1,3}[-. ]?([0-9]{2,3}[-. ]?){2,3}[0-9])?$/,
         t("form.validation.phone_format")
       ),
     status: Yup.string().required(t("status_required")),
@@ -108,7 +108,7 @@ export default function UserQuickEditForm({
   const onSubmit = handleSubmit(async (data) => {
     try {
       const updateData: UpdateData = {
-        phone: data.phone,
+        phone: data.phone ?? "",
       };
       if (data.status === "banned") {
         updateData.active_status = 0;

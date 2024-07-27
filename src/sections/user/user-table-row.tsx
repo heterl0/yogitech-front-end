@@ -18,6 +18,7 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 import { IAccount } from "@/types/user";
 
 import UserQuickEditForm from "./user-quick-edit-form";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -49,6 +50,8 @@ export default function UserTableRow({
     auth_provider,
     profile: { avatar_url },
   } = row;
+
+  const { t } = useTranslation();
 
   const role = is_staff ? "Admin" : is_premium ? "Premium User" : "User";
   const status =
@@ -116,7 +119,7 @@ export default function UserTableRow({
         </TableCell>
 
         <TableCell align="right" sx={{ px: 1, whiteSpace: "nowrap" }}>
-          <Tooltip title="Quick Edit" placement="top" arrow>
+          <Tooltip title={t("notiPage.QuickEdit")} placement="top" arrow>
             <IconButton
               color={quickEdit.value ? "inherit" : "default"}
               onClick={quickEdit.onTrue}
@@ -152,10 +155,16 @@ export default function UserTableRow({
             confirm.onTrue();
             popover.onClose();
           }}
-          sx={{ color: "error.main" }}
+          sx={{ color: active_status == 1 ? "error.main" : "info.main" }}
         >
-          <Iconify icon="solar:close-circle-bold" />
-          Ban
+          <Iconify
+            icon={
+              active_status === 1
+                ? "solar:close-circle-bold"
+                : "solar:check-circle-bold"
+            }
+          />
+          {active_status === 1 ? t("notiPage.Ban") : t("notiPage.Unban")}
         </MenuItem>
 
         <MenuItem
@@ -165,25 +174,31 @@ export default function UserTableRow({
           }}
         >
           <Iconify icon="solar:pen-bold" />
-          Edit
+          {t("notiPage.Edit")}
         </MenuItem>
       </CustomPopover>
 
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Ban User"
-        content="Are you sure want to ban?"
+        title={
+          active_status === 1 ? t("notiPage.BanUser") : t("notiPage.UnBanUser")
+        }
+        content={
+          active_status === 1
+            ? t("accountListView.sureBan")
+            : t("accountListView.sureUnban")
+        }
         action={
           <Button
             variant="contained"
-            color="error"
+            color={active_status === 1 ? "error" : "info"}
             onClick={() => {
               onBanRow();
               confirm.onFalse();
             }}
           >
-            Ban
+            {active_status === 1 ? t("notiPage.Ban") : t("notiPage.Unban")}
           </Button>
         }
       />
