@@ -154,7 +154,7 @@
       "edit": "Edit"
     },
     "poseFiltersResult": {
-      "resultsFound": "results found",
+      "resultsFound": "{{ num }} results found",
       "muscle": "Muscle",
       "level": "Level",
       "status": "Status",
@@ -371,7 +371,7 @@
         "createFailed": "Create failed!"
       },
       "filtersResult": {
-        "resultsFound": "results found",
+        "resultsFound": "{{ num }} results found",
         "status": "Status:",
         "keyword": "Keyword:",
         "clear": "Clear",
@@ -455,7 +455,7 @@
         "noData": "No Data"
       },
       "filtersResult": {
-        "resultsFound": "results found",
+        "resultsFound": "{{ num }} results found",
         "clear": "Clear",
         "available": "Available:",
         "status": "Status:"
@@ -893,7 +893,7 @@
     "Advanced": "Advanced"
   },
   "filterResults": {
-    "resultsFound": "results found",
+    "resultsFound": "{{ num }} results found",
     "clear": "Clear",
     "status": "Status:",
     "role": "Role",

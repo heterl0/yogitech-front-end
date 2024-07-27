@@ -9,6 +9,7 @@ import Stack, { StackProps } from "@mui/material/Stack";
 import Iconify from "@/components/iconify";
 
 import { IUserTableFilters, IUserTableFilterValue } from "@/types/user";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,7 @@ export default function UserTableFiltersResult({
   results,
   ...other
 }: Props) {
+  const { t } = useTranslation();
   const handleRemoveKeyword = useCallback(() => {
     onFilters("name", "");
   }, [onFilters]);
@@ -52,7 +54,7 @@ export default function UserTableFiltersResult({
       <Box sx={{ typography: "body2" }}>
         <strong>{`${results} `}</strong>
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          results found
+          {t("filterResults.resultsFound", { num: results })}
         </Box>
       </Box>
 
@@ -64,17 +66,17 @@ export default function UserTableFiltersResult({
         alignItems="center"
       >
         {filters.status !== "all" && (
-          <Block label="Status:">
+          <Block label={t("filterResults.status")}>
             <Chip
               size="small"
-              label={filters.status}
+              label={t(`accountListView.statusOptions.${filters.status}`)}
               onDelete={handleRemoveStatus}
             />
           </Block>
         )}
 
         {!!filters.role.length && (
-          <Block label="Role:">
+          <Block label={t("filterResults.role")}>
             {filters.role.map((item) => (
               <Chip
                 key={item}
@@ -87,7 +89,7 @@ export default function UserTableFiltersResult({
         )}
 
         {!!filters.name && (
-          <Block label="Keyword:">
+          <Block label={t("filterResults.keyword")}>
             <Chip
               label={filters.name}
               size="small"
@@ -101,7 +103,7 @@ export default function UserTableFiltersResult({
           onClick={onResetFilters}
           startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
         >
-          Clear
+          {t("filterResults.clear")}
         </Button>
       </Stack>
     </Stack>

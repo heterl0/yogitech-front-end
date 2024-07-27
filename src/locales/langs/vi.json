@@ -153,7 +153,7 @@
       "edit": "Chỉnh sửa"
     },
     "poseFiltersResult": {
-      "resultsFound": "kết quả được tìm thấy",
+      "resultsFound": "Có {{ num }} kết quả được tìm thấy",
       "muscle": "Cơ",
       "level": "Cấp độ",
       "status": "Trạng thái",
@@ -369,7 +369,7 @@
         "updateFail": "Cập nhật thất bại!"
       },
       "filtersResult": {
-        "resultsFound": "kết quả được tìm thấy",
+        "resultsFound": "Có {{ num }} kết quả được tìm thấy",
         "status": "Trạng thái:",
         "keyword": "Từ khóa:",
         "clear": "Xóa",
@@ -453,7 +453,7 @@
         "noData": "Không có dữ liệu"
       },
       "filtersResult": {
-        "resultsFound": "kết quả được tìm thấy",
+        "resultsFound": "Có {{ num }} kết quả được tìm thấy",
         "clear": "Xóa",
         "available": "Có hiệu lực:",
         "status": "Trạng thái:"
@@ -891,7 +891,7 @@
     "popular": "Phổ biến"
   },
   "filterResults": {
-    "resultsFound": "kết quả được tìm thấy",
+    "resultsFound": "Có {{ num }} kết quả được tìm thấy",
     "clear": "Xóa",
     "status": "Trạng thái:",
     "role": "Vai trò",

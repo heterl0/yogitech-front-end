@@ -53,9 +53,9 @@ export default function PoseFiltersResult({
   return (
     <Stack spacing={1.5} {...other}>
       <Box sx={{ typography: "body2" }}>
-        <strong>{`${results} `}</strong>
+        {/* <strong>{`${results} `}</strong> */}
         <Box component="span" sx={{ color: "text.secondary", ml: 0.25 }}>
-          {t("posePage.poseFiltersResult.resultsFound")}
+          {t("posePage.poseFiltersResult.resultsFound", { num: results })}
         </Box>
       </Box>
 
