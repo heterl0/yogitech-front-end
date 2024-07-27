@@ -863,9 +863,11 @@
     "newUser": "Người dùng mới",
     "banSuccess": "Cấm thành công!",
     "banFailed": "Cấm thất bại!",
+    "unbanSuccess": "Bỏ cấm thành công!",
+    "unbanFailed": "Bỏ cấm thất bại!",
     "deleteSuccess": "Xóa thành công!",
-    "delete": "Xóa",
-    "deleteConfirm": "Bạn có chắc chắn muốn xóa {count} mục?",
+    "delete": "Cấm",
+    "deleteConfirm": "Bạn có chắc chắn muốn cấm {{count}} người dùng này?",
     "statusOptions": {
       "all": "Tất cả",
       "active": "Hoạt động",

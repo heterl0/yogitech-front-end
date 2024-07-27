@@ -59,6 +59,7 @@ export const endpoints = {
     list: "/api/v1/users/",
     create: "/api/v1/user/",
     details: "/api/v1/users/",
+    batchBan: "/api/v1/user/batch-ban/",
   },
   profile: {
     list: "/api/v1/user-profiles/",

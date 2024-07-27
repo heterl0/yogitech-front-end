@@ -84,10 +84,10 @@ export default function AccountListView() {
     filters,
   });
 
-  const dataInPage = dataFiltered.slice(
-    table.page * table.rowsPerPage,
-    table.page * table.rowsPerPage + table.rowsPerPage
-  );
+  // const dataInPage = dataFiltered.slice(
+  //   table.page * table.rowsPerPage,
+  //   table.page * table.rowsPerPage + table.rowsPerPage
+  // );
 
   const denseHeight = table.dense ? 56 : 56 + 20;
   const canReset = !isEqual(defaultFilters, filters);
@@ -130,6 +130,9 @@ export default function AccountListView() {
             tableData.find((row) => row.id === id)?.active_status === 0 ? 1 : 0,
         }
       );
+      const active_status = tableData.find(
+        (row) => row.id === id
+      )?.active_status;
       if (response.status === 200) {
         const updatedRows = tableData.map((row) => {
           if (row.id === id) {
@@ -141,37 +144,46 @@ export default function AccountListView() {
           return row;
         });
 
-        enqueueSnackbar(t("accountListView.banSuccess"));
+        enqueueSnackbar(
+          active_status === 1
+            ? t("accountListView.banSuccess")
+            : t("accountListView.unbanSuccess")
+        );
 
         setTableData(updatedRows);
       } else {
-        enqueueSnackbar(t("accountListView.banFailed"), { variant: "error" });
+        enqueueSnackbar(
+          active_status === 1
+            ? t("accountListView.banFailed")
+            : t("accountListView.unbanFailed"),
+          { variant: "error" }
+        );
       }
     },
     [enqueueSnackbar, tableData, t]
   );
 
-  const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter(
-      (row) => !table.selected.includes(row.id)
-    );
-
-    enqueueSnackbar(t("accountListView.deleteSuccess"));
-
-    setTableData(deleteRows);
-
-    table.onUpdatePageDeleteRows({
-      totalRowsInPage: dataInPage.length,
-      totalRowsFiltered: dataFiltered.length,
+  const handleDeleteRows = useCallback(async () => {
+    const response = await axiosInstance.post(`${endpoints.account.batchBan}`, {
+      ids: table.selected,
     });
-  }, [
-    dataFiltered.length,
-    dataInPage.length,
-    enqueueSnackbar,
-    table,
-    tableData,
-    t,
-  ]);
+    if (response.status === 200) {
+      const updatedRows = tableData.map((row) => {
+        if (table.selected.includes(row.id)) {
+          return {
+            ...row,
+            active_status: 0,
+          };
+        }
+        return row;
+      });
+
+      enqueueSnackbar(t("accountListView.banSuccess"));
+      setTableData(updatedRows);
+    } else {
+      enqueueSnackbar(t("accountListView.banFailed"), { variant: "error" });
+    }
+  }, [table.selected, t]);
 
   const handleEditRow = useCallback(
     (id: number) => {
@@ -312,7 +324,7 @@ export default function AccountListView() {
               action={
                 <Tooltip title={t("accountListView.delete")}>
                   <IconButton color="primary" onClick={confirm.onTrue}>
-                    <Iconify icon="solar:trash-bin-trash-bold" />
+                    <Iconify icon="solar:close-circle-bold" />
                   </IconButton>
                 </Tooltip>
               }
