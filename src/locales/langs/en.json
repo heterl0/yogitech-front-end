@@ -943,5 +943,6 @@
   },
   "table": {
     "selected": "{{ numSelected }} selected"
-  }
+  },
+  "create_user_info": "Create a new user with the information below and click the 'Create User' button."
 }

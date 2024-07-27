@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
@@ -13,16 +12,13 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
-
 import Label from "@/components/label";
 import { useSnackbar } from "@/components/snackbar";
 import FormProvider, { RHFTextField, RHFSelect } from "@/components/hook-form";
-
 import { IAccount } from "@/types/user";
-import { MenuItem } from "@mui/material";
+import { Alert, MenuItem } from "@mui/material";
 import { USER_STATUS_OPTIONS } from "@/_mock";
 import UserCard from "../user/user-card";
 import axiosInstance, { endpoints } from "@/utils/axios";
@@ -49,7 +45,7 @@ type CreateData = {
 };
 
 type UpdateData = {
-  phone: string;
+  phone?: string;
   is_active?: boolean;
   is_staff?: boolean;
   is_premium?: boolean;
@@ -67,9 +63,9 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
       .required(t("form.validation.email_required"))
       .email(t("form.validation.email_invalid")),
     phone: Yup.string()
-      .required(t("form.validation.phone_required"))
+      // .required(t("form.validation.phone_required"))
       .matches(
-        /^\+?[0-9]{1,3}?[-. ]?([0-9]{2,3}[-. ]?){2,3}[0-9]$/,
+        /^(\+?[0-9]{1,3}[-. ]?([0-9]{2,3}[-. ]?){2,3}[0-9])?$/,
         t("form.validation.phone_format")
       ),
     status: Yup.string().required(t("form.validation.status_required")),
@@ -145,10 +141,6 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
           `${endpoints.account.details}${currentAccount?.id}/`,
           updateData
         );
-        // await axiosInstance.patch(
-        //   `${endpoints.profile.details}${currentAccount?.profile.id}/`,
-        //   { active_status: updateData.active_status }
-        // );
         if (response.status === HttpStatusCode.Ok) {
           enqueueSnackbar(t("form.update_success"));
           mutate?.({
@@ -165,7 +157,7 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
         const createData: CreateData = {
           username: data.username,
           email: data.email,
-          phone: data.phone,
+          phone: data.phone ?? "",
           password: data.password,
           auth_provider: data.provider,
         };
@@ -210,126 +202,104 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
   });
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Grid container spacing={3}>
-        {currentAccount && (
-          <Grid xs={12} md={4}>
-            <Card sx={{ pt: 3, pb: 3, px: 3 }}>
-              {currentAccount && (
-                <Label
-                  color={
-                    (values.status === "active" && "success") ||
-                    (values.status === "banned" && "error") ||
-                    "warning"
-                  }
-                  sx={{
-                    position: "absolute",
-                    bottom: 228,
-                    right: 36,
-                    zIndex: 9,
-                  }}
-                >
-                  {values.status}
-                </Label>
-              )}
+    <>
+      <Alert severity="info" sx={{ mb: 3 }}>
+        {t("create_user_info")}
+      </Alert>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        <Grid container spacing={3}>
+          {currentAccount && (
+            <Grid xs={12} md={4}>
+              <Card sx={{ pt: 3, pb: 3, px: 3 }}>
+                {currentAccount && (
+                  <Label
+                    color={
+                      (values.status === "active" && "success") ||
+                      (values.status === "banned" && "error") ||
+                      "warning"
+                    }
+                    sx={{
+                      position: "absolute",
+                      bottom: 228,
+                      right: 36,
+                      zIndex: 9,
+                    }}
+                  >
+                    {values.status}
+                  </Label>
+                )}
 
-              {currentAccount && (
-                <UserCard userProfile={currentAccount.profile} />
-              )}
-            </Card>
-          </Grid>
-        )}
+                {currentAccount && (
+                  <UserCard userProfile={currentAccount.profile} />
+                )}
+              </Card>
+            </Grid>
+          )}
 
-        <Grid xs={12} md={currentAccount ? 8 : 12}>
-          <Card sx={{ p: 3 }}>
-            <Box
-              rowGap={3}
-              columnGap={2}
-              display="grid"
-              gridTemplateColumns={{
-                xs: "repeat(1, 1fr)",
-                sm: "repeat(2, 1fr)",
-              }}
-            >
-              <RHFTextField
-                name="username"
-                disabled={currentAccount ? true : false}
-                label={t("form.label.username")}
-              />
-              <RHFTextField
-                name="email"
-                disabled={currentAccount ? true : false}
-                label={t("form.label.email_address")}
-              />
-
-              {!currentAccount && (
+          <Grid xs={12} md={currentAccount ? 8 : 12}>
+            <Card sx={{ p: 3 }}>
+              <Box
+                rowGap={3}
+                columnGap={2}
+                display="grid"
+                gridTemplateColumns={{
+                  xs: "repeat(1, 1fr)",
+                  sm: "repeat(2, 1fr)",
+                }}
+              >
                 <RHFTextField
-                  name="password"
-                  type="password"
-                  label={t("form.label.password")}
+                  name="username"
+                  required
+                  disabled={currentAccount ? true : false}
+                  label={t("form.label.username")}
                 />
-              )}
+                <RHFTextField
+                  name="email"
+                  required
+                  disabled={currentAccount ? true : false}
+                  label={t("form.label.email_address")}
+                />
 
-              <RHFSelect name="status" label={t("form.label.status")}>
-                {USER_STATUS_OPTIONS.map((status) => (
-                  <MenuItem key={status.value} value={status.value}>
-                    {t(`accountListView.tabs.${status.value}`)}
-                  </MenuItem>
-                ))}
-              </RHFSelect>
-
-              <RHFTextField name="phone" label={t("form.label.phone_number")} />
-
-              <RHFSelect name="role" label={t("form.label.role")}>
-                {["Admin", "Premium User", "User"].map((role) => (
-                  <MenuItem key={role} value={role}>
-                    {role}
-                  </MenuItem>
-                ))}
-              </RHFSelect>
-              <RHFSelect name="provider" label={t("form.label.provider")}>
-                {["Email", "Google"].map((value) => (
-                  <MenuItem key={value} value={value.toLowerCase()}>
-                    {value}
-                  </MenuItem>
-                ))}
-              </RHFSelect>
-              <FormControlLabel
-                labelPlacement="start"
-                control={
-                  <Controller
-                    name="status"
-                    control={control}
-                    render={({ field }) => (
-                      <Switch
-                        {...field}
-                        checked={field.value === "active"}
-                        onChange={(event) =>
-                          field.onChange(
-                            event.target.checked ? "active" : "pending"
-                          )
-                        }
-                      />
-                    )}
+                {!currentAccount && (
+                  <RHFTextField
+                    required
+                    name="password"
+                    type="password"
+                    label={t("form.label.password")}
                   />
-                }
-                label={
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      {t("form.label.email_verified")}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      {t("form.helper_text.verification_email")}
-                    </Typography>
-                  </>
-                }
-                sx={{ mx: 0, mb: 0, width: 1, justifyContent: "space-between" }}
-              />
+                )}
 
-              {currentAccount && (
+                <RHFSelect name="status" label={t("form.label.status")}>
+                  {USER_STATUS_OPTIONS.map((status) => (
+                    <MenuItem key={status.value} value={status.value}>
+                      {t(`accountListView.tabs.${status.value}`)}
+                    </MenuItem>
+                  ))}
+                </RHFSelect>
+
+                <RHFTextField
+                  name="phone"
+                  label={t("form.label.phone_number")}
+                />
+
+                <RHFSelect name="role" label={t("form.label.role")}>
+                  {["Admin", "Premium User", "User"].map((role) => (
+                    <MenuItem key={role} value={role}>
+                      {role}
+                    </MenuItem>
+                  ))}
+                </RHFSelect>
+                <RHFSelect
+                  name="provider"
+                  required
+                  label={t("form.label.provider")}
+                >
+                  {["Email", "Google"].map((value) => (
+                    <MenuItem key={value} value={value.toLowerCase()}>
+                      {value}
+                    </MenuItem>
+                  ))}
+                </RHFSelect>
                 <FormControlLabel
                   labelPlacement="start"
                   control={
@@ -339,10 +309,10 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
                       render={({ field }) => (
                         <Switch
                           {...field}
-                          checked={field.value === "banned"}
+                          checked={field.value === "active"}
                           onChange={(event) =>
                             field.onChange(
-                              event.target.checked ? "banned" : "active"
+                              event.target.checked ? "active" : "pending"
                             )
                           }
                         />
@@ -352,13 +322,13 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
                   label={
                     <>
                       <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                        {t("form.label.banned")}
+                        {t("form.label.email_verified")}
                       </Typography>
                       <Typography
                         variant="body2"
                         sx={{ color: "text.secondary" }}
                       >
-                        {t("form.helper_text.disable_account")}
+                        {t("form.helper_text.verification_email")}
                       </Typography>
                     </>
                   }
@@ -369,23 +339,65 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
                     justifyContent: "space-between",
                   }}
                 />
-              )}
-            </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
-              <LoadingButton
-                type="submit"
-                variant="contained"
-                loading={isSubmitting}
-              >
-                {!currentAccount
-                  ? t("form.action.create_user")
-                  : t("form.action.save_changes")}
-              </LoadingButton>
-            </Stack>
-          </Card>
+                {currentAccount && (
+                  <FormControlLabel
+                    labelPlacement="start"
+                    control={
+                      <Controller
+                        name="status"
+                        control={control}
+                        render={({ field }) => (
+                          <Switch
+                            {...field}
+                            checked={field.value === "banned"}
+                            onChange={(event) =>
+                              field.onChange(
+                                event.target.checked ? "banned" : "active"
+                              )
+                            }
+                          />
+                        )}
+                      />
+                    }
+                    label={
+                      <>
+                        <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                          {t("form.label.banned")}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "text.secondary" }}
+                        >
+                          {t("form.helper_text.disable_account")}
+                        </Typography>
+                      </>
+                    }
+                    sx={{
+                      mx: 0,
+                      mb: 0,
+                      width: 1,
+                      justifyContent: "space-between",
+                    }}
+                  />
+                )}
+              </Box>
+
+              <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+                <LoadingButton
+                  type="submit"
+                  variant="contained"
+                  loading={isSubmitting}
+                >
+                  {!currentAccount
+                    ? t("form.action.create_user")
+                    : t("form.action.save_changes")}
+                </LoadingButton>
+              </Stack>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </FormProvider>
+      </FormProvider>
+    </>
   );
 }

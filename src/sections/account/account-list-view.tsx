@@ -163,7 +163,7 @@ export default function AccountListView() {
     [enqueueSnackbar, tableData, t]
   );
 
-  const handleDeleteRows = useCallback(async () => {
+  const handleBatchBan = useCallback(async () => {
     const response = await axiosInstance.post(`${endpoints.account.batchBan}`, {
       ids: table.selected,
     });
@@ -177,7 +177,6 @@ export default function AccountListView() {
         }
         return row;
       });
-
       enqueueSnackbar(t("accountListView.banSuccess"));
       setTableData(updatedRows);
     } else {
@@ -411,7 +410,7 @@ export default function AccountListView() {
             variant="contained"
             color="error"
             onClick={() => {
-              handleDeleteRows();
+              handleBatchBan();
               confirm.onFalse();
             }}
           >

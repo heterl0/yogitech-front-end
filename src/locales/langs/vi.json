@@ -941,5 +941,6 @@
   },
   "table": {
     "selected": "Đã chọn {{ numSelected }} "
-  }
+  },
+  "create_user_info": "Tạo người dùng mới với thông tin bên dưới và nhấp vào nút 'Tạo Người Dùng'."
 }
