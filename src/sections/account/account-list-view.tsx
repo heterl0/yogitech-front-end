@@ -435,7 +435,9 @@ function applyFilter({
 
   if (name) {
     inputData = inputData.filter(
-      (user) => user.username.toLowerCase().indexOf(name.toLowerCase()) !== -1
+      (user) =>
+        user.username.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
+        user.email.toLowerCase().indexOf(name.toLowerCase()) !== -1
     );
   }
 
