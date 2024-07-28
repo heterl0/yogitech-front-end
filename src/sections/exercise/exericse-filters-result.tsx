@@ -9,6 +9,7 @@ import { LEVELS } from "@/constants/level";
 import { NOTIFICATION_STATUS } from "@/types/notification";
 import { IExerciseFilterValue, IExerciseFilters } from "@/types/exercise";
 import { useTranslation } from "react-i18next";
+import { LabelColor } from "@/components/label";
 
 // ----------------------------------------------------------------------
 
@@ -36,12 +37,46 @@ export default function ExerciseFiltersResult({
 
   const { t } = useTranslation();
 
+  const PREMIUM = [
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.free"),
+      value: 0,
+      color: "error" as LabelColor,
+    },
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.premium"),
+      value: 1,
+      color: "info" as LabelColor,
+    },
+  ];
+
+  const ADMIN = [
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.user"),
+      value: 0,
+      color: "error" as LabelColor,
+    },
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.admin"),
+      value: 1,
+      color: "info" as LabelColor,
+    },
+  ];
+
   const handleRemoveLevel = () => {
     onFilters("level", -1);
   };
 
   const handleRemoveStatus = () => {
     onFilters("status", -1);
+  };
+
+  const handleRemovePremium = () => {
+    onFilters("is_premium", -1);
+  };
+
+  const handleRemoveAdmin = () => {
+    onFilters("is_admin", -1);
   };
 
   // const handleRemoveAvailable = () => {
@@ -115,6 +150,26 @@ export default function ExerciseFiltersResult({
               label={NOTIFICATION_STATUS[filters.status].label}
               size="small"
               onDelete={() => handleRemoveStatus()}
+            />
+          </Block>
+        )}
+
+        {filters.is_premium !== -1 && (
+          <Block label={t("filterResults.type")}>
+            <Chip
+              label={PREMIUM[filters.is_premium].label}
+              size="small"
+              onDelete={() => handleRemovePremium()}
+            />
+          </Block>
+        )}
+
+        {filters.is_admin !== -1 && (
+          <Block label={t("filterResults.owner")}>
+            <Chip
+              label={ADMIN[filters.is_admin].label}
+              size="small"
+              onDelete={() => handleRemoveAdmin()}
             />
           </Block>
         )}

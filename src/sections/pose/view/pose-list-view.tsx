@@ -26,6 +26,7 @@ import PoseSearch from "../pose-search";
 import PoseSort from "../pose-sort";
 import PoseList from "../pose-list";
 import { useTranslation } from "react-i18next";
+import { formatMuscles } from "../pose-new-edit-form";
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +47,8 @@ export default function PoseListView() {
   const [sortBy, setSortBy] = useState("latest");
 
   const { poses } = useGetPoses();
-  const { muscles } = useGetMuscles();
+  let { muscles } = useGetMuscles();
+  muscles = formatMuscles(muscles);
 
   const [search, setSearch] = useState<{ query: string; results: IPose[] }>({
     query: "",

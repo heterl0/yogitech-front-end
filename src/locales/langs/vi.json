@@ -238,6 +238,7 @@
     }
   },
   "exercisePage": {
+    "poseDurationDescription": "Thời gian trong video khi tư thế bắt đầu, bỏ qua nếu tư thế không có trong video hoặc video không có sẵn.",
     "updateSuccess": "Cập nhật thành công!",
     "updateFail": "Cập nhật thất bại!",
     "createSuccess": "Tạo thành công!",
@@ -252,6 +253,8 @@
     "image": "Hình ảnh",
     "upload": "TẢI LÊN",
     "properties": "Thuộc tính",
+    "mainProperties": "Thuộc tính chính",
+    "mainPropertiesDescription": "Danh sách tư thế và video...",
     "propertiesDescription": "Các chức năng và thuộc tính bổ sung...",
     "video": "Video",
     "poses": "Động tác",
@@ -294,7 +297,7 @@
       "listOfPoses": "Danh sách tư thế",
       "point": "Điểm",
       "videoUrl": "URL video",
-      "premium": "Cao cấp?",
+      "premium": "Trả phí?",
       "yes": "Có",
       "no": "Không",
       "benefit": "Lợi ích",
@@ -379,7 +382,13 @@
         "searchPlaceholder": "Tìm kiếm...",
         "status": "Trạng thái",
         "all": "Tất cả",
-        "benefit": "Lợi ích"
+        "benefit": "Lợi ích",
+        "type": "Loại",
+        "owner": "Chủ sở hữu",
+        "premium": "Trả phí",
+        "free": "Miễn phí",
+        "admin": "Hệ thống",
+        "user": "Người dùng"
       },
       "quickCreateEditForm": {
         "editTitle": "Chỉnh sửa bình luận",
@@ -916,7 +925,13 @@
     "keyword": "Từ khóa",
     "benefit": "Lợi ích:",
     "level": "Cấp độ:",
-    "available": "Thời gian diễn ra:"
+    "available": "Thời gian diễn ra:",
+    "type": "Loại",
+    "owner": "Chủ sở hữu",
+    "premium": "Trả phí",
+    "free": "Miễn phí",
+    "admin": "Hệ thống",
+    "user": "Người dùng"
   },
   "name_required": "Tên là bắt buộc",
   "email_required": "Email là bắt buộc",
@@ -964,5 +979,6 @@
   "all": "Tất cả",
   "active": "Hoạt động",
   "pending": "Chưa kích hoạt",
-  "banned": "Bị cấm"
+  "banned": "Bị cấm",
+  "system": "Hệ thống"
 }

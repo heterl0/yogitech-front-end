@@ -97,7 +97,7 @@ export default function UserCard({ userProfile }: Props) {
           />
         </Tooltip>
         <Image
-          src={_mock.image.cover(id % 30)}
+          src={_mock.image.cover(id % 21)}
           alt={fullName}
           ratio="16/9"
           overlay={alpha(theme.palette.grey[900], 0.48)}

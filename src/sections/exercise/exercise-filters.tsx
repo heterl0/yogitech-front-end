@@ -65,6 +65,20 @@ export default function ExerciseFilters({
     [onFilters]
   );
 
+  const handleFilterPremium = useCallback(
+    (newValue: number) => {
+      onFilters("is_premium", newValue);
+    },
+    [onFilters]
+  );
+
+  const handleFilterAdmin = useCallback(
+    (newValue: number) => {
+      onFilters("is_admin", newValue);
+    },
+    [onFilters]
+  );
+
   const { t } = useTranslation();
 
   const handleFilterMuscle = useCallback(
@@ -73,6 +87,32 @@ export default function ExerciseFilters({
     },
     [onFilters]
   );
+
+  const PREMIUM = [
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.premium"),
+      value: 1,
+      color: "info" as LabelColor,
+    },
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.free"),
+      value: 0,
+      color: "error" as LabelColor,
+    },
+  ];
+
+  const ADMIN = [
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.admin"),
+      value: 1,
+      color: "info" as LabelColor,
+    },
+    {
+      label: t("exercisePage.exerciseCommentListView.filters.user"),
+      value: 0,
+      color: "error" as LabelColor,
+    },
+  ];
 
   const renderHead = (
     <Stack
@@ -158,7 +198,65 @@ export default function ExerciseFilters({
     </Stack>
   );
 
-  const renderTourGuide = (
+  const renderPremium = (
+    <Stack>
+      <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
+        {t("exercisePage.exerciseCommentListView.filters.type")}
+      </Typography>
+
+      <TextField
+        select
+        fullWidth
+        value={filters.is_premium}
+        onChange={(event) => handleFilterPremium(parseInt(event.target.value))}
+        placeholder={t("exercisePage.exerciseCommentListView.filters.type")}
+      >
+        {[
+          {
+            label: t("exercisePage.exerciseCommentListView.filters.all"),
+            value: -1,
+            color: "default" as LabelColor,
+          },
+          ...PREMIUM,
+        ].map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            <Label color={option.color}>{option.label}</Label>
+          </MenuItem>
+        ))}
+      </TextField>
+    </Stack>
+  );
+
+  const renderAdmin = (
+    <Stack>
+      <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
+        {t("exercisePage.exerciseCommentListView.filters.owner")}
+      </Typography>
+
+      <TextField
+        select
+        fullWidth
+        value={filters.is_admin}
+        onChange={(event) => handleFilterAdmin(parseInt(event.target.value))}
+        placeholder={t("exercisePage.exerciseCommentListView.filters.owner")}
+      >
+        {[
+          {
+            label: t("exercisePage.exerciseCommentListView.filters.all"),
+            value: -1,
+            color: "default" as LabelColor,
+          },
+          ...ADMIN,
+        ].map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            <Label color={option.color}>{option.label}</Label>
+          </MenuItem>
+        ))}
+      </TextField>
+    </Stack>
+  );
+
+  const renderBenefits = (
     <Stack>
       <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
         {t("exercisePage.exerciseCommentListView.filters.benefit")}
@@ -232,7 +330,8 @@ export default function ExerciseFilters({
 
         <Scrollbar sx={{ px: 2.5, py: 3 }}>
           <Stack spacing={3}>
-            {renderTourGuide} {renderLevel} {renderStatus}
+            {renderBenefits} {renderLevel} {renderStatus}
+            {renderPremium} {renderAdmin}
           </Stack>
         </Scrollbar>
       </Drawer>

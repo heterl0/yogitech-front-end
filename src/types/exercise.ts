@@ -22,10 +22,11 @@ export type IExercise = {
   is_premium: boolean;
   created_at: string;
   updated_at: string;
-  owner: null;
+  owner: number;
   active_status: number;
   poses: IPoseWithTime[];
   comments: IComment[];
+  is_admin: boolean;
 };
 
 export type IVote = {
@@ -89,6 +90,7 @@ export type IExerciseFilters = {
   status: number;
   level: number;
   is_premium: number;
+  is_admin: number;
 };
 
 export type ICommentTableFilters = {

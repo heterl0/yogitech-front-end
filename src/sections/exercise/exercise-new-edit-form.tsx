@@ -27,7 +27,7 @@ import FormProvider, {
 } from "@/components/hook-form";
 
 import { IPose } from "@/types/pose";
-import { Box, MenuItem } from "@mui/material";
+import { Alert, Box, MenuItem } from "@mui/material";
 import { LEVELS } from "@/constants/level";
 import { IExercise, IPoseWithTime } from "@/types/exercise";
 import { benefits } from "../blog/post-new-edit-form";
@@ -393,7 +393,11 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
               {/* <Typography variant="subtitle2">Name</Typography> */}
-              <RHFTextField name="title" label={t("exercisePage.title")} />
+              <RHFTextField
+                name="title"
+                label={t("exercisePage.title")}
+                required
+              />
             </Stack>
 
             <RHFAutocomplete
@@ -450,15 +454,15 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     </>
   );
 
-  const renderProperties = (
+  const renderMainProperties = (
     <>
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            {t("exercisePage.properties")}
+            {t("exercisePage.mainProperties")}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            {t("exercisePage.propertiesDescription")}
+            {t("exercisePage.mainPropertiesDescription")}
           </Typography>
         </Grid>
       )}
@@ -533,7 +537,9 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
                     }
                   />
                 </Stack>
-
+                <Alert severity="info">
+                  {t("exercisePage.poseDurationDescription")}
+                </Alert>
                 <Box
                   gap={3}
                   display="grid"
@@ -563,6 +569,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
                   />
                 </Box>
                 <RHFTextField
+                  required
                   type="number"
                   name="duration"
                   label={t("exercisePage.duration")}
@@ -570,7 +577,31 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
                 />
               </>
             )}
-            <RHFSelect name="level" label={t("exercisePage.level")}>
+          </Stack>
+        </Card>
+      </Grid>
+    </>
+  );
+
+  const renderProperties = (
+    <>
+      {mdUp && (
+        <Grid md={4}>
+          <Typography variant="h6" sx={{ mb: 0.5 }}>
+            {t("exercisePage.properties")}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {t("exercisePage.propertiesDescription")}
+          </Typography>
+        </Grid>
+      )}
+
+      <Grid xs={12} md={8}>
+        <Card>
+          {!mdUp && <CardHeader title="Properties" />}
+
+          <Stack spacing={3} sx={{ p: 3 }}>
+            <RHFSelect name="level" label={t("exercisePage.level")} required>
               {LEVELS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
@@ -579,6 +610,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
             </RHFSelect>
 
             <RHFTextField
+              required
               name="point"
               label={t("exercisePage.point")}
               type="number"
@@ -639,6 +671,8 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
         {renderDetails}
+
+        {renderMainProperties}
 
         {renderProperties}
 

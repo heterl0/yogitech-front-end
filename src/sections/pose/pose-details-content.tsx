@@ -5,10 +5,11 @@ import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import Iconify from "@/components/iconify";
 import Markdown from "@/components/markdown";
-import { Avatar, AvatarGroup, Link } from "@mui/material";
+import { Avatar, AvatarGroup, Link, Tooltip } from "@mui/material";
 import { IPose } from "@/types/pose";
 import { LEVELS } from "@/constants/level";
 import { useTranslation } from "react-i18next";
+import { formatMuscles } from "./pose-new-edit-form";
 
 // ----------------------------------------------------------------------
 
@@ -25,8 +26,10 @@ export default function PoseDetailsContent({ pose }: Props) {
     keypoint_url,
     image_url,
     instruction,
-    muscles,
   } = pose;
+
+  let muscles = pose.muscles;
+  muscles = formatMuscles(muscles);
 
   const { t } = useTranslation();
 
@@ -56,18 +59,19 @@ export default function PoseDetailsContent({ pose }: Props) {
       <Typography variant="h6" sx={{ mb: 2 }}>
         {t("posePage.poseDetailsContent.muscles")}
       </Typography>
-      <div className="flex flex-row">
-        <AvatarGroup>
+      <div className="flex w-fit flex-row rounded-md border border-primary-main p-2">
+        <AvatarGroup max={5}>
           {muscles.map((muscle) => (
-            <Avatar
-              alt={muscle.name}
-              src={muscle.image}
-              key={muscle.id}
-              // sx={{
-              //   width: 24,
-              //   height: 24,
-              // }}
-            />
+            <Tooltip title={muscle.name} key={muscle.id}>
+              <Avatar
+                alt={muscle.name}
+                src={muscle.image}
+                key={muscle.id}
+                sx={{
+                  backgroundColor: "white",
+                }}
+              />
+            </Tooltip>
           ))}
         </AvatarGroup>
       </div>
@@ -86,7 +90,7 @@ export default function PoseDetailsContent({ pose }: Props) {
       {[
         {
           label: t("posePage.poseDetailsContent.level"),
-          value: `${LEVELS[level].label}`,
+          value: `${LEVELS[level - 1].label}`,
           icon: <Iconify icon="mingcute:filter-2-fill" />,
         },
         {

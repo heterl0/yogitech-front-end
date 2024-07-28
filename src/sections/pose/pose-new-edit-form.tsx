@@ -46,6 +46,16 @@ type Props = {
   currentPose?: IPose;
 };
 
+export const formatMuscles = (muscles: IMuscle[]) => {
+  return muscles.map((m: IMuscle) => {
+    const name = m.name.toLowerCase().replace(" ", "");
+    return {
+      ...m,
+      image: `/assets/muscles/${name}.png`,
+    };
+  });
+};
+
 export default function PoseNewEditForm({ currentPose }: Props) {
   const { t } = useTranslation();
   const router = useRouter();
@@ -63,7 +73,9 @@ export default function PoseNewEditForm({ currentPose }: Props) {
     }
   }, [currentPose]);
 
-  const { muscles } = useGetMuscles();
+  let { muscles } = useGetMuscles();
+  muscles = formatMuscles(muscles);
+
   const [checkImageChange, setCheckImageChange] = useState(false);
   const mdUp = useResponsive("up", "md");
 
@@ -157,10 +169,10 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           formData
         );
         if (response.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Create success!");
+          enqueueSnackbar(t("form.create_success"), { variant: "success" });
           router.push(paths.dashboard.pose.root);
         } else {
-          enqueueSnackbar("Create failed!");
+          enqueueSnackbar(t("form.create_failed"), { variant: "error" });
         }
       } else {
         const formData = new FormData();
@@ -184,10 +196,10 @@ export default function PoseNewEditForm({ currentPose }: Props) {
           formData
         );
         if (response.status === HttpStatusCode.Ok) {
-          enqueueSnackbar("Upload success!");
+          enqueueSnackbar(t("form.update_success"), { variant: "success" });
           router.push(paths.dashboard.pose.root);
         } else {
-          enqueueSnackbar("Upload failed!");
+          enqueueSnackbar(t("form.update_failed"), { variant: "error" });
         }
       }
     } catch (error) {
@@ -262,6 +274,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
             <Stack spacing={1.5}>
               {/* <Typography variant="subtitle2">Name</Typography> */}
               <RHFTextField
+                required
                 name="name"
                 label={t("posePage.poseNewEditForm.name")}
               />
@@ -270,6 +283,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
             <Stack spacing={1.5}>
               {/* <Typography variant="subtitle2">Content</Typography> */}
               <RHFTextField
+                required
                 name="instruction"
                 label={t("posePage.poseNewEditForm.instruction")}
                 multiline
@@ -294,6 +308,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
                 {t("posePage.poseNewEditForm.keypoint")}
               </Typography>
               <TextField
+                required
                 multiline
                 disabled
                 maxRows={8}
@@ -335,12 +350,17 @@ export default function PoseNewEditForm({ currentPose }: Props) {
             </Typography> */}
 
             <RHFTextField
+              required
               name="duration"
               label={t("posePage.poseNewEditForm.duration")}
               type="number"
             />
 
-            <RHFSelect name="level" label={t("posePage.poseNewEditForm.level")}>
+            <RHFSelect
+              name="level"
+              required
+              label={t("posePage.poseNewEditForm.level")}
+            >
               {LEVELS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
@@ -349,6 +369,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
             </RHFSelect>
 
             <RHFTextField
+              required
               name="calories"
               label={t("posePage.poseNewEditForm.calories")}
               type="number"
@@ -369,6 +390,7 @@ export default function PoseNewEditForm({ currentPose }: Props) {
                     alt={muscle.image}
                     src={muscle.image}
                     sx={{ width: 24, height: 24, flexShrink: 0, mr: 1 }}
+                    variant="square"
                   />
 
                   {muscle.name}

@@ -16,6 +16,9 @@ import { LEVELS } from "@/constants/level";
 import { IExercise } from "@/types/exercise";
 
 import { useTranslation } from "react-i18next";
+import { useGetAccount } from "@/api/account";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -26,27 +29,56 @@ type Props = {
 };
 
 export default function ExerciseItem({ exercise, onEdit }: Props) {
-  const { id, title, image_url, durations, level } = exercise;
+  const { id, title, image_url, durations, level, is_admin, owner } = exercise;
   const { t } = useTranslation();
 
+  const { account } = useGetAccount(owner.toString());
+  const router = useRouter();
+
+  const onClickUserRouter = useCallback(() => {
+    router.push(paths.dashboard.account.edit(account.id));
+  }, [router, account]);
+
   const renderPrice = (
-    <Stack
-      direction="row"
-      alignItems="center"
-      sx={{
-        top: 8,
-        right: 8,
-        zIndex: 9,
-        borderRadius: 1,
-        bgcolor: "primary.main",
-        position: "absolute",
-        p: "2px 6px 2px 4px",
-        color: "common.white",
-        typography: "subtitle2",
-      }}
-    >
-      {fSeconds(durations)}
-    </Stack>
+    <>
+      <Stack
+        direction="row"
+        alignItems="center"
+        sx={{
+          top: 8,
+          right: 8,
+          zIndex: 9,
+          borderRadius: 1,
+          bgcolor: "primary.main",
+          position: "absolute",
+          p: "2px 6px 2px 4px",
+          color: "common.white",
+          typography: "subtitle2",
+        }}
+      >
+        {fSeconds(durations)}
+      </Stack>
+
+      <Stack
+        onClick={onClickUserRouter}
+        direction="row"
+        alignItems="center"
+        sx={{
+          top: 40,
+          right: 8,
+          zIndex: 9,
+          borderRadius: 1,
+          bgcolor: "primary.main",
+          position: "absolute",
+          p: "2px 6px 2px 4px",
+          color: "common.white",
+          typography: "subtitle2",
+          cursor: "pointer",
+        }}
+      >
+        {is_admin ? t("system") : account?.username}
+      </Stack>
+    </>
   );
 
   const renderImages = (

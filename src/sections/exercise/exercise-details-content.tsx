@@ -66,7 +66,7 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
       {[
         {
           label: t("exercisePage.exerciseDetailsContent.level"),
-          value: `${LEVELS[level].label}`,
+          value: `${LEVELS[level - 1].label}`,
           icon: <Iconify icon="mingcute:filter-2-fill" />,
         },
         {

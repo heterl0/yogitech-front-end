@@ -240,6 +240,7 @@
   },
 
   "exercisePage": {
+    "poseDurationDescription": "Time in the video when the pose starts, ignore if the pose is not in the video, or the video is not available.",
     "updateSuccess": "Update success!",
     "updateFail": "Update fail!",
     "createSuccess": "Create success!",
@@ -254,6 +255,8 @@
     "image": "Image",
     "upload": "ON UPLOAD",
     "properties": "Properties",
+    "mainProperties": "Main properties",
+    "mainPropertiesDescription": "Pose list and video...",
     "propertiesDescription": "Additional functions and attributes...",
     "video": "Video",
     "poses": "Poses",
@@ -381,7 +384,13 @@
         "searchPlaceholder": "Search...",
         "status": "Status",
         "all": "All",
-        "benefit": "Benefit"
+        "benefit": "Benefit",
+        "type": "Type",
+        "owner": "Owner",
+        "premium": "Premium",
+        "free": "Free",
+        "admin": "System",
+        "user": "User"
       },
       "quickCreateEditForm": {
         "editTitle": "Edit comment",
@@ -918,7 +927,13 @@
     "keyword": "Keyword",
     "benefit": "Benefit:",
     "level": "Level:",
-    "available": "Available:"
+    "available": "Available:",
+    "type": "Type",
+    "owner": "Owner",
+    "premium": "Premium",
+    "free": "Free",
+    "admin": "Admin",
+    "user": "User"
   },
   "name_required": "Name is required",
   "email_required": "Email is required",
@@ -966,5 +981,6 @@
   "all": "All",
   "active": "Active",
   "pending": "Pending",
-  "banned": "Banned"
+  "banned": "Banned",
+  "system": "System"
 }

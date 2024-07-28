@@ -37,6 +37,7 @@ const defaultFilters: IExerciseFilters = {
   level: -1,
   status: -1,
   is_premium: -1,
+  is_admin: 1,
 };
 
 // ----------------------------------------------------------------------
@@ -75,7 +76,8 @@ export default function ExerciseListView() {
     !!filters.benefits.length ||
     filters.level !== -1 ||
     filters.status !== -1 ||
-    filters.is_premium !== -1;
+    filters.is_premium !== -1 ||
+    (filters.is_admin !== 1 && filters.is_admin !== -1);
 
   const notFound = !dataFiltered.length && canReset;
 
@@ -234,7 +236,7 @@ const applyFilter = ({
   filters: IExerciseFilters;
   sortBy: string;
 }) => {
-  const { benefits, level, status, is_premium } = filters;
+  const { benefits, level, status, is_premium, is_admin } = filters;
 
   // SORT BY
   if (sortBy === "latest") {
@@ -257,12 +259,23 @@ const applyFilter = ({
 
   if (is_premium !== -1) {
     inputData = inputData.filter(
-      (exercise) => exercise.is_premium && is_premium === 1
+      (exercise) =>
+        (exercise.is_premium && is_premium === 1) ||
+        (!exercise.is_premium && is_premium === 0)
+    );
+  }
+
+  if (is_admin !== -1) {
+    inputData = inputData.filter(
+      (exercise) =>
+        (exercise.is_admin && is_admin === 1) ||
+        (!exercise.is_admin && is_admin === 0)
     );
   }
 
   if (benefits.length > 0) {
     inputData = inputData.filter((exercise) => {
+      if (exercise.benefit === null) return false;
       const exerciseBenefits = JSON.parse(exercise.benefit) as string[];
       return benefits.some((benefit) => exerciseBenefits.includes(benefit));
     });
