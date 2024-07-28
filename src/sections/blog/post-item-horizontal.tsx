@@ -124,9 +124,9 @@ export default function PostItemHorizontal({ post, deleteMutate }: Props) {
               }
             >
               {t(
-                `blogPage.postDetailsToolbar.${
+                `blogPage.postItemHorizontal.${
                   active_status === 1
-                    ? "publish"
+                    ? "published"
                     : active_status === 0
                       ? "draft"
                       : "trash"

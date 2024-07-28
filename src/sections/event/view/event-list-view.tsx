@@ -241,13 +241,17 @@ const applyFilter = ({
   }
 
   // FILTERS
-
   if (status !== -1) {
     inputData = inputData.filter((event) => {
       if (status === 0) {
         return event.active_status === 0;
-      } else if (event.active_status === 1) return event.status === status - 1;
-      return false;
+      } else {
+        const now = new Date();
+        const start = new Date(event.start_date);
+        const end = new Date(event.expire_date);
+        const statusTime = now < start ? 1 : now > end ? 3 : 2;
+        return status === statusTime;
+      }
     });
   }
 

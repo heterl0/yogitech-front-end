@@ -71,7 +71,9 @@ export default function PostDetailsToolbar({
         </Tooltip>
 
         <LoadingButton
-          color={publish === 1 ? "primary" : "inherit"}
+          color={
+            publish === 1 ? "primary" : publish === 0 ? "inherit" : "error"
+          }
           variant="contained"
           loading={false}
           loadingIndicator={t("blogPage.postDetailsToolbar.loading")}
@@ -96,6 +98,14 @@ export default function PostDetailsToolbar({
             onClick={() => {
               popover.onClose();
               onChangePublish(option.value);
+            }}
+            sx={{
+              color:
+                option.value == 1
+                  ? "primary.main"
+                  : option.value === 0
+                    ? "gray.main"
+                    : "error.main",
             }}
           >
             {option.value === 1 && <Iconify icon="eva:cloud-upload-fill" />}

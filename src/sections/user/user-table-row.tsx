@@ -96,7 +96,7 @@ export default function UserTableRow({
               "default"
             }
           >
-            {status}
+            {t(status)}
           </Label>
         </TableCell>
 

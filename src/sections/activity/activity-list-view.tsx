@@ -42,16 +42,16 @@ export default function ActivityListView() {
   const { t } = useTranslation();
 
   const TABLE_HEAD = [
-    { id: "exerciseId", label: t("activityPage.exerciseId"), width: 140 },
-    { id: "userId", label: t("activityPage.userId"), width: 180 },
+    { id: "exercise", label: t("activityPage.exerciseId"), width: 140 },
+    { id: "user", label: t("activityPage.userId"), width: 180 },
     { id: "process", label: t("activityPage.process"), width: 140 },
-    { id: "completePose", label: t("activityPage.completePose"), width: 110 },
+    { id: "complete_pose", label: t("activityPage.completePose"), width: 110 },
     { id: "result", label: t("activityPage.result"), width: 110 },
     { id: "point", label: t("activityPage.point"), width: 110 },
     { id: "exp", label: t("activityPage.exp"), width: 110 },
     { id: "calories", label: t("activityPage.calories"), width: 110 },
-    { id: "ttf", label: t("activityPage.ttf"), width: 110 },
-    { id: "createdAt", label: t("activityPage.createdAt"), width: 110 },
+    { id: "total_time_finish", label: t("activityPage.ttf"), width: 110 },
+    { id: "created_at", label: t("activityPage.createdAt"), width: 110 },
   ];
 
   const defaultFilters: IExerciseLogTableFilters = useMemo(() => {

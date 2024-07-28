@@ -6,7 +6,6 @@ export type IEvent = {
   id: number;
   title: string;
   image_url: string;
-  status: number;
   start_date: string;
   expire_date: string;
   description: string;
@@ -43,26 +42,24 @@ export const EVENT_STATUS = [
   { label: "Ended", color: "error" as LabelColor, value: 3 },
 ];
 
-export function getStatusLabel(status: number, active_status?: number): string {
-  if (active_status !== undefined) {
-    if (active_status === 1) {
-      if (status === 0) {
-        return "Not start";
-      } else if (status === 1) {
-        return "In Progress";
-      } else {
-        return "Ended";
-      }
+export function getStatusLabel(
+  active_status: number,
+  startDate: string,
+  endDate: string
+): string {
+  const now = new Date();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const status = now < start ? 0 : now > end ? 3 : 1;
+  if (active_status === 1) {
+    if (status === 0) {
+      return "notStart";
+    } else if (status === 1) {
+      return "inProgress";
     } else {
-      return "Inactive";
+      return "completed";
     }
   } else {
-    if (status === 0) {
-      return "Not start";
-    } else if (status === 1) {
-      return "In Progress";
-    } else {
-      return "Ended";
-    }
+    return "inactive";
   }
 }

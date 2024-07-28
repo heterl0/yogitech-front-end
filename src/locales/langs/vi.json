@@ -420,6 +420,15 @@
       "updateEvent": "Cập nhật sự kiện",
       "active": "Hoạt động"
     },
+    "formHelper": {
+      "titleRequired": "Tiêu đề là bắt buộc",
+      "descriptionRequired": "Nội dung là bắt buộc",
+      "imageRequired": "Hình ảnh là bắt buộc",
+      "exerciseAtLeastOne": "Phải có ít nhất 1 bài tập",
+      "startDateRequired": "Ngày bắt đầu là bắt buộc",
+      "endDateRequired": "Ngày kết thúc là bắt buộc",
+      "endDateError": "Ngày kết thúc phải sau ngày bắt đầu"
+    },
     "eventItem": {
       "from": "Từ",
       "to": "đến"
@@ -578,6 +587,7 @@
     "postItemHorizontal": {
       "published": "Đã xuất bản",
       "draft": "Bản nháp",
+      "trash": "Thùng rác",
       "view": "Xem",
       "edit": "Sửa",
       "delete": "Xóa",
@@ -873,13 +883,13 @@
     "statusOptions": {
       "all": "Tất cả",
       "active": "Hoạt động",
-      "pending": "Đang chờ",
+      "pending": "Chưa kích hoạt",
       "banned": "Bị cấm"
     },
     "tabs": {
       "all": "Tất cả",
       "active": "Hoạt động",
-      "pending": "Đang chờ",
+      "pending": "Chưa kích hoạt",
       "banned": "Bị cấm"
     },
     "sureBan": "Bạn có chắc muốn cấm người dùng này?",
@@ -946,5 +956,13 @@
   },
   "create_user_info": "Tạo người dùng mới với thông tin bên dưới và nhấp vào nút 'Tạo Người Dùng'.",
   "user with this email already exists.": "Người dùng với email này đã tồn tại.",
-  "user with this username already exists.": "Người dùng với tên đăng nhập này đã tồn tại."
+  "user with this username already exists.": "Người dùng với tên đăng nhập này đã tồn tại.",
+  "notStart": "Chưa bắt đầu",
+  "inProgress": "Đang diễn ra",
+  "completed": "Đã kết thúc",
+  "inactive": "Không hoạt động",
+  "all": "Tất cả",
+  "active": "Hoạt động",
+  "pending": "Chưa kích hoạt",
+  "banned": "Bị cấm"
 }

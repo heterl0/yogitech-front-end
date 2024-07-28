@@ -5,9 +5,10 @@ import Button from "@mui/material/Button";
 import Stack, { StackProps } from "@mui/material/Stack";
 import { useTranslation } from "react-i18next";
 import Iconify from "@/components/iconify";
-import { EVENT_STATUS, IEventFilterValue, IEventFilters } from "@/types/event";
+import { IEventFilterValue, IEventFilters } from "@/types/event";
 import { shortDateLabel } from "@/components/custom-date-range-picker";
 import { useLocales } from "@/locales";
+import { LabelColor } from "@/components/label";
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +34,12 @@ export default function EventfilterResults({
 }: Props) {
   const { t } = useTranslation();
   // const shortLabel = shortDateLabel(filters.startDate, filters.endDate);
-
+  const EVENT_STATUS = [
+    { label: t("inactive"), color: "default" as LabelColor, value: 0 },
+    { label: t("notStart"), color: "success" as LabelColor, value: 1 },
+    { label: t("inProgress"), color: "warning" as LabelColor, value: 2 },
+    { label: t("completed"), color: "error" as LabelColor, value: 3 },
+  ];
   const handleRemoveStatus = () => {
     onFilters("status", -1);
   };

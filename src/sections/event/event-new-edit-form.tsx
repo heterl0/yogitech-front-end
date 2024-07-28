@@ -25,14 +25,12 @@ import FormProvider, {
   RHFUpload,
   RHFTextField,
   RHFAutocomplete,
-  RHFSelect,
   RHFEditor,
 } from "@/components/hook-form";
 
-import { MenuItem } from "@mui/material";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { HttpStatusCode } from "axios";
-import { IEvent, getStatusLabel } from "@/types/event";
+import { IEvent } from "@/types/event";
 import { IExercise } from "@/types/exercise";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useLocales } from "@/locales";
@@ -55,23 +53,26 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
   const { currentLang } = useLocales();
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewTourSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
-    description: Yup.string().required("Content is required"),
-    image: Yup.mixed<any>().required("Image is required"),
+  const NewEventSchema = Yup.object().shape({
+    title: Yup.string().required(t("eventPage.formHelper.titleRequired")),
+    description: Yup.string().required(
+      t("eventPage.formHelper.descriptionRequired")
+    ),
+    image: Yup.mixed<any>().required(t("eventPage.formHelper.imageRequired")),
     //
-    exercise: Yup.array().min(1, "Must have at least 1 exercise"),
+    exercise: Yup.array().min(1, t("eventPage.formHelper.exerciseAtLeastOne")),
     available: Yup.object().shape({
-      startDate: Yup.mixed<any>().nullable().required("Start date is required"),
+      startDate: Yup.mixed<any>()
+        .nullable()
+        .required(t("eventPage.formHelper.startDateRequired")),
       endDate: Yup.mixed<any>()
-        .required("End date is required")
+        .required(t("eventPage.formHelper.endDateRequired"))
         .test(
           "date-min",
-          "End date must be later than start date",
+          t("eventPage.formHelper.endDateError"),
           (value, { parent }) => value.getTime() > parent.startDate.getTime()
         ),
     }),
-    status: Yup.number().required("Status is required"),
   });
 
   const defaultValues = useMemo(
@@ -89,7 +90,6 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
           ? new Date(currentEvent?.expire_date)
           : null,
       },
-      status: currentEvent?.status || 0,
     }),
     [currentEvent]
   );
@@ -101,7 +101,7 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewTourSchema),
+    resolver: yupResolver(NewEventSchema),
     defaultValues,
   });
 
@@ -133,7 +133,6 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
         data.exercise?.forEach((exericse) =>
           formData.append("exercise_ids", exericse.id.toString())
         );
-        formData.append("status", data.status + "");
         formData.append("active_status", active ? "1" : "0");
         formData.append("start_date", data.available.startDate.toISOString());
         formData.append("expire_date", data.available.endDate.toISOString());
@@ -143,10 +142,10 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
           formData
         );
         if (response.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Create success!");
+          enqueueSnackbar(t("form.create_success"), { variant: "success" });
           setTimeout(() => router.push(paths.dashboard.event.root), 2000);
         } else {
-          enqueueSnackbar("Create failed!");
+          enqueueSnackbar(t("form.create_failed"), { variant: "error" });
         }
       } else {
         const formData = new FormData();
@@ -158,7 +157,6 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
         data.exercise?.forEach((exericse) =>
           formData.append("exercise_ids", exericse.id.toString())
         );
-        formData.append("status", data.status + "");
         formData.append("active_status", active ? "1" : "0");
         formData.append("start_date", data.available.startDate.toISOString());
         formData.append("expire_date", data.available.endDate.toISOString());
@@ -167,10 +165,10 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
           formData
         );
         if (response.status === HttpStatusCode.Ok) {
-          enqueueSnackbar("Upload success!");
+          enqueueSnackbar(t("form.update_success"), { variant: "success" });
           router.push(paths.dashboard.event.root);
         } else {
-          enqueueSnackbar("Upload failed!");
+          enqueueSnackbar(t("form.update_failed"), { variant: "error" });
         }
       }
     } catch (error) {
@@ -231,7 +229,9 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Image</Typography>
+              <Typography variant="subtitle2">
+                {t("eventPage.newEditForm.image")}
+              </Typography>
               <RHFUpload
                 thumbnail
                 name="image"
@@ -312,14 +312,6 @@ export default function EventNewEditForm({ currentEvent, exercises }: Props) {
                 />
               </Stack>
             </Stack>
-
-            <RHFSelect name="status" label="Status">
-              {[0, 1, 2].map((value) => (
-                <MenuItem key={value} value={value}>
-                  {getStatusLabel(value)}
-                </MenuItem>
-              ))}
-            </RHFSelect>
 
             <RHFAutocomplete
               multiple

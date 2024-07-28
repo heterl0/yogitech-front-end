@@ -25,15 +25,8 @@ type Props = {
 };
 
 export default function EventItem({ event, onEdit }: Props) {
-  const {
-    id,
-    title,
-    image_url,
-    active_status,
-    status,
-    start_date,
-    expire_date,
-  } = event;
+  const { id, title, image_url, active_status, start_date, expire_date } =
+    event;
   const { t } = useTranslation();
   const { currentLang } = useLocales();
   // const renderRating = (
@@ -72,7 +65,7 @@ export default function EventItem({ event, onEdit }: Props) {
         typography: "subtitle2",
       }}
     >
-      {getStatusLabel(status, active_status)}
+      {t(getStatusLabel(active_status, start_date, expire_date))}
     </Stack>
   );
 

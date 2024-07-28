@@ -16,7 +16,7 @@ import Scrollbar from "@/components/scrollbar";
 
 import { MenuItem } from "@mui/material";
 import Label, { LabelColor } from "@/components/label";
-import { EVENT_STATUS, IEventFilterValue, IEventFilters } from "@/types/event";
+import { IEventFilterValue, IEventFilters } from "@/types/event";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useLocales } from "@/locales";
 import { format } from "date-fns";
@@ -52,6 +52,13 @@ export default function EventFilters({
   const { t } = useTranslation();
 
   const { currentLang } = useLocales();
+
+  const EVENT_STATUS = [
+    { label: t("inactive"), color: "default" as LabelColor, value: 0 },
+    { label: t("notStart"), color: "success" as LabelColor, value: 1 },
+    { label: t("inProgress"), color: "warning" as LabelColor, value: 2 },
+    { label: t("completed"), color: "error" as LabelColor, value: 3 },
+  ];
 
   const dateFormatter = useCallback(
     (weekday: Date) =>
@@ -149,7 +156,7 @@ export default function EventFilters({
         placeholder="Select Status"
       >
         {[
-          { label: "All", value: -1, color: "default" as LabelColor },
+          { label: t("all"), value: -1, color: "default" as LabelColor },
           ...EVENT_STATUS,
         ].map((option) => (
           <MenuItem key={option.value} value={option.value}>

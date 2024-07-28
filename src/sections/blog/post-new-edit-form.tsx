@@ -142,9 +142,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
           }
         );
         if (response.status === HttpStatusCode.Ok) {
-          enqueueSnackbar("Update success!");
+          enqueueSnackbar(t("form.update_success"), { variant: "success" });
         } else {
-          enqueueSnackbar("Update fail!");
+          enqueueSnackbar(t("form.update_fail"), { variant: "error" });
         }
       } else {
         const response = await axiosInstance.post(
@@ -158,9 +158,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
           }
         );
         if (response.status === HttpStatusCode.Created) {
-          enqueueSnackbar("Create success!");
+          enqueueSnackbar(t("form.create_success"), { variant: "success" });
         } else {
-          enqueueSnackbar("Create fail!");
+          enqueueSnackbar(t("form.create_fail"), { variant: "error" });
         }
       }
       preview.onFalse();

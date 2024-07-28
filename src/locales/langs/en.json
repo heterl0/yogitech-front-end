@@ -422,6 +422,15 @@
       "updateEvent": "Update Event",
       "active": "Active"
     },
+    "formHelper": {
+      "titleRequired": "Title is required",
+      "descriptionRequired": "Description is required",
+      "imageRequired": "Image is required",
+      "exerciseAtLeastOne": "Exercise must have at least 1 item",
+      "startDateRequired": "Start date is required",
+      "endDateRequired": "End date is required",
+      "endDateError": "End date must be later than start date"
+    },
     "eventItem": {
       "from": "From",
       "to": "to"
@@ -580,6 +589,7 @@
     "postItemHorizontal": {
       "published": "Published",
       "draft": "Draft",
+      "trash": "Trash",
       "view": "View",
       "edit": "Edit",
       "delete": "Delete",
@@ -948,5 +958,13 @@
   },
   "create_user_info": "Create a new user with the information below and click the 'Create User' button.",
   "user with this email already exists.": "User with this email already exists.",
-  "user with this username already exists.": "User with this username already exists."
+  "user with this username already exists.": "User with this username already exists.",
+  "notStart": "Not start",
+  "inProgress": "In progress",
+  "completed": "Ended",
+  "inactive": "Inactive",
+  "all": "All",
+  "active": "Active",
+  "pending": "Pending",
+  "banned": "Banned"
 }

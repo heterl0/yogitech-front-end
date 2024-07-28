@@ -5,8 +5,8 @@ import Pagination, { paginationClasses } from "@mui/material/Pagination";
 
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
-import PoseItem from "./event-item";
 import { IEvent } from "@/types/event";
+import EventItem from "./event-item";
 
 // ----------------------------------------------------------------------
 
@@ -21,13 +21,6 @@ export default function EventList({ events, isFilter }: Props) {
   const [page, setPage] = useState(1);
 
   const itemsPerPage = 9;
-
-  // const handleView = useCallback(
-  //   (id: string) => {
-  //     router.push(paths.dashboard.pose.edit(id));
-  //   },
-  //   [router]
-  // );
 
   useEffect(() => {
     if (isFilter) {
@@ -60,7 +53,7 @@ export default function EventList({ events, isFilter }: Props) {
         {events
           .slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
           .map((event) => (
-            <PoseItem
+            <EventItem
               key={event.id}
               event={event}
               // onView={() => handleView(pose.id + "")}

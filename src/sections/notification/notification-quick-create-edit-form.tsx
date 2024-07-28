@@ -165,7 +165,7 @@ export default function NotificationQuickCreateEditForm({
               sm: "repeat(2, 1fr)",
             }}
           >
-            <RHFTextField name="title" label={t("notiPage.Title")} />
+            <RHFTextField required name="title" label={t("notiPage.Title")} />
             <MobileDateTimePicker
               label={t("notiPage.Time")}
               name="time"
@@ -176,7 +176,7 @@ export default function NotificationQuickCreateEditForm({
               dayOfWeekFormatter={dateFormatter}
             />
 
-            <RHFSelect name="status" label={t("notiPage.Status")}>
+            <RHFSelect name="status" required label={t("notiPage.Status")}>
               {NOTIFICATION_STATUS.map(({ label, value }) => (
                 <MenuItem key={value} value={value}>
                   {label}
@@ -188,6 +188,7 @@ export default function NotificationQuickCreateEditForm({
               label={t("notiPage.Body")}
               multiline
               rows={4}
+              required
             />
             <FormControlLabel
               labelPlacement="end"

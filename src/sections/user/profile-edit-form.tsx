@@ -259,12 +259,17 @@ export default function ProfileEditForm({ currentProfile, mutate }: Props) {
                 sm: "repeat(2, 1fr)",
               }}
             >
-              <RHFTextField name="last_name" label={t("userPage.last_name")} />
+              <RHFTextField
+                name="last_name"
+                label={t("userPage.last_name")}
+                required
+              />
               <RHFTextField
                 name="first_name"
                 label={t("userPage.first_name")}
+                required
               />
-              <RHFSelect name="gender" label={t("userPage.gender")}>
+              <RHFSelect name="gender" label={t("userPage.gender")} required>
                 {GENDER.map(({ value, label }) => (
                   <MenuItem key={value} value={value}>
                     {label}
@@ -286,6 +291,7 @@ export default function ProfileEditForm({ currentProfile, mutate }: Props) {
                 dayOfWeekFormatter={dateFormatter}
               />
               <RHFTextField
+                required
                 name="height"
                 label={t("userPage.height")}
                 type="number"
@@ -294,8 +300,9 @@ export default function ProfileEditForm({ currentProfile, mutate }: Props) {
                 name="weight"
                 label={t("userPage.weight")}
                 type="number"
+                required
               />
-              <RHFSelect name="level" label={t("userPage.level")}>
+              <RHFSelect name="level" label={t("userPage.level")} required>
                 {LEVELS.map(({ value, label }) => (
                   <MenuItem key={value} value={value}>
                     {label}

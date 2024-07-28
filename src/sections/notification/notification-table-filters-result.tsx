@@ -71,7 +71,7 @@ export default function NotificationTableFiltersResult({
         alignItems="center"
       >
         {filters.type !== "all" && (
-          <Block label="Type:">
+          <Block label={t("tableHead.role") + ":"}>
             <Chip
               size="small"
               label={filters.type}
@@ -81,7 +81,7 @@ export default function NotificationTableFiltersResult({
         )}
 
         {!!filters.status.length && (
-          <Block label="Role:">
+          <Block label={t("form.label.status") + ":"}>
             {filters.status.map((item: string) => (
               <Chip
                 key={item}
@@ -94,7 +94,7 @@ export default function NotificationTableFiltersResult({
         )}
 
         {!!filters.name && (
-          <Block label="Keyword:">
+          <Block label={t("filterResults.keyword") + ":"}>
             <Chip
               label={filters.name}
               size="small"

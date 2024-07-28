@@ -64,7 +64,7 @@ export default function NotificationListView() {
     { id: "title", label: t("notiPage.Title"), width: 560 },
     { id: "time", label: t("notiPage.Time"), width: 180 },
     { id: "user", label: t("notiPage.User"), width: 140 },
-    { id: "status", label: t("notiPage.Status"), width: 110 },
+    { id: "active_status", label: t("notiPage.Status"), width: 110 },
     { id: "", width: 88 },
   ];
 
@@ -449,7 +449,8 @@ function applyFilter({
   if (name) {
     inputData = inputData.filter(
       (notification) =>
-        notification.title.toLowerCase().indexOf(name.toLowerCase()) !== -1
+        notification.title.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
+        notification.body.toLowerCase().indexOf(name.toLowerCase()) !== -1
     );
   }
 
