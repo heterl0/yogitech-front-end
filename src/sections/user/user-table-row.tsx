@@ -155,7 +155,7 @@ export default function UserTableRow({
             confirm.onTrue();
             popover.onClose();
           }}
-          sx={{ color: active_status == 1 ? "error.main" : "info.main" }}
+          sx={{ color: active_status === 1 ? "error.main" : "info.main" }}
         >
           <Iconify
             icon={

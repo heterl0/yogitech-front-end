@@ -101,7 +101,7 @@ export default function PostDetailsToolbar({
             }}
             sx={{
               color:
-                option.value == 1
+                option.value == +1
                   ? "primary.main"
                   : option.value === 0
                     ? "gray.main"
