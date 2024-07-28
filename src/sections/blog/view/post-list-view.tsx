@@ -42,7 +42,7 @@ export default function PostListView() {
 
   const debouncedQuery = useDebounce(searchQuery);
 
-  const { posts } = useGetPosts();
+  const { posts, postsMutate } = useGetPosts();
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
@@ -73,6 +73,21 @@ export default function PostListView() {
     },
     []
   );
+
+  const deleteMutate = (id: number) => {
+    postsMutate(
+      (blogs: IBlog[]) =>
+        blogs.map((blog) =>
+          blog.id === id
+            ? {
+                ...blog,
+                active_status: ActiveStatus.Trash,
+              }
+            : blog
+        ),
+      false
+    );
+  };
 
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
@@ -180,7 +195,7 @@ export default function PostListView() {
         ))}
       </Tabs>
 
-      <PostListHorizontal posts={dataFiltered} />
+      <PostListHorizontal posts={dataFiltered} deleteMutate={deleteMutate} />
     </Container>
   );
 }

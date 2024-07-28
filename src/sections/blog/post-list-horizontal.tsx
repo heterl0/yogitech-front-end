@@ -11,9 +11,14 @@ import PostItemHorizontal from "./post-item-horizontal";
 type Props = {
   posts: IBlog[];
   loading?: boolean;
+  deleteMutate: (id: number) => void;
 };
 
-export default function PostListHorizontal({ posts, loading }: Props) {
+export default function PostListHorizontal({
+  posts,
+  loading,
+  deleteMutate,
+}: Props) {
   const renderSkeleton = (
     <>
       {[...Array(16)].map((_, index) => (
@@ -25,7 +30,11 @@ export default function PostListHorizontal({ posts, loading }: Props) {
   const renderList = (
     <>
       {posts.map((post) => (
-        <PostItemHorizontal key={post.id} post={post} />
+        <PostItemHorizontal
+          key={post.id}
+          post={post}
+          deleteMutate={deleteMutate}
+        />
       ))}
     </>
   );

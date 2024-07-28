@@ -52,6 +52,11 @@ type UpdateData = {
   active_status?: number;
 };
 
+interface CreateError extends Error {
+  email: string[];
+  username: string[];
+}
+
 export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
   const { t } = useTranslation();
   const router = useRouter();
@@ -197,15 +202,33 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
         }
       }
     } catch (error) {
-      console.error(error);
+      const createError = error as CreateError;
+
+      if (createError) {
+        enqueueSnackbar(t("form.create_failed"), {
+          variant: "error",
+        });
+        const { email, username } = createError;
+        if (email) {
+          methods.setError("email", { type: "manual", message: t(email[0]) });
+        }
+        if (username) {
+          methods.setError("username", {
+            type: "manual",
+            message: t(username[0]),
+          });
+        }
+      }
     }
   });
 
   return (
     <>
-      <Alert severity="info" sx={{ mb: 3 }}>
-        {t("create_user_info")}
-      </Alert>
+      {!currentAccount && (
+        <Alert severity="info" sx={{ mb: 3 }}>
+          {t("create_user_info")}
+        </Alert>
+      )}
       <FormProvider methods={methods} onSubmit={onSubmit}>
         <Grid container spacing={3}>
           {currentAccount && (
@@ -293,6 +316,7 @@ export default function AccountNewEditForm({ currentAccount, mutate }: Props) {
                   name="provider"
                   required
                   label={t("form.label.provider")}
+                  disabled={currentAccount ? true : false}
                 >
                   {["Email", "Google"].map((value) => (
                     <MenuItem key={value} value={value.toLowerCase()}>

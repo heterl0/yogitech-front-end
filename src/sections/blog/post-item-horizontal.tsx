@@ -37,9 +37,10 @@ import { useLocales } from "@/locales";
 
 type Props = {
   post: IBlog;
+  deleteMutate: (id: number) => void;
 };
 
-export default function PostItemHorizontal({ post }: Props) {
+export default function PostItemHorizontal({ post, deleteMutate }: Props) {
   const { t } = useTranslation();
 
   const popover = usePopover();
@@ -76,15 +77,17 @@ export default function PostItemHorizontal({ post }: Props) {
   }, [votes]);
 
   const handleDelete = useCallback(async () => {
-    const response = await axiosInstance.delete(
-      `${endpoints.post.delete}${id}/`
+    const response = await axiosInstance.patch(
+      `${endpoints.post.delete}${id}/`,
+      { active_status: 2 }
     );
+    deleteMutate(id);
 
-    if (response.status === HttpStatusCode.NoContent) {
-      enqueueSnackbar("Delete success!");
+    if (response.status === HttpStatusCode.Ok) {
+      enqueueSnackbar(t("blogPage.deleteSuccess"));
       dialog.onFalse();
     } else {
-      enqueueSnackbar("Delete fail!");
+      enqueueSnackbar(t("blogPage.deleteFail"), { variant: "error" });
       dialog.onFalse();
     }
     router.push(paths.dashboard.blog.root);

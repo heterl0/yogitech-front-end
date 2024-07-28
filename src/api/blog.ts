@@ -10,7 +10,7 @@ import { IBlog } from "@/types/blog";
 export function useGetPosts() {
   const URL = endpoints.post.list;
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating, mutate } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
@@ -19,6 +19,7 @@ export function useGetPosts() {
       postsError: error,
       postsValidating: isValidating,
       postsEmpty: !isLoading && !data?.length,
+      postsMutate: mutate,
     }),
     [data, error, isLoading, isValidating]
   );
@@ -72,9 +73,13 @@ export function useGetLatestPosts(title: string) {
 export function useSearchPosts(query: string) {
   const URL = query ? [endpoints.post.search, { params: { query } }] : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher, {
-    keepPreviousData: true,
-  });
+  const { data, isLoading, error, isValidating, mutate } = useSWR(
+    URL,
+    fetcher,
+    {
+      keepPreviousData: true,
+    }
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -83,6 +88,7 @@ export function useSearchPosts(query: string) {
       searchError: error,
       searchValidating: isValidating,
       searchEmpty: !isLoading && !data?.length,
+      mutate: mutate,
     }),
     [data, error, isLoading, isValidating]
   );

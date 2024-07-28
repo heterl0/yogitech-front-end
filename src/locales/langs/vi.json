@@ -620,7 +620,9 @@
       "latest": "Mới nhất",
       "oldest": "Cũ nhất",
       "popular": "Phổ biến"
-    }
+    },
+    "deleteSuccess": "Xóa thành công!",
+    "deleteFail": "Xóa thất bại!"
   },
   "notiPage": {
     "Title": "Tiêu đề",
@@ -755,7 +757,7 @@
     "update_success": "Cập nhật thành công!",
     "update_failed": "Cập nhật thất bại! {{data}}",
     "create_success": "Tạo thành công!",
-    "create_failed": "Tạo thất bại! {{data}}",
+    "create_failed": "Tạo thất bại!",
     "helper_text": {
       "verification_email": "Vô hiệu hóa điều này sẽ tự động gửi email xác minh cho người dùng",
       "disable_account": "Áp dụng vô hiệu hóa tài khoản"
@@ -942,5 +944,7 @@
   "table": {
     "selected": "Đã chọn {{ numSelected }} "
   },
-  "create_user_info": "Tạo người dùng mới với thông tin bên dưới và nhấp vào nút 'Tạo Người Dùng'."
+  "create_user_info": "Tạo người dùng mới với thông tin bên dưới và nhấp vào nút 'Tạo Người Dùng'.",
+  "user with this email already exists.": "Người dùng với email này đã tồn tại.",
+  "user with this username already exists.": "Người dùng với tên đăng nhập này đã tồn tại."
 }

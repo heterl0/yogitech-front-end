@@ -622,7 +622,9 @@
       "latest": "Latest",
       "oldest": "Oldest",
       "popular": "Popular"
-    }
+    },
+    "deleteSuccess": "Delete success!",
+    "deleteFail": "Delete fail!"
   },
   "notiPage": {
     "Title": "Title",
@@ -757,7 +759,7 @@
     "update_success": "Update success!",
     "update_failed": "Update failed! {{data}}",
     "create_success": "Create success!",
-    "create_failed": "Create failed! {{data}}",
+    "create_failed": "Create failed!",
     "helper_text": {
       "verification_email": "Disabling this will automatically send the user a verification email",
       "disable_account": "Apply disable account"
@@ -944,5 +946,7 @@
   "table": {
     "selected": "{{ numSelected }} selected"
   },
-  "create_user_info": "Create a new user with the information below and click the 'Create User' button."
+  "create_user_info": "Create a new user with the information below and click the 'Create User' button.",
+  "user with this email already exists.": "User with this email already exists.",
+  "user with this username already exists.": "User with this username already exists."
 }
