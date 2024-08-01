@@ -30,6 +30,7 @@ import { getMonthLabel } from "@/types/dashboard";
 import AppRecentTimeline from "../app-recent-timeline";
 import AppTopUsers from "../app-top-users";
 import { useTranslation } from "react-i18next";
+import Image from "@/components/image";
 
 // ----------------------------------------------------------------------
 
@@ -113,7 +114,10 @@ export default function OverviewAppView() {
                 title={t("dashboard.upcomingEvent")}
                 total={overview.upcoming_events}
                 icon={
-                  <img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />
+                  <Image
+                    alt="icon"
+                    src="/assets/icons/glass/ic_glass_bag.png"
+                  />
                 }
               />
             </Grid>
@@ -123,7 +127,7 @@ export default function OverviewAppView() {
                 total={overview.total_users}
                 color="info"
                 icon={
-                  <img
+                  <Image
                     alt="icon"
                     src="/assets/icons/glass/ic_glass_users.png"
                   />
@@ -137,7 +141,10 @@ export default function OverviewAppView() {
                 total={overview.total_poses}
                 color="warning"
                 icon={
-                  <img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />
+                  <Image
+                    alt="icon"
+                    src="/assets/icons/glass/ic_glass_buy.png"
+                  />
                 }
               />
             </Grid>
@@ -148,7 +155,7 @@ export default function OverviewAppView() {
                 total={overview.total_exercises}
                 color="error"
                 icon={
-                  <img
+                  <Image
                     alt="icon"
                     src="/assets/icons/glass/ic_glass_message.png"
                   />

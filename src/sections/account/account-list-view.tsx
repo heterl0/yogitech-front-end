@@ -182,7 +182,7 @@ export default function AccountListView() {
     } else {
       enqueueSnackbar(t("accountListView.banFailed"), { variant: "error" });
     }
-  }, [table.selected, t]);
+  }, [table.selected, t, enqueueSnackbar, tableData]);
 
   const handleEditRow = useCallback(
     (id: number) => {

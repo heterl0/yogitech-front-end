@@ -40,7 +40,7 @@ export function useGetExercise(id: string) {
       exerciseValidating: isValidating,
       exerciseMutation: mutate,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating, mutate]
   );
 
   return memoizedValue;

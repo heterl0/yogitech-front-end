@@ -21,7 +21,7 @@ export function useGetPosts() {
       postsEmpty: !isLoading && !data?.length,
       postsMutate: mutate,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating, mutate]
   );
 
   return memoizedValue;
@@ -90,7 +90,7 @@ export function useSearchPosts(query: string) {
       searchEmpty: !isLoading && !data?.length,
       mutate: mutate,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating, mutate]
   );
 
   return memoizedValue;

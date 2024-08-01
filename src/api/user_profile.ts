@@ -40,7 +40,7 @@ export function useGetProfile(id: string) {
       profileValidating: isValidating,
       profileMutate: mutate,
     }),
-    [data, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating, mutate]
   );
 
   return memoizedValue;

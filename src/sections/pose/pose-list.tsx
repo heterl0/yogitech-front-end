@@ -32,7 +32,7 @@ export default function PoseList({ poses, isFilter }: Props) {
     if (isFilter) {
       setPage(1);
     }
-  }, [poses]);
+  }, [poses, isFilter]);
 
   const itemsPerPage = 9;
 

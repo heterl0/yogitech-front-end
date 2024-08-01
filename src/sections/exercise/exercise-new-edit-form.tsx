@@ -316,7 +316,7 @@ export default function ExerciseNewEditForm({ currentExercise, poses }: Props) {
       setValue("inSecond", poseWithTime.time);
       setValue("duration", poseWithTime.duration);
     }
-  }, [poseSelectedIndex]);
+  }, [poseSelectedIndex, poseExercises, setValue]);
 
   const handleRemoveFile = useCallback(() => {
     setValue("image", currentExercise?.image_url || null);

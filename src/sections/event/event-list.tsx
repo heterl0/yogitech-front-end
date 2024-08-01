@@ -26,7 +26,7 @@ export default function EventList({ events, isFilter }: Props) {
     if (isFilter) {
       setPage(1);
     }
-  }, [events]);
+  }, [events, isFilter]);
 
   const handleEdit = useCallback(
     (id: string) => {

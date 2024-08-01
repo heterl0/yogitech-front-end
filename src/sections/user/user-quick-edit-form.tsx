@@ -97,7 +97,7 @@ export default function UserQuickEditForm({
     if (defaultValues) {
       methods.reset(defaultValues);
     }
-  }, [defaultValues]);
+  }, [defaultValues, methods]);
 
   const {
     reset,

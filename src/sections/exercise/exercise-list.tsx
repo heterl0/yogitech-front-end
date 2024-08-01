@@ -32,7 +32,7 @@ export default function ExerciseList({ exercises, isFilter }: Props) {
     if (isFilter) {
       setPage(1);
     }
-  }, [exercises]);
+  }, [exercises, isFilter]);
 
   const itemsPerPage = 9;
 

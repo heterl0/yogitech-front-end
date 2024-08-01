@@ -47,7 +47,7 @@ export default function ExerciseCommentTableRow({
 
   useEffect(() => {
     setStatus(active_status === 0 ? "Disabled" : "Active");
-  }, [row]);
+  }, [row, active_status]);
 
   // const dateFormatted = format(new Date(time), "HH:mm dd MMM yyyy");
 

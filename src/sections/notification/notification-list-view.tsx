@@ -128,43 +128,6 @@ export default function NotificationListView() {
     setFilters(defaultFilters);
   }, [defaultFilters]);
 
-  const handleBanRow = useCallback(
-    async (id: number) => {
-      const response = await axiosInstance.patch(
-        `${endpoints.notification.update(id.toString())}`,
-        {
-          active_status:
-            tableData.find((row) => row.id === id)?.active_status === 0 ? 1 : 0,
-        }
-      );
-      if (response.status === HttpStatusCode.Ok) {
-        const deleteRow = tableData.map((row) => {
-          if (row.id === id) {
-            return {
-              ...row,
-              active_status: row.active_status === 0 ? 1 : 0,
-            };
-          }
-          return row;
-        });
-        handleMutation(response.data, false);
-
-        enqueueSnackbar(
-          response.data.active_status === 0
-            ? t("notiPage.Disablesuccess")
-            : t("notiPage.Enablesuccess")
-        );
-
-        setTableData(deleteRow);
-      } else {
-        enqueueSnackbar(t("notiPage.Error"), { variant: "error" });
-      }
-
-      // table.onUpdatePageDeleteRow(dataInPage.length);
-    },
-    [enqueueSnackbar, t, tableData]
-  );
-
   const handleDeleteRows = useCallback(() => {
     const deleteRows = tableData.filter(
       (row) => !table.selected.includes(row.id)
@@ -212,6 +175,43 @@ export default function NotificationListView() {
       }
     },
     [notificationsMutate]
+  );
+
+  const handleBanRow = useCallback(
+    async (id: number) => {
+      const response = await axiosInstance.patch(
+        `${endpoints.notification.update(id.toString())}`,
+        {
+          active_status:
+            tableData.find((row) => row.id === id)?.active_status === 0 ? 1 : 0,
+        }
+      );
+      if (response.status === HttpStatusCode.Ok) {
+        const deleteRow = tableData.map((row) => {
+          if (row.id === id) {
+            return {
+              ...row,
+              active_status: row.active_status === 0 ? 1 : 0,
+            };
+          }
+          return row;
+        });
+        handleMutation(response.data, false);
+
+        enqueueSnackbar(
+          response.data.active_status === 0
+            ? t("notiPage.Disablesuccess")
+            : t("notiPage.Enablesuccess")
+        );
+
+        setTableData(deleteRow);
+      } else {
+        enqueueSnackbar(t("notiPage.Error"), { variant: "error" });
+      }
+
+      // table.onUpdatePageDeleteRow(dataInPage.length);
+    },
+    [enqueueSnackbar, t, tableData, handleMutation]
   );
 
   return (

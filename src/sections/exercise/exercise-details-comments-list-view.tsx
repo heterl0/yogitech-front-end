@@ -176,62 +176,65 @@ export default function ExerciseCommentListView({
     [enqueueSnackbar, t, tableData]
   );
 
-  const handleBanRow = useCallback(async (id: number) => {
-    const response = await axiosInstance.patch(
-      `${endpoints.exercise.comment.details(id.toString())}`,
-      {
-        active_status: 0,
-      }
-    );
-    if (response.status === HttpStatusCode.Ok) {
-      const deleteRow = tableData.map((row) => {
-        if (row.id === id) {
-          return {
-            ...row,
-            active_status: 0,
-          };
-        }
-        return row;
-      });
-
-      enqueueSnackbar(
-        t("exercisePage.exerciseCommentListView.snackbar.banSuccess")
-      );
-
-      setTableData(deleteRow);
-    } else {
-      enqueueSnackbar(
-        t("exercisePage.exerciseCommentListView.snackbar.banFailed"),
+  const handleBanRow = useCallback(
+    async (id: number) => {
+      const response = await axiosInstance.patch(
+        `${endpoints.exercise.comment.details(id.toString())}`,
         {
-          variant: "error",
+          active_status: 0,
         }
       );
-    }
-  }, []);
+      if (response.status === HttpStatusCode.Ok) {
+        const deleteRow = tableData.map((row) => {
+          if (row.id === id) {
+            return {
+              ...row,
+              active_status: 0,
+            };
+          }
+          return row;
+        });
 
-  const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter(
-      (row) => !table.selected.includes(row.id)
-    );
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.banSuccess")
+        );
 
-    enqueueSnackbar(
-      t("exercisePage.exerciseCommentListView.snackbar.deleteSuccess")
-    );
+        setTableData(deleteRow);
+      } else {
+        enqueueSnackbar(
+          t("exercisePage.exerciseCommentListView.snackbar.banFailed"),
+          {
+            variant: "error",
+          }
+        );
+      }
+    },
+    [enqueueSnackbar, t, tableData]
+  );
 
-    setTableData(deleteRows);
+  // const handleDeleteRows = useCallback(() => {
+  //   const deleteRows = tableData.filter(
+  //     (row) => !table.selected.includes(row.id)
+  //   );
 
-    table.onUpdatePageDeleteRows({
-      totalRowsInPage: dataInPage.length,
-      totalRowsFiltered: dataFiltered.length,
-    });
-  }, [
-    dataFiltered.length,
-    dataInPage.length,
-    enqueueSnackbar,
-    t,
-    table,
-    tableData,
-  ]);
+  //   enqueueSnackbar(
+  //     t("exercisePage.exerciseCommentListView.snackbar.deleteSuccess")
+  //   );
+
+  //   setTableData(deleteRows);
+
+  //   table.onUpdatePageDeleteRows({
+  //     totalRowsInPage: dataInPage.length,
+  //     totalRowsFiltered: dataFiltered.length,
+  //   });
+  // }, [
+  //   dataFiltered.length,
+  //   dataInPage.length,
+  //   enqueueSnackbar,
+  //   t,
+  //   table,
+  //   tableData,
+  // ]);
 
   const batchInactive = useCallback(async () => {
     const response = await axiosInstance.post(
@@ -264,7 +267,14 @@ export default function ExerciseCommentListView({
       totalRowsInPage: dataInPage.length,
       totalRowsFiltered: dataFiltered.length,
     });
-  }, [confirm, handleDeleteRows]);
+  }, [
+    dataInPage.length,
+    dataFiltered.length,
+    t,
+    mutate,
+    enqueueSnackbar,
+    table,
+  ]);
 
   const handleResponse = useCallback(
     async (data: IRequestComment) => {
@@ -289,7 +299,7 @@ export default function ExerciseCommentListView({
         );
       }
     },
-    [mutate]
+    [mutate, exerciseId, t, enqueueSnackbar]
   );
 
   const handleEditResponse = useCallback(
@@ -314,7 +324,7 @@ export default function ExerciseCommentListView({
         );
       }
     },
-    [mutate]
+    [mutate, t, enqueueSnackbar]
   );
 
   return (

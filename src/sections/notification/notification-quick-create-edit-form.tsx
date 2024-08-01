@@ -84,7 +84,7 @@ export default function NotificationQuickCreateEditForm({
 
   useEffect(() => {
     reset(defaultValues);
-  }, [defaultValues]);
+  }, [defaultValues, reset]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {

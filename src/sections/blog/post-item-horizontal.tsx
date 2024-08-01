@@ -91,7 +91,7 @@ export default function PostItemHorizontal({ post, deleteMutate }: Props) {
       dialog.onFalse();
     }
     router.push(paths.dashboard.blog.root);
-  }, [dialog, enqueueSnackbar, id, router]);
+  }, [dialog, enqueueSnackbar, id, router, t, deleteMutate]);
 
   return (
     <>
