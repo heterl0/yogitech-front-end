@@ -86,7 +86,7 @@ export default function DownloadAdvertisement() {
           y: [-20, 0, -20],
         }}
         transition={{ duration: 4, repeat: Infinity }}
-        alt="rocket"
+        alt="Yogitech download"
         src="/assets/images/home/rocket.webp"
         sx={{ maxWidth: 460 }}
       />

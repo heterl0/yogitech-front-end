@@ -22,7 +22,8 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: "YogiTech: Mentor Platform",
-  description: "YogiTech: Mentor Platform",
+  description:
+    "Welcome to YogiTech, the ultimate mentor platform to connect with experts and enhance your skills.",
 };
 
 export default function RootLayout({
