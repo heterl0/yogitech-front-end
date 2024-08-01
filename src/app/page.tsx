@@ -33,6 +33,8 @@ export default function Home() {
           name="twitter:image"
           content="https://www.yogitech.me/twitter-image.jpg"
         />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <HomeView />
     </>
