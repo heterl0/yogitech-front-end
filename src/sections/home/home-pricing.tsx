@@ -240,27 +240,6 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
         </Box>
       </Stack>
 
-      {/* {standardLicense ? (
-        <Box
-          component="img"
-          alt={icons[1]}
-          src={icons[1]}
-          sx={{ width: 20, height: 20 }}
-        />
-      ) : (
-        <Stack direction="row" spacing={2}>
-          {icons.map((icon) => (
-            <Box
-              component="img"
-              key={icon}
-              alt={icon}
-              src={icon}
-              sx={{ width: 20, height: 20 }}
-            />
-          ))}
-        </Stack>
-      )} */}
-
       <Stack spacing={2.5}>
         {commons.map((option) => (
           <Stack key={option} spacing={1} direction="row" alignItems="center">

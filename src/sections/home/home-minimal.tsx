@@ -102,7 +102,7 @@ export default function HomeMinimal() {
               <Box
                 component="img"
                 src={card.icon}
-                alt={card.title}
+                alt={+"Yogitech - " + card.title}
                 sx={{ mx: "auto", width: 48, height: 48 }}
               />
 

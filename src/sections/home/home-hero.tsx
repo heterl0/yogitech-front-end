@@ -264,7 +264,7 @@ export default function HomeHero() {
           component={m.img}
           animate={{ y: ["0%", "100%"] }}
           transition={transition}
-          alt={lightMode ? "light_1" : "dark_1"}
+          alt={"Yogitech Hero"}
           src={
             lightMode
               ? `/assets/images/home/hero/light_1.png`
@@ -276,7 +276,7 @@ export default function HomeHero() {
           component={m.img}
           animate={{ y: ["-100%", "0%"] }}
           transition={transition}
-          alt={lightMode ? "light_1" : "dark_1"}
+          alt={"Yogitech Hero"}
           src={
             lightMode
               ? `/assets/images/home/hero/light_1.png`
@@ -295,7 +295,7 @@ export default function HomeHero() {
           component={m.img}
           animate={{ y: ["100%", "0%"] }}
           transition={transition}
-          alt={lightMode ? "light_2" : "dark_2"}
+          alt={"Yogitech Hero"}
           src={
             lightMode
               ? `/assets/images/home/hero/light_2.png`
@@ -307,7 +307,7 @@ export default function HomeHero() {
           component={m.img}
           animate={{ y: ["0%", "-100%"] }}
           transition={transition}
-          alt={lightMode ? "light_2" : "dark_2"}
+          alt={"Yogitech Hero"}
           src={
             lightMode
               ? `/assets/images/home/hero/light_2.png`
