@@ -35,6 +35,9 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
+export interface LoginError extends Error {
+  detail: string;
+}
 
 export default function JwtLoginView() {
   const { t } = useTranslation();
@@ -80,10 +83,13 @@ export default function JwtLoginView() {
     } catch (error) {
       console.error(error);
       reset();
+      const newError = error as LoginError;
+      console.log(newError);
+
       setErrorMsg(
-        typeof error === "string"
+        typeof newError === "string"
           ? t("login.error.notCredentialAvailable")
-          : t("login.error.genericError")
+          : t(newError.detail)
       );
     }
   });

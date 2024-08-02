@@ -124,15 +124,6 @@ export default function NotificationTableRow({
           <Iconify icon="solar:close-circle-bold" />
           {active_status === 0 ? t("notiPage.Enable") : t("notiPage.Disable")}
         </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            popover.onClose();
-          }}
-        >
-          <Iconify icon="solar:pen-bold" />
-          {t("notiPage.Edit")}
-        </MenuItem>
       </CustomPopover>
 
       <ConfirmDialog

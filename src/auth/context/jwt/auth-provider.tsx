@@ -160,7 +160,7 @@ export function AuthProvider({ children }: Props) {
 
     const user = resUser.data;
     if (user.is_staff === false) {
-      throw new Error("You are not admin!");
+      throw { detail: "You are not admin!" };
     }
 
     setSession(access);

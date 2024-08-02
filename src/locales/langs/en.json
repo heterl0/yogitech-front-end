@@ -657,6 +657,7 @@
     "List": "List",
     "Create": "Create",
     "Delete": "Delete",
+    "Deleteconfirmation": "Are you sure you want to delete {{ num }} notification?",
     "Bansuccess": "Ban success!",
     "Banfailed": "Ban failed!",
     "Deletesuccess": "Delete success!",
@@ -856,7 +857,8 @@
     "updatePassword": "Update Password",
     "returnToSignIn": "Return to sign in",
     "requestSentSuccess": "Request sent successfully!",
-    "newPassword": "Please enter your new password you want to reset.",
+    "enterNewPassword": "Please enter your new password",
+    "newPassword": "Enter your new password",
     "updateSuccess": "Update Successfully!",
     "redirectToLogin": "We will redirect you to login page.",
     "errorOccurred": "An error has occurred!!!",
@@ -982,5 +984,8 @@
   "active": "Active",
   "pending": "Pending",
   "banned": "Banned",
-  "system": "System"
+  "system": "System",
+  "No active account found with the given credentials": "No active account found with the given credentials",
+  "Please activate your account.": "Please activate your account.",
+  "You are not admin!": "You are not admin!"
 }

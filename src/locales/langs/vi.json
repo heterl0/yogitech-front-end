@@ -655,6 +655,7 @@
     "List": "Danh sách",
     "Create": "Tạo mới",
     "Delete": "Xóa",
+    "Deleteconfirmation": "Bạn có chắc chắn muốn xóa {{ num }} thông báo không?",
     "Bansuccess": "Cấm thành công!",
     "Banfailed": "Cấm thất bại!",
     "Deletesuccess": "Xóa thành công!",
@@ -860,7 +861,8 @@
     "updatePassword": "Cập nhật Mật khẩu",
     "returnToSignIn": "Trở lại đăng nhập",
     "requestSentSuccess": "Yêu cầu đã được gửi thành công!",
-    "newPassword": "Vui lòng nhập mật khẩu mới mà bạn muốn đặt lại.",
+    "enterNewPassword": "Vui lòng nhập mật khẩu mới của bạn.",
+    "newPassword": "Nhập mật khẩu mới",
     "updateSuccess": "Cập nhật thành công!",
     "redirectToLogin": "Chúng tôi sẽ chuyển hướng bạn đến trang đăng nhập.",
     "errorOccurred": "Đã xảy ra lỗi!!!",
@@ -980,5 +982,8 @@
   "active": "Hoạt động",
   "pending": "Chưa kích hoạt",
   "banned": "Bị cấm",
-  "system": "Hệ thống"
+  "system": "Hệ thống",
+  "No active account found with the given credentials": "Không tìm thấy tài khoản hoạt động với thông tin đăng nhập đã cung cấp",
+  "Please activate your account.": "Vui lòng kích hoạt tài khoản của bạn.",
+  "You are not admin!": "Bạn không phải là quản trị viên!"
 }

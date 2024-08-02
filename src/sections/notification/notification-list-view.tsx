@@ -128,11 +128,18 @@ export default function NotificationListView() {
     setFilters(defaultFilters);
   }, [defaultFilters]);
 
-  const handleDeleteRows = useCallback(() => {
+  const handleDeleteRows = useCallback(async () => {
     const deleteRows = tableData.filter(
       (row) => !table.selected.includes(row.id)
     );
 
+    const res = await axiosInstance.post(endpoints.notification.batchDelete, {
+      ids: table.selected,
+    });
+    if (res.status !== HttpStatusCode.Ok) {
+      enqueueSnackbar(t("notiPage.Error"), { variant: "error" });
+      return;
+    }
     enqueueSnackbar(t("notiPage.Deletesuccess"));
 
     setTableData(deleteRows);
@@ -318,7 +325,7 @@ export default function NotificationListView() {
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title={t("notiPage.Delete")}>
                   <IconButton color="primary" onClick={confirm.onTrue}>
                     <Iconify icon="solar:trash-bin-trash-bold" />
                   </IconButton>
@@ -394,11 +401,12 @@ export default function NotificationListView() {
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t("notiPage.Delete")}
         content={
           <>
-            Are you sure want to delete{" "}
-            <strong> {table.selected.length} </strong> items?
+            {/* Are you sure want to delete{" "}
+            <strong> {table.selected.length} </strong> items? */}
+            {t("notiPage.Deleteconfirmation", { num: table.selected.length })}
           </>
         }
         action={
@@ -410,7 +418,7 @@ export default function NotificationListView() {
               confirm.onFalse();
             }}
           >
-            Delete
+            {t("notiPage.Delete")}
           </Button>
         }
       />

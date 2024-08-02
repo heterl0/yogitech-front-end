@@ -70,6 +70,7 @@ export const endpoints = {
     create: "/api/v1/notification/create/",
     update: (id: string) => `/api/v1/notification/${id}/`,
     delete: (id: string) => `/api/v1/notification/${id}/`,
+    batchDelete: "/api/v1/notification/batch-delete/",
   },
   pose: {
     list: "/api/v1/poses/",
