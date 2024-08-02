@@ -55,7 +55,7 @@ export default function DownloadAdvertisement() {
             size="large"
             variant="contained"
             rel="noopener"
-            href={"/"}
+            href="https://storage.yogitech.me/yogitech_release_v1_0.apk"
             sx={{
               color: "grey.800",
               bgcolor: "common.white",
