@@ -116,7 +116,7 @@ export default function OverviewAppView() {
                 icon={
                   <Image
                     alt="icon"
-                    src="/assets/icons/glass/ic_glass_bag.png"
+                    src="/assets/icons/glass/ic_glass_event.png"
                   />
                 }
               />
@@ -129,7 +129,7 @@ export default function OverviewAppView() {
                 icon={
                   <Image
                     alt="icon"
-                    src="/assets/icons/glass/ic_glass_users.png"
+                    src="/assets/icons/glass/ic_glass_users1.png"
                   />
                 }
               />
@@ -143,7 +143,7 @@ export default function OverviewAppView() {
                 icon={
                   <Image
                     alt="icon"
-                    src="/assets/icons/glass/ic_glass_buy.png"
+                    src="/assets/icons/glass/ic_glass_pose.png"
                   />
                 }
               />
@@ -157,7 +157,7 @@ export default function OverviewAppView() {
                 icon={
                   <Image
                     alt="icon"
-                    src="/assets/icons/glass/ic_glass_message.png"
+                    src="/assets/icons/glass/ic_glass_exercise.png"
                   />
                 }
               />
