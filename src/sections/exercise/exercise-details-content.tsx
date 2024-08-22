@@ -32,7 +32,7 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
     poses,
   } = exercise;
 
-  const renderGallery = (
+  const renderGallery = image_url && (
     <Box
       sx={{
         borderRadius: "12px",
@@ -124,9 +124,9 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
     </Box>
   );
 
-  const renderContent = <Markdown>{description}</Markdown>;
+  const renderContent = description && <Markdown>{description}</Markdown>;
 
-  const renderBenefit = (
+  const renderBenefit = benefit && (
     <>
       <Typography variant="h6" sx={{ mb: 2 }}>
         {t("exercisePage.exerciseDetailsContent.benefit")}
@@ -156,10 +156,11 @@ export default function ExerciseDetailsContent({ exercise }: Props) {
 
         {renderBenefit}
 
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          {t("exercisePage.exerciseDetailsContent.description")}
-        </Typography>
-
+        {description && (
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            {t("exercisePage.exerciseDetailsContent.description")}
+          </Typography>
+        )}
         {renderContent}
       </Stack>
     </>

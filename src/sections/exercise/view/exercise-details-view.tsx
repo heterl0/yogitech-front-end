@@ -40,6 +40,10 @@ export default function ExerciseDetailsView({ id }: Props) {
     { value: "comment", label: t("exercisePage.tabs.comment") },
   ];
 
+  if (!currentExercise?.is_admin) {
+    EXERCISE_DETAILS_TABS.pop();
+  }
+
   const renderTabs = (
     <Tabs
       value={currentTab}

@@ -276,7 +276,7 @@ const applyFilter = ({
   if (benefits.length > 0) {
     inputData = inputData.filter((exercise) => {
       if (exercise.benefit === null) return false;
-      const exerciseBenefits = JSON.parse(exercise.benefit) as string[];
+      const exerciseBenefits = JSON.parse(exercise.benefit || "") as string[];
       return benefits.some((benefit) => exerciseBenefits.includes(benefit));
     });
   }

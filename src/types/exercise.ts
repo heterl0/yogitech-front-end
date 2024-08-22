@@ -14,8 +14,8 @@ export type IExercise = {
   video_url: string;
   durations: number;
   level: number;
-  benefit: string;
-  description: string;
+  benefit?: string;
+  description?: string;
   calories: string;
   number_poses: number;
   point: number;
