@@ -101,22 +101,22 @@ export default function ExerciseCommentListView({
 
   const TABLE_HEAD = [
     {
-      id: "comment",
+      id: "text",
       label: t("exercisePage.exerciseCommentListView.tableHead.comment"),
       width: 560,
     },
     {
-      id: "vote",
+      id: "votes",
       label: t("exercisePage.exerciseCommentListView.tableHead.vote"),
       width: 110,
     },
     {
-      id: "time",
+      id: "created_at",
       label: t("exercisePage.exerciseCommentListView.tableHead.time"),
       width: 180,
     },
     {
-      id: "status",
+      id: "active_status",
       label: t("exercisePage.exerciseCommentListView.tableHead.status"),
       width: 110,
     },
