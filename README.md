@@ -9,7 +9,7 @@ Full Logo | Favicon
 ## Installation
 
 ```bash
-git clone https://gitlab.com/heterl0/admin-web
+git clone https://github.com/heterl0/yogitech-front-end
 ```
 
 Go to the project directory
