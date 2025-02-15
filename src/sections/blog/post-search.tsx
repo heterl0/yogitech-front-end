@@ -110,7 +110,7 @@ export default function PostSearch({
               key={post.id}
               alt={post.title}
               src={post.image_url}
-              variant="rounded"
+              variant="rounded-sm"
               sx={{
                 width: 48,
                 height: 48,

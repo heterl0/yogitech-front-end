@@ -200,7 +200,7 @@ export default function HomeHero() {
 
       <m.div variants={varFade().in}>
         <StyledTextGradient
-          className="!leading-[5.5rem] md:!leading-[7rem]"
+          className="leading-[5.5rem]! md:leading-[7rem]!"
           animate={{ backgroundPosition: "200% center" }}
           transition={{
             repeatType: "reverse",

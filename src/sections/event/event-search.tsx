@@ -106,7 +106,7 @@ export default function EventSearch({
               key={pose.id}
               alt={pose.title}
               src={pose.image_url}
-              variant="rounded"
+              variant="rounded-sm"
               sx={{
                 width: 48,
                 height: 48,

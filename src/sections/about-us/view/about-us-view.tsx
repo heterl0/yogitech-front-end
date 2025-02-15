@@ -22,12 +22,12 @@ function AboutUsView() {
     <MainLayout>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
-      <div className="text-white relative min-h-screen bg-gradient-to-br from-blue-900 via-[#0A192F] to-purple-900">
+      <div className="relative min-h-screen bg-linear-to-br from-blue-900 via-[#0A192F] to-purple-900 text-white">
         {/* Gradient Orbs */}
         <div className="pointer-events-none fixed inset-0 overflow-hidden">
-          <div className="absolute -left-4 top-0 h-72 w-72 animate-blob rounded-full bg-blue-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
-          <div className="animation-delay-2000 absolute -right-4 top-0 h-72 w-72 animate-blob rounded-full bg-purple-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
-          <div className="animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 animate-blob rounded-full bg-pink-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
+          <div className="animate-blob absolute top-0 -left-4 h-72 w-72 rounded-full bg-blue-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
+          <div className="animation-delay-2000 animate-blob absolute top-0 -right-4 h-72 w-72 rounded-full bg-purple-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
+          <div className="animation-delay-4000 animate-blob absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-pink-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
         </div>
 
         {/* Content Container */}
@@ -46,10 +46,10 @@ function AboutUsView() {
               className="object-cover"
               priority
             />
-            <div className="bg-black/30 absolute inset-0 flex items-center justify-center backdrop-blur-sm">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-xs">
               <Typography
                 variant="h1"
-                className="text-white/90 text-5xl font-bold md:text-7xl"
+                className="text-5xl font-bold text-white/90 md:text-7xl"
               >
                 YOGA MONITOR
               </Typography>
@@ -59,12 +59,12 @@ function AboutUsView() {
           {/* About Section */}
           <LayoutWrapper>
             <m.div {...fadeIn} className="mb-20 text-center">
-              <div className="bg-white/10 border-white/20 rounded-2xl border p-8 shadow-xl backdrop-blur-md">
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
                 <Typography variant="h2" className="mb-6 text-4xl font-bold">
                   ABOUT YOGITECH
                 </Typography>
                 <Box className="mb-8 flex items-center justify-center gap-8">
-                  <div className="bg-white/5 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="rounded-xl bg-white/5 p-4 backdrop-blur-xs">
                     <Icon icon="mdi:yoga" className="text-6xl text-blue-400" />
                   </div>
                   <div className="text-left">
@@ -89,7 +89,7 @@ function AboutUsView() {
 
             {/* Overview Section */}
             <m.div {...fadeIn} className="mb-20">
-              <div className="bg-white/10 border-white/20 rounded-2xl border p-8 shadow-xl backdrop-blur-md">
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
                 <Typography
                   variant="h3"
                   className="mb-8 text-center text-3xl font-bold"
@@ -109,7 +109,7 @@ function AboutUsView() {
                   <Grid item xs={12} md={6}>
                     <m.div
                       whileHover={{ scale: 1.02 }}
-                      className="bg-white/5 overflow-hidden rounded-lg p-2 backdrop-blur-sm"
+                      className="overflow-hidden rounded-lg bg-white/5 p-2 backdrop-blur-xs"
                     >
                       <Image
                         src="/banner.png?height=400&width=600"
@@ -126,7 +126,7 @@ function AboutUsView() {
 
             {/* Team Section */}
             <m.div {...fadeIn}>
-              <div className="bg-white/10 border-white/20 rounded-2xl border p-8 shadow-xl backdrop-blur-md">
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
                 <Typography
                   variant="h3"
                   className="mb-12 text-center text-3xl font-bold"
@@ -138,17 +138,12 @@ function AboutUsView() {
                     <Grid item xs={12} sm={6} md={4} key={member}>
                       <m.div
                         whileHover={{ y: -10, scale: 1.02 }}
-                        className="bg-white/5 border-white/10 hover:bg-white/20 rounded-xl border p-6 shadow-lg 
-                               backdrop-blur-md transition-all duration-300"
+                        className="rounded-xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-white/20"
                       >
-                        <div
-                          className="mx-auto mb-4 flex h-32 w-32 items-center 
-                                  justify-center overflow-hidden rounded-full 
-                                  bg-gradient-to-br from-blue-400/30 to-purple-400/30 backdrop-blur-sm"
-                        >
+                        <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-blue-400/30 to-purple-400/30 backdrop-blur-xs">
                           <Icon
                             icon="mdi:account-circle"
-                            className="text-white/80 text-6xl"
+                            className="text-6xl text-white/80"
                           />
                         </div>
                         <Typography variant="h6" className="mb-2">

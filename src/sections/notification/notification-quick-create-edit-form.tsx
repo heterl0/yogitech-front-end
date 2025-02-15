@@ -192,7 +192,7 @@ export default function NotificationQuickCreateEditForm({
             />
             <FormControlLabel
               labelPlacement="end"
-              className="!justify-start"
+              className="justify-start!"
               control={
                 <Controller
                   name="is_admin"

@@ -10,7 +10,7 @@ type StyledRootProps = {
 };
 
 const StyledRoot = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "rounded",
+  shouldForwardProp: (prop) => prop !== "rounded-sm",
 })<StyledRootProps>(({ rounded, theme }) => ({
   zIndex: 9,
   margin: 0,

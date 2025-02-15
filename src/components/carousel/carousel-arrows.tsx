@@ -9,7 +9,7 @@ import { LeftIcon, RightIcon } from "./arrow-icons";
 
 interface StyledIconButtonProps extends IconButtonProps {
   filled?: boolean;
-  shape?: "circular" | "rounded";
+  shape?: "circular" | "rounded-sm";
   hasChild?: boolean;
 }
 
@@ -21,7 +21,7 @@ const StyledIconButton = styled(IconButton, {
   transition: theme.transitions.create("all", {
     duration: theme.transitions.duration.shorter,
   }),
-  ...(shape === "rounded" && {
+  ...(shape === "rounded-sm" && {
     borderRadius: theme.shape.borderRadius * 1.5,
   }),
   ...(!filled && {
@@ -49,7 +49,7 @@ const StyledIconButton = styled(IconButton, {
 // ----------------------------------------------------------------------
 
 interface Props extends StackProps {
-  shape?: "circular" | "rounded";
+  shape?: "circular" | "rounded-sm";
   filled?: boolean;
   children?: React.ReactNode;
   icon?: IconifyProps; // Right icon

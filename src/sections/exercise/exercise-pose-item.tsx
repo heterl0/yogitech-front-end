@@ -210,7 +210,7 @@ export default function ExercisePoseItem({
         <Card
           onClick={onSelect}
           raised={isSelected}
-          className={`${isSelected ? "-translate-y-1 border border-grey-300 shadow-lg" : ""} box-content cursor-pointer !transition-transform !duration-200 !ease-in-out`}
+          className={`${isSelected ? "border-grey-300 -translate-y-1 border shadow-lg" : ""} box-content cursor-pointer transition-transform! duration-200! ease-in-out!`}
         >
           {renderImages}
 
