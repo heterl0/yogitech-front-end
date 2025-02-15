@@ -53,7 +53,7 @@ I depoloy this project on [Vercel](https://vercel.com/), current only to host th
 
 My project Live at [https//:www.yogitech.me](https//:www.yogitech.me).
 
-![Homepage](https://storage.yogitech.me/yogitech_homepage.png) _Landing Page YogiTech: Yoga Mentor Platform_
+![Homepage](https://www.yogitech.me/og-image.png) _Landing Page YogiTech: Yoga Mentor Platform_
 
 ##### #Notice: if you feel interest and find my [back-end](https://gitlab.com/sep490-16-YogiTech/back-end) (DjangoRestfulFramework.)
 
