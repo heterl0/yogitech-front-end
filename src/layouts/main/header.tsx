@@ -18,6 +18,7 @@ import { navConfig } from "./config-navigation";
 import { useTranslate } from "@/locales";
 import LanguagePopover from "../common/language-popover";
 import NavMobile from "./nav/mobile";
+import Link from "next/link";
 
 // ----------------------------------------------------------------------
 
@@ -97,13 +98,8 @@ export default function Header({ isBlurFromStart = false }: Props) {
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
           >
-            <Button
-              variant="contained"
-              rel="noopener"
-              href={paths.download}
-              color="primary"
-            >
-              {t("header.download")}
+            <Button variant="contained" rel="noopener" color="primary">
+              <Link href={paths.download}>{t("header.download")}</Link>
             </Button>
 
             {!mdUp && <NavMobile data={navConfig()} />}
