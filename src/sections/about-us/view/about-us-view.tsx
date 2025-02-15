@@ -22,12 +22,12 @@ function AboutUsView() {
     <MainLayout>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
-      <div className="from-blue-500 to-purple-500 text-white relative min-h-screen bg-gradient-to-br via-[#0A192F]">
+      <div className="text-white relative min-h-screen bg-gradient-to-br from-blue-900 via-[#0A192F] to-purple-900">
         {/* Gradient Orbs */}
         <div className="pointer-events-none fixed inset-0 overflow-hidden">
-          <div className="bg-blue-500 absolute -left-4 top-0 h-72 w-72 animate-blob rounded-full opacity-20 mix-blend-multiply blur-xl filter"></div>
-          <div className="bg-purple-500 animation-delay-2000 absolute -right-4 top-0 h-72 w-72 animate-blob rounded-full opacity-20 mix-blend-multiply blur-xl filter"></div>
-          <div className="bg-pink-500 animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 animate-blob rounded-full opacity-20 mix-blend-multiply blur-xl filter"></div>
+          <div className="absolute -left-4 top-0 h-72 w-72 animate-blob rounded-full bg-blue-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
+          <div className="animation-delay-2000 absolute -right-4 top-0 h-72 w-72 animate-blob rounded-full bg-purple-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
+          <div className="animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 animate-blob rounded-full bg-pink-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
         </div>
 
         {/* Content Container */}
@@ -65,7 +65,7 @@ function AboutUsView() {
                 </Typography>
                 <Box className="mb-8 flex items-center justify-center gap-8">
                   <div className="bg-white/5 rounded-xl p-4 backdrop-blur-sm">
-                    <Icon icon="mdi:yoga" className="text-blue-400 text-6xl" />
+                    <Icon icon="mdi:yoga" className="text-6xl text-blue-400" />
                   </div>
                   <div className="text-left">
                     <Typography variant="h6">Project: YogiTech</Typography>
@@ -77,7 +77,7 @@ function AboutUsView() {
                 </Box>
                 <Typography
                   variant="body1"
-                  className="text-gray-200 mx-auto max-w-2xl"
+                  className="mx-auto max-w-2xl text-gray-200"
                 >
                   We created an AI Yoga app that gives real-time feedback on
                   poses using your phone's camera. It supports English and
@@ -142,9 +142,9 @@ function AboutUsView() {
                                backdrop-blur-md transition-all duration-300"
                       >
                         <div
-                          className="from-blue-400/30 to-purple-400/30 mx-auto mb-4 flex h-32 
-                                  w-32 items-center justify-center 
-                                  overflow-hidden rounded-full bg-gradient-to-br backdrop-blur-sm"
+                          className="mx-auto mb-4 flex h-32 w-32 items-center 
+                                  justify-center overflow-hidden rounded-full 
+                                  bg-gradient-to-br from-blue-400/30 to-purple-400/30 backdrop-blur-sm"
                         >
                           <Icon
                             icon="mdi:account-circle"
