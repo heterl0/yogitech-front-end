@@ -16,8 +16,6 @@ import { useTranslate } from "@/locales";
 
 // ----------------------------------------------------------------------
 
-// ----------------------------------------------------------------------
-
 export default function HomePricing() {
   const mdUp = useResponsive("up", "md");
 
@@ -127,39 +125,6 @@ export default function HomePricing() {
           </Box>
         </>
       )}
-
-      {/* <m.div variants={varFade().in}>
-        <Box
-          sx={{
-            textAlign: "center",
-            mt: {
-              xs: 5,
-              md: 10,
-            },
-          }}
-        >
-          <m.div variants={varFade().inDown}>
-            <Typography variant="h4">Still have questions?</Typography>
-          </m.div>
-
-          <m.div variants={varFade().inDown}>
-            <Typography sx={{ mt: 2, mb: 5, color: "text.secondary" }}>
-              Please describe your case to receive the most accurate advice.
-            </Typography>
-          </m.div>
-
-          <m.div variants={varFade().inUp}>
-            <Button
-              color="inherit"
-              size="large"
-              variant="contained"
-              href="mailto:support@minimals.cc?subject=[Feedback] from Customer"
-            >
-              Contact us
-            </Button>
-          </m.div>
-        </Box>
-      </m.div> */}
     </>
   );
 
