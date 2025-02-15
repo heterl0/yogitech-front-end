@@ -19,6 +19,7 @@ import { useTranslate } from "@/locales";
 import LanguagePopover from "../common/language-popover";
 import NavMobile from "./nav/mobile";
 import Link from "next/link";
+import { memo } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ type Props = {
   isBlurFromStart?: boolean;
 };
 
-export default function Header({ isBlurFromStart = false }: Props) {
+function Header({ isBlurFromStart = false }: Props) {
   const theme = useTheme();
   const { t } = useTranslate();
   const mdUp = useResponsive("up", "md");
@@ -109,3 +110,5 @@ export default function Header({ isBlurFromStart = false }: Props) {
     </AppBar>
   );
 }
+
+export default memo(Header);

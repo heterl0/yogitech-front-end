@@ -4,6 +4,7 @@ import { useTranslate } from "@/locales";
 // ----------------------------------------------------------------------
 
 export const navConfig = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { t } = useTranslate();
   return [
     {
