@@ -55,7 +55,8 @@
   "header": {
     "home": "Home",
     "about_us": "About Us",
-    "download": "Download"
+    "download": "Download",
+    "product": "Features"
   },
   "notification": "Notification",
   "pose_exercise": "Pose & Exercise",

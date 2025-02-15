@@ -17,6 +17,7 @@ import { HEADER } from "../config-layout";
 import { navConfig } from "./config-navigation";
 import { useTranslate } from "@/locales";
 import LanguagePopover from "../common/language-popover";
+import NavMobile from "./nav/mobile";
 
 // ----------------------------------------------------------------------
 
@@ -105,7 +106,7 @@ export default function Header({ isBlurFromStart = false }: Props) {
               {t("header.download")}
             </Button>
 
-            {/* {!mdUp &&  <NavMobile data={navConfig()} />} */}
+            {!mdUp && <NavMobile data={navConfig()} />}
           </Stack>
         </Container>
       </Toolbar>
