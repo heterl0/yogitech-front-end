@@ -54,6 +54,8 @@
     "simplebar-react": "3.2.4",
     "slick-carousel": "1.8.1",
     "swr": "2.2.5",
+    "tailwind-merge": "3.0.1",
+    "tailwindcss-animate": "1.0.7",
     "yet-another-react-lightbox": "3.18.0",
     "yup": "1.4.0"
   },
