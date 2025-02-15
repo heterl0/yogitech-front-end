@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.yogitech.me/</loc>
+    <lastmod>2025-15-02</lastmod>
+    <priority>1.00</priority>
+  </url>
+   <url>
+    <loc>https://www.yogitech.me/about-us/</loc>
+    <lastmod>2024-15-02</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.yogitech.me/download/</loc>
+    <lastmod>2024-01-08</lastmod>
+    <priority>0.80</priority>
+  </url>
+</urlset>

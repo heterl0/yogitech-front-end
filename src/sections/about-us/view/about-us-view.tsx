@@ -205,15 +205,6 @@ function AboutUsView() {
                         whileHover={{ y: -10, scale: 1.02 }}
                         className="cursor-pointer rounded-xl border border-black/10 bg-black/5 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-white/20"
                       >
-                        <div className="h-60 overflow-visible">
-                          <Image
-                            src={member.image}
-                            className="translate-y-[-72px] rounded-full border-b"
-                            alt={member.name}
-                            width={400}
-                            height={400}
-                          />
-                        </div>
                         {/* <Typography variant="h4" className="mb-2">
                           {member.name}
                         </Typography>
@@ -229,14 +220,24 @@ function AboutUsView() {
                           alignItems="center"
                           mb={2}
                         >
-                          <Box>
-                            <Typography
-                              variant="h5"
-                              component="h3"
-                              gutterBottom
-                            >
-                              {member.name}
-                            </Typography>
+                          <Box sx={{ width: "100%" }}>
+                            <div className="mb-6 flex w-full items-center justify-between gap-4 md:flex-row">
+                              <Typography
+                                variant="h5"
+                                component="h3"
+                                gutterBottom
+                              >
+                                {member.name}
+                              </Typography>
+
+                              <Image
+                                src={member.image}
+                                className="rounded-full border-b"
+                                alt={member.name}
+                                width={64}
+                                height={64}
+                              />
+                            </div>
                             <Typography
                               variant="subtitle1"
                               color="text.secondary"
