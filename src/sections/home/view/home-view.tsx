@@ -12,6 +12,7 @@ import ScrollProgress from "@/components/scroll-progress";
 import HomeHero from "../home-hero";
 import HomeMinimal from "../home-minimal";
 import HomePricing from "../home-pricing";
+import HomeFAQ from "../home-faqs";
 
 export default function HomeView() {
   const { scrollYProgress } = useScroll();
@@ -30,6 +31,7 @@ export default function HomeView() {
       >
         <HomeMinimal />
         <HomePricing />
+        <HomeFAQ />
       </Box>
     </MainLayout>
   );
