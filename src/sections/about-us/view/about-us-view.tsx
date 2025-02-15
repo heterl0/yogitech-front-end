@@ -2,13 +2,74 @@
 "use client";
 
 import { m, useScroll } from "framer-motion";
-import { Icon } from "@iconify/react";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box, Grid, IconButton } from "@mui/material";
 import Image from "next/image";
 import { memo } from "react";
 import MainLayout from "@/layouts/main";
 import ScrollProgress from "@/components/scroll-progress";
 import LayoutWrapper from "@/components/wapper/layout-wrapper";
+import Iconify from "@/components/iconify";
+
+const Members = [
+  {
+    name: "Hieu Le Van",
+    image: "/member/hieu-1.png",
+    position: "Product Manager",
+    description:
+      "Leader of the team, responsible for the product's vision and strategy.",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/heterl0/",
+      facebook: "https://www.facebook.com/heterl0",
+      github: "https://www.github.com/heterl0",
+    },
+  },
+  {
+    name: "Tran Nguyen Huyen",
+    image: "/member/tran-1.png",
+    position: "Backend Developer & Yoga Instructor",
+    description: "Responsible for the product's logic and API.",
+    socials: {
+      linkedin: "#",
+      facebook: "https://www.facebook.com/RiTaka157",
+      github: "https://github.com/TranNHCE161052",
+    },
+  },
+  {
+    name: "Duy Nguyen T. Quoc",
+    image: "/member/duy-1.png",
+    position: "Developer",
+    description:
+      "Responsible for the product's development and implementation.",
+    socials: {
+      linkedin: "#",
+      facebook: "https://www.facebook.com/ntqduy1004",
+      github: "https://github.com/duy100402",
+    },
+  },
+  {
+    name: "Kiet Le Tuan",
+    image: "/member/kiet-1.png",
+    position: "Designer & UI/UX",
+    description: "Responsible for the product's interface and user experience.",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/ki%E1%BB%87t-l%C3%AA-5a5720192/",
+      facebook: "https://www.facebook.com/profile.php?id=100007748776947",
+      github: "#",
+    },
+  },
+  {
+    name: "Loc Van Cao Phu",
+    image: "/member/loc-1.png",
+    position: "Developer & Yoga Instructor & Marketing",
+    description:
+      "Responsible for the product's development, yoga content, and marketing.",
+    socials: {
+      linkedin: "#",
+      facebook: "https://www.facebook.com/colnav.zone99",
+      github: "#",
+    },
+  },
+];
 
 function AboutUsView() {
   const fadeIn = {
@@ -22,62 +83,63 @@ function AboutUsView() {
     <MainLayout>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
-      <div className="relative min-h-screen bg-linear-to-br from-blue-900 via-[#0A192F] to-purple-900 text-white">
+      {/* <div className="relative min-h-screen bg-linear-to-b from-[#09141C] via-[#09141C] via-80% to-purple-900 text-white"> */}
+      <div className="relative min-h-screen bg-[#09141C] bg-linear-to-b pb-8 text-white">
         {/* Gradient Orbs */}
-        <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden">
           <div className="animate-blob absolute top-0 -left-4 h-72 w-72 rounded-full bg-blue-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
           <div className="animation-delay-2000 animate-blob absolute top-0 -right-4 h-72 w-72 rounded-full bg-purple-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
           <div className="animation-delay-4000 animate-blob absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-pink-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
         </div>
 
         {/* Content Container */}
-        <div className="relative">
+        <div className="relative z-0">
           {/* Hero Section */}
           <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative h-[60vh] overflow-hidden"
+            className="relative h-[60vh] overflow-visible md:h-[85vh]"
           >
             <Image
               src="/banner.png"
               alt="YogiTech App Interface"
-              fill
-              className="object-cover"
+              width={1920}
+              height={1080}
+              className="w-full translate-y-[-20vh] bg-center"
               priority
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-xs">
-              <Typography
-                variant="h1"
-                className="text-5xl font-bold text-white/90 md:text-7xl"
-              >
-                YOGA MONITOR
-              </Typography>
-            </div>
           </m.div>
 
           {/* About Section */}
           <LayoutWrapper>
-            <m.div {...fadeIn} className="mb-20 text-center">
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
-                <Typography variant="h2" className="mb-6 text-4xl font-bold">
-                  ABOUT YOGITECH
+            <m.div {...fadeIn} className="mb-8 max-w-2xl text-left md:mb-20">
+              <div className="text-black-contrast-text rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
+                <Typography variant="h1" className="mb-6 text-4xl font-bold">
+                  About Us
                 </Typography>
-                <Box className="mb-8 flex items-center justify-center gap-8">
+                <Box className="mb-8 flex items-center justify-start gap-8">
                   <div className="rounded-xl bg-white/5 p-4 backdrop-blur-xs">
-                    <Icon icon="mdi:yoga" className="text-6xl text-blue-400" />
+                    <Image
+                      src="/logo/logo_signle_2.svg"
+                      alt="YogiTech Logo"
+                      width={100}
+                      height={100}
+                    />
                   </div>
                   <div className="text-left">
-                    <Typography variant="h6">Project: YogiTech</Typography>
-                    <Typography variant="subtitle1">
-                      Category: Mobile App
+                    <Typography variant="h2">What is YogiTech?</Typography>
+                    <Typography variant="subtitle1" className="text-2xl!">
+                      Mobile App
                     </Typography>
-                    <Typography variant="subtitle1">Date: 2024</Typography>
+                    <Typography variant="subtitle1" className="text-2xl!">
+                      2024
+                    </Typography>
                   </div>
                 </Box>
                 <Typography
                   variant="body1"
-                  className="mx-auto max-w-2xl text-gray-200"
+                  className="mx-auto max-w-2xl text-2xl! text-gray-200"
                 >
                   We created an AI Yoga app that gives real-time feedback on
                   poses using your phone's camera. It supports English and
@@ -88,17 +150,20 @@ function AboutUsView() {
             </m.div>
 
             {/* Overview Section */}
-            <m.div {...fadeIn} className="mb-20">
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
+            <m.div {...fadeIn} className="mb-8 md:mb-20">
+              <div className="rounded-2xl border border-black/20 bg-black/10 p-8 shadow-xl backdrop-blur-md">
                 <Typography
-                  variant="h3"
-                  className="mb-8 text-center text-3xl font-bold"
+                  variant="h2"
+                  className="text-black-contrast-text mb-8 text-center font-bold"
                 >
                   Overview
                 </Typography>
                 <Grid container spacing={6} alignItems="center">
                   <Grid item xs={12} md={6}>
-                    <Typography variant="body1" className="text-gray-200">
+                    <Typography
+                      variant="body1"
+                      className="text-2xl! text-gray-200"
+                    >
                       YogiTech is an AI-powered yoga platform that provides
                       real-time feedback to help users improve their poses
                       safely and effectively. Supporting both English and
@@ -126,32 +191,94 @@ function AboutUsView() {
 
             {/* Team Section */}
             <m.div {...fadeIn}>
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
+              <div className="text-black-contrast-text flex flex-col gap-6 rounded-2xl bg-white/10 p-8 shadow-xl backdrop-blur-md">
                 <Typography
-                  variant="h3"
-                  className="mb-12 text-center text-3xl font-bold"
+                  variant="h2"
+                  className="mb-12! text-center font-bold"
                 >
                   Our Team
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
-                  {[1, 2, 3].map((member) => (
-                    <Grid item xs={12} sm={6} md={4} key={member}>
+                  {Members.map((member) => (
+                    <Grid item xs={12} sm={6} md={4} key={member.name}>
                       <m.div
                         whileHover={{ y: -10, scale: 1.02 }}
-                        className="rounded-xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-white/20"
+                        className="cursor-pointer rounded-xl border border-black/10 bg-black/5 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-white/20"
                       >
-                        <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-blue-400/30 to-purple-400/30 backdrop-blur-xs">
-                          <Icon
-                            icon="mdi:account-circle"
-                            className="text-6xl text-white/80"
+                        <div className="h-60 overflow-visible">
+                          <Image
+                            src={member.image}
+                            className="translate-y-[-72px] rounded-full border-b"
+                            alt={member.name}
+                            width={400}
+                            height={400}
                           />
                         </div>
-                        <Typography variant="h6" className="mb-2">
-                          Team Member {member}
+                        {/* <Typography variant="h4" className="mb-2">
+                          {member.name}
                         </Typography>
-                        <Typography variant="body2" className="text-gray-300">
-                          Position
+                        <Typography variant="h5" className="inline-block h-[60px]" >
+                          {member.position}
                         </Typography>
+                        <Typography variant="body2" className="mt-4 text-gray-200 inline-block h-[44px]">
+                          {member.description}
+                          </Typography> */}
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          mb={2}
+                        >
+                          <Box>
+                            <Typography
+                              variant="h5"
+                              component="h3"
+                              gutterBottom
+                            >
+                              {member.name}
+                            </Typography>
+                            <Typography
+                              variant="subtitle1"
+                              color="text.secondary"
+                              className="inline-block h-[48px]"
+                            >
+                              {member.position}
+                            </Typography>
+                          </Box>
+                          {/* <Avatar sx={{ width: 56, height: 56 }}>
+                      <Icon icon={member.icon} width={24} height={24} />
+                    </Avatar> */}
+                        </Box>
+                        <Typography
+                          variant="body2"
+                          paragraph
+                          className="inline-block h-[44px]"
+                        >
+                          {member.description}
+                        </Typography>
+                        <Box mt={2}>
+                          <IconButton
+                            size="small"
+                            color="primary"
+                            href={member.socials.linkedin}
+                          >
+                            <Iconify icon="mdi:linkedin" />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            color="primary"
+                            href={member.socials.facebook}
+                          >
+                            <Iconify icon="mdi:facebook" />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            color="primary"
+                            href={member.socials.github}
+                          >
+                            <Iconify icon="mdi:github" />
+                          </IconButton>
+                        </Box>
                       </m.div>
                     </Grid>
                   ))}
