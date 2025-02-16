@@ -9,6 +9,7 @@ import MainLayout from "@/layouts/main";
 import ScrollProgress from "@/components/scroll-progress";
 import LayoutWrapper from "@/components/wapper/layout-wrapper";
 import Iconify from "@/components/iconify";
+import { useTranslate } from "@/locales";
 
 const Members = [
   {
@@ -72,6 +73,7 @@ const Members = [
 ];
 
 function AboutUsView() {
+  const { t } = useTranslate();
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -116,7 +118,7 @@ function AboutUsView() {
             <m.div {...fadeIn} className="mb-8 max-w-2xl text-left md:mb-20">
               <div className="text-black-contrast-text rounded-2xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
                 <Typography variant="h1" className="mb-6 text-4xl font-bold">
-                  About Us
+                  {t("aboutUs.title")}
                 </Typography>
                 <Box className="mb-8 flex items-center justify-start gap-8">
                   <div className="rounded-xl bg-white/5 p-4 backdrop-blur-xs">
@@ -128,12 +130,14 @@ function AboutUsView() {
                     />
                   </div>
                   <div className="text-left">
-                    <Typography variant="h2">What is YogiTech?</Typography>
-                    <Typography variant="subtitle1" className="text-2xl!">
-                      Mobile App
+                    <Typography variant="h2">
+                      {t("aboutUs.whatIsYogiTech")}
                     </Typography>
                     <Typography variant="subtitle1" className="text-2xl!">
-                      2024
+                      {t("aboutUs.appType")}
+                    </Typography>
+                    <Typography variant="subtitle1" className="text-2xl!">
+                      {t("aboutUs.year")}
                     </Typography>
                   </div>
                 </Box>
@@ -141,10 +145,7 @@ function AboutUsView() {
                   variant="body1"
                   className="mx-auto max-w-2xl text-2xl! text-gray-200"
                 >
-                  We created an AI Yoga app that gives real-time feedback on
-                  poses using your phone's camera. It supports English and
-                  Vietnamese, helping users improve techniques and avoid
-                  injuries.
+                  {t("aboutUs.description")}
                 </Typography>
               </div>
             </m.div>
@@ -156,7 +157,7 @@ function AboutUsView() {
                   variant="h2"
                   className="text-black-contrast-text mb-8 text-center font-bold"
                 >
-                  Overview
+                  {t("aboutUs.overviewTitle")}
                 </Typography>
                 <Grid container spacing={6} alignItems="center">
                   <Grid item xs={12} md={6}>
@@ -164,11 +165,7 @@ function AboutUsView() {
                       variant="body1"
                       className="text-2xl! text-gray-200"
                     >
-                      YogiTech is an AI-powered yoga platform that provides
-                      real-time feedback to help users improve their poses
-                      safely and effectively. Supporting both English and
-                      Vietnamese, it offers a personalized and accessible yoga
-                      experience for all levels.
+                      {t("aboutUs.overviewDescription")}
                     </Typography>
                   </Grid>
                   <Grid item xs={12} md={6}>
@@ -196,7 +193,7 @@ function AboutUsView() {
                   variant="h2"
                   className="mb-12! text-center font-bold"
                 >
-                  Our Team
+                  {t("aboutUs.teamTitle")}
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
                   {Members.map((member) => (

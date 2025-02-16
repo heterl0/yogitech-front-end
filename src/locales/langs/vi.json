@@ -100,7 +100,48 @@
           "personal": "Tạo “Bài tập cá nhân”"
         }
       }
+    },
+    "faq": {
+      "overline": "Câu hỏi thường gặp",
+      "title": "Các câu hỏi thường gặp",
+      "description": "Xem những câu hỏi phổ biến nhất về YogiTech.",
+      "question1": "YogiTech là gì?",
+      "answer1": "YogiTech là trợ lý yoga sử dụng AI cung cấp phản hồi thời gian thực.",
+      "question2": "Làm thế nào để sử dụng ứng dụng?",
+      "answer2": "Tải ứng dụng từ cửa hàng và bắt đầu tập luyện.",
+      "question3": "Nó có miễn phí không?",
+      "answer3": "Có, các tính năng cơ bản dành cho tất cả mọi người.",
+      "question4": "Tôi có thể nâng cấp gói không?",
+      "answer4": "Các tính năng cao cấp có sẵn qua đăng ký.",
+      "question5": "Tôi có thể nhận hỗ trợ ở đâu?",
+      "answer5": "Liên hệ đội hỗ trợ của chúng tôi qua email."
     }
+  },
+  "aboutUs": {
+    "title": "Về Chúng Tôi",
+    "whatIsYogiTech": "YogiTech là gì?",
+    "appType": "Ứng dụng di động",
+    "year": "2024",
+    "description": "Chúng tôi phát triển ứng dụng Yoga AI cung cấp phản hồi thời gian thực cho các tư thế của bạn, hỗ trợ cả tiếng Anh và tiếng Việt.",
+    "overviewTitle": "Tổng Quan",
+    "overviewDescription": "YogiTech là nền tảng yoga sử dụng AI giúp bạn tập luyện an toàn và hiệu quả với phản hồi thời gian thực.",
+    "teamTitle": "Đội Ngũ Của Chúng Tôi"
+  },
+  "footer": {
+    "yogitech": "YogiTech",
+    "about": "Về chúng tôi",
+    "contact": "Liên hệ",
+    "faqs": "Câu hỏi",
+    "legal": "Pháp lý",
+    "terms": "Điều khoản và Điều kiện",
+    "privacy": "Chính sách bảo mật",
+    "contactHeader": "Liên hệ",
+    "supportEmail": "support@yogitech.me",
+    "rights": "© Đã bảo lưu mọi quyền",
+    "madeBy": "Được tạo bởi",
+    "website": "www.yogitech.me",
+    "description": "YogiTech là nền tảng kết nối bạn với các chuyên gia để nâng cao kỹ năng.",
+    "copyright": "© {{year}} YogiTech. Đã bảo lưu mọi quyền."
   },
   "download": {
     "getApp": "Tải ứng dụng về!",

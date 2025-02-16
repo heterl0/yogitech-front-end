@@ -1,0 +1,61 @@
+{
+  "home": {
+    "pricing": {
+      "plans": "Pricing Plans",
+      "rightPlan": "Choose the Right Plan for You",
+      "choosePlan": "Select the plan that best fits your needs.",
+      "yogiTechPlan": {
+        "free": "Standard",
+        "premium": "Premium",
+        "10free": "10 free features",
+        "options": {
+          "unlimit": "Unlimited usage",
+          "adv": "Advanced analytics",
+          "personal": "Personalized support"
+        },
+        "plan": "Plan"
+      }
+    },
+    "faq": {
+      "overline": "Frequency Asked Questions",
+      "title": "Frequently Asked Questions",
+      "description": "Check out our most common questions about YogiTech.",
+      "question1": "What is YogiTech?",
+      "answer1": "YogiTech is an AI-powered yoga mentor that gives real-time pose feedback.",
+      "question2": "How do I use the app?",
+      "answer2": "Download it from the app store and start practicing.",
+      "question3": "Is it free?",
+      "answer3": "Yes, the basic features are free for everyone.",
+      "question4": "Can I upgrade my plan?",
+      "answer4": "Premium features are available with subscription.",
+      "question5": "Where can I get support?",
+      "answer5": "Contact our support team via email."
+    }
+  },
+  "aboutUs": {
+    "title": "About Us",
+    "whatIsYogiTech": "What is YogiTech?",
+    "appType": "Mobile App",
+    "year": "2024",
+    "description": "We developed an AI Yoga app that provides real-time feedback on your poses, supporting both English and Vietnamese.",
+    "overviewTitle": "Overview",
+    "overviewDescription": "YogiTech is an AI-powered yoga platform that gives real-time feedback to help you practice safely and effectively.",
+    "teamTitle": "Our Team"
+  },
+  "footer": {
+    "yogitech": "YogiTech",
+    "about": "About us",
+    "contact": "Contact us",
+    "faqs": "FAQs",
+    "legal": "Legal",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
+    "contactHeader": "Contact",
+    "supportEmail": "support@yogitech.me",
+    "rights": "© All rights reserved",
+    "madeBy": "Made by",
+    "website": "www.yogitech.me",
+    "description": "YogiTech is a platform that connects you with experts to enhance your skills.",
+    "copyright": "© {{year}} YogiTech. All rights reserved."
+  }
+}
