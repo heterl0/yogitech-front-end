@@ -30,8 +30,8 @@ export default function ActivateView() {
   const errorDialog = useBoolean();
 
   const defaultValues = {
-    uid: path[pathLength - 2],
-    token: path[pathLength - 1],
+    uid: path[pathLength - 3],
+    token: path[pathLength - 2],
   };
 
   const methods = useForm({

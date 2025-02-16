@@ -31,7 +31,6 @@ import { useTranslation } from "react-i18next";
 
 export default function ForgetPasswordRetypeView() {
   const { t } = useTranslation();
-
   const path = usePathname().split("/");
   const router = useRouter();
   const pathLength = path.length;
@@ -42,8 +41,8 @@ export default function ForgetPasswordRetypeView() {
   const rePassword = useBoolean();
 
   const defaultValues = {
-    uid: path[pathLength - 2],
-    token: path[pathLength - 1],
+    uid: path[pathLength - 3],
+    token: path[pathLength - 2],
     new_password: "",
     re_password: "",
   };
