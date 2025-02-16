@@ -22,6 +22,7 @@
     "@mui/material": "5.15.17",
     "@mui/x-data-grid": "7.4.0",
     "@mui/x-date-pickers": "7.4.0",
+    "@next/third-parties": "14.2.22",
     "@react-oauth/google": "0.12.1",
     "admin-web": "file:",
     "apexcharts": "3.49.1",
