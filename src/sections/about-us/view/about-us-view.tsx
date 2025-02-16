@@ -215,7 +215,7 @@ function AboutUsView() {
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
                   {MEMBERS.map((member) => (
-                    <Grid item xs={12} sm={6} md={4} key={member.name}>
+                    <Grid item xs={12} md={6} lg={4} key={member.name}>
                       <m.div
                         whileHover={{ y: -10, scale: 1.02 }}
                         className="cursor-pointer rounded-xl border border-black/10 bg-black/5 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-white/20"
