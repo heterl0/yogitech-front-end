@@ -108,7 +108,7 @@ export default function ExerciseSearch({
               key={exercise.id}
               alt={exercise.title}
               src={exercise.image_url}
-              variant="rounded-sm"
+              variant="rounded"
               sx={{
                 width: 48,
                 height: 48,

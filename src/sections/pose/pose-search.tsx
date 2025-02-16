@@ -107,7 +107,7 @@ export default function PoseSearch({
               key={pose.id}
               alt={pose.name}
               src={pose.image_url}
-              variant="rounded-sm"
+              variant="rounded"
               sx={{
                 width: 48,
                 height: 48,
