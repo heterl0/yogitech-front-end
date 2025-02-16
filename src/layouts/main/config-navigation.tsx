@@ -20,7 +20,7 @@ export const navConfig = () => {
     {
       title: t("header.product"),
       icon: <Iconify icon="hugeicons:yoga-01" />,
-      path: "/features/",
+      path: "/",
     },
     // {
     //   title: "Pages",
