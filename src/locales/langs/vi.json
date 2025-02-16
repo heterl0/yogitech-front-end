@@ -135,7 +135,7 @@
       },
       "tran": {
         "name": "Tran Nguyen Huyen",
-        "position": "Lập trình viên Backend & Huấn luyện viên Yoga",
+        "position": "Lập trình viên & Huấn luyện viên Yoga",
         "description": "Chịu trách nhiệm về logic và API của sản phẩm."
       },
       "duy": {
@@ -150,7 +150,7 @@
       },
       "loc": {
         "name": "Loc Van Cao Phu",
-        "position": "Lập trình viên & Huấn luyện viên Yoga & Marketing",
+        "position": "Lập trình viên & Huấn luyện viên Yoga",
         "description": "Chịu trách nhiệm về phát triển sản phẩm, nội dung yoga và marketing."
       }
     }
