@@ -202,15 +202,6 @@ function AboutUsView() {
                         whileHover={{ y: -10, scale: 1.02 }}
                         className="cursor-pointer rounded-xl border border-black/10 bg-black/5 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-white/20"
                       >
-                        {/* <Typography variant="h4" className="mb-2">
-                          {member.name}
-                        </Typography>
-                        <Typography variant="h5" className="inline-block h-[60px]" >
-                          {member.position}
-                        </Typography>
-                        <Typography variant="body2" className="mt-4 text-gray-200 inline-block h-[44px]">
-                          {member.description}
-                          </Typography> */}
                         <Box
                           display="flex"
                           justifyContent="space-between"
@@ -226,14 +217,15 @@ function AboutUsView() {
                               >
                                 {member.name}
                               </Typography>
-
-                              <Image
-                                src={member.image}
-                                className="rounded-full border-b"
-                                alt={member.name}
-                                width={64}
-                                height={64}
-                              />
+                              <div className="rounded-xl border border-white/20 p-1 backdrop-blur-xs">
+                                <Image
+                                  src={member.image}
+                                  className="rounded-xl"
+                                  alt={member.name}
+                                  width={64}
+                                  height={64}
+                                />
+                              </div>
                             </div>
                             <Typography
                               variant="subtitle1"
