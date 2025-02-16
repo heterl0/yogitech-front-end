@@ -98,14 +98,14 @@ function AboutUsView() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative h-[60vh] overflow-visible md:h-[85vh]"
+            className="relative h-[40vh] overflow-visible md:h-[85vh]"
           >
             <Image
               src="/banner.png"
               alt="YogiTech App Interface"
               width={1920}
               height={1080}
-              className="w-full translate-y-[-20vh] bg-center"
+              className="w-full bg-center lg:translate-y-[-20vh]"
               priority
             />
           </m.div>
@@ -206,15 +206,24 @@ function AboutUsView() {
                           mb={2}
                         >
                           <Box sx={{ width: "100%" }}>
-                            <div className="mb-6 flex w-full items-center justify-between gap-4 md:flex-row">
-                              <Typography
-                                variant="h5"
-                                component="h3"
-                                gutterBottom
-                              >
-                                {member.name}
-                              </Typography>
-                              <div className="rounded-xl border border-white/20 p-1 backdrop-blur-xs">
+                            <div className="flex w-full items-center justify-between gap-4 md:flex-row">
+                              <div className="flex flex-col justify-center">
+                                <Typography
+                                  variant="h5"
+                                  component="h3"
+                                  gutterBottom
+                                >
+                                  {member.name}
+                                </Typography>
+                                <Typography
+                                  variant="subtitle1"
+                                  color="text.secondary"
+                                  className="inline-block h-[48px]"
+                                >
+                                  {member.position}
+                                </Typography>
+                              </div>
+                              <div className="flex-none rounded-xl border border-gray-300/20 p-1 backdrop-blur-xs">
                                 <Image
                                   src={member.image}
                                   className="rounded-xl"
@@ -224,13 +233,6 @@ function AboutUsView() {
                                 />
                               </div>
                             </div>
-                            <Typography
-                              variant="subtitle1"
-                              color="text.secondary"
-                              className="inline-block h-[48px]"
-                            >
-                              {member.position}
-                            </Typography>
                           </Box>
                           {/* <Avatar sx={{ width: 56, height: 56 }}>
                       <Icon icon={member.icon} width={24} height={24} />
