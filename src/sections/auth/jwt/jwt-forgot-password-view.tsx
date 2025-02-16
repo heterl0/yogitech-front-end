@@ -124,7 +124,7 @@ export default function JwtForgotPasswordView() {
       <Dialog open={dialog.value} onClose={dialog.onFalse}>
         <DialogTitle>{t("forgotPassword.sendRequestSuccess")}</DialogTitle>
 
-        <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
+        <DialogContent sx={{ color: "text.secondary" }} className="p-6! pt-0!">
           <div className="flex flex-col items-center justify-center gap-8">
             <Typography>{t("forgotPassword.checkMail")}</Typography>
             <div>

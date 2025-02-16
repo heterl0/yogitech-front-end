@@ -55,7 +55,8 @@
   "header": {
     "home": "Home",
     "about_us": "About Us",
-    "download": "Download"
+    "download": "Download",
+    "product": "Features"
   },
   "notification": "Notification",
   "pose_exercise": "Pose & Exercise",
@@ -99,9 +100,77 @@
           "personal": "Create “Personalized Exercise”"
         }
       }
+    },
+    "faq": {
+      "overline": "Frequency Asked Questions",
+      "title": "Frequently Asked Questions",
+      "description": "Check out our most common questions about YogiTech.",
+      "question1": "What is YogiTech?",
+      "answer1": "YogiTech is an AI-powered yoga mentor that gives real-time pose feedback.",
+      "question2": "How do I use the app?",
+      "answer2": "Download it from the app store and start practicing.",
+      "question3": "Is it free?",
+      "answer3": "Yes, the basic features are free for everyone.",
+      "question4": "Can I upgrade my plan?",
+      "answer4": "Premium features are available with subscription.",
+      "question5": "Where can I get support?",
+      "answer5": "Contact our support team via email."
     }
   },
-
+  "aboutUs": {
+    "title": "About Us",
+    "whatIsYogiTech": "What is YogiTech?",
+    "appType": "Mobile App",
+    "year": "2024",
+    "description": "We developed an AI Yoga app that provides real-time feedback on your poses, supporting both English and Vietnamese.",
+    "overviewTitle": "Overview",
+    "overviewButton": "Check out features!",
+    "overviewDescription": "YogiTech is an AI-powered yoga platform that gives real-time feedback to help you practice safely and effectively.",
+    "teamTitle": "Our Team",
+    "members": {
+      "hieu": {
+        "name": "Hieu Le Van",
+        "position": "Product Manager",
+        "description": "Leader of the team, responsible for the product's vision and strategy."
+      },
+      "tran": {
+        "name": "Tran Nguyen Huyen",
+        "position": "Backend Developer & Yoga Instructor",
+        "description": "Responsible for the product's logic and API."
+      },
+      "duy": {
+        "name": "Duy Nguyen T. Quoc",
+        "position": "Mobile Developer",
+        "description": "Responsible for the product's development and implementation."
+      },
+      "kiet": {
+        "name": "Kiet Le Tuan",
+        "position": "Designer & UI/UX",
+        "description": "Responsible for the product's interface and user experience."
+      },
+      "loc": {
+        "name": "Loc Van Cao Phu",
+        "position": "Developer & Yoga Instructor & Marketing",
+        "description": "Responsible for the product's development, yoga content, and marketing."
+      }
+    }
+  },
+  "footer": {
+    "yogitech": "YogiTech",
+    "about": "About us",
+    "contact": "Contact us",
+    "faqs": "FAQs",
+    "legal": "Legal",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
+    "contactHeader": "Contact",
+    "supportEmail": "support@yogitech.me",
+    "rights": "© All rights reserved",
+    "madeBy": "Made by",
+    "website": "www.yogitech.me",
+    "description": "YogiTech is a platform that connects you with experts to enhance your skills.",
+    "copyright": "© {{year}} YogiTech. All rights reserved."
+  },
   "download": {
     "getApp": "Get our app!",
     "comingSoon": "iOS app will coming soon",

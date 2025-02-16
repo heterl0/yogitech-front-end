@@ -95,8 +95,8 @@ export default function ForgetPasswordRetypeView() {
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
-      <RHFTextField className="!hidden" name="uid" />
-      <RHFTextField className="!hidden" name="token" />
+      <RHFTextField className="hidden!" name="uid" />
+      <RHFTextField className="hidden!" name="token" />
 
       <RHFTextField
         name="new_password"
@@ -190,7 +190,7 @@ export default function ForgetPasswordRetypeView() {
       <Dialog open={dialog.value} onClose={dialog.onFalse}>
         <DialogTitle>{t("forgotPasswordRetype.updateSuccess")}</DialogTitle>
 
-        <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
+        <DialogContent sx={{ color: "text.secondary" }} className="p-6! pt-0!">
           <div className="flex flex-col items-center justify-center gap-8">
             <Typography>{t("forgotPasswordRetype.redirectToLogin")}</Typography>
             <div>
@@ -204,7 +204,7 @@ export default function ForgetPasswordRetypeView() {
           {t("forgotPasswordRetype.errorOccurred")}
         </DialogTitle>
 
-        <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
+        <DialogContent sx={{ color: "text.secondary" }} className="p-6! pt-0!">
           <div className="flex flex-col items-center justify-center gap-8">
             <Typography>{t("forgotPasswordRetype.expiredLink")}</Typography>
             <div className="p-2">

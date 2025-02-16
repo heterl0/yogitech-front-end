@@ -59,7 +59,7 @@ export default function PoseDetailsContent({ pose }: Props) {
       <Typography variant="h6" sx={{ mb: 2 }}>
         {t("posePage.poseDetailsContent.muscles")}
       </Typography>
-      <div className="flex w-fit flex-row rounded-md border border-primary-main p-2">
+      <div className="border-primary-main flex w-fit flex-row rounded-md border p-2">
         <AvatarGroup max={5}>
           {muscles.map((muscle) => (
             <Tooltip title={muscle.name} key={muscle.id}>

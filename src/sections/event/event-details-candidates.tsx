@@ -67,13 +67,13 @@ function CandidateItem({ candidate, ranking }: BookerItemProps) {
     switch (index) {
       case 0:
         return (
-          <span className="text-2xl font-bold text-primary-main">
+          <span className="text-primary-main text-2xl font-bold">
             {t("eventPage.eventDetails.candidates.firstPlace")}
           </span>
         );
       case 1:
         return (
-          <span className="text-2xl font-bold text-secondary-main">
+          <span className="text-secondary-main text-2xl font-bold">
             {t("eventPage.eventDetails.candidates.secondPlace")}
           </span>
         );

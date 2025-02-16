@@ -162,7 +162,7 @@ export default function ProfileEditForm({ currentProfile, mutate }: Props) {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Grid container spacing={3} gap={3} className="!flex-nowrap">
+      <Grid container spacing={3} gap={3} className="flex-nowrap!">
         <Grid xs={12} md={4}>
           <Card sx={{ pb: 5, pt: 10, px: 3 }} className="flex flex-col gap-10">
             <Box sx={{ mb: 5 }}>

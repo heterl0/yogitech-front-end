@@ -63,8 +63,8 @@ export default function ActivateView() {
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
-      <RHFTextField className="!hidden" name="uid" />
-      <RHFTextField className="!hidden" name="token" />
+      <RHFTextField className="hidden!" name="uid" />
+      <RHFTextField className="hidden!" name="token" />
 
       <LoadingButton
         fullWidth
@@ -102,7 +102,7 @@ export default function ActivateView() {
       <Dialog open={dialog.value} onClose={dialog.onFalse}>
         <DialogTitle>{t("activateView.activationSuccess")}</DialogTitle>
 
-        <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
+        <DialogContent sx={{ color: "text.secondary" }} className="p-6! pt-0!">
           <div className="flex flex-col items-center justify-center gap-8">
             <Typography>{t("activateView.redirectHomepage")}</Typography>
             <div>
@@ -116,7 +116,7 @@ export default function ActivateView() {
           {t("activateView.errorOccurred")}
         </DialogTitle>
 
-        <DialogContent sx={{ color: "text.secondary" }} className="!p-6 !pt-0">
+        <DialogContent sx={{ color: "text.secondary" }} className="p-6! pt-0!">
           <div className="flex flex-col items-center justify-center gap-8">
             <Typography>{t("activateView.errorMessage")}</Typography>
             <div className="p-2">

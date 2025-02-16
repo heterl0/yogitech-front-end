@@ -17,6 +17,9 @@ import { HEADER } from "../config-layout";
 import { navConfig } from "./config-navigation";
 import { useTranslate } from "@/locales";
 import LanguagePopover from "../common/language-popover";
+import NavMobile from "./nav/mobile";
+import Link from "next/link";
+import { memo } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +27,7 @@ type Props = {
   isBlurFromStart?: boolean;
 };
 
-export default function Header({ isBlurFromStart = false }: Props) {
+function Header({ isBlurFromStart = false }: Props) {
   const theme = useTheme();
   const { t } = useTranslate();
   const mdUp = useResponsive("up", "md");
@@ -96,19 +99,16 @@ export default function Header({ isBlurFromStart = false }: Props) {
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
           >
-            <Button
-              variant="contained"
-              rel="noopener"
-              href={paths.download}
-              color="primary"
-            >
-              {t("header.download")}
+            <Button variant="contained" rel="noopener" color="primary">
+              <Link href={paths.download}>{t("header.download")}</Link>
             </Button>
 
-            {/* {!mdUp &&  <NavMobile data={navConfig()} />} */}
+            {!mdUp && <NavMobile data={navConfig()} />}
           </Stack>
         </Container>
       </Toolbar>
     </AppBar>
   );
 }
+
+export default memo(Header);

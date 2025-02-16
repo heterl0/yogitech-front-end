@@ -27,7 +27,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
       placeholder,
       wrapperProps,
       scrollPosition,
-      effect = "blur",
+      // effect = "blur-sm",
       visibleByDefault,
       wrapperClassName,
       useIntersectionObserver,
@@ -52,7 +52,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
     };
 
     const content = (
-      <Box
+      <Image
         component={LazyLoadImage}
         //
         alt={alt}
@@ -66,7 +66,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
         wrapperProps={wrapperProps}
         scrollPosition={scrollPosition}
         visibleByDefault={visibleByDefault}
-        effect={disabledEffect ? undefined : effect}
+        // effect={disabledEffect ? undefined : effect}
         useIntersectionObserver={useIntersectionObserver}
         wrapperClassName={wrapperClassName || "component-image-wrapper"}
         placeholderSrc={

@@ -1,20 +1,25 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-// import Iconify from "@/components/iconify";
-// import { useTranslate } from "@/locales";
+import Iconify from "@/components/iconify";
+import { useTranslate } from "@/locales";
 
 // ----------------------------------------------------------------------
 
 export const navConfig = () => {
-  // const { t } = useTranslate();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslate();
   return [
+    {
+      title: t("header.home"),
+      icon: <Iconify icon="solar:home-2-bold-duotone" />,
+      path: "/",
+    },
+    {
+      title: t("header.about_us"),
+      icon: <Iconify icon="solar:atom-bold-duotone" />,
+      path: "/about-us/",
+    },
     // {
-    //   title: t("header.home"),
-    //   icon: <Iconify icon="solar:home-2-bold-duotone" />,
-    //   path: "/",
-    // },
-    // {
-    //   title: t("header.about_us"),
-    //   icon: <Iconify icon="solar:atom-bold-duotone" />,
+    //   title: t("header.product"),
+    //   icon: <Iconify icon="hugeicons:yoga-01" />,
     //   path: "/",
     // },
     // {
