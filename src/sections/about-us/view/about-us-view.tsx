@@ -11,67 +11,6 @@ import LayoutWrapper from "@/components/wapper/layout-wrapper";
 import Iconify from "@/components/iconify";
 import { useTranslate } from "@/locales";
 
-const Members = [
-  {
-    name: "Hieu Le Van",
-    image: "/member/hieu-1.png",
-    position: "Product Manager",
-    description:
-      "Leader of the team, responsible for the product's vision and strategy.",
-    socials: {
-      linkedin: "https://www.linkedin.com/in/heterl0/",
-      facebook: "https://www.facebook.com/heterl0",
-      github: "https://www.github.com/heterl0",
-    },
-  },
-  {
-    name: "Tran Nguyen Huyen",
-    image: "/member/tran-1.png",
-    position: "Backend Developer & Yoga Instructor",
-    description: "Responsible for the product's logic and API.",
-    socials: {
-      linkedin: "#",
-      facebook: "https://www.facebook.com/RiTaka157",
-      github: "https://github.com/TranNHCE161052",
-    },
-  },
-  {
-    name: "Duy Nguyen T. Quoc",
-    image: "/member/duy-1.png",
-    position: "Developer",
-    description:
-      "Responsible for the product's development and implementation.",
-    socials: {
-      linkedin: "#",
-      facebook: "https://www.facebook.com/ntqduy1004",
-      github: "https://github.com/duy100402",
-    },
-  },
-  {
-    name: "Kiet Le Tuan",
-    image: "/member/kiet-1.png",
-    position: "Designer & UI/UX",
-    description: "Responsible for the product's interface and user experience.",
-    socials: {
-      linkedin: "https://www.linkedin.com/in/ki%E1%BB%87t-l%C3%AA-5a5720192/",
-      facebook: "https://www.facebook.com/profile.php?id=100007748776947",
-      github: "#",
-    },
-  },
-  {
-    name: "Loc Van Cao Phu",
-    image: "/member/loc-1.png",
-    position: "Developer & Yoga Instructor & Marketing",
-    description:
-      "Responsible for the product's development, yoga content, and marketing.",
-    socials: {
-      linkedin: "#",
-      facebook: "https://www.facebook.com/colnav.zone99",
-      github: "#",
-    },
-  },
-];
-
 function AboutUsView() {
   const { t } = useTranslate();
   const fadeIn = {
@@ -80,6 +19,64 @@ function AboutUsView() {
     transition: { duration: 0.6 },
   };
   const { scrollYProgress } = useScroll();
+
+  const MEMBERS = [
+    {
+      name: t("aboutUs.members.hieu.name"),
+      image: "/member/hieu-1.png",
+      position: t("aboutUs.members.hieu.position"),
+      description: t("aboutUs.members.hieu.description"),
+      socials: {
+        linkedin: "https://www.linkedin.com/in/heterl0/",
+        facebook: "https://www.facebook.com/heterl0",
+        github: "https://www.github.com/heterl0",
+      },
+    },
+    {
+      name: t("aboutUs.members.tran.name"),
+      image: "/member/tran-1.png",
+      position: t("aboutUs.members.tran.position"),
+      description: t("aboutUs.members.tran.description"),
+      socials: {
+        linkedin: "#",
+        facebook: "https://www.facebook.com/RiTaka157",
+        github: "https://github.com/TranNHCE161052",
+      },
+    },
+    {
+      name: t("aboutUs.members.duy.name"),
+      image: "/member/duy-1.png",
+      position: t("aboutUs.members.duy.position"),
+      description: t("aboutUs.members.duy.description"),
+      socials: {
+        linkedin: "#",
+        facebook: "https://www.facebook.com/ntqduy1004",
+        github: "https://github.com/duy100402",
+      },
+    },
+    {
+      name: t("aboutUs.members.kiet.name"),
+      image: "/member/kiet-1.png",
+      position: t("aboutUs.members.kiet.position"),
+      description: t("aboutUs.members.kiet.description"),
+      socials: {
+        linkedin: "https://www.linkedin.com/in/ki%E1%BB%87t-l%C3%AA-5a5720192/",
+        facebook: "https://www.facebook.com/profile.php?id=100007748776947",
+        github: "#",
+      },
+    },
+    {
+      name: t("aboutUs.members.loc.name"),
+      image: "/member/loc-1.png",
+      position: t("aboutUs.members.loc.position"),
+      description: t("aboutUs.members.loc.description"),
+      socials: {
+        linkedin: "#",
+        facebook: "https://www.facebook.com/colnav.zone99",
+        github: "#",
+      },
+    },
+  ];
 
   return (
     <MainLayout>
@@ -196,7 +193,7 @@ function AboutUsView() {
                   {t("aboutUs.teamTitle")}
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
-                  {Members.map((member) => (
+                  {MEMBERS.map((member) => (
                     <Grid item xs={12} sm={6} md={4} key={member.name}>
                       <m.div
                         whileHover={{ y: -10, scale: 1.02 }}

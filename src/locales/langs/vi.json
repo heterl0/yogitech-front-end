@@ -125,7 +125,34 @@
     "description": "Chúng tôi phát triển ứng dụng Yoga AI cung cấp phản hồi thời gian thực cho các tư thế của bạn, hỗ trợ cả tiếng Anh và tiếng Việt.",
     "overviewTitle": "Tổng Quan",
     "overviewDescription": "YogiTech là nền tảng yoga sử dụng AI giúp bạn tập luyện an toàn và hiệu quả với phản hồi thời gian thực.",
-    "teamTitle": "Đội Ngũ Của Chúng Tôi"
+    "teamTitle": "Đội Ngũ Của Chúng Tôi",
+    "members": {
+      "hieu": {
+        "name": "Hieu Le Van",
+        "position": "Quản lý Sản phẩm",
+        "description": "Người lãnh đạo đội ngũ, chịu trách nhiệm về tầm nhìn và chiến lược sản phẩm."
+      },
+      "tran": {
+        "name": "Tran Nguyen Huyen",
+        "position": "Lập trình viên Backend & Huấn luyện viên Yoga",
+        "description": "Chịu trách nhiệm về logic và API của sản phẩm."
+      },
+      "duy": {
+        "name": "Duy Nguyen T. Quoc",
+        "position": "Lập trình viên",
+        "description": "Chịu trách nhiệm phát triển và triển khai sản phẩm."
+      },
+      "kiet": {
+        "name": "Kiet Le Tuan",
+        "position": "Thiết kế & UI/UX",
+        "description": "Chịu trách nhiệm về giao diện và trải nghiệm người dùng của sản phẩm."
+      },
+      "loc": {
+        "name": "Loc Van Cao Phu",
+        "position": "Lập trình viên & Huấn luyện viên Yoga & Marketing",
+        "description": "Chịu trách nhiệm về phát triển sản phẩm, nội dung yoga và marketing."
+      }
+    }
   },
   "footer": {
     "yogitech": "YogiTech",

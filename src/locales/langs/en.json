@@ -125,7 +125,34 @@
     "description": "We developed an AI Yoga app that provides real-time feedback on your poses, supporting both English and Vietnamese.",
     "overviewTitle": "Overview",
     "overviewDescription": "YogiTech is an AI-powered yoga platform that gives real-time feedback to help you practice safely and effectively.",
-    "teamTitle": "Our Team"
+    "teamTitle": "Our Team",
+    "members": {
+      "hieu": {
+        "name": "Hieu Le Van",
+        "position": "Product Manager",
+        "description": "Leader of the team, responsible for the product's vision and strategy."
+      },
+      "tran": {
+        "name": "Tran Nguyen Huyen",
+        "position": "Backend Developer & Yoga Instructor",
+        "description": "Responsible for the product's logic and API."
+      },
+      "duy": {
+        "name": "Duy Nguyen T. Quoc",
+        "position": "Developer",
+        "description": "Responsible for the product's development and implementation."
+      },
+      "kiet": {
+        "name": "Kiet Le Tuan",
+        "position": "Designer & UI/UX",
+        "description": "Responsible for the product's interface and user experience."
+      },
+      "loc": {
+        "name": "Loc Van Cao Phu",
+        "position": "Developer & Yoga Instructor & Marketing",
+        "description": "Responsible for the product's development, yoga content, and marketing."
+      }
+    }
   },
   "footer": {
     "yogitech": "YogiTech",
