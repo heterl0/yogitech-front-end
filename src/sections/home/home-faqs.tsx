@@ -10,37 +10,33 @@ import {
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { m } from "framer-motion";
+import { useTranslate } from "@/locales";
 import { varFade } from "@/components/animate";
 
-const faqData = [
-  {
-    question: "What is YogiTech?",
-    answer:
-      "YogiTech is an AI-powered yoga mentor that provides real-time feedback on your poses using your phone’s camera. It supports both English and Vietnamese, helping users improve their techniques and avoid injuries.",
-  },
-  {
-    question: "How do I use this application?",
-    answer:
-      "You can download the YogiTech app on Android through Google Play Store and start your yoga journey today!",
-  },
-  {
-    question: "Is YogiTech available on iOS?",
-    answer:
-      "Currently, we are working on developing an iOS version, but integrating AI on iOS presents some challenges. Stay tuned for updates!",
-  },
-  {
-    question: "What features are available in the free plan?",
-    answer:
-      "With the free plan, you can access almost all features, including AI-powered yoga pose detection, progress tracking to monitor your improvement, calorie tracking to measure your burned calories, and much more—all for free!",
-  },
-  {
-    question: "Does YogiTech have a premium plan?",
-    answer:
-      "At the moment, YogiTech does not offer a premium plan. However, we plan to introduce one in the future with more advanced features, an ad-free experience, and enhanced AI-driven exercises to make your practice even more effective!",
-  },
-];
-
 export default function HomeFAQ() {
+  const { t } = useTranslate();
+  const faqData = [
+    {
+      question: t("home.faq.question1"),
+      answer: t("home.faq.answer1"),
+    },
+    {
+      question: t("home.faq.question2"),
+      answer: t("home.faq.answer2"),
+    },
+    {
+      question: t("home.faq.question3"),
+      answer: t("home.faq.answer3"),
+    },
+    {
+      question: t("home.faq.question4"),
+      answer: t("home.faq.answer4"),
+    },
+    {
+      question: t("home.faq.question5"),
+      answer: t("home.faq.answer5"),
+    },
+  ];
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
       <Stack spacing={3} sx={{ mb: 10, textAlign: "center" }}>
@@ -50,20 +46,17 @@ export default function HomeFAQ() {
             variant="overline"
             sx={{ mb: 2, color: "text.disabled" }}
           >
-            Frequency Asked Questions
+            {t("home.faq.overline")}
           </Typography>
         </m.div>
 
         <m.div variants={varFade().inDown}>
-          <Typography variant="h2">
-            Những câu hỏi thường gặp về Yogitech?
-          </Typography>
+          <Typography variant="h2">{t("home.faq.title")}</Typography>
         </m.div>
 
         <m.div variants={varFade().inDown}>
           <Typography sx={{ color: "text.secondary" }}>
-            Bạn có thể tham khảo qua những câu hỏi thường gặp dưới đây để hiểu
-            rõ hơn về Yogitech.
+            {t("home.faq.description")}
           </Typography>
         </m.div>
       </Stack>
