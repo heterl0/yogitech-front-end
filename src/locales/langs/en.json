@@ -124,6 +124,7 @@
     "year": "2024",
     "description": "We developed an AI Yoga app that provides real-time feedback on your poses, supporting both English and Vietnamese.",
     "overviewTitle": "Overview",
+    "overviewButton": "Check out features!",
     "overviewDescription": "YogiTech is an AI-powered yoga platform that gives real-time feedback to help you practice safely and effectively.",
     "teamTitle": "Our Team",
     "members": {

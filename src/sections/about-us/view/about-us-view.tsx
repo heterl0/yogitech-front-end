@@ -2,7 +2,7 @@
 "use client";
 
 import { m, useScroll } from "framer-motion";
-import { Typography, Box, Grid, IconButton } from "@mui/material";
+import { Typography, Box, Grid, IconButton, Button } from "@mui/material";
 import Image from "next/image";
 import { memo } from "react";
 import MainLayout from "@/layouts/main";
@@ -10,6 +10,7 @@ import ScrollProgress from "@/components/scroll-progress";
 import LayoutWrapper from "@/components/wapper/layout-wrapper";
 import Iconify from "@/components/iconify";
 import { useTranslate } from "@/locales";
+import Link from "next/link";
 
 function AboutUsView() {
   const { t } = useTranslate();
@@ -120,7 +121,7 @@ function AboutUsView() {
                 <Box className="mb-8 flex items-center justify-start gap-8">
                   <div className="rounded-xl bg-white/5 p-4 backdrop-blur-xs">
                     <Image
-                      src="/logo/logo_signle_2.svg"
+                      src="/logo/yogi.png"
                       alt="YogiTech Logo"
                       width={100}
                       height={100}
@@ -140,7 +141,7 @@ function AboutUsView() {
                 </Box>
                 <Typography
                   variant="body1"
-                  className="mx-auto max-w-2xl text-2xl! text-gray-200"
+                  className="mx-auto max-w-2xl text-2xl! text-gray-300!"
                 >
                   {t("aboutUs.description")}
                 </Typography>
@@ -157,13 +158,33 @@ function AboutUsView() {
                   {t("aboutUs.overviewTitle")}
                 </Typography>
                 <Grid container spacing={6} alignItems="center">
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={12} md={6} className="flex flex-col! gap-8">
                     <Typography
                       variant="body1"
-                      className="text-2xl! text-gray-200"
+                      className="text-2xl! text-gray-300!"
                     >
                       {t("aboutUs.overviewDescription")}
                     </Typography>
+                    <div className="flex gap-4">
+                      <Link href="/features/">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className="mt-8"
+                        >
+                          {t("aboutUs.overviewButton")}
+                        </Button>
+                      </Link>
+                      <Link href="/download/">
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          className="mt-8"
+                        >
+                          {t("download.getApp")}
+                        </Button>
+                      </Link>
+                    </div>
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <m.div
