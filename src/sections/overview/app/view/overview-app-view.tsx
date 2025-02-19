@@ -30,7 +30,7 @@ import { getMonthLabel } from "@/types/dashboard";
 import AppRecentTimeline from "../app-recent-timeline";
 import AppTopUsers from "../app-top-users";
 import { useTranslation } from "react-i18next";
-import Image from "@/components/image";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -117,6 +117,8 @@ export default function OverviewAppView() {
                   <Image
                     alt="icon"
                     src="/assets/icons/glass/ic_glass_event.png"
+                    width={360}
+                    height={360}
                   />
                 }
               />
@@ -130,6 +132,8 @@ export default function OverviewAppView() {
                   <Image
                     alt="icon"
                     src="/assets/icons/glass/ic_glass_users1.png"
+                    width={360}
+                    height={360}
                   />
                 }
               />
@@ -144,6 +148,8 @@ export default function OverviewAppView() {
                   <Image
                     alt="icon"
                     src="/assets/icons/glass/ic_glass_pose.png"
+                    width={360}
+                    height={360}
                   />
                 }
               />
@@ -158,6 +164,8 @@ export default function OverviewAppView() {
                   <Image
                     alt="icon"
                     src="/assets/icons/glass/ic_glass_exercise.png"
+                    width={360}
+                    height={360}
                   />
                 }
               />

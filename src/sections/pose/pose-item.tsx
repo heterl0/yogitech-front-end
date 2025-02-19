@@ -9,12 +9,12 @@ import { RouterLink } from "@/routes/components";
 
 import { fSeconds } from "@/utils/format-number";
 
-import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 import { IPose } from "@/types/pose";
 import { LEVELS } from "@/constants/level";
 import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -61,7 +61,9 @@ export default function PoseItem({ pose, onEdit }: Props) {
         <Image
           alt={image_url}
           src={image_url}
-          sx={{ borderRadius: 1, height: 164, width: 1 }}
+          height={144}
+          width={320}
+          className="aspect-video w-full rounded-sm bg-cover"
         />
       </Stack>
     </Stack>

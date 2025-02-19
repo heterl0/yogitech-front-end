@@ -15,12 +15,12 @@ import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
 
 import { IMuscle, IPoseFilterValue, IPoseFilters } from "@/types/pose";
-import Image from "@/components/image";
 import { LEVELS } from "@/constants/level";
 import { MenuItem } from "@mui/material";
 import { NOTIFICATION_STATUS } from "@/types/notification";
 import Label, { LabelColor } from "@/components/label";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -177,7 +177,8 @@ export default function PoseFilters({
               key={muscle.id}
               alt={muscle.image}
               src={muscle.image}
-              sx={{ width: 24, height: 24, flexShrink: 0, mr: 1 }}
+              width={24}
+              height={24}
             />
 
             {muscle.name}

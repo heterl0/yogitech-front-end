@@ -5,10 +5,10 @@ import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
-import Image from "../image";
 import Iconify from "../iconify";
 import { UploadProps } from "./types";
 import RejectionFiles from "./errors-rejection-files";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -44,12 +44,10 @@ export default function UploadAvatar({
   const renderPreview = hasFile && (
     <Image
       alt="avatar"
-      src={imgUrl}
-      sx={{
-        width: 1,
-        height: 1,
-        borderRadius: "50%",
-      }}
+      src={imgUrl as string}
+      width={144}
+      height={144}
+      className="h-full w-full rounded-full"
     />
   );
 

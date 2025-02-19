@@ -8,13 +8,13 @@ import { useTranslation } from "react-i18next";
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 
-import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 // import { shortDateLabel } from "@/components/custom-date-range-picker";
 import { Tooltip } from "@mui/material";
 import { IEvent, getStatusLabel } from "@/types/event";
 import { fDate } from "@/utils/format-time";
 import { useLocales } from "@/locales";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -83,7 +83,9 @@ export default function EventItem({ event, onEdit }: Props) {
         <Image
           alt={image_url}
           src={image_url}
-          sx={{ borderRadius: 1, height: 164, width: 1 }}
+          height={164}
+          width={320}
+          className="aspect-video w-full rounded-sm bg-cover"
         />
       </Stack>
       {/* <Stack spacing={0.5}>

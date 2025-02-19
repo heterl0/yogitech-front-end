@@ -7,12 +7,12 @@ import ListItemText from "@mui/material/ListItemText";
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 
-import Image from "@/components/image";
 // import { shortDateLabel } from "@/components/custom-date-range-picker";
 import { LEVELS } from "@/constants/level";
 import { IPoseWithTime } from "@/types/exercise";
 import Iconify from "@/components/iconify";
 import { IconButton } from "@mui/material";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ export default function ExercisePoseItem({
   onSelect,
   isSelected,
 }: Props) {
-  const { id, name, image_url, level } = poseWithTime?.pose;
+  const { id, name, image_url, level } = poseWithTime?.pose ?? {};
 
   // const renderRating = (
   //   <Stack
@@ -86,7 +86,9 @@ export default function ExercisePoseItem({
         <Image
           alt={image_url}
           src={image_url}
-          sx={{ borderRadius: 1, height: 164, width: 1 }}
+          height={164}
+          width={320}
+          className="aspect-video w-full rounded-sm bg-cover"
         />
       </Stack>
       {/* <Stack spacing={0.5}>

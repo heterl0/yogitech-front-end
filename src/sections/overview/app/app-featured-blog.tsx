@@ -4,9 +4,7 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Card, { CardProps } from "@mui/material/Card";
-import { alpha, useTheme } from "@mui/material/styles";
 
-import Image from "@/components/image";
 import { varFade, MotionContainer } from "@/components/animate";
 import Carousel, {
   useCarousel,
@@ -15,6 +13,7 @@ import Carousel, {
 } from "@/components/carousel";
 import { IBlog } from "@/types/blog";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -72,25 +71,11 @@ type CarouselItemProps = {
 };
 
 function CarouselItem({ item, active }: CarouselItemProps) {
-  const theme = useTheme();
   const { t } = useTranslation();
   const { image_url, title, description } = item;
 
   const renderImg = (
-    <Image
-      alt={title}
-      src={image_url}
-      overlay={`linear-gradient(to bottom, ${alpha(theme.palette.grey[900], 0)} 0%, ${
-        theme.palette.grey[900]
-      } 75%)`}
-      sx={{
-        width: 1,
-        height: {
-          xs: 280,
-          xl: 320,
-        },
-      }}
-    />
+    <Image alt={title} src={image_url} width={480} height={320} />
   );
 
   return (

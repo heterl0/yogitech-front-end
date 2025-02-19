@@ -10,9 +10,9 @@ import Link from "@mui/material/Link";
 
 import { RouterLink } from "@/routes/components";
 
-import Image from "../image";
 import StyledMarkdown from "./styles";
 import { MarkdownProps } from "./types";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +36,14 @@ export default function Markdown({ sx, ...other }: MarkdownProps) {
 
 const components = {
   img: ({ ...props }) => (
-    <Image alt={props.alt} ratio="16/9" sx={{ borderRadius: 2 }} {...props} />
+    <Image
+      alt={props.alt}
+      src={props.src}
+      width={props.width}
+      height={props.height}
+      className="h-full w-full"
+      {...props}
+    />
   ),
   a: ({ ...props }) => {
     const isHttp = props.href.includes("http");

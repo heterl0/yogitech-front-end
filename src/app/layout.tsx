@@ -10,6 +10,8 @@ import ProgressBar from "@/components/progress-bar";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { AuthProvider } from "@/auth/context/jwt";
 import SnackbarProvider from "@/components/snackbar/snackbar-provider";
+import Script from "next/script";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,6 +59,19 @@ export default function RootLayout({
             </SettingsProvider>
           </LocalizationProvider>
         </AuthProvider>
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <GoogleAnalytics gaId="G-686MPCS14D" />
+            <GoogleTagManager gtmId="GTM-P43FRWB7" />
+            <Script id="clarity-script" defer>
+              {` (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "qastr5sh4u");`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );

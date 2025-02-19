@@ -12,10 +12,10 @@ import {
 } from "@mediapipe/tasks-vision";
 import { Box, Button, CardContent, Typography } from "@mui/material";
 import { mockPose } from "@/_mock/_pose";
-import Image from "@/components/image";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { fShortenNumber } from "@/utils/format-number";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -345,7 +345,12 @@ function Test({ setFeedback }: Props) {
               color="primary"
               key={index}
             >
-              <Image src={item.pose_image} alt={item.pose_name} />
+              <Image
+                src={item.pose_image}
+                alt={item.pose_name}
+                width={320}
+                height={240}
+              />
             </Card>
           ))}
         </div>

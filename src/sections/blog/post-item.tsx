@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import { alpha, useTheme } from "@mui/material/styles";
 
 // import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
@@ -17,13 +16,13 @@ import { fShortenNumber } from "@/utils/format-number";
 
 import { AvatarShape } from "@/assets/illustrations";
 
-import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 import TextMaxLine from "@/components/text-max-line";
 
 import { IBlog } from "@/types/blog";
 import { useMemo } from "react";
 import { useLocales } from "@/locales";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -33,8 +32,6 @@ type Props = {
 };
 
 export default function PostItem({ post, index }: Props) {
-  const theme = useTheme();
-
   const mdUp = useResponsive("up", "md");
 
   const { owner, title, image_url, created_at, votes } = post;
@@ -72,15 +69,7 @@ export default function PostItem({ post, index }: Props) {
           index={index}
         />
 
-        <Image
-          alt={title}
-          src={image_url}
-          overlay={alpha(theme.palette.grey[900], 0.48)}
-          sx={{
-            width: 1,
-            height: 360,
-          }}
-        />
+        <Image alt={title} src={image_url} height={360} width={480} />
       </Card>
     );
   }
@@ -110,7 +99,13 @@ export default function PostItem({ post, index }: Props) {
           }}
         />
 
-        <Image alt={title} src={image_url} ratio="4/3" />
+        <Image
+          alt={title}
+          src={image_url}
+          width={400}
+          height={300}
+          className="aspect-[4/3]"
+        />
       </Box>
 
       <PostContent title={title} vote={vote} createdAt={created_at} />

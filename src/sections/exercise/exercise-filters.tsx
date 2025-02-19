@@ -16,7 +16,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Iconify from "@/components/iconify";
 import Scrollbar from "@/components/scrollbar";
 
-import Image from "@/components/image";
 import { LEVELS } from "@/constants/level";
 import { MenuItem } from "@mui/material";
 import { NOTIFICATION_STATUS } from "@/types/notification";
@@ -24,6 +23,7 @@ import Label, { LabelColor } from "@/components/label";
 import { IExerciseFilterValue, IExerciseFilters } from "@/types/exercise";
 import { benefits } from "../blog/post-new-edit-form";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -290,7 +290,9 @@ export default function ExerciseFilters({
               size="small"
               variant="soft"
               label={benefit}
-              avatar={<Image alt={benefit} src={benefit} />}
+              avatar={
+                <Image alt={benefit} src={benefit} width={24} height={24} />
+              }
             />
           ))
         }
