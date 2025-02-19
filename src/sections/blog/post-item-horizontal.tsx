@@ -15,7 +15,6 @@ import { useResponsive } from "@/hooks/use-responsive";
 import { fDate } from "@/utils/format-time";
 
 import Label from "@/components/label";
-import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 import TextMaxLine from "@/components/text-max-line";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
@@ -32,6 +31,7 @@ import axiosInstance, { endpoints } from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import { HttpStatusCode } from "axios";
 import { useLocales } from "@/locales";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -116,11 +116,11 @@ export default function PostItemHorizontal({ post, deleteMutate }: Props) {
             <Label
               variant="soft"
               color={
-                (active_status === 1
+                active_status === 1
                   ? "info"
                   : active_status === 2
                     ? "error"
-                    : "default") || "default"
+                    : "default"
               }
             >
               {t(
@@ -209,11 +209,7 @@ export default function PostItemHorizontal({ post, deleteMutate }: Props) {
               src={owner.profile.avatar_url || ""}
               sx={{ position: "absolute", top: 16, right: 16, zIndex: 9 }}
             />
-            <Image
-              alt={title}
-              src={image_url}
-              sx={{ height: 1, borderRadius: 1.5 }}
-            />
+            <Image alt={title} src={image_url} width={180} height={240} />
           </Box>
         )}
       </Stack>

@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 
-import Image from "../image";
 import { CardMedia } from "@mui/material";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -21,15 +21,7 @@ export default function SingleFilePreview({ imgUrl = "" }: Props) {
         position: "absolute",
       }}
     >
-      <Image
-        alt="file preview"
-        src={imgUrl}
-        sx={{
-          width: 1,
-          height: 1,
-          borderRadius: 1,
-        }}
-      />
+      <Image alt="file preview" src={imgUrl} fill />
     </Box>
   );
 }

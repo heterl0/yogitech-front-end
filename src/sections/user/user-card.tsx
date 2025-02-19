@@ -5,7 +5,6 @@ import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
-import { alpha, useTheme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 import { Tooltip } from "@mui/material";
@@ -13,11 +12,11 @@ import { Tooltip } from "@mui/material";
 import { fShortenNumber } from "@/utils/format-number";
 import { _mock } from "@/_mock";
 import { AvatarShape } from "@/assets/illustrations";
-import Image from "@/components/image";
 import { IProfile } from "@/types/user";
 import { paths } from "@/routes/paths";
 import { useLocales } from "@/locales";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +25,6 @@ type Props = {
 };
 
 export default function UserCard({ userProfile }: Props) {
-  const theme = useTheme();
   const { t } = useTranslation();
 
   const {
@@ -99,8 +97,9 @@ export default function UserCard({ userProfile }: Props) {
         <Image
           src={_mock.image.cover(id % 21)}
           alt={fullName}
-          ratio="16/9"
-          overlay={alpha(theme.palette.grey[900], 0.48)}
+          width={320}
+          height={144}
+          className="aspect-video w-full rounded-sm bg-cover"
         />
       </Box>
 

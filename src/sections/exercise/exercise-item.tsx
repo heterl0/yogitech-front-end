@@ -10,7 +10,6 @@ import { RouterLink } from "@/routes/components";
 
 import { fSeconds } from "@/utils/format-number";
 
-import Image from "@/components/image";
 import Iconify from "@/components/iconify";
 import { LEVELS } from "@/constants/level";
 import { IExercise } from "@/types/exercise";
@@ -19,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { useGetAccount } from "@/api/account";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -92,9 +92,11 @@ export default function ExerciseItem({ exercise, onEdit }: Props) {
       <Stack flexGrow={1} sx={{ position: "relative" }}>
         {renderPrice}
         <Image
-          alt={image_url}
-          src={image_url}
-          sx={{ borderRadius: 1, height: 164, width: 1 }}
+          alt={title}
+          src={image_url || "/assets/background/overlay_3.jpg"}
+          width={320}
+          height={164}
+          className="aspect-video w-full rounded-sm bg-cover"
         />
       </Stack>
     </Stack>
