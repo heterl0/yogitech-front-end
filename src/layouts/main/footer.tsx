@@ -27,8 +27,8 @@ export default function Footer() {
     {
       headline: t("footer.legal"),
       children: [
-        { name: t("footer.terms"), href: "#" },
-        { name: t("footer.privacy"), href: "#" },
+        { name: t("footer.terms"), href: paths.termsAndConditions },
+        { name: t("footer.privacy"), href: paths.privacyPolicy },
       ],
     },
     {

@@ -1055,5 +1055,108 @@
   "system": "Hệ thống",
   "No active account found with the given credentials": "Không tìm thấy tài khoản hoạt động với thông tin đăng nhập đã cung cấp",
   "Please activate your account.": "Vui lòng kích hoạt tài khoản của bạn.",
-  "You are not admin!": "Bạn không phải là quản trị viên!"
+  "You are not admin!": "Bạn không phải là quản trị viên!",
+  "termsAndConditions": {
+    "title": "Điều khoản và Điều kiện",
+    "effectiveDate": "Ngày hiệu lực: 20 Tháng 2, 2024",
+    "footerText": "Bằng cách sử dụng YogiTech, bạn đồng ý với Điều khoản và Điều kiện này.",
+    "sections": {
+      "introduction": {
+        "title": "Giới thiệu",
+        "content": "Chào mừng bạn đến với YogiTech: Nền tảng Mentor (\"YogiTech,\" \"chúng tôi\" hoặc \"của chúng tôi\"). Các Điều khoản và Điều kiện này điều chỉnh việc bạn sử dụng trang web và ứng dụng di động của chúng tôi. Bằng cách sử dụng dịch vụ, bạn đồng ý tuân thủ các Điều khoản. Nếu bạn không đồng ý, vui lòng không sử dụng YogiTech."
+      },
+      "userEligibility": {
+        "title": "Điều kiện Người dùng",
+        "content1": "Đủ 13 tuổi trở lên (hoặc đáp ứng độ tuổi tối thiểu theo quy định của quốc gia).",
+        "content2": "Đồng ý với các Điều khoản này và Chính sách Quyền riêng tư của chúng tôi."
+      },
+      "useOfServices": {
+        "title": "Sử dụng Dịch vụ",
+        "content1": "Lạm dụng nền tảng cho các hoạt động bất hợp pháp hoặc gây hại.",
+        "content2": "Phân tích ngược hoặc cố gắng tấn công ứng dụng.",
+        "content3": "Vi phạm quyền sở hữu trí tuệ (ví dụ: sao chép nội dung mà không được phép).",
+        "note": "Bạn đồng ý chỉ sử dụng YogiTech cho các mục đích hợp pháp. Các hoạt động bị cấm bao gồm:"
+      },
+      "userAccountsData": {
+        "title": "Tài khoản & Dữ liệu Người dùng",
+        "content1": "Bạn chịu trách nhiệm bảo mật tài khoản của chính mình.",
+        "content2": "Bạn phải cung cấp thông tin chính xác và cập nhật khi đăng ký.",
+        "content3": "Chúng tôi có thể tạm khóa hoặc hủy tài khoản vi phạm các Điều khoản này."
+      },
+      "paymentSubscription": {
+        "title": "Thanh toán & Đăng ký",
+        "content": "Nếu YogiTech cung cấp các tính năng hoặc gói đăng ký cao cấp, việc thanh toán sẽ được xử lý qua các nhà cung cấp bên thứ ba. Chính sách hoàn tiền sẽ được thông báo riêng nếu có."
+      },
+      "dataCollectionPrivacy": {
+        "title": "Thu thập & Quyền riêng tư Dữ liệu",
+        "content1": "Chúng tôi thu thập và xử lý dữ liệu người dùng như đã nêu trong Chính sách Quyền riêng tư.",
+        "content2": "Bằng cách sử dụng YogiTech, bạn đồng ý với các hoạt động dữ liệu của chúng tôi, bao gồm việc sử dụng cookie, phân tích, và camera để theo dõi tư thế yoga.",
+        "note": ""
+      },
+      "thirdPartyServices": {
+        "title": "Dịch vụ Bên Thứ ba",
+        "content": "YogiTech tích hợp các dịch vụ của bên thứ ba như Google Analytics, Microsoft Clarity, và CookiesYes. Điều khoản của họ sẽ áp dụng cho bất kỳ dữ liệu nào họ xử lý."
+      },
+      "limitationOfLiability": {
+        "title": "Giới hạn Trách nhiệm",
+        "content1": "YogiTech được cung cấp “nguyên trạng” mà không có cam kết đảm bảo tính chính xác hoặc không gián đoạn.",
+        "content2": "Chúng tôi không chịu trách nhiệm cho bất kỳ thương tích, thiệt hại hoặc tổn thất nào do việc sử dụng nền tảng của chúng tôi. Người dùng tự chịu rủi ro khi luyện tập yoga."
+      },
+      "terminationOfService": {
+        "title": "Chấm dứt Dịch vụ",
+        "content": "Chúng tôi giữ quyền tạm dừng hoặc chấm dứt quyền truy cập nếu người dùng vi phạm các Điều khoản này."
+      },
+      "changesToTerms": {
+        "title": "Thay đổi Điều khoản",
+        "content": "Chúng tôi có thể cập nhật các Điều khoản này. Người dùng sẽ được thông báo về các thay đổi lớn qua email hoặc thông báo trên trang web."
+      },
+      "contactInformation": {
+        "title": "Thông tin Liên hệ",
+        "content": "Nếu bạn có bất kỳ câu hỏi nào về các Điều khoản này, vui lòng liên hệ qua: 📧 Email: support@yogitech.me"
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Chính sách Quyền riêng tư",
+    "effectiveDate": "Ngày hiệu lực: 20 Tháng 2, 2024",
+    "sections": {
+      "introduction": {
+        "title": "Giới thiệu",
+        "content": "Chào mừng bạn đến với YogiTech: Nền tảng Mentor (\"YogiTech,\" \"chúng tôi,\" hoặc \"của chúng tôi\"). Chúng tôi trân trọng sự riêng tư của bạn và cam kết bảo vệ thông tin cá nhân. Chính sách Quyền riêng tư này giải thích cách chúng tôi thu thập, sử dụng, và bảo vệ dữ liệu của bạn khi bạn sử dụng trang web và ứng dụng di động."
+      },
+      "informationWeCollect": {
+        "title": "Thông tin Chúng tôi Thu thập",
+        "content1": "Thông tin Cá nhân: Tên, địa chỉ email (để tạo tài khoản, liên lạc, và truy cập dịch vụ).",
+        "content2": "Cookie và Dữ liệu Theo dõi: Chúng tôi sử dụng cookie và công nghệ theo dõi để phân tích lưu lượng trang web và cải thiện hiệu suất.",
+        "content3": "Dữ liệu Camera (Chỉ trên Ứng dụng Di động): Nếu được cấp quyền, ứng dụng sẽ sử dụng camera thiết bị để theo dõi và phân tích tư thế yoga. Dữ liệu này được xử lý nội bộ và không được lưu trữ."
+      },
+      "howWeUseYourInformation": {
+        "title": "Cách Chúng tôi Sử dụng Thông tin của Bạn",
+        "content1": "Để cung cấp và cải thiện các dịch vụ yoga hỗ trợ AI.",
+        "content2": "Để phân tích hành vi người dùng và nâng cao hiệu quả theo dõi.",
+        "content3": "Để tuân thủ các nghĩa vụ pháp lý và bảo vệ người dùng."
+      },
+      "thirdPartyServices": {
+        "title": "Dịch vụ Bên Thứ ba",
+        "content1": "Google Analytics & Google Tag Manager (cho phân tích trang web).",
+        "content2": "CookiesYes (cho quản lý cookie và tuân thủ quy định).",
+        "content3": "Microsoft Clarity (phân tích trải nghiệm người dùng).",
+        "note": "Các dịch vụ này có thể thu thập và xử lý dữ liệu theo chính sách riêng của họ."
+      },
+      "userRightsDataControl": {
+        "title": "Quyền Người dùng & Kiểm soát Dữ liệu",
+        "content1": "Truy cập và chỉnh sửa dữ liệu trong cài đặt tài khoản của bạn.",
+        "content2": "Yêu cầu xóa dữ liệu bằng cách liên hệ với chúng tôi.",
+        "content3": "Từ chối cookie thông qua công cụ quản lý cookie của chúng tôi."
+      },
+      "dataSecurity": {
+        "title": "Bảo mật Dữ liệu",
+        "content": "Chúng tôi triển khai các biện pháp an ninh mạnh mẽ để bảo vệ dữ liệu của bạn. Tuy nhiên, không có hệ thống nào an toàn tuyệt đối, và chúng tôi khuyến khích người dùng tự có biện pháp bảo vệ."
+      },
+      "contactUs": {
+        "title": "Liên hệ với Chúng tôi",
+        "content": "Nếu bạn có câu hỏi hoặc băn khoăn về Chính sách Quyền riêng tư này, vui lòng liên hệ với chúng tôi qua: 📧 Email: support@yogitech.me"
+      }
+    }
+  }
 }

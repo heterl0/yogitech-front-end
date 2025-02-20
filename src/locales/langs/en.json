@@ -1056,5 +1056,107 @@
   "system": "System",
   "No active account found with the given credentials": "No active account found with the given credentials",
   "Please activate your account.": "Please activate your account.",
-  "You are not admin!": "You are not admin!"
+  "You are not admin!": "You are not admin!",
+  "termsAndConditions": {
+    "title": "Terms and Conditions",
+    "effectiveDate": "Effective Date: February 20, 2024",
+    "footerText": "By using YogiTech, you agree to these Terms and Conditions.",
+    "sections": {
+      "introduction": {
+        "title": "Introduction",
+        "content": "Welcome to YogiTech: Mentor Platform (\"YogiTech,\" \"we,\" \"our,\" or \"us\"). These Terms and Conditions govern your use of our website and mobile application. By using our services, you agree to comply with these Terms. If you do not agree, please do not use YogiTech."
+      },
+      "userEligibility": {
+        "title": "User Eligibility",
+        "content1": "Be at least 13 years old (or meet your country's minimum age for digital services).",
+        "content2": "Agree to these Terms and our Privacy Policy."
+      },
+      "useOfServices": {
+        "title": "Use of Services",
+        "content1": "Misusing the platform for illegal or harmful activities.",
+        "content2": "Reverse engineering or attempting to hack the application.",
+        "content3": "Violating intellectual property rights (e.g., copying content without permission).",
+        "note": "You agree to use YogiTech only for lawful purposes. Prohibited activities include:"
+      },
+      "userAccountsData": {
+        "title": "User Accounts & Data",
+        "content1": "You are responsible for maintaining the security of your account.",
+        "content2": "You must provide accurate and up-to-date information when registering.",
+        "content3": "We may suspend or terminate accounts that violate these Terms."
+      },
+      "paymentSubscription": {
+        "title": "Payment & Subscription",
+        "content": "If YogiTech offers premium features or subscriptions, payments will be handled through third-party providers. Refund policies will be provided separately if applicable."
+      },
+      "dataCollectionPrivacy": {
+        "title": "Data Collection & Privacy",
+        "content1": "We collect and process user data as described in our Privacy Policy.",
+        "content2": "By using YogiTech, you consent to our data practices, including the use of cookies, analytics, and camera tracking for yoga pose analysis."
+      },
+      "thirdPartyServices": {
+        "title": "Third-Party Services",
+        "content": "YogiTech integrates third-party services like Google Analytics, Microsoft Clarity, and CookiesYes. Their terms apply to any data they process."
+      },
+      "limitationOfLiability": {
+        "title": "Limitation of Liability",
+        "content1": "YogiTech is provided \"as is\" without guarantees of accuracy or uninterrupted service.",
+        "content2": "We are not liable for injuries, damages, or losses caused by using our platform. Users practice yoga at their own risk."
+      },
+      "terminationOfService": {
+        "title": "Termination of Service",
+        "content": "We reserve the right to suspend or terminate access if users violate these Terms."
+      },
+      "changesToTerms": {
+        "title": "Changes to Terms",
+        "content": "We may update these Terms occasionally. Users will be notified of major changes via email or website updates."
+      },
+      "contactInformation": {
+        "title": "Contact Information",
+        "content": "If you have any questions about these Terms, contact us at: 📧 Email: support@yogitech.me"
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "effectiveDate": "Effective Date: February 20, 2024",
+    "sections": {
+      "introduction": {
+        "title": "Introduction",
+        "content": "Welcome to YogiTech: Mentor Platform (\"YogiTech,\" \"we,\" \"our,\" or \"us\"). We value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and protect your data when you use our website and mobile application."
+      },
+      "informationWeCollect": {
+        "title": "Information We Collect",
+        "content1": "Personal Information: Name, email address (for account creation, communication, and service access).",
+        "content2": "Cookies and Tracking Data: We use cookies and tracking technologies to analyze website traffic and improve performance.",
+        "content3": "Camera Data (Mobile App Only): If granted permission, the app uses your device's camera to track and analyze yoga poses. This data is processed locally and not stored."
+      },
+      "howWeUseYourInformation": {
+        "title": "How We Use Your Information",
+        "content1": "To provide and improve our AI-powered yoga mentor services.",
+        "content2": "To analyze user behavior and enhance tracking efficiency.",
+        "content3": "To comply with legal obligations and protect users."
+      },
+      "thirdPartyServices": {
+        "title": "Third-Party Services",
+        "content1": "Google Analytics & Google Tag Manager (for website analytics).",
+        "content2": "CookiesYes (for cookie management and compliance).",
+        "content3": "Microsoft Clarity (for user experience analysis).",
+        "note": "These services may collect and process data under their own privacy policies."
+      },
+      "userRightsDataControl": {
+        "title": "User Rights & Data Control",
+        "content1": "Access and modify your data within your account settings.",
+        "content2": "Request data deletion by contacting us.",
+        "content3": "Opt-out of cookies via our cookie management tool."
+      },
+      "dataSecurity": {
+        "title": "Data Security",
+        "content": "We implement strong security measures to protect your data. However, no system is completely secure, and we encourage users to take their own precautions."
+      },
+      "contactUs": {
+        "title": "Contact Us",
+        "content": "If you have questions or concerns about this Privacy Policy, please contact us at: 📧 Email: support@yogitech.me"
+      }
+    }
+  }
 }

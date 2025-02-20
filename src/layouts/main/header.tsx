@@ -99,7 +99,7 @@ function Header({ isBlurFromStart = false }: Props) {
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
           >
-            <Button variant="contained" rel="noopener" color="primary">
+            <Button variant="contained" color="primary">
               <Link href={paths.download}>{t("header.download")}</Link>
             </Button>
 
