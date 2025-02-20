@@ -40,7 +40,7 @@ export default function HomeFAQ() {
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
       <Stack spacing={3} sx={{ mb: 10, textAlign: "center" }}>
-        <m.div variants={varFade().inUp}>
+        <m.div variants={varFade().inUp} id="faqs">
           <Typography
             component="div"
             variant="overline"
