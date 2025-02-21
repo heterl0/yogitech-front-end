@@ -5,14 +5,12 @@ import Link from "@mui/material/Link";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { paths } from "@/routes/paths";
-import { usePathname } from "@/routes/hooks";
 import Logo from "@/components/logo";
 import { useTranslate } from "@/locales";
 
 // ----------------------------------------------------------------------
 
 export default function Footer() {
-  const pathname = usePathname();
   const { t } = useTranslate();
 
   const LINKS = [
@@ -37,7 +35,7 @@ export default function Footer() {
     },
   ];
 
-  const homePage = pathname === "/";
+  const homePage = false;
 
   const simpleFooter = (
     <Box
