@@ -7,8 +7,6 @@ import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-// import { paths } from "@/routes/paths";
-
 import { useDebounce } from "@/hooks/use-debounce";
 
 import { POST_SORT_OPTIONS } from "@/_mock";

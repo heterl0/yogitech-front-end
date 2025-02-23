@@ -14,10 +14,7 @@ export type IPostHero = {
   title: string;
   coverUrl: string;
   createdAt?: Date;
-  author?: {
-    name: string;
-    avatarUrl: string;
-  };
+  author?: IAccount;
 };
 
 export type IBlogVote = {

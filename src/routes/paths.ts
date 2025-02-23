@@ -37,6 +37,9 @@ export const paths = {
     checkout: `/product/checkout`,
     details: (id: string) => `/product/${id}`,
   },
+  blog: {
+    root: `/blog/`,
+  },
   // AUTH
   auth: {
     jwt: {

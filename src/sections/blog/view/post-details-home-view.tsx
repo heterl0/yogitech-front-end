@@ -1,43 +1,27 @@
 /* eslint-disable react/no-children-prop */
 "use client";
 
-// import Chip from "@mui/material/Chip";
-// import Stack from "@mui/material/Stack";
-// import Button from "@mui/material/Button";
-// import Avatar from "@mui/material/Avatar";
-// import Divider from "@mui/material/Divider";
-// import Checkbox from "@mui/material/Checkbox";
-// import Container from "@mui/material/Container";
-// import Typography from "@mui/material/Typography";
-// import AvatarGroup from "@mui/material/AvatarGroup";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-
-// import { RouterLink } from "@/routes/components";
-
-// import { fShortenNumber } from "@/utils/format-number";
-
-// import { useGetPost, useGetLatestPosts } from "@/api/blog";
-
-// import Iconify from "@/components/iconify";
-// import Markdown from "@/components/markdown";
-// import EmptyContent from "@/components/empty-content";
-// import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
-
-// import PostList from "../post-list";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Markdown from "@/components/markdown";
+import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
+import PostList from "../post-list";
 // import PostCommentList from "../post-comment-list";
-// import PostCommentForm from "../post-comment-form";
-// import PostDetailsHero from "../post-details-hero";
-// import { PostDetailsSkeleton } from "../post-skeleton";
+import PostDetailsHero from "../post-details-hero";
+import { IBlog } from "@/types/blog";
+import MainLayout from "@/layouts/main";
+import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  title: string;
+  post: IBlog;
+  latestPosts: IBlog[];
 };
 
-export default function PostDetailsHomeView({}: Props) {
-  // const { post, postError, postLoading } = useGetPost(title);
-
+export default function PostDetailsHomeView({ post, latestPosts }: Props) {
   // const { latestPosts, latestPostsLoading } = useGetLatestPosts(title);
 
   // const renderSkeleton = <PostDetailsSkeleton />;
@@ -46,12 +30,11 @@ export default function PostDetailsHomeView({}: Props) {
   //   <Container sx={{ my: 10 }}>
   //     <EmptyContent
   //       filled
-  //       title={`${postError?.message}`}
+  //       title={`Blog is not found`}
   //       action={
   //         <Button
   //           component={RouterLink}
-  //           // href={paths.post.root}
-  //           href={"#"}
+  //           href={paths.blog.root}
   //           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
   //           sx={{ mt: 3 }}
   //         >
@@ -63,134 +46,133 @@ export default function PostDetailsHomeView({}: Props) {
   //   </Container>
   // );
 
-  // const renderPost = post && (
-  //   <>
-  //     <PostDetailsHero
-  //       title={post.title}
-  //       author={post.author}
-  //       coverUrl={post.coverUrl}
-  //       createdAt={post.createdAt}
-  //     />
+  const renderPost = post && (
+    <>
+      <PostDetailsHero
+        title={post.title}
+        author={post.owner}
+        coverUrl={post.image_url}
+        createdAt={new Date(post.created_at)}
+      />
 
-  //     <Container
-  //       maxWidth={false}
-  //       sx={{
-  //         py: 3,
-  //         mb: 5,
-  //         borderBottom: (theme) => `solid 1px ${theme.palette.divider}`,
-  //       }}
-  //     >
-  //       <CustomBreadcrumbs
-  //         links={[
-  //           {
-  //             name: "Home",
-  //             href: "/",
-  //           },
-  //           {
-  //             name: "Blog",
-  //             href: "#",
-  //             // href: paths.post.root,
-  //           },
-  //           {
-  //             name: post?.title,
-  //           },
-  //         ]}
-  //         sx={{ maxWidth: 720, mx: "auto" }}
-  //       />
-  //     </Container>
+      <Container
+        maxWidth={false}
+        sx={{
+          py: 3,
+          mb: 5,
+          borderBottom: (theme) => `solid 1px ${theme.palette.divider}`,
+        }}
+      >
+        <CustomBreadcrumbs
+          links={[
+            {
+              name: "Home",
+              href: "/",
+            },
+            {
+              name: "Blog",
+              href: paths.blog.root,
+            },
+            {
+              name: post?.title,
+            },
+          ]}
+          sx={{ maxWidth: 720, mx: "auto" }}
+        />
+      </Container>
 
-  //     <Container maxWidth={false}>
-  //       <Stack sx={{ maxWidth: 720, mx: "auto" }}>
-  //         <Typography variant="subtitle1" sx={{ mb: 5 }}>
-  //           {post.description}
-  //         </Typography>
+      <Container maxWidth={false}>
+        <Stack sx={{ maxWidth: 720, mx: "auto" }}>
+          <Typography variant="subtitle1" sx={{ mb: 5 }}>
+            {post.description}
+          </Typography>
 
-  //         <Markdown children={post.content} />
+          <Markdown children={post.content} />
 
-  //         <Stack
-  //           spacing={3}
-  //           sx={{
-  //             py: 3,
-  //             borderTop: (theme) => `dashed 1px ${theme.palette.divider}`,
-  //             borderBottom: (theme) => `dashed 1px ${theme.palette.divider}`,
-  //           }}
-  //         >
-  //           <Stack direction="row" flexWrap="wrap" spacing={1}>
-  //             {post.tags.map((tag) => (
-  //               <Chip key={tag} label={tag} variant="soft" />
-  //             ))}
-  //           </Stack>
+          <Stack
+            spacing={3}
+            sx={{
+              py: 3,
+              borderTop: (theme) => `dashed 1px ${theme.palette.divider}`,
+              borderBottom: (theme) => `dashed 1px ${theme.palette.divider}`,
+            }}
+          >
+            <Stack direction="row" flexWrap="wrap" spacing={1}>
+              {JSON.parse(post.benefit).map((tag: string) => (
+                <Chip key={tag} label={tag} variant="soft" />
+              ))}
+            </Stack>
 
-  //           <Stack direction="row" alignItems="center">
-  //             <FormControlLabel
-  //               control={
-  //                 <Checkbox
-  //                   defaultChecked
-  //                   size="small"
-  //                   color="error"
-  //                   icon={<Iconify icon="solar:heart-bold" />}
-  //                   checkedIcon={<Iconify icon="solar:heart-bold" />}
-  //                 />
-  //               }
-  //               label={fShortenNumber(post.totalFavorites)}
-  //               sx={{ mr: 1 }}
-  //             />
+            {/* <Stack direction="row" alignItems="center">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    defaultChecked
+                    size="small"
+                    color="error"
+                    icon={<Iconify icon="solar:heart-bold" />}
+                    checkedIcon={<Iconify icon="solar:heart-bold" />}
+                  />
+                }
+                label={fShortenNumber(post.totalFavorites)}
+                sx={{ mr: 1 }}
+              />
 
-  //             <AvatarGroup>
-  //               {post.favoritePerson.map((person) => (
-  //                 <Avatar
-  //                   key={person.name}
-  //                   alt={person.name}
-  //                   src={person.avatarUrl}
-  //                 />
-  //               ))}
-  //             </AvatarGroup>
-  //           </Stack>
-  //         </Stack>
+              <AvatarGroup>
+                {post.favoritePerson.map((person) => (
+                  <Avatar
+                    key={person.name}
+                    alt={person.name}
+                    src={person.avatarUrl}
+                  />
+                ))}
+              </AvatarGroup>
+            </Stack> */}
+          </Stack>
 
-  //         <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-  //           <Typography variant="h4">Comments</Typography>
+          {/* <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
+            <Typography variant="h4">Comments</Typography>
 
-  //           <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
-  //             ({post.comments.length})
-  //           </Typography>
-  //         </Stack>
+            <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
+              ({post.comments.length})
+            </Typography>
+          </Stack>
 
-  //         <PostCommentForm />
+          <PostCommentForm />
 
-  //         <Divider sx={{ mt: 5, mb: 2 }} />
+          <Divider sx={{ mt: 5, mb: 2 }} />
 
-  //         <PostCommentList comments={post.comments} />
-  //       </Stack>
-  //     </Container>
-  //   </>
-  // );
+          <PostCommentList comments={post.comments} /> */}
+        </Stack>
+      </Container>
+    </>
+  );
 
-  // const renderLatestPosts = (
-  //   <>
-  //     <Typography variant="h4" sx={{ mb: 5 }}>
-  //       Recent Posts
-  //     </Typography>
+  const renderLatestPosts = (
+    <>
+      <Typography variant="h4" sx={{ mb: 5 }}>
+        Recent Posts
+      </Typography>
 
-  //     <PostList
-  //       posts={latestPosts.slice(latestPosts.length - 4)}
-  //       loading={latestPostsLoading}
-  //       disabledIndex
-  //     />
-  //   </>
-  // );
+      <PostList
+        posts={latestPosts.slice(latestPosts.length - 4)}
+        loading={false}
+        disabledIndex
+      />
+    </>
+  );
 
   return (
-    <>
+    <MainLayout>
       {/* {postLoading && renderSkeleton}
 
-      {postError && renderError}
+      {postError && renderError} */}
 
       {post && renderPost}
 
       <Container sx={{ pb: 15 }}>
         {!!latestPosts.length && renderLatestPosts}
-      </Container> */}
-    </>
+      </Container>
+    </MainLayout>
   );
 }

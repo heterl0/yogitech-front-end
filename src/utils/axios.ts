@@ -48,10 +48,10 @@ export const endpoints = {
   },
   post: {
     list: "/api/v1/blogs/",
-    create: "/api/v1/blogs/",
+    create: "/api/v1/blogs/create/",
     update: "/api/v1/blogs/",
     delete: "/api/v1/blogs/",
-    details: "/api/v1/blogs/",
+    details: (slug: string) => `/api/v1/blogs/${slug}/`,
     latest: "/api/v1/blogs/",
     search: "/api/v1/blogs/",
   },
