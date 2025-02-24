@@ -30,9 +30,11 @@ export function useGetPosts() {
 // ----------------------------------------------------------------------
 
 export function useGetPost(id: string) {
-  const URL = id ? [`${endpoints.post.details}${id}/`] : "";
+  const URL = id ? [`${endpoints.post.details(id)}`] : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher, {
+    revalidateOnFocus: false,
+  });
 
   const memoizedValue = useMemo(
     () => ({

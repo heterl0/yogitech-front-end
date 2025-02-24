@@ -7,13 +7,13 @@ const StyledMarkdown = styled("div")(({ theme }) => {
 
   return {
     // Text
-    h1: { margin: 0, ...theme.typography.h1 },
-    h2: { margin: 0, ...theme.typography.h2 },
-    h3: { margin: 0, ...theme.typography.h3 },
-    h4: { margin: 0, ...theme.typography.h4 },
-    h5: { margin: 0, ...theme.typography.h5 },
-    h6: { margin: 0, ...theme.typography.h6 },
-    p: { margin: 0, ...theme.typography.body1 },
+    h1: { ...theme.typography.h1, marginTop: 40, marginBottom: 8 },
+    h2: { ...theme.typography.h2, marginTop: 40, marginBottom: 8 },
+    h3: { ...theme.typography.h3, marginTop: 24, marginBottom: 8 },
+    h4: { ...theme.typography.h4, marginTop: 24, marginBottom: 8 },
+    h5: { ...theme.typography.h5, marginTop: 24, marginBottom: 8 },
+    h6: { ...theme.typography.h6, marginTop: 24, marginBottom: 8 },
+    p: { ...theme.typography.body1, marginBottom: "1.25rem" },
 
     br: {
       display: "grid",

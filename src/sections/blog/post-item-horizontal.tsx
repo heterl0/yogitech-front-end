@@ -209,7 +209,13 @@ export default function PostItemHorizontal({ post, deleteMutate }: Props) {
               src={owner.profile.avatar_url || ""}
               sx={{ position: "absolute", top: 16, right: 16, zIndex: 9 }}
             />
-            <Image alt={title} src={image_url} width={180} height={240} />
+            <Image
+              alt={title}
+              src={image_url}
+              width={426}
+              height={240}
+              className="h-full rounded-lg object-cover"
+            />
           </Box>
         )}
       </Stack>

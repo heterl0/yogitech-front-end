@@ -69,7 +69,13 @@ export default function PostItem({ post, index }: Props) {
           index={index}
         />
 
-        <Image alt={title} src={image_url} height={360} width={480} />
+        <Image
+          alt={title}
+          src={image_url}
+          height={360}
+          width={480}
+          className=""
+        />
       </Card>
     );
   }

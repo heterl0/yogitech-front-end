@@ -43,9 +43,10 @@ export default function PostDetailsHero({
             zIndex: 9,
             color: "common.white",
             position: "absolute",
-            maxWidth: 480,
+            maxWidth: 1200,
             pt: { xs: 2, md: 8 },
           }}
+          className="line-clamp-[10]"
         >
           {title}
         </Typography>
