@@ -26,6 +26,7 @@ export default function DownloadAdvertisement() {
           xs: "center",
           md: "left",
         },
+        px: { xs: 2, md: 5 },
       }}
     >
       <Box
@@ -35,46 +36,60 @@ export default function DownloadAdvertisement() {
       >
         {t("download.getApp")}
       </Box>
+      <div className="flex flex-col-reverse items-center gap-3 md:flex-col md:items-start md:gap-2">
+        <Box
+          component={m.div}
+          variants={varFade().inDown}
+          sx={{ color: "common.white", mb: 1 }}
+        >
+          {t("download.comingSoon")}
+        </Box>
 
-      <Box
-        component={m.div}
-        variants={varFade().inDown}
-        sx={{ color: "common.white", mb: 3 }}
-      >
-        {t("download.comingSoon")}
-      </Box>
+        <Box
+          component={m.div}
+          variants={varFade().inDown}
+          className="mb-3 max-w-md text-xs font-medium text-gray-300"
+        >
+          {t("download.note")}
+        </Box>
 
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        justifyContent={{ xs: "center", md: "flex-start" }}
-        spacing={2}
-      >
-        <m.div variants={varFade().inRight}>
-          <Button
-            color="inherit"
-            size="large"
-            variant="contained"
-            rel="noopener"
-            href="https://storage.yogitech.me/yogitech_release_v1_0.apk"
-            sx={{
-              color: "grey.800",
-              bgcolor: "common.white",
-              ":hover": {
+        <div className="flex flex-row items-center justify-center gap-2 md:justify-start">
+          <m.div variants={varFade().inRight}>
+            <Button
+              id="download-android"
+              color="inherit"
+              size="large"
+              variant="contained"
+              rel="noopener"
+              href="https://storage.yogitech.me/files/yogitech-beta-v1_0.1.apk"
+              sx={{
+                color: "grey.800",
                 bgcolor: "common.white",
-              },
-            }}
-            startIcon={
-              <Iconify
-                icon="ant-design:android-filled"
-                width={24}
-                sx={{ mr: 0 }}
-              />
-            }
-          >
-            {t("download.android")}
-          </Button>
-        </m.div>
-      </Stack>
+                ":hover": {
+                  bgcolor: "common.white",
+                },
+              }}
+              startIcon={
+                <Iconify
+                  icon="ant-design:android-filled"
+                  width={24}
+                  sx={{ mr: 0 }}
+                />
+              }
+            >
+              {t("download.android")}
+            </Button>
+          </m.div>
+          <m.div variants={varFade().inRight} className="flex items-center">
+            <span className="text-sm font-bold md:text-xl">
+              👈
+              <span className="to-gray bg-gradient-to-br from-[#fdfdfd] to-gray-200 bg-clip-text font-bold text-transparent">
+                {t("download.click-me")}
+              </span>
+            </span>
+          </m.div>
+        </div>
+      </div>
     </Box>
   );
 
@@ -107,6 +122,7 @@ export default function DownloadAdvertisement() {
           borderRadius: 2,
           pb: { xs: 5, md: 0 },
         }}
+        className="overflow-hidden"
       >
         {renderImg}
 

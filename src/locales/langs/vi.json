@@ -174,7 +174,9 @@
   "download": {
     "getApp": "Tải ứng dụng về!",
     "comingSoon": "Ứng dụng dành cho iOS đang được phát triển",
-    "android": "Android"
+    "note": "Lưu ý: Ứng dụng chỉ hỗ trợ Android 5.0 trở lên, chúng tôi đang ra mắt bản beta cho android. Và mong nhận được feedback từ các bạn.",
+    "android": "Android",
+    "click-me": "Nhấn vào đây!"
   },
   "dashboard": {
     "welcomeBack": "Chào mừng trở lại 👋",
