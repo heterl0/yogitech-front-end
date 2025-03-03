@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /auth/jwt/login
+
+Sitemap: https://www.yogitech.me/sitemap.xml
