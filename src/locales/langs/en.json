@@ -174,7 +174,9 @@
   "download": {
     "getApp": "Get our app!",
     "comingSoon": "iOS app will coming soon",
-    "android": "Android"
+    "note": "Note: The application only supports Android 5.0 or higher. We are launching a beta version for Android and look forward to your feedback.",
+    "android": "Android",
+    "click-me": "Click me!"
   },
   "dashboard": {
     "welcomeBack": "Welcome back 👋",
