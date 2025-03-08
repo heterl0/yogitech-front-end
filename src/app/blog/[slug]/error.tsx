@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import Button from "@mui/material/Button";
@@ -5,9 +6,8 @@ import Container from "@mui/material/Container";
 
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
-
-import { Iconify } from "@/components/iconify";
-import { EmptyContent } from "@/components/empty-content";
+import EmptyContent from "@/components/empty-content";
+import Iconify from "@/components/iconify";
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ export default function Error({
         action={
           <Button
             component={RouterLink}
-            href={paths.post.root}
+            href={paths.blog.root}
             startIcon={<Iconify width={16} icon="eva:arrow-ios-back-fill" />}
             sx={{ mt: 3 }}
           >
