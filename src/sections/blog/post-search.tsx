@@ -13,13 +13,13 @@ import { useRouter } from "@/routes/hooks";
 import Iconify from "@/components/iconify";
 import SearchNotFound from "@/components/search-not-found";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 
 // ----------------------------------------------------------------------
 
 type Props = {
   query: string;
-  results: IBlog[];
+  results: IPost[];
   onSearch: (inputValue: string) => void;
   hrefItem: (title: string) => string;
   loading?: boolean;

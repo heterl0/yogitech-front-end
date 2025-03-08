@@ -17,7 +17,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { paths } from "@/routes/paths";
 import { useBoolean } from "@/hooks/use-boolean";
 import { useResponsive } from "@/hooks/use-responsive";
-// import { _tags } from "@/_mock";
 import { CustomFile } from "@/components/upload";
 import { useSnackbar } from "@/components/snackbar";
 import FormProvider, {
@@ -27,17 +26,19 @@ import FormProvider, {
   RHFAutocomplete,
 } from "@/components/hook-form";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 
 import PostDetailsPreview from "./post-details-preview";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { useRouter } from "next/navigation";
-import { HttpStatusCode } from "axios";
+import axios, { HttpStatusCode } from "axios";
+import Iconify from "@/components/iconify";
+import { slugify } from "@/utils/slugify";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  currentPost?: IBlog;
+  currentPost?: IPost;
 };
 
 export const benefits = [
@@ -56,17 +57,25 @@ export default function PostNewEditForm({ currentPost }: Props) {
   const router = useRouter();
   const [active, setActive] = useState(false); // Default checked
 
+  // Loading states for AI generation
+  const [loadingDescription, setLoadingDescription] = useState(false);
+  const [loadingContent, setLoadingContent] = useState(false);
+  const [loadingSeo, setLoadingSeo] = useState(false);
+  const [loadingExcerpt, setLoadingExcerpt] = useState(false);
+
   useEffect(() => {
     if (currentPost) {
       setActive(currentPost.active_status === 1 ? true : false);
     }
   }, [currentPost]);
+
   const handleChange = (
     event: ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
     setActive(checked);
   };
+
   const mdUp = useResponsive("up", "md");
 
   const { enqueueSnackbar } = useSnackbar();
@@ -77,10 +86,14 @@ export default function PostNewEditForm({ currentPost }: Props) {
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
     content: Yup.string().required("Content is required"),
-    imageUrl: Yup.mixed<any>().nullable().required("Cover is required"),
+    imageUrl: Yup.mixed<any>().nullable(),
     benefit: Yup.array().min(1, "Must have at least 1 tag"),
     active: Yup.string(),
-    // not required
+    seoTitle: Yup.string(),
+    seoDescription: Yup.string(),
+    seoKeywords: Yup.string(),
+    slug: Yup.string().required("Slug is required"),
+    excerpt: Yup.string().required("Excerpt is required"),
   });
 
   const defaultValues = useMemo(
@@ -93,6 +106,11 @@ export default function PostNewEditForm({ currentPost }: Props) {
         ? (JSON.parse(currentPost.benefit) as [])
         : [],
       active: currentPost?.active_status + "" || "",
+      seoTitle: currentPost?.seo_title || "",
+      seoDescription: currentPost?.seo_description || "",
+      seoKeywords: currentPost?.seo_keywords || "",
+      slug: currentPost?.slug || "",
+      excerpt: currentPost?.excerpt || "",
     }),
     [currentPost]
   );
@@ -110,6 +128,8 @@ export default function PostNewEditForm({ currentPost }: Props) {
     formState: { isSubmitting, isValid },
   } = methods;
 
+  const { getValues } = methods;
+
   const values = watch();
 
   useEffect(() => {
@@ -117,6 +137,160 @@ export default function PostNewEditForm({ currentPost }: Props) {
       reset(defaultValues);
     }
   }, [currentPost, defaultValues, reset]);
+
+  // Function to generate content using Gemini API
+  const generateWithAI = async (
+    field: string,
+    prompt: string,
+    context: string | null = null
+  ) => {
+    let loadingState;
+
+    // Set appropriate loading state
+    switch (field) {
+      case "description":
+        loadingState = setLoadingDescription;
+        break;
+      case "content":
+        loadingState = setLoadingContent;
+        break;
+      case "seo":
+        loadingState = setLoadingSeo;
+        break;
+      case "excerpt":
+        loadingState = setLoadingExcerpt;
+        break;
+      default:
+        loadingState = () => {};
+    }
+
+    loadingState(true);
+
+    try {
+      const response = await axios.post(endpoints.api.v1.gemini.root, {
+        field,
+        prompt,
+        context,
+      });
+
+      if (response.status === 200) {
+        const { content } = response.data;
+
+        // Update the appropriate field
+        switch (field) {
+          case "description":
+            setValue("description", content, { shouldValidate: true });
+            break;
+          case "content":
+            setValue("content", content, { shouldValidate: true });
+            break;
+          case "seo":
+            setValue("seoDescription", content, { shouldValidate: true });
+            break;
+          case "keywords":
+            setValue("seoKeywords", content, { shouldValidate: true });
+            break;
+          case "excerpt":
+            setValue("excerpt", content, { shouldValidate: true });
+            break;
+        }
+
+        enqueueSnackbar(t("form.generation_success"), { variant: "success" });
+      } else {
+        enqueueSnackbar(t("form.generation_fail"), { variant: "error" });
+      }
+    } catch (error) {
+      console.error("Error generating content:", error);
+      enqueueSnackbar(t("form.generation_fail"), { variant: "error" });
+    } finally {
+      loadingState(false);
+    }
+  };
+
+  // Generate description based on title
+  const generateDescription = async () => {
+    const title = getValues("title");
+    if (!title) {
+      enqueueSnackbar(t("form.title_required"), { variant: "warning" });
+      return;
+    }
+
+    const prompt = `Write a compelling and concise blog post description (2-3 sentences) for a post titled: "${title}". 
+    The description should be engaging and make readers want to read the full post.`;
+
+    await generateWithAI("description", prompt, title);
+  };
+
+  // Generate content based on title and description
+  const generateContent = async () => {
+    const title = getValues("title");
+    const description = getValues("description");
+
+    if (!title || !description) {
+      enqueueSnackbar(t("form.title_description_required"), {
+        variant: "warning",
+      });
+      return;
+    }
+
+    const prompt = `Write a comprehensive blog post with the title: "${title}". 
+    The post should expand on this description: "${description}".
+    Include appropriate HTML formatting like <h2>, <h3>, <p>, <ul>, <li>, etc. 
+    for a well-structured post not use h1 and return content only.
+    The content should be engaging, informative, and around 800-1000 words.`;
+
+    await generateWithAI("content", prompt, `${title}\n${description}`);
+  };
+
+  const generateSeoKeywords = async (title: string) => {
+    if (!title) {
+      enqueueSnackbar(t("form.title_required"), {
+        variant: "warning",
+      });
+      return "";
+    }
+
+    const prompt = `Write an SEO-keyword meta upto 5 keywords for a blog post with the title: "${title}". 
+    The meta keywords must include: "YogiTech", "Yoga Mobile App", separate each keyword with a comma.
+    Return only the content`;
+
+    await generateWithAI("keywords", prompt, `${title}`);
+  };
+
+  // Generate SEO description
+  const generateSeoDescription = async () => {
+    const title = getValues("title");
+
+    if (!title) {
+      enqueueSnackbar(t("form.title_required"), {
+        variant: "warning",
+      });
+      return;
+    }
+
+    const prompt = `Write an SEO-optimized meta description (maximum 100 - 150 characters) for a blog post with the title: "${title}" . 
+    The meta description should include relevant keywords and encourage clicks.`;
+
+    await generateWithAI("seo", prompt, `${title}`);
+  };
+
+  // Generate excerpt
+  const generateExcerpt = async () => {
+    const title = getValues("title");
+    const description = getValues("description");
+
+    if (!title || !description) {
+      enqueueSnackbar(t("form.title_description_required"), {
+        variant: "warning",
+      });
+      return;
+    }
+
+    const prompt = `Create a brief, engaging excerpt (1-2 sentences) for a blog post with the title: "${title}" 
+    and description: "${description}". The excerpt should entice readers to click and read the full post.`;
+
+    await generateWithAI("excerpt", prompt, `${title}\n${description}`);
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -130,6 +304,24 @@ export default function PostNewEditForm({ currentPost }: Props) {
       formData.append("content", data.content);
       formData.append("benefit", JSON.stringify(data.benefit));
       formData.append("active_status", active ? "1" : "0");
+      if (!data.seoTitle) {
+        data.seoTitle = data.title;
+      }
+      if (!data.seoDescription) {
+        data.seoDescription = data.description.slice(0, 160);
+      }
+      if (!data.seoKeywords) {
+        data.seoKeywords = data.title.split(" ").join(", ");
+      }
+      if (!data.excerpt) {
+        data.excerpt = data.description.slice(0, 160);
+      }
+      formData.append("seo_title", data.seoTitle);
+      formData.append("seo_description", data.seoDescription);
+      formData.append("seo_keywords", data.seoKeywords);
+      formData.append("excerpt", data.excerpt);
+      formData.append("slug", data.slug);
+      formData.append("url", `/blog/${data.slug}/`);
       if (currentPost) {
         const response = await axiosInstance.patch(
           `${endpoints.post.update}${currentPost.id}/`,
@@ -212,19 +404,69 @@ export default function PostNewEditForm({ currentPost }: Props) {
             <RHFTextField
               name="title"
               label={t("blogPage.postNewEditForm.postTitle")}
+              onBlur={() => {
+                const titleValue = getValues("title");
+                if (!getValues("seoTitle")) {
+                  setValue("seoTitle", titleValue + " | YogiTech");
+                }
+                if (!getValues("seoKeywords")) {
+                  generateSeoKeywords(titleValue);
+                }
+                if (!getValues("slug")) {
+                  setValue("slug", slugify(titleValue));
+                }
+              }}
             />
 
-            <RHFTextField
-              name="description"
-              label={t("blogPage.postNewEditForm.description")}
-              multiline
-              rows={3}
-            />
+            <Stack direction="row" spacing={2} alignItems="flex-start">
+              <RHFTextField
+                name="description"
+                label={t("blogPage.postNewEditForm.description")}
+                multiline
+                rows={3}
+                sx={{ flex: 1 }}
+                onBlur={() => {
+                  const descValue = getValues("description");
+                  if (!getValues("seoDescription")) {
+                    setValue("seoDescription", descValue);
+                  }
+                  if (!getValues("excerpt")) {
+                    setValue("excerpt", descValue);
+                  }
+                }}
+              />
+              <LoadingButton
+                onClick={generateDescription}
+                loading={loadingDescription}
+                variant="contained"
+                color="primary"
+                startIcon={<Iconify icon={"ic:outline-auto-awesome"} />}
+                sx={{ mt: 1 }}
+              >
+                AI
+              </LoadingButton>
+            </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">
-                {t("blogPage.postNewEditForm.content")}
-              </Typography>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography variant="subtitle2">
+                  {t("blogPage.postNewEditForm.content")}
+                </Typography>
+                <LoadingButton
+                  onClick={generateContent}
+                  loading={loadingContent}
+                  variant="contained"
+                  color="primary"
+                  startIcon={<Iconify icon={"ic:outline-auto-awesome"} />}
+                  size="small"
+                >
+                  Generate Content
+                </LoadingButton>
+              </Stack>
               <RHFEditor simple name="content" />
             </Stack>
 
@@ -236,6 +478,42 @@ export default function PostNewEditForm({ currentPost }: Props) {
                 onDrop={handleDrop}
                 onDelete={handleRemoveFile}
               />
+            </Stack>
+
+            <Stack direction="row" spacing={2} alignItems="flex-start">
+              <Stack spacing={3} sx={{ flex: 1 }}>
+                <RHFTextField name="seoTitle" label="SEO Title" />
+                <RHFTextField
+                  name="seoDescription"
+                  label="SEO Description"
+                  multiline
+                  rows={3}
+                />
+                <RHFTextField name="seoKeywords" label="SEO Keywords" />
+              </Stack>
+              <LoadingButton
+                onClick={generateSeoDescription}
+                loading={loadingSeo}
+                variant="contained"
+                color="primary"
+                startIcon={<Iconify icon={"ic:outline-auto-awesome"} />}
+                sx={{ mt: 1 }}
+              >
+                AI
+              </LoadingButton>
+            </Stack>
+            <Stack spacing={1.5} direction="row" alignItems="flex-start">
+              <RHFTextField name="excerpt" label="Excerpt" multiline rows={2} />
+              <LoadingButton
+                onClick={generateExcerpt}
+                loading={loadingExcerpt}
+                variant="contained"
+                color="primary"
+                startIcon={<Iconify icon={"ic:outline-auto-awesome"} />}
+                sx={{ mt: 1 }}
+              >
+                AI
+              </LoadingButton>
             </Stack>
           </Stack>
         </Card>
@@ -290,6 +568,9 @@ export default function PostNewEditForm({ currentPost }: Props) {
               }
             />
           </Stack>
+          <Stack spacing={3} sx={{ p: 3 }}>
+            <RHFTextField name="slug" label="Slug" />
+          </Stack>
         </Card>
       </Grid>
     </>
@@ -318,6 +599,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
         <LoadingButton
           type="submit"
           variant="contained"
+          color="primary"
           size="large"
           loading={isSubmitting}
           sx={{ ml: 2 }}

@@ -10,15 +10,15 @@ import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 import PostList from "../post-list";
 // import PostCommentList from "../post-comment-list";
 import PostDetailsHero from "../post-details-hero";
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 import MainLayout from "@/layouts/main";
 import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: IBlog;
-  latestPosts: IBlog[];
+  post: IPost;
+  latestPosts: IPost[];
 };
 
 export default function PostDetailsHomeView({ post, latestPosts }: Props) {

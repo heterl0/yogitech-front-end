@@ -19,7 +19,7 @@ import Iconify from "@/components/iconify";
 import TextMaxLine from "@/components/text-max-line";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 import { useCallback, useMemo } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -36,7 +36,7 @@ import Image from "next/image";
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: IBlog;
+  post: IPost;
   deleteMutate: (id: number) => void;
 };
 

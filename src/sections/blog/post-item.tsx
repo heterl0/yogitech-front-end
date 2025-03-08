@@ -19,7 +19,7 @@ import { AvatarShape } from "@/assets/illustrations";
 import Iconify from "@/components/iconify";
 import TextMaxLine from "@/components/text-max-line";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 import { useMemo } from "react";
 import { useLocales } from "@/locales";
 import Image from "next/image";
@@ -27,7 +27,7 @@ import Image from "next/image";
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: IBlog;
+  post: IPost;
   index?: number;
 };
 

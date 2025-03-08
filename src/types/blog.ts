@@ -17,7 +17,7 @@ export type IPostHero = {
   author?: IAccount;
 };
 
-export type IBlogVote = {
+export type IPostVote = {
   id: number;
   user: string;
   user_id: string;
@@ -25,7 +25,7 @@ export type IBlogVote = {
   vote_value: number;
 };
 
-export type IBlog = {
+export type IPost = {
   id: number;
   owner: IAccount;
   title: string;
@@ -33,10 +33,16 @@ export type IBlog = {
   image_url: string;
   content: string;
   benefit: string;
-  votes: IBlogVote[];
+  votes: IPostVote[];
   created_at: string;
   updated_at: string;
   active_status: number;
+  seo_title: string;
+  seo_description: string;
+  seo_keywords: string;
+  slug: string;
+  url: string;
+  excerpt: string;
 };
 
 export enum ActiveStatus {

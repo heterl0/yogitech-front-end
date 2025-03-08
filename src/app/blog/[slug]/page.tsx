@@ -1,5 +1,5 @@
 import { PostDetailsHomeView } from "@/sections/blog/view";
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 import axiosInstance, { endpoints } from "@/utils/axios";
 
 // ----------------------------------------------------------------------
@@ -11,11 +11,11 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { slug } = params;
 
-  const res = await axiosInstance.get<IBlog>(endpoints.post.details(slug));
+  const res = await axiosInstance.get<IPost>(endpoints.post.details(slug));
 
   const post = res.data;
 
-  const resList = await axiosInstance.get<IBlog[]>(endpoints.post.list);
+  const resList = await axiosInstance.get<IPost[]>(endpoints.post.list);
 
   return <PostDetailsHomeView post={post} latestPosts={resList.data} />;
 }

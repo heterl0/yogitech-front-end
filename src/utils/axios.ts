@@ -29,6 +29,13 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
 // ----------------------------------------------------------------------
 
 export const endpoints = {
+  api: {
+    v1: {
+      gemini: {
+        root: "/api/v1/gemini/",
+      },
+    },
+  },
   chat: "/api/chat",
   kanban: "/api/kanban",
   calendar: "/api/calendar",

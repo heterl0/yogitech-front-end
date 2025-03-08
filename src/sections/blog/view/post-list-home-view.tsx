@@ -14,7 +14,7 @@ import { useGetPosts, useSearchPosts } from "@/api/blog";
 
 import { useSettingsContext } from "@/components/settings";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 
 import PostList from "../post-list";
 import PostSort from "../post-sort";
@@ -95,7 +95,7 @@ const applyFilter = ({
   inputData,
   sortBy,
 }: {
-  inputData: IBlog[];
+  inputData: IPost[];
   sortBy: string;
 }) => {
   if (sortBy === "latest") {
