@@ -3,7 +3,7 @@ import { useMemo } from "react";
 
 import { fetcher, endpoints } from "@/utils/axios";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 import {
   IDashboardOverview,
   IEventGrowth,
@@ -22,7 +22,7 @@ export function useGetPosts() {
 
   const memoizedValue = useMemo(
     () => ({
-      posts: (data as IBlog[]) || [],
+      posts: (data as IPost[]) || [],
       postsLoading: isLoading,
       postsError: error,
       postsValidating: isValidating,

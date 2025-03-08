@@ -21,7 +21,13 @@ export default function SingleFilePreview({ imgUrl = "" }: Props) {
         position: "absolute",
       }}
     >
-      <Image alt="file preview" src={imgUrl} fill />
+      <Image
+        alt="file preview"
+        src={imgUrl}
+        className="aspect-video rounded-lg object-cover"
+        width={700}
+        height={400}
+      />
     </Box>
   );
 }

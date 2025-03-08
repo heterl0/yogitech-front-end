@@ -21,7 +21,7 @@ import Iconify from "@/components/iconify";
 import { useSettingsContext } from "@/components/settings";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
 
-import { IBlog, ActiveStatus } from "@/types/blog";
+import { IPost, ActiveStatus } from "@/types/blog";
 
 import PostSort from "../post-sort";
 import PostSearch from "../post-search";
@@ -76,7 +76,7 @@ export default function PostListView() {
 
   const deleteMutate = (id: number) => {
     postsMutate(
-      (blogs: IBlog[]) =>
+      (blogs: IPost[]) =>
         blogs.map((blog) =>
           blog.id === id
             ? {
@@ -207,7 +207,7 @@ const applyFilter = ({
   filter,
   sortBy,
 }: {
-  inputData: IBlog[];
+  inputData: IPost[];
   filter: number;
   sortBy: string;
 }) => {
@@ -220,7 +220,7 @@ const applyFilter = ({
   }
 
   if (sortBy === "popular") {
-    interface IBlogWithSumVote extends IBlog {
+    interface IBlogWithSumVote extends IPost {
       sumVote: number;
     }
 
@@ -228,7 +228,7 @@ const applyFilter = ({
       return votes.reduce((sum, vote) => sum + vote.vote_value, 0);
     };
 
-    const addSumVotesToBlogs = (blogs: IBlog[]): IBlogWithSumVote[] => {
+    const addSumVotesToBlogs = (blogs: IPost[]): IBlogWithSumVote[] => {
       return blogs.map((blog) => ({
         ...blog,
         sumVote: calculateSumVotes(blog.votes),

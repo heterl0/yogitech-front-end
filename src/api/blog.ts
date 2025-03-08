@@ -3,7 +3,7 @@ import { useMemo } from "react";
 
 import { fetcher, endpoints } from "@/utils/axios";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ export function useGetPosts() {
 
   const memoizedValue = useMemo(
     () => ({
-      posts: (data as IBlog[]) || [],
+      posts: (data as IPost[]) || [],
       postsLoading: isLoading,
       postsError: error,
       postsValidating: isValidating,
@@ -30,13 +30,15 @@ export function useGetPosts() {
 // ----------------------------------------------------------------------
 
 export function useGetPost(id: string) {
-  const URL = id ? [`${endpoints.post.details}${id}/`] : "";
+  const URL = id ? [`${endpoints.post.details(id)}`] : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher, {
+    revalidateOnFocus: false,
+  });
 
   const memoizedValue = useMemo(
     () => ({
-      post: data as IBlog,
+      post: data as IPost,
       postLoading: isLoading,
       postError: error,
       postValidating: isValidating,
@@ -56,7 +58,7 @@ export function useGetLatestPosts(title: string) {
 
   const memoizedValue = useMemo(
     () => ({
-      latestPosts: (data as IBlog[]) || [],
+      latestPosts: (data as IPost[]) || [],
       latestPostsLoading: isLoading,
       latestPostsError: error,
       latestPostsValidating: isValidating,
@@ -83,7 +85,7 @@ export function useSearchPosts(query: string) {
 
   const memoizedValue = useMemo(
     () => ({
-      searchResults: (data as IBlog[]) || [],
+      searchResults: (data as IPost[]) || [],
       searchLoading: isLoading,
       searchError: error,
       searchValidating: isValidating,

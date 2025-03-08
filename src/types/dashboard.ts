@@ -1,11 +1,11 @@
-import { IBlog } from "./blog";
+import { IPost } from "./blog";
 import { IPose } from "@/types/pose";
 import { IEvent } from "@/types/event";
 import { IExercise } from "@/types/exercise";
 import { IAccount } from "./user";
 export type IRecentActivity = {
   type: string;
-  data: IAccount | IBlog | IPose | IExercise | IEvent;
+  data: IAccount | IPost | IPose | IExercise | IEvent;
 };
 
 export type IDashboardOverview = {

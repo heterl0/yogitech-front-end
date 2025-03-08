@@ -43,9 +43,10 @@ export default function PostDetailsHero({
             zIndex: 9,
             color: "common.white",
             position: "absolute",
-            maxWidth: 480,
+            maxWidth: 1200,
             pt: { xs: 2, md: 8 },
           }}
+          className="line-clamp-[10]"
         >
           {title}
         </Typography>
@@ -68,14 +69,18 @@ export default function PostDetailsHero({
               }}
             >
               <Avatar
-                alt={author.name}
-                src={author.avatarUrl}
+                alt={author.username}
+                src={author.profile?.avatar_url || ""}
                 sx={{ width: 64, height: 64, mr: 2 }}
               />
 
               <ListItemText
                 sx={{ color: "common.white" }}
-                primary={author.name}
+                primary={
+                  author.profile?.last_name && author.profile?.first_name
+                    ? `${author.profile?.last_name} ${author.profile?.first_name}`
+                    : author.username
+                }
                 secondary={fDate(createdAt, currentLang.adapterLocale)}
                 primaryTypographyProps={{ typography: "subtitle1", mb: 0.5 }}
                 secondaryTypographyProps={{

@@ -11,7 +11,7 @@ import Carousel, {
   CarouselDots,
   CarouselArrows,
 } from "@/components/carousel";
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 
@@ -25,7 +25,7 @@ import Image from "next/image";
 // };
 
 interface Props extends CardProps {
-  list: IBlog[];
+  list: IPost[];
 }
 
 export default function AppFeaturedBlog({ list, ...other }: Props) {
@@ -66,7 +66,7 @@ export default function AppFeaturedBlog({ list, ...other }: Props) {
 // ----------------------------------------------------------------------
 
 type CarouselItemProps = {
-  item: IBlog;
+  item: IPost;
   active?: boolean;
 };
 

@@ -100,10 +100,11 @@ export default function PostDetailsView({ id }: Props) {
         title={post.title}
         coverUrl={post.image_url}
         createdAt={new Date(post.created_at)}
-        author={{
-          avatarUrl: post.owner.profile.avatar_url || "",
-          name: post.owner.username,
-        }}
+        // author={{
+        //   avatarUrl: post.owner.profile.avatar_url || "",
+        //   name: post.owner.username,
+        // }}
+        author={post.owner}
       />
 
       <Stack

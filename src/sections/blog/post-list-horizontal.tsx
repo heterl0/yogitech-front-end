@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
 
-import { IBlog } from "@/types/blog";
+import { IPost } from "@/types/blog";
 
 import { PostItemSkeleton } from "./post-skeleton";
 import PostItemHorizontal from "./post-item-horizontal";
@@ -9,7 +9,7 @@ import PostItemHorizontal from "./post-item-horizontal";
 // ----------------------------------------------------------------------
 
 type Props = {
-  posts: IBlog[];
+  posts: IPost[];
   loading?: boolean;
   deleteMutate: (id: number) => void;
 };
