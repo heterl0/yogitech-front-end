@@ -99,7 +99,12 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
           >
             <Stack direction="row" flexWrap="wrap" spacing={1}>
               {JSON.parse(post.benefit).map((tag: string) => (
-                <Chip key={tag} label={tag} variant="soft" />
+                <Chip
+                  key={tag}
+                  label={tag}
+                  variant="soft"
+                  className="!cursor-pointer"
+                />
               ))}
             </Stack>
 
