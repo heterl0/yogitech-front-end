@@ -23,6 +23,7 @@ import { IPost } from "@/types/blog";
 import { useMemo } from "react";
 import { useLocales } from "@/locales";
 import Image from "next/image";
+import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
 
@@ -67,15 +68,10 @@ export default function PostItem({ post, index }: Props) {
           createdAt={created_at}
           vote={vote}
           index={index}
+          slug={post.slug}
         />
 
-        <Image
-          alt={title}
-          src={image_url}
-          height={360}
-          width={480}
-          className=""
-        />
+        <Image alt={title} src={image_url} width={800} height={600} />
       </Card>
     );
   }
@@ -110,11 +106,16 @@ export default function PostItem({ post, index }: Props) {
           src={image_url}
           width={400}
           height={300}
-          className="aspect-[4/3]"
+          className="aspect-video"
         />
       </Box>
 
-      <PostContent title={title} vote={vote} createdAt={created_at} />
+      <PostContent
+        title={title}
+        vote={vote}
+        createdAt={created_at}
+        slug={post.slug}
+      />
     </Card>
   );
 }
@@ -129,6 +130,7 @@ type PostContentProps = {
     down: number;
   };
   createdAt: Date | string | number;
+  slug: string;
 };
 
 export function PostContent({
@@ -136,10 +138,11 @@ export function PostContent({
   createdAt,
   vote,
   index,
+  slug,
 }: PostContentProps) {
   const mdUp = useResponsive("up", "md");
 
-  // const linkTo = paths.post.details(title);
+  const linkTo = paths.blog.detail(slug);
 
   const latestPostLarge = index === 0;
 
@@ -153,45 +156,56 @@ export function PostContent({
         pt: 6,
         width: 1,
         ...((latestPostLarge || latestPostSmall) && {
-          pt: 0,
           zIndex: 9,
           bottom: 0,
           position: "absolute",
           color: "common.white",
+          display: "flex",
+          gap: index !== 0 && mdUp ? 1 : 3,
+          flexDirection: index === 0 ? "row" : "column",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          backgroundColor: "rgba(0, 0, 0, 0.48)",
+          backdropFilter: "blur(4px)",
+          p: index !== 0 && mdUp ? 1 : 2,
         }),
       }}
     >
-      <Typography
-        variant="caption"
-        component="div"
-        sx={{
-          mb: 1,
-          color: "text.disabled",
-          ...((latestPostLarge || latestPostSmall) && {
-            opacity: 0.64,
-            color: "common.white",
-          }),
-        }}
-      >
-        {fDate(createdAt, currentLang.adapterLocale)}
-      </Typography>
+      <div className="flex w-full flex-col">
+        {(index === 0 || !mdUp) && (
+          <Typography
+            variant="caption"
+            component="div"
+            sx={{
+              mb: 1,
+              color: "text.disabled",
+              ...((latestPostLarge || latestPostSmall) && {
+                opacity: 0.64,
+                color: "common.white",
+              }),
+            }}
+          >
+            {fDate(createdAt, currentLang.adapterLocale)}
+          </Typography>
+        )}
 
-      <Link color="inherit" component={RouterLink} href={"#"}>
-        <TextMaxLine
-          variant={mdUp && latestPostLarge ? "h5" : "subtitle2"}
-          line={2}
-          persistent
-        >
-          {title}
-        </TextMaxLine>
-      </Link>
+        <Link color="inherit" component={RouterLink} href={linkTo}>
+          <TextMaxLine
+            variant={mdUp && latestPostLarge ? "h5" : "subtitle2"}
+            line={index !== 0 && mdUp ? 1 : 2}
+            persistent
+          >
+            {title}
+          </TextMaxLine>
+        </Link>
+      </div>
 
       <Stack
         spacing={1.5}
         direction="row"
         justifyContent="flex-end"
         sx={{
-          mt: 3,
+          mt: index !== 0 && mdUp ? 0 : 3,
           typography: "caption",
           color: "text.disabled",
           ...((latestPostLarge || latestPostSmall) && {

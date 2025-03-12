@@ -77,12 +77,12 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
               name: post?.title,
             },
           ]}
-          sx={{ maxWidth: 720, mx: "auto" }}
+          sx={{ maxWidth: 1152, mx: "auto" }}
         />
       </Container>
 
       <Container maxWidth={false}>
-        <Stack sx={{ maxWidth: 720, mx: "auto" }}>
+        <Stack sx={{ maxWidth: 1152, mx: "auto" }}>
           <Typography variant="subtitle1" sx={{ mb: 5 }}>
             {post.description}
           </Typography>

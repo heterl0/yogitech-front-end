@@ -39,8 +39,8 @@ const components = {
     <Image
       alt={props.alt}
       src={props.src}
-      width={props.width}
-      height={props.height}
+      width={props.width ?? 600}
+      height={props.height ?? 400}
       className="h-full w-full"
       {...props}
     />
