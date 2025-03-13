@@ -88,7 +88,17 @@ export default function PostItem({ post, index = 0 }: Props) {
   const smUp = useResponsive("up", "sm");
   const { currentLang } = useLocales();
 
-  const { owner, title, image_url, created_at, votes, slug, excerpt } = post;
+  const {
+    owner,
+    title,
+    image_url,
+    created_at,
+    votes,
+    slug,
+    excerpt,
+    view_count,
+    reading_time,
+  } = post;
 
   const vote = useMemo(() => {
     const result = { down: 0, up: 0 };
@@ -189,14 +199,24 @@ export default function PostItem({ post, index = 0 }: Props) {
 
               <Stack direction="row" spacing={1.5}>
                 <Stack direction="row" alignItems="center" spacing={0.5}>
+                  <Iconify icon="solar:eye-bold" width={16} />
+                  {fShortenNumber(view_count)}
+                </Stack>
+
+                <Stack direction="row" alignItems="center" spacing={0.5}>
+                  <Iconify icon="solar:clock-circle-bold" width={16} />
+                  {reading_time} min
+                </Stack>
+
+                <Stack direction="row" alignItems="center" spacing={0.5}>
                   <Iconify icon="solar:like-bold" width={16} />
                   {fShortenNumber(vote.up)}
                 </Stack>
 
-                <Stack direction="row" alignItems="center" spacing={0.5}>
+                {/* <Stack direction="row" alignItems="center" spacing={0.5}>
                   <Iconify icon="solar:dislike-bold" width={16} />
                   {fShortenNumber(vote.down)}
-                </Stack>
+                </Stack> */}
               </Stack>
             </Stack>
           </Stack>
@@ -255,6 +275,24 @@ export default function PostItem({ post, index = 0 }: Props) {
             <Stack direction="row" spacing={1}>
               <Stack direction="row" alignItems="center" spacing={0.5}>
                 <Iconify
+                  icon="solar:eye-bold"
+                  width={16}
+                  sx={{ color: "info.main" }}
+                />
+                {fShortenNumber(view_count)}
+              </Stack>
+
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Iconify
+                  icon="solar:clock-circle-bold"
+                  width={16}
+                  sx={{ color: "warning.main" }}
+                />
+                {reading_time} min
+              </Stack>
+
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Iconify
                   icon="solar:like-bold"
                   width={16}
                   sx={{ color: "success.main" }}
@@ -262,14 +300,14 @@ export default function PostItem({ post, index = 0 }: Props) {
                 {fShortenNumber(vote.up)}
               </Stack>
 
-              <Stack direction="row" alignItems="center" spacing={0.5}>
+              {/* <Stack direction="row" alignItems="center" spacing={0.5}>
                 <Iconify
                   icon="solar:dislike-bold"
                   width={16}
                   sx={{ color: "error.main" }}
                 />
                 {fShortenNumber(vote.down)}
-              </Stack>
+              </Stack> */}
             </Stack>
           </Stack>
 

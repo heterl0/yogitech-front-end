@@ -167,10 +167,7 @@ export default function PostListView() {
             icon={
               <Label
                 variant={((tab === -1 || filter === tab) && "filled") || "soft"}
-                color={
-                  (tab === 1 ? "info" : tab === 2 ? "error" : "default") ||
-                  "default"
-                }
+                color={tab === 1 ? "info" : tab === 2 ? "error" : "default"}
               >
                 {tab === -1 && posts.length}
 
