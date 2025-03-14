@@ -9,22 +9,41 @@ import { EditorProps } from "./types";
 import { StyledEditor } from "./styles";
 import Toolbar, { formats } from "./toolbar";
 
-const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
-  loading: () => (
-    <Skeleton
-      sx={{
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: 1,
-        borderRadius: 1,
-        position: "absolute",
-      }}
-    />
-  ),
-});
+// Import the markdown module
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill");
+
+    // Import the markdown module
+    const { default: MarkdownShortcuts } = await import(
+      "quill-markdown-shortcuts"
+    );
+
+    // Register the markdown module with Quill
+    if (typeof window !== "undefined") {
+      const Quill = (await import("quill")).default;
+      Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
+    }
+
+    return RQ;
+  },
+  {
+    ssr: false,
+    loading: () => (
+      <Skeleton
+        sx={{
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 1,
+          borderRadius: 1,
+          position: "absolute",
+        }}
+      />
+    ),
+  }
+);
 
 // ----------------------------------------------------------------------
 
@@ -49,6 +68,8 @@ export default function Editor({
     clipboard: {
       matchVisual: false,
     },
+    // Add the markdown shortcuts module
+    markdownShortcuts: {},
   };
 
   return (
