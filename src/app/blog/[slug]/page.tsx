@@ -1,6 +1,9 @@
 import { PostDetailsHomeView } from "@/sections/blog/view";
 import { IPost } from "@/types/blog";
 import axiosInstance, { endpoints } from "@/utils/axios";
+import { generatePostJsonLd } from "@/utils/generate-post-jsonld";
+import { Metadata } from "next";
+import Script from "next/script";
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +20,17 @@ export default async function Page({ params }: Props) {
 
   const resList = await axiosInstance.get<IPost[]>(endpoints.post.list);
 
-  return <PostDetailsHomeView post={post} latestPosts={resList.data} />;
+  return (
+    <>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generatePostJsonLd(post)),
+        }}
+      />
+      <PostDetailsHomeView post={post} latestPosts={resList.data} />
+    </>
+  );
 }
 
 // ----------------------------------------------------------------------
@@ -40,4 +53,52 @@ export async function generateStaticParams() {
   return res.data.map((post: { slug: string }) => ({
     slug: post.slug,
   }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const { slug } = await params;
+
+  const res = await axiosInstance.get<IPost>(endpoints.post.details(slug));
+
+  const post = res.data;
+
+  return {
+    metadataBase: new URL(`${process.env.HOST_WEB_DOMAIN}/`),
+    title: post.seo_title ?? "Blog - YogiTech",
+    description:
+      post.seo_description ??
+      "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",
+    keywords:
+      post.seo_keywords ??
+      "Yogitech, Yoga blog, AI yoga, yoga tips, wellness, yoga techniques",
+    openGraph: {
+      title: post.seo_title ?? "Blog - YogiTech",
+      description:
+        post.seo_description ??
+        "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",
+      url: `${process.env.HOST_WEB_DOMAIN}/blog/${post.slug}/`,
+      type: "article",
+      images: [
+        {
+          url: post.image_url,
+        },
+        { url: `${process.env.HOST_WEB_DOMAIN}/blog-banner.jpg` },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.seo_title ?? "Blog - YogiTech",
+      description:
+        post.seo_description &&
+        "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",
+      images: [
+        post.image_url,
+        `${process.env.HOST_WEB_DOMAIN}/blog-banner.jpg`,
+      ],
+    },
+    alternates: {
+      canonical: `${process.env.HOST_WEB_DOMAIN}/blog/${post.slug}/`,
+    },
+  };
 }

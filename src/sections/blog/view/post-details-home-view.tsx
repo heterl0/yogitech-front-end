@@ -45,7 +45,6 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
   //     />
   //   </Container>
   // );
-
   const renderPost = post && (
     <>
       <PostDetailsHero

@@ -149,7 +149,10 @@ export default function PostItem({ post, index = 0 }: Props) {
           <StyledOverlay />
         </StyledCardMedia>
 
-        <StyledAvatar alt={authorName} src={owner.profile?.avatar_url || ""} />
+        <StyledAvatar
+          alt={authorName}
+          src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
+        />
 
         <StyledInfo>
           <Stack spacing={1}>
@@ -250,7 +253,10 @@ export default function PostItem({ post, index = 0 }: Props) {
           priority={index < 6}
         />
 
-        <StyledAvatar alt={authorName} src={owner.profile?.avatar_url || ""} />
+        <StyledAvatar
+          alt={authorName}
+          src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
+        />
       </StyledCardMedia>
 
       <CardContent sx={{ flexGrow: 1, p: { xs: 2, sm: 3 } }}>
