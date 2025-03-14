@@ -55,10 +55,10 @@ const StyledTextGradient = styled(m.h1)(({ theme }) => ({
     `300deg, ${theme.palette.primary.main} 0%, ${theme.palette.warning.main} 25%, ${theme.palette.primary.main} 50%, ${theme.palette.warning.main} 75%, ${theme.palette.primary.main} 100%`
   ),
   padding: 0,
-  marginTop: 8,
+  // marginTop: 8,
   lineHeight: 1,
   fontWeight: 900,
-  marginBottom: 24,
+  // marginBottom: 24,
   letterSpacing: 8,
   textAlign: "center",
   backgroundSize: "400%",
@@ -200,7 +200,7 @@ export default function HomeHero() {
 
       <m.div variants={varFade().in}>
         <StyledTextGradient
-          className="leading-[5.5rem]! md:leading-[7rem]!"
+          className="leading-[5.5rem]! md:leading-[8rem]!"
           animate={{ backgroundPosition: "200% center" }}
           transition={{
             repeatType: "reverse",

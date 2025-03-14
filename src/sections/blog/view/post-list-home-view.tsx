@@ -20,6 +20,7 @@ import PostList from "../post-list";
 import PostSort from "../post-sort";
 import PostSearch from "../post-search";
 import { useTranslation } from "react-i18next";
+import MainLayout from "@/layouts/main";
 
 // ----------------------------------------------------------------------
 
@@ -51,41 +52,46 @@ export default function PostListHomeView() {
   }, []);
 
   return (
-    <Container maxWidth={settings.themeStretch ? false : "lg"}>
-      <Typography
-        variant="h4"
-        sx={{
-          my: { xs: 3, md: 5 },
-        }}
+    <MainLayout>
+      <Container
+        maxWidth={settings.themeStretch ? false : "lg"}
+        sx={{ mb: 10 }}
       >
-        {t("blogPage.listHomeView.heading")}
-      </Typography>
+        <Typography
+          variant="h4"
+          sx={{
+            my: { xs: 3, md: 5 },
+          }}
+        >
+          {t("blogPage.listHomeView.heading")}
+        </Typography>
 
-      <Stack
-        spacing={3}
-        justifyContent="space-between"
-        alignItems={{ xs: "flex-end", sm: "center" }}
-        direction={{ xs: "column", sm: "row" }}
-        sx={{ mb: { xs: 3, md: 5 } }}
-      >
-        <PostSearch
-          query={debouncedQuery}
-          results={searchResults}
-          onSearch={handleSearch}
-          loading={searchLoading}
-          hrefItem={() => "#"}
-          // hrefItem={(title: string) => paths.post.details(title)}
-        />
+        <Stack
+          spacing={3}
+          justifyContent="space-between"
+          alignItems={{ xs: "flex-end", sm: "center" }}
+          direction={{ xs: "column", sm: "row" }}
+          sx={{ mb: { xs: 3, md: 5 } }}
+        >
+          <PostSearch
+            query={debouncedQuery}
+            results={searchResults}
+            onSearch={handleSearch}
+            loading={searchLoading}
+            hrefItem={() => "#"}
+            // hrefItem={(title: string) => paths.post.details(title)}
+          />
 
-        <PostSort
-          sort={sortBy}
-          onSort={handleSortBy}
-          sortOptions={POST_SORT_OPTIONS}
-        />
-      </Stack>
+          <PostSort
+            sort={sortBy}
+            onSort={handleSortBy}
+            sortOptions={POST_SORT_OPTIONS}
+          />
+        </Stack>
 
-      <PostList posts={dataFiltered} loading={postsLoading} />
-    </Container>
+        <PostList posts={dataFiltered} loading={postsLoading} />
+      </Container>
+    </MainLayout>
   );
 }
 
@@ -99,15 +105,40 @@ const applyFilter = ({
   sortBy: string;
 }) => {
   if (sortBy === "latest") {
-    return orderBy(inputData, ["createdAt"], ["desc"]);
+    inputData = orderBy(inputData, ["created_at"], ["desc"]);
   }
 
   if (sortBy === "oldest") {
-    return orderBy(inputData, ["createdAt"], ["asc"]);
+    inputData = orderBy(inputData, ["created_at"], ["asc"]);
   }
 
   if (sortBy === "popular") {
-    return orderBy(inputData, ["totalViews"], ["desc"]);
+    interface IBlogWithSumVote extends IPost {
+      sumVote: number;
+    }
+
+    const calculateSumVotes = (votes: { vote_value: number }[]) => {
+      return votes.reduce((sum, vote) => sum + vote.vote_value, 0);
+    };
+
+    const addSumVotesToBlogs = (blogs: IPost[]): IBlogWithSumVote[] => {
+      return blogs.map((blog) => ({
+        ...blog,
+        sumVote: calculateSumVotes(blog.votes),
+      }));
+    };
+    const blogsWithSumVotes = addSumVotesToBlogs(inputData);
+
+    // Sort by sumVote in descending order
+    const sortedBlogsWithSumVotes = orderBy(
+      blogsWithSumVotes,
+      ["sumVote"],
+      ["desc"]
+    );
+
+    // Strip out the sumVote property to return the array as IBlog[]
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    inputData = sortedBlogsWithSumVotes.map(({ sumVote, ...blog }) => blog);
   }
 
   return inputData;

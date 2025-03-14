@@ -43,6 +43,8 @@ export type IPost = {
   slug: string;
   url: string;
   excerpt: string;
+  view_count: number;
+  reading_time: number;
 };
 
 export enum ActiveStatus {

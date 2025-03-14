@@ -39,6 +39,7 @@ export const paths = {
   },
   blog: {
     root: `/blog/`,
+    detail: (slug: string) => `/blog/${slug}/`,
   },
   // AUTH
   auth: {

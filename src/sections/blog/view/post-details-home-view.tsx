@@ -45,7 +45,6 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
   //     />
   //   </Container>
   // );
-
   const renderPost = post && (
     <>
       <PostDetailsHero
@@ -77,12 +76,12 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
               name: post?.title,
             },
           ]}
-          sx={{ maxWidth: 720, mx: "auto" }}
+          sx={{ maxWidth: 1152, mx: "auto" }}
         />
       </Container>
 
       <Container maxWidth={false}>
-        <Stack sx={{ maxWidth: 720, mx: "auto" }}>
+        <Stack sx={{ maxWidth: 1152, mx: "auto" }}>
           <Typography variant="subtitle1" sx={{ mb: 5 }}>
             {post.description}
           </Typography>
@@ -99,7 +98,12 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
           >
             <Stack direction="row" flexWrap="wrap" spacing={1}>
               {JSON.parse(post.benefit).map((tag: string) => (
-                <Chip key={tag} label={tag} variant="soft" />
+                <Chip
+                  key={tag}
+                  label={tag}
+                  variant="soft"
+                  className="!cursor-pointer"
+                />
               ))}
             </Stack>
 

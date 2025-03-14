@@ -5,11 +5,12 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import { alpha, useTheme } from "@mui/material/styles";
+import Chip from "@mui/material/Chip";
+import Fade from "@mui/material/Fade";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { fDate } from "@/utils/format-time";
-
 import { bgGradient } from "@/theme/css";
-
 import { IPostHero } from "@/types/blog";
 import { useLocales } from "@/locales";
 
@@ -20,77 +21,157 @@ export default function PostDetailsHero({
   author,
   coverUrl,
   createdAt,
-}: IPostHero) {
+  category,
+  readTime,
+}: IPostHero & { category?: string; readTime?: string }) {
   const theme = useTheme();
   const { currentLang } = useLocales();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const authorName =
+    author?.profile?.last_name && author?.profile?.first_name
+      ? `${author.profile?.last_name} ${author.profile?.first_name}`
+      : author?.username;
+
   return (
     <Box
       sx={{
-        height: 480,
+        position: "relative",
+        height: { xs: "auto", sm: 480, md: 560, lg: 640 },
         overflow: "hidden",
         ...bgGradient({
           imgUrl: coverUrl,
-          startColor: `${alpha(theme.palette.grey[900], 0.64)} 0%`,
-          endColor: `${alpha(theme.palette.grey[900], 0.64)} 100%`,
+          startColor: `${alpha(theme.palette.grey[900], 0.76)} 0%`,
+          endColor: `${alpha(theme.palette.grey[900], 0.76)} 100%`,
         }),
+        display: "flex",
+        alignItems: "center",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `linear-gradient(to bottom, transparent 0%, ${alpha(theme.palette.grey[900], 0.85)} 100%)`,
+          zIndex: 1,
+        },
       }}
     >
-      <Container sx={{ height: 1, position: "relative" }}>
-        <Typography
-          variant="h3"
-          component="h1"
-          sx={{
-            zIndex: 9,
-            color: "common.white",
-            position: "absolute",
-            maxWidth: 1200,
-            pt: { xs: 2, md: 8 },
-          }}
-          className="line-clamp-[10]"
-        >
-          {title}
-        </Typography>
+      <Container
+        sx={{
+          height: 1,
+          position: "relative",
+          zIndex: 2,
+          py: { xs: 8, sm: 0 },
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: { xs: "flex-start", sm: "center" },
+        }}
+      >
+        <Fade in timeout={1000}>
+          <Box>
+            {/* Category and read time */}
+            {(category || readTime) && (
+              <Stack
+                direction="row"
+                spacing={2}
+                sx={{
+                  mb: { xs: 2, md: 3 },
+                  flexWrap: "wrap",
+                  gap: 1,
+                }}
+              >
+                {category && (
+                  <Chip
+                    label={category}
+                    size={isMobile ? "small" : "medium"}
+                    sx={{
+                      color: "primary.light",
+                      bgcolor: alpha(theme.palette.primary.main, 0.16),
+                      fontWeight: "medium",
+                    }}
+                  />
+                )}
+                {readTime && (
+                  <Chip
+                    label={readTime}
+                    size={isMobile ? "small" : "medium"}
+                    sx={{
+                      color: "common.white",
+                      bgcolor: alpha(theme.palette.common.white, 0.16),
+                      fontWeight: "medium",
+                    }}
+                  />
+                )}
+              </Stack>
+            )}
 
-        <Stack
-          sx={{
-            left: 0,
-            width: 1,
-            bottom: 0,
-            position: "absolute",
-          }}
-        >
-          {author && createdAt && (
-            <Stack
-              direction="row"
-              alignItems="center"
+            {/* Title */}
+            <Typography
+              variant="h1"
+              component="h1"
               sx={{
-                px: { xs: 2, md: 3 },
-                pb: { xs: 3, md: 8 },
+                color: "common.white",
+                maxWidth: { xs: "100%", md: "80%", lg: "70%" },
+                mb: { xs: 3, md: 5 },
+                textShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                fontSize: {
+                  xs: "2rem",
+                  sm: "2.5rem",
+                  md: "3rem",
+                  lg: "3.5rem",
+                },
+                lineHeight: 1.2,
               }}
             >
-              <Avatar
-                alt={author.username}
-                src={author.profile?.avatar_url || ""}
-                sx={{ width: 64, height: 64, mr: 2 }}
-              />
+              {title}
+            </Typography>
 
-              <ListItemText
-                sx={{ color: "common.white" }}
-                primary={
-                  author.profile?.last_name && author.profile?.first_name
-                    ? `${author.profile?.last_name} ${author.profile?.first_name}`
-                    : author.username
-                }
-                secondary={fDate(createdAt, currentLang.adapterLocale)}
-                primaryTypographyProps={{ typography: "subtitle1", mb: 0.5 }}
-                secondaryTypographyProps={{
-                  color: "inherit",
-                  sx: { opacity: 0.64 },
+            {/* Author info */}
+            {author && createdAt && (
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={2}
+                sx={{
+                  mt: { xs: 2, md: "auto" },
                 }}
-              />
-            </Stack>
-          )}
-        </Stack>
+              >
+                <Avatar
+                  alt={authorName}
+                  src={author.profile?.avatar_url || ""}
+                  sx={{
+                    width: { xs: 48, md: 64 },
+                    height: { xs: 48, md: 64 },
+                    border: `2px solid ${theme.palette.common.white}`,
+                    boxShadow: theme.shadows[2],
+                  }}
+                />
+
+                <ListItemText
+                  sx={{ color: "common.white" }}
+                  primary={authorName}
+                  secondary={
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                      <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                        {fDate(createdAt, currentLang.adapterLocale)}
+                      </Typography>
+                    </Stack>
+                  }
+                  primaryTypographyProps={{
+                    typography: "subtitle1",
+                    fontWeight: "bold",
+                    mb: 0.5,
+                  }}
+                  secondaryTypographyProps={{
+                    color: "inherit",
+                  }}
+                />
+              </Stack>
+            )}
+          </Box>
+        </Fade>
       </Container>
     </Box>
   );

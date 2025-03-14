@@ -17,6 +17,11 @@ export const navConfig = () => {
       icon: <Iconify icon="solar:atom-bold-duotone" />,
       path: "/about-us/",
     },
+    {
+      title: t("header.blog"),
+      icon: <Iconify icon="iconoir:post-solid" />,
+      path: "/blog/",
+    },
     // {
     //   title: t("header.product"),
     //   icon: <Iconify icon="hugeicons:yoga-01" />,

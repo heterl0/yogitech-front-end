@@ -75,7 +75,13 @@ function CarouselItem({ item, active }: CarouselItemProps) {
   const { image_url, title, description } = item;
 
   const renderImg = (
-    <Image alt={title} src={image_url} width={480} height={320} />
+    <Image
+      alt={title}
+      src={image_url}
+      width={600}
+      height={400}
+      className="aspect-video h-full object-cover"
+    />
   );
 
   return (
