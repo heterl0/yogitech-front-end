@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
  * Will remove in Next.js v15
  */
 // const dynamic = CONFIG.isStaticExport ? "auto" : "force-dynamic";
-const dynamic = "auto";
+const dynamic = "force-dynamic";
 export { dynamic };
 
 /**
