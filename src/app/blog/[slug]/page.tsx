@@ -27,6 +27,7 @@ export default async function Page({ params }: Props) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(generatePostJsonLd(post)),
         }}
+        id="json-ld-post"
       />
       <PostDetailsHomeView post={post} latestPosts={resList.data} />
     </>
