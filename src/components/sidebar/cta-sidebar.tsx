@@ -38,7 +38,7 @@ export default function CtaSidebar() {
           <Box
             component="img"
             // src="/logo/logo_signle_2.svg?height=200&width=260"
-            src="/banner-2.png"
+            src="/banner-2-ads.png"
             alt="App Screenshot"
             sx={{ width: "100%", height: 200, objectFit: "cover" }}
           />
