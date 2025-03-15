@@ -63,6 +63,13 @@ export default function RootLayout({
           <>
             <GoogleAnalytics gaId="G-686MPCS14D" />
             <GoogleTagManager gtmId="GTM-P43FRWB7" />
+            <Script
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3767915082225357`}
+              strategy="lazyOnload"
+              crossOrigin="anonymous"
+            />
+
             <Script id="clarity-script" defer>
               {` (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
