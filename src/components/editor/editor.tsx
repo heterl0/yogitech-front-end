@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import "@/utils/highlight";
 
 import dynamic from "next/dynamic";
+import { useCallback, useMemo, useRef } from "react";
 
 import { alpha } from "@mui/material/styles";
 import Skeleton from "@mui/material/Skeleton";
@@ -8,6 +12,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { EditorProps } from "./types";
 import { StyledEditor } from "./styles";
 import Toolbar, { formats } from "./toolbar";
+import axiosInstance, { endpoints } from "@/utils/axios";
 
 // Import the markdown module
 const ReactQuill = dynamic(
@@ -25,7 +30,10 @@ const ReactQuill = dynamic(
       Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
     }
 
-    return RQ;
+    // Return a component that forwards the ref to the actual ReactQuill instance
+    return ({ forwardedRef, ...props }: any) => (
+      <RQ ref={forwardedRef} {...props} />
+    );
   },
   {
     ssr: false,
@@ -55,22 +63,74 @@ export default function Editor({
   sx,
   ...other
 }: EditorProps) {
-  const modules = {
-    toolbar: {
-      container: `#${id}`,
-    },
-    history: {
-      delay: 500,
-      maxStack: 100,
-      userOnly: true,
-    },
-    syntax: true,
-    clipboard: {
-      matchVisual: false,
-    },
-    // Add the markdown shortcuts module
-    markdownShortcuts: {},
-  };
+  const quillRef = useRef(null);
+
+  // Example upload function (replace with your actual implementation)
+  const uploadImage = useCallback(async (file: File) => {
+    // Implementation example:
+    // 1. Create FormData
+    const formData = new FormData();
+    formData.append("file", file);
+
+    // 2. Make API call to your server
+    try {
+      const response = await axiosInstance.post(
+        endpoints.media.uploadFile,
+        formData
+      );
+      console.log(response);
+      return response.data.file_url;
+    } catch {
+      throw new Error("Upload failed");
+    }
+  }, []);
+
+  // Image upload handler function
+  const imageHandler = useCallback(() => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = async () => {
+      if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+
+        // This should be replaced with your actual image upload function
+        const imageUrl = await uploadImage(file);
+
+        // Insert the image at the current cursor position
+        if (quillRef.current) {
+          const quillEditor = (quillRef.current as any).getEditor();
+          const range = quillEditor.getSelection();
+          quillEditor.insertEmbed(range.index, "image", imageUrl);
+        }
+      }
+    };
+  }, [uploadImage]);
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: `#${id}`,
+        handlers: {
+          image: imageHandler,
+        },
+      },
+      history: {
+        delay: 500,
+        maxStack: 100,
+        userOnly: true,
+      },
+      syntax: true,
+      clipboard: {
+        matchVisual: false,
+      },
+      // Add the markdown shortcuts module
+      markdownShortcuts: {},
+    }),
+    [id, imageHandler]
+  );
 
   return (
     <>
@@ -88,6 +148,7 @@ export default function Editor({
         <Toolbar id={id} simple={simple} />
 
         <ReactQuill
+          forwardedRef={quillRef}
           modules={modules}
           formats={formats}
           placeholder="Write something awesome..."
