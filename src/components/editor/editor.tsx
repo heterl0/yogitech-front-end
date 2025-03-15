@@ -78,7 +78,6 @@ export default function Editor({
         endpoints.media.uploadFile,
         formData
       );
-      console.log(response);
       return response.data.file_url;
     } catch {
       throw new Error("Upload failed");
