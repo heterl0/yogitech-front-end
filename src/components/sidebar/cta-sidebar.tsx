@@ -6,9 +6,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import Iconify from "@/components/iconify";
+import { useTranslation } from "react-i18next";
 
 export default function CtaSidebar() {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -23,7 +25,7 @@ export default function CtaSidebar() {
       }}
     >
       <Stack spacing={3} sx={{ pb: 2 }}>
-        <Typography variant="h6">Download Our App</Typography>
+        <Typography variant="h6">{t("ctaSidebar.downloadApp")}</Typography>
 
         <Box
           sx={{
@@ -43,12 +45,11 @@ export default function CtaSidebar() {
 
           <Stack spacing={2} sx={{ p: 2 }}>
             <Typography variant="subtitle1">
-              Get the best experience on our mobile app
+              {t("ctaSidebar.experience")}
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
-              Access exclusive features, faster loading times, and offline
-              capabilities.
+              {t("ctaSidebar.msg")}
             </Typography>
 
             <Stack direction="row" spacing={2}>
@@ -58,7 +59,7 @@ export default function CtaSidebar() {
                 href="https://storage.yogitech.me/files/yogitech-beta-v1_0.1.apk"
                 startIcon={<Iconify icon="ri:google-play-fill" />}
               >
-                Google Play
+                {t("ctaSidebar.googlePlay")}
               </Button>
 
               {/* <Button
@@ -73,17 +74,19 @@ export default function CtaSidebar() {
         </Box>
 
         <Stack spacing={2}>
-          <Typography variant="subtitle2">Why download our app?</Typography>
+          <Typography variant="subtitle2">
+            {t("ctaSidebar.whyDownload")}
+          </Typography>
 
           <Stack spacing={1}>
             {[
               {
                 icon: "healthicons:exercise-yoga",
-                text: "Practice Yoga with AI",
+                text: t("ctaSidebar.list1"),
               },
-              { icon: "fluent:flash-20-filled", text: "Faster loading times" },
-              { icon: "tabler:yoga", text: "Many poses for free" },
-              { icon: "solar:bookmark-bold", text: "Track your process" },
+              { icon: "fluent:flash-20-filled", text: t("ctaSidebar.list2") },
+              { icon: "tabler:yoga", text: t("ctaSidebar.list3") },
+              { icon: "solar:bookmark-bold", text: t("ctaSidebar.list4") },
             ].map((item, index) => (
               <Stack
                 key={index}

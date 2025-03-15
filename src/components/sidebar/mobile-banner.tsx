@@ -7,9 +7,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Iconify from "@/components/iconify";
+import { useTranslation } from "react-i18next";
 
 export default function MobileBanner() {
   const [isOpen, setIsOpen] = useState(true);
+  const { t } = useTranslation();
 
   if (!isOpen) return null;
 
@@ -31,7 +33,7 @@ export default function MobileBanner() {
         <IconButton
           size="small"
           onClick={() => setIsOpen(false)}
-          sx={{ position: "absolute", top: 8, right: 8 }}
+          sx={{ position: "absolute", top: 6, right: 6 }}
         >
           <Iconify icon="eva:close-fill" width={20} />
         </IconButton>
@@ -45,10 +47,10 @@ export default function MobileBanner() {
 
         <Stack spacing={0.5} sx={{ flexGrow: 1 }}>
           <Typography variant="subtitle2" noWrap>
-            Download Our App
+            {t("mobileBanner.downloadApp")}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }} noWrap>
-            Get the best practice yoga on mobile
+            {t("mobileBanner.description")}
           </Typography>
         </Stack>
 
@@ -58,7 +60,7 @@ export default function MobileBanner() {
           href="https://storage.yogitech.me/files/yogitech-beta-v1_0.1.apk"
           startIcon={<Iconify icon="eva:download-fill" />}
         >
-          Get App
+          {t("mobileBanner.getButton")}
         </Button>
       </Stack>
     </Box>

@@ -1161,5 +1161,25 @@
         "content": "Nếu bạn có câu hỏi hoặc băn khoăn về Chính sách Quyền riêng tư này, vui lòng liên hệ với chúng tôi qua: 📧 Email: support@yogitech.me"
       }
     }
+  },
+  "mobileBanner": {
+    "downloadApp": "Tải Ứng Dụng Của Chúng Tôi",
+    "description": "Trải nghiệm yoga tốt nhất trên di động",
+    "getButton": "Tải Ứng Dụng"
+  },
+  "ctaSidebar": {
+    "downloadApp": "Tải Ứng Dụng Của Chúng Tôi",
+    "experience": "Trải nghiệm tốt nhất trên ứng dụng di động",
+    "msg": "Truy cập những tính năng độc quyền, tốc độ tải nhanh hơn và khả năng ngoại tuyến.",
+    "whyDownload": "Tại sao nên tải ứng dụng của chúng tôi?",
+    "list1": "Tập Yoga với AI",
+    "list2": "Tốc độ tải nhanh hơn",
+    "list3": "Nhiều tư thế Yoga miễn phí",
+    "list4": "Theo dõi quá trình tập luyện",
+    "googlePlay": "Google Play"
+  },
+  "adsSidebar": {
+    "sponsored": "Được tài trợ",
+    "placeholder": "Vị trí Quảng cáo Google"
   }
 }

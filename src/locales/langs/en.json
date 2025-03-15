@@ -1161,5 +1161,25 @@
         "content": "If you have questions or concerns about this Privacy Policy, please contact us at: 📧 Email: support@yogitech.me"
       }
     }
+  },
+  "mobileBanner": {
+    "downloadApp": "Download Our App",
+    "description": "Get the best practice yoga on mobile",
+    "getButton": "Get App"
+  },
+  "ctaSidebar": {
+    "downloadApp": "Download Our App",
+    "experience": "Get the best experience on our mobile app",
+    "msg": "Access exclusive features, faster loading times, and offline capabilities.",
+    "whyDownload": "Why download our app?",
+    "list1": "Practice Yoga with AI",
+    "list2": "Faster loading times",
+    "list3": "Many poses for free",
+    "list4": "Track your process",
+    "googlePlay": "Google Play"
+  },
+  "adsSidebar": {
+    "sponsored": "Sponsored",
+    "placeholder": "Google Ads Placement"
   }
 }

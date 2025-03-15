@@ -4,8 +4,11 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Iconify from "@/components/iconify";
+import { useTranslation } from "react-i18next";
 
 export default function AdsSidebar() {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -21,7 +24,9 @@ export default function AdsSidebar() {
       <Stack spacing={2}>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Iconify icon="solar:ads-bold" width={24} />
-          <Typography variant="subtitle1">Sponsored</Typography>
+          <Typography variant="subtitle1">
+            {t("adsSidebar.sponsored")}
+          </Typography>
         </Stack>
 
         {/* Google Ads Container */}
@@ -38,7 +43,7 @@ export default function AdsSidebar() {
         >
           {/* Replace this with your actual Google Ads code */}
           <Typography variant="body2" color="text.secondary" align="center">
-            Google Ads Placement
+            {t("adsSidebar.placeholder")}
           </Typography>
         </Box>
       </Stack>
