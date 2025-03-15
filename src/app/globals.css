@@ -400,12 +400,15 @@
     0% {
       transform: translate(0px, 0px) scale(1);
     }
+
     33% {
       transform: translate(30px, -50px) scale(1.1);
     }
+
     66% {
       transform: translate(-20px, 20px) scale(0.9);
     }
+
     100% {
       transform: translate(0px, 0px) scale(1);
     }
@@ -461,4 +464,56 @@
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Lists styling - Enhanced for nested lists */
+ul,
+ol {
+  margin: 0.8rem 0;
+  padding-left: 1.2rem;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+/* Nested list styling */
+ul ul,
+ol ul {
+  list-style-type: circle;
+  margin: 0.4rem 0;
+}
+
+ul ul ul,
+ol ul ul,
+ul ol ul,
+ol ol ul {
+  list-style-type: square;
+}
+
+ol ol,
+ul ol {
+  list-style-type: lower-alpha;
+  margin: 0.4rem 0;
+}
+
+ol ol ol,
+ul ol ol,
+ol ul ol,
+ul ul ol {
+  list-style-type: lower-roman;
+}
+
+li {
+  font-size: inherit;
+  margin-bottom: 0.3rem;
+}
+
+/* Ensure nested lists don't have bottom margin on last item */
+li:last-child {
+  margin-bottom: 0;
 }
