@@ -135,19 +135,26 @@ export default function PostItem({ post, index = 0 }: Props) {
           transition: "box-shadow 0.3s ease",
         }}
       >
-        <StyledCardMedia sx={{ height: "100%" }}>
-          <Image
-            alt={title}
-            src={image_url}
-            fill
-            sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
-            style={{
-              objectFit: "cover",
-            }}
-            priority={index < 3}
-          />
-          <StyledOverlay />
-        </StyledCardMedia>
+        <Link
+          component={RouterLink}
+          href={linkTo}
+          color="inherit"
+          underline="none"
+        >
+          <StyledCardMedia sx={{ height: "100%" }}>
+            <Image
+              alt={title}
+              src={image_url}
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+              style={{
+                objectFit: "cover",
+              }}
+              priority={index < 3}
+            />
+            <StyledOverlay />
+          </StyledCardMedia>
+        </Link>
 
         <StyledAvatar
           alt={authorName}
@@ -215,11 +222,6 @@ export default function PostItem({ post, index = 0 }: Props) {
                   <Iconify icon="solar:like-bold" width={16} />
                   {fShortenNumber(vote.up)}
                 </Stack>
-
-                {/* <Stack direction="row" alignItems="center" spacing={0.5}>
-                  <Iconify icon="solar:dislike-bold" width={16} />
-                  {fShortenNumber(vote.down)}
-                </Stack> */}
               </Stack>
             </Stack>
           </Stack>
@@ -241,23 +243,30 @@ export default function PostItem({ post, index = 0 }: Props) {
         },
       }}
     >
-      <StyledCardMedia sx={{ pt: "56.25%", position: "relative" }}>
-        <Image
-          alt={title}
-          src={image_url}
-          fill
-          sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
-          style={{
-            objectFit: "cover",
-          }}
-          priority={index < 6}
-        />
+      <Link
+        component={RouterLink}
+        href={linkTo}
+        color="inherit"
+        underline="none"
+      >
+        <StyledCardMedia sx={{ pt: "56.25%", position: "relative" }}>
+          <Image
+            alt={title}
+            src={image_url}
+            fill
+            sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+            style={{
+              objectFit: "cover",
+            }}
+            priority={index < 6}
+          />
 
-        <StyledAvatar
-          alt={authorName}
-          src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
-        />
-      </StyledCardMedia>
+          <StyledAvatar
+            alt={authorName}
+            src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
+          />
+        </StyledCardMedia>
+      </Link>
 
       <CardContent sx={{ flexGrow: 1, p: { xs: 2, sm: 3 } }}>
         <Stack spacing={smUp ? 2 : 1.5}>
@@ -275,6 +284,7 @@ export default function PostItem({ post, index = 0 }: Props) {
                 fontWeight: "medium",
                 bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
                 color: "primary.main",
+                ":hover": { bgcolor: "primary.light" },
               }}
             />
 
@@ -297,14 +307,14 @@ export default function PostItem({ post, index = 0 }: Props) {
                 {reading_time} min
               </Stack>
 
-              <Stack direction="row" alignItems="center" spacing={0.5}>
+              {/* <Stack direction="row" alignItems="center" spacing={0.5}>
                 <Iconify
                   icon="solar:like-bold"
                   width={16}
                   sx={{ color: "success.main" }}
                 />
                 {fShortenNumber(vote.up)}
-              </Stack>
+              </Stack> */}
 
               {/* <Stack direction="row" alignItems="center" spacing={0.5}>
                 <Iconify
