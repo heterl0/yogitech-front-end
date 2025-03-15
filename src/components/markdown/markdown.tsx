@@ -36,14 +36,16 @@ export default function Markdown({ sx, ...other }: MarkdownProps) {
 
 const components = {
   img: ({ ...props }) => (
-    <Image
-      alt={props.alt}
-      src={props.src}
-      width={props.width ?? 600}
-      height={props.height ?? 400}
-      className="h-full w-full"
-      {...props}
-    />
+    <div className="flex w-full justify-center">
+      <Image
+        alt={props.alt}
+        src={props.src}
+        height={props.height ?? 628}
+        width={props.width ?? 940}
+        className="rounded-xl"
+        {...props}
+      />
+    </div>
   ),
   a: ({ ...props }) => {
     const isHttp = props.href.includes("http");
