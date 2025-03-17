@@ -4,5 +4,6 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "i18n-ally.localesPaths": ["src/locales", "src/locales/langs"]
+  "i18n-ally.localesPaths": ["src/locales", "src/locales/langs"],
+  "i18n-ally.keystyle": "nested"
 }
