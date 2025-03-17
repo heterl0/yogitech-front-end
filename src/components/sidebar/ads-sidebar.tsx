@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Iconify from "@/components/iconify";
 import { useTranslation } from "react-i18next";
+import AdBanner from "../ad-banner/ad-banner";
 
 export default function AdsSidebar() {
   const { t } = useTranslation();
@@ -41,10 +42,12 @@ export default function AdsSidebar() {
             justifyContent: "center",
           }}
         >
-          {/* Replace this with your actual Google Ads code */}
-          <Typography variant="body2" color="text.secondary" align="center">
-            {t("adsSidebar.placeholder")}
-          </Typography>
+          <AdBanner
+            className="adsbygoogle"
+            style={{ display: "inline-block", width: "300px", height: "600px" }}
+            data-ad-client="ca-pub-3767915082225357"
+            data-ad-slot="1889465032"
+          />
         </Box>
       </Stack>
     </Box>

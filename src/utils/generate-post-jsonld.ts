@@ -29,14 +29,14 @@ export const generatePostJsonLd = (post: IPost) => {
     articleBody: post.content,
     wordCount: post.content.split(" ").length,
     commentCount: post.votes.length,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: (
-        post.votes.reduce((sum, vote) => sum + vote.vote_value, 0) /
-          post.votes.length || 0
-      ).toFixed(1),
-      reviewCount: post.votes.length,
-    },
+    // aggregateRating: {
+    //   "@type": "AggregateRating",
+    //   ratingValue: (
+    //     post.votes.reduce((sum, vote) => sum + vote.vote_value, 0) /
+    //       post.votes.length || 0
+    //   ).toFixed(1),
+    //   reviewCount: post.votes.length,
+    // },
     interactionStatistic: {
       "@type": "InteractionCounter",
       interactionType: "https://schema.org/ViewAction",
