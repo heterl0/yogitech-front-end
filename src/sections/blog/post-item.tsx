@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import Image from "next/image";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
@@ -93,22 +92,21 @@ export default function PostItem({ post, index = 0 }: Props) {
     title,
     image_url,
     created_at,
-    votes,
     slug,
     excerpt,
     view_count,
     reading_time,
   } = post;
 
-  const vote = useMemo(() => {
-    const result = { down: 0, up: 0 };
-    votes.forEach((item) => {
-      item.vote_value === 1
-        ? (result.up = result.up + 1)
-        : (result.down = result.down + 1);
-    });
-    return result;
-  }, [votes]);
+  // const vote = useMemo(() => {
+  //   const result = { down: 0, up: 0 };
+  //   votes.forEach((item) => {
+  //     item.vote_value === 1
+  //       ? (result.up = result.up + 1)
+  //       : (result.down = result.down + 1);
+  //   });
+  //   return result;
+  // }, [votes]);
 
   const isFeaturePost = index === 0;
   const isLatestPost = index === 1 || index === 2;
@@ -218,10 +216,10 @@ export default function PostItem({ post, index = 0 }: Props) {
                   {reading_time} min
                 </Stack>
 
-                <Stack direction="row" alignItems="center" spacing={0.5}>
+                {/* <Stack direction="row" alignItems="center" spacing={0.5}>
                   <Iconify icon="solar:like-bold" width={16} />
                   {fShortenNumber(vote.up)}
-                </Stack>
+                </Stack> */}
               </Stack>
             </Stack>
           </Stack>

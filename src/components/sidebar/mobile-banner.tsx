@@ -45,7 +45,7 @@ export default function MobileBanner() {
           sx={{ width: 60, height: 60, borderRadius: 1 }}
         />
 
-        <Stack spacing={0.5} sx={{ flexGrow: 1 }}>
+        <Stack spacing={0.5}>
           <Typography variant="subtitle2" noWrap>
             {t("mobileBanner.downloadApp")}
           </Typography>
