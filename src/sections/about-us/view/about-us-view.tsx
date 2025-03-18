@@ -41,7 +41,7 @@ function AboutUsView() {
       socials: {
         linkedin: "#",
         facebook: "https://www.facebook.com/RiTaka157",
-        github: "https://github.com/TranNHCE161052",
+        github: "https://github.com/ritaka157",
       },
     },
     {
