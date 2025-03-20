@@ -11,13 +11,13 @@ const ROOTS = {
 // ----------------------------------------------------------------------
 
 export const paths = {
-  download: "/download",
-  comingSoon: "/coming-soon",
-  maintenance: "/maintenance",
-  pricing: "/pricing",
-  payment: "/payment",
-  about: "/about-us",
-  contact: "/contact-us",
+  download: "/download/",
+  comingSoon: "/coming-soon/",
+  maintenance: "/maintenance/",
+  pricing: "/pricing/",
+  payment: "/payment/",
+  about: "/about-us/",
+  contact: "/contact-us/",
   faqs: "/#faqs",
   privacyPolicy: "/privacy-policy",
   termsAndConditions: "/terms-and-conditions",
