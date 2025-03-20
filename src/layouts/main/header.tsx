@@ -34,7 +34,7 @@ function Header({ isBlurFromStart = false }: Props) {
   const mdUp = useResponsive("up", "md");
   const pathname = usePathname();
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
-
+  const isDark = pathname === paths.about;
   return (
     <AppBar>
       <Toolbar
@@ -50,13 +50,14 @@ function Header({ isBlurFromStart = false }: Props) {
           }),
           ...((offsetTop || isBlurFromStart) && {
             ...bgBlur({
-              color:
-                pathname === paths.about
-                  ? "rgba(0, 0, 0, 0.6)"
-                  : theme.palette.background.default,
+              color: isDark
+                ? "rgba(0, 0, 0) !important"
+                : theme.palette.background.default,
+              opacity: isDark ? 0.4 : undefined,
             }),
             height: {
               md: HEADER.H_DESKTOP_OFFSET,
+              xs: HEADER.H_MOBILE,
             },
           }),
         }}

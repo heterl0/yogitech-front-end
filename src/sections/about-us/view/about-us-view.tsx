@@ -80,7 +80,7 @@ function AboutUsView() {
   ];
 
   return (
-    <MainLayout>
+    <MainLayout isBlurFromStart>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
       {/* <div className="relative min-h-screen bg-linear-to-b from-[#09141C] via-[#09141C] via-80% to-purple-900 text-white"> */}
@@ -206,7 +206,7 @@ function AboutUsView() {
 
             {/* Team Section */}
             <m.div {...fadeIn}>
-              <div className="text-black-contrast-text flex flex-col gap-6 rounded-2xl bg-white/10 p-8 shadow-xl backdrop-blur-md">
+              <div className="text-black-contrast-text flex flex-col gap-6 rounded-2xl bg-white/10 shadow-xl backdrop-blur-md md:p-8">
                 <Typography
                   variant="h2"
                   className="mb-12! text-center font-bold"
