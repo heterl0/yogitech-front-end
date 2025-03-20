@@ -20,6 +20,7 @@ import LanguagePopover from "../common/language-popover";
 import NavMobile from "./nav/mobile";
 import Link from "next/link";
 import { memo } from "react";
+import { usePathname } from "next/navigation";
 
 // ----------------------------------------------------------------------
 
@@ -31,9 +32,9 @@ function Header({ isBlurFromStart = false }: Props) {
   const theme = useTheme();
   const { t } = useTranslate();
   const mdUp = useResponsive("up", "md");
-
+  const pathname = usePathname();
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
-
+  const isDark = pathname === paths.about;
   return (
     <AppBar>
       <Toolbar
@@ -49,10 +50,14 @@ function Header({ isBlurFromStart = false }: Props) {
           }),
           ...((offsetTop || isBlurFromStart) && {
             ...bgBlur({
-              color: theme.palette.background.default,
+              color: isDark
+                ? "rgba(0, 0, 0) !important"
+                : theme.palette.background.default,
+              opacity: isDark ? 0.4 : undefined,
             }),
             height: {
               md: HEADER.H_DESKTOP_OFFSET,
+              xs: HEADER.H_MOBILE,
             },
           }),
         }}

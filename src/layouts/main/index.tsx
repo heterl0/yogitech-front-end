@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 import Footer from "./footer";
 import Header from "./header";
+import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +18,8 @@ export default function MainLayout({ children, isBlurFromStart }: Props) {
 
   const homePage = pathname === "/";
 
+  const aboutPage = pathname === paths.about;
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
       <Header isBlurFromStart={isBlurFromStart} />
@@ -25,7 +28,7 @@ export default function MainLayout({ children, isBlurFromStart }: Props) {
         component="main"
         sx={{
           flexGrow: 1,
-          ...(!homePage && {
+          ...(!(homePage || aboutPage) && {
             pt: { xs: 8, md: 10 },
           }),
         }}

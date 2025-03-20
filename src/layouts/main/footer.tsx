@@ -7,11 +7,15 @@ import Typography from "@mui/material/Typography";
 import { paths } from "@/routes/paths";
 import Logo from "@/components/logo";
 import { useTranslate } from "@/locales";
+import { usePathname } from "next/navigation";
+import { cn } from "@/utils/cn";
 
 // ----------------------------------------------------------------------
 
 export default function Footer() {
   const { t } = useTranslate();
+  const pathname = usePathname();
+  const isDark = pathname === paths.about;
 
   const LINKS = [
     {
@@ -63,26 +67,56 @@ export default function Footer() {
   );
 
   const mainFooter = (
-    <footer className="bg-background border-grey-300 relative border-t">
+    <footer
+      className={cn(
+        "relative border-t",
+        isDark
+          ? "dark border-gray-800 bg-gray-900"
+          : "bg-background border-grey-300"
+      )}
+    >
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Logo className="mb-4 h-8 w-auto" />
-            <p className="text-muted-foreground max-w-xs text-sm">
+            <p
+              className={cn(
+                "max-w-xs text-sm",
+                isDark ? "text-gray-400" : "text-muted-foreground"
+              )}
+            >
               {t("footer.description")}
             </p>
           </div>
           {LINKS.map((list) => (
             <div key={list.headline}>
-              <h3 className="text-foreground mb-4 text-sm font-semibold">
+              <h3
+                className={cn(
+                  "mb-4 text-sm font-semibold",
+                  isDark ? "text-[#eee]" : "text-foreground"
+                )}
+              >
                 {list.headline}
               </h3>
               <ul className="space-y-2">
                 {list.children.map((link) => (
-                  <li key={link.name}>
+                  <li
+                    key={link.name}
+                    className={cn(
+                      "text-sm transition-colors",
+                      isDark
+                        ? "text-gray-400 hover:text-[#eee]"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
                     <Link
                       href={link.href}
-                      className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                      className={cn(
+                        "text-sm transition-colors",
+                        isDark
+                          ? "text-gray-400 hover:text-[#eee]"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
                     >
                       {link.name}
                     </Link>
@@ -92,8 +126,18 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-grey-300 mt-12 border-t pt-8 md:border-t-0">
-          <p className="text-muted-foreground text-center text-sm">
+        <div
+          className={cn(
+            "mt-12 border-t pt-8 md:border-t-0",
+            isDark ? "border-gray-800" : "border-grey-300"
+          )}
+        >
+          <p
+            className={cn(
+              "text-center text-sm",
+              isDark ? "text-gray-400" : "text-muted-foreground"
+            )}
+          >
             {t("footer.copyright", { year: new Date().getFullYear() })}
           </p>
         </div>
