@@ -189,7 +189,7 @@ function FeaturesView() {
                   <Grid item xs={12} md={6}>
                     <m.div
                       whileHover={{ scale: 1.02 }}
-                      className="overflow-hidden rounded-lg bg-white/5 p-2 backdrop-blur-xs"
+                      className="text- taw text-wh overflow-hidden rounded-lg bg-white/5 p-2 backdrop-blur-xs"
                     >
                       <Image
                         src="/banner.png?height=400&width=600"
