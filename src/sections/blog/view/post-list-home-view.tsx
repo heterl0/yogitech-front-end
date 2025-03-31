@@ -21,6 +21,7 @@ import PostSort from "../post-sort";
 import PostSearch from "../post-search";
 import { useTranslation } from "react-i18next";
 import MainLayout from "@/layouts/main";
+import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
 
@@ -78,8 +79,8 @@ export default function PostListHomeView() {
             results={searchResults}
             onSearch={handleSearch}
             loading={searchLoading}
-            hrefItem={() => "#"}
-            // hrefItem={(title: string) => paths.post.details(title)}
+            hrefItem={(title: string) => paths.blog.detail(title)}
+            useSlug
           />
 
           <PostSort

@@ -14,7 +14,6 @@ import { Box, Button, CardContent, Typography } from "@mui/material";
 import { mockPose } from "@/_mock/_pose";
 import axiosInstance, { endpoints } from "@/utils/axios";
 import { fShortenNumber } from "@/utils/format-number";
-import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
 // ----------------------------------------------------------------------
@@ -165,8 +164,6 @@ function Test({ setFeedback }: Props) {
     null
   );
 
-  const router = useRouter();
-  const pathname = usePathname();
   const [poseSelected, setPoseSelected] = useState<SamplePose>(mockPose[0]);
   useEffect(() => {
     if (canvasRef.current) {
@@ -318,18 +315,10 @@ function Test({ setFeedback }: Props) {
         <Button
           ref={enableWebcamButtonRef}
           id="webcamButton"
-          onClick={
-            webcamRunning
-              ? enableCam
-              : () => {
-                  router.push(pathname);
-                  setWebcamRunning(true);
-                }
-          }
+          onClick={enableCam}
           className=""
           variant="contained"
           color="primary"
-          hidden={webcamRunning}
         >
           Start Detect
         </Button>

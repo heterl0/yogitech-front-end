@@ -31,11 +31,11 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
   );
 
   const [page, setPage] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = 4;
 
   const renderList = (
     <>
-      {posts.slice(0, page * itemsPerPage).map((post, index) => (
+      {posts.slice(0, 11 + (page - 1) * itemsPerPage).map((post, index) => (
         <Grid
           key={post.id}
           xs={12}
@@ -54,7 +54,7 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
         {loading ? renderSkeleton : renderList}
       </Grid>
 
-      {posts.length > 8 && (
+      {posts.length > 11 + (page - 1) * itemsPerPage && (
         <Stack
           alignItems="center"
           sx={{
