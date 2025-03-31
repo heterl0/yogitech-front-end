@@ -23,6 +23,7 @@ type Props = {
   onSearch: (inputValue: string) => void;
   hrefItem: (title: string) => string;
   loading?: boolean;
+  useSlug?: boolean;
 };
 
 export default function PostSearch({
@@ -31,13 +32,14 @@ export default function PostSearch({
   onSearch,
   hrefItem,
   loading,
+  useSlug = false,
 }: Props) {
   const { t } = useTranslation();
   const router = useRouter();
 
   const handleClick = (title: string) => {
     const blogs = results.filter((item) => item.title === title);
-    router.push(hrefItem(blogs[0].id + ""));
+    router.push(hrefItem(`${useSlug ? blogs[0].slug : blogs[0].id}`));
   };
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
