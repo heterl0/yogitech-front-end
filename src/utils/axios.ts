@@ -42,6 +42,7 @@ export const endpoints = {
   auth: {
     me: "/api/v1/users/me/",
     login: "/api/v1/auth/login/",
+    refresh: "/api/v1/auth/refresh/",
     register: "/api/v1/users/",
     forgetPassword: "/api/v1/users/reset_password/",
     confirm: "/api/v1/users/reset_password_confirm/",

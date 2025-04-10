@@ -73,3 +73,40 @@ export const setSession = (access: string | null) => {
     delete axios.defaults.headers.common.Authorization;
   }
 };
+
+// ----------------------------------------------------------------------
+
+export const setCookie = (name: string, value: string, exp?: number) => {
+  if (exp) {
+    axios.defaults.headers.common.Authorization = `Bearer ${value}`;
+    // tokenExpired(exp);
+    // Convert the timestamp to a valid date string
+    const date = new Date(exp);
+    const expires = `; expires=${date.toUTCString()}`;
+
+    document.cookie = `${name}=${value || ""}${expires}; path=/`;
+  } else {
+    axios.defaults.headers.common.Authorization = `Bearer ${value}`;
+  }
+};
+
+// ----------------------------------------------------------------------
+
+export const getCookie = (name: string) => {
+  const nameEQ = `${name}=`;
+  const ca = document.cookie.split(";");
+
+  for (let i = 0; i < ca.length; i += 1) {
+    let c = ca[i];
+
+    while (c.charAt(0) === " ") {
+      c = c.substring(1, c.length);
+    }
+
+    if (c.indexOf(nameEQ) === 0) {
+      return c.substring(nameEQ.length, c.length);
+    }
+  }
+
+  return null;
+};

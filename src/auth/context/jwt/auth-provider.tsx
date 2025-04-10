@@ -5,7 +5,7 @@ import { useMemo, useEffect, useReducer, useCallback } from "react";
 import axios, { endpoints } from "@/utils/axios";
 
 import { AuthContext } from "./auth-context";
-import { setSession, isValidToken } from "./utils";
+import { setSession, isValidToken, getCookie, setCookie } from "./utils";
 import { AuthUserType, ActionMapType, AuthStateType } from "../../types";
 
 // ----------------------------------------------------------------------
@@ -101,10 +101,10 @@ export function AuthProvider({ children }: Props) {
 
   const initialize = useCallback(async () => {
     try {
-      const access = sessionStorage.getItem(STORAGE_KEY);
+      const access = getCookie(STORAGE_KEY);
 
       if (access && isValidToken(access)) {
-        setSession(access);
+        setCookie(STORAGE_KEY, access);
 
         const res = await axios.get(endpoints.auth.me);
 
@@ -120,12 +120,37 @@ export function AuthProvider({ children }: Props) {
           },
         });
       } else {
-        dispatch({
-          type: Types.INITIAL,
-          payload: {
-            user: null,
-          },
-        });
+        const refresh = localStorage.getItem("refresh");
+        if (refresh) {
+          axios.defaults.headers.Authorization = `Bearer ${refresh}`;
+          const res = await axios.post(endpoints.auth.refresh, {
+            refresh,
+          });
+
+          const { access } = res.data;
+
+          setCookie(STORAGE_KEY, access);
+          axios.defaults.headers.Authorization = `Bearer ${access}`;
+          const resUser = await axios.get(endpoints.auth.me);
+          const user = resUser.data;
+
+          dispatch({
+            type: Types.INITIAL,
+            payload: {
+              user: {
+                ...user,
+                access,
+              },
+            },
+          });
+        } else {
+          dispatch({
+            type: Types.INITIAL,
+            payload: {
+              user: null,
+            },
+          });
+        }
       }
     } catch (error) {
       console.error(error);
@@ -151,7 +176,7 @@ export function AuthProvider({ children }: Props) {
 
     const res = await axios.post(endpoints.auth.login, data);
 
-    const { access } = res.data;
+    const { access, refresh } = res.data;
     const resUser = await axios.get(endpoints.auth.me, {
       headers: {
         Authorization: `Bearer ${access}`,
@@ -163,7 +188,10 @@ export function AuthProvider({ children }: Props) {
       throw { detail: "You are not admin!" };
     }
 
-    setSession(access);
+    setCookie(STORAGE_KEY, access);
+    localStorage.setItem("refresh", refresh);
+
+    // setSession(access);
     // setSession(refresh);
 
     dispatch({
@@ -194,7 +222,8 @@ export function AuthProvider({ children }: Props) {
 
     const user = resUser.data;
 
-    setSession(access);
+    setCookie(STORAGE_KEY, access);
+    // setSession(access);
     // setSession(refresh);
 
     dispatch({
@@ -227,7 +256,8 @@ export function AuthProvider({ children }: Props) {
 
       const { access, user } = res.data;
 
-      sessionStorage.setItem(STORAGE_KEY, access);
+      // sessionStorage.setItem(STORAGE_KEY, access);
+      setCookie(STORAGE_KEY, access);
 
       dispatch({
         type: Types.REGISTER,
@@ -245,6 +275,8 @@ export function AuthProvider({ children }: Props) {
   // LOGOUT
   const logout = useCallback(async () => {
     setSession(null);
+    setCookie(STORAGE_KEY, "", -1);
+    localStorage.removeItem("refresh");
     dispatch({
       type: Types.LOGOUT,
     });
