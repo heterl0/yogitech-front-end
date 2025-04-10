@@ -294,7 +294,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const access = sessionStorage.getItem("access");
+      // const access = sessionStorage.getItem("access");
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("description", data.description);
@@ -329,7 +329,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${access}`,
+              // Authorization: `Bearer ${access}`,
             },
           }
         );
@@ -345,7 +345,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${access}`,
+              // Authorization: `Bearer ${access}`,
             },
           }
         );
