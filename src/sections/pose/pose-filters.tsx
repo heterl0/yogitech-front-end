@@ -192,7 +192,14 @@ export default function PoseFilters({
               size="small"
               variant="soft"
               label={muscle.name}
-              avatar={<Image alt={muscle.name} src={muscle.image} />}
+              avatar={
+                <Image
+                  alt={muscle.name}
+                  src={muscle.image}
+                  width={24}
+                  height={24}
+                />
+              }
             />
           ))
         }
