@@ -93,7 +93,8 @@
     "wrangler": "3.57.0"
   },
   "optionalDependencies": {
-    "@tailwindcss/oxide-linux-x64-gnu": "4.0.1"
+    "@tailwindcss/oxide-linux-x64-gnu": "4.0.1",
+    "lightningcss-linux-x64-gnu": "1.29.1"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
