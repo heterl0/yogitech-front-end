@@ -1,6 +1,6 @@
 "use client";
 
-import { m, useScroll } from "framer-motion";
+import { m, useScroll } from "motion/react";
 import { Icon } from "@iconify/react";
 import {
   Card,

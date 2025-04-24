@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { useState, useCallback } from "react";
 
 import Tab from "@mui/material/Tab";

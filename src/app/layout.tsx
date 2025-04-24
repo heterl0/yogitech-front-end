@@ -1,7 +1,7 @@
 import "@/global.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito_Sans, Lora } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/theme";
 import { LocalizationProvider } from "@/locales";
@@ -13,7 +13,55 @@ import SnackbarProvider from "@/components/snackbar/snackbar-provider";
 import Script from "next/script";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
-const inter = Inter({ subsets: ["latin"] });
+export const nunitoSans = Nunito_Sans({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-nunito-sans",
+  fallback: [
+    // Windows
+    "Segoe UI",
+    "Tahoma",
+    "Arial",
+    // macOS
+    "-apple-system",
+    "BlinkMacSystemFont",
+    // Linux
+    "Ubuntu",
+    "Cantarell",
+    "Noto Sans",
+    // Android
+    "Roboto",
+    // iOS
+    "San Francisco",
+    // Generic
+    "Helvetica Neue",
+    "Helvetica",
+    "Arial",
+    "sans-serif",
+  ],
+});
+
+export const lora = Lora({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-lora",
+  fallback: [
+    // Windows
+    "Georgia",
+    "Times New Roman",
+    // macOS
+    "Apple Garamond",
+    "Baskerville",
+    // Linux
+    "Liberation Serif",
+    "DejaVu Serif",
+    // Generic
+    "Times",
+    "serif",
+  ],
+});
 
 export const viewport = {
   themeColor: "#000000",
@@ -34,8 +82,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={`${nunitoSans.variable} ${lora.variable}`}>
+      <body className={nunitoSans.className}>
         <AuthProvider>
           <LocalizationProvider>
             <SettingsProvider

@@ -1,6 +1,6 @@
 "use client";
 
-import { m } from "framer-motion";
+import { m } from "motion/react";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";

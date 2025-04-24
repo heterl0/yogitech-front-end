@@ -9,7 +9,7 @@ import {
   Stack,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { useTranslate } from "@/locales";
 import { varFade } from "@/components/animate";
 

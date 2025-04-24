@@ -1,4 +1,4 @@
-import { m, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "motion/react";
 
 import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material/styles";

@@ -36,9 +36,9 @@ export default function PoseList({ poses, isFilter }: Props) {
 
   const itemsPerPage = 9;
 
-  const handleDelete = useCallback((id: string) => {
-    console.info("DELETE", id);
-  }, []);
+  // const handleDelete = useCallback((id: string) => {
+  //   console.info("DELETE", id);
+  // }, []);
 
   return (
     <>
@@ -59,7 +59,7 @@ export default function PoseList({ poses, isFilter }: Props) {
               pose={pose}
               // onView={() => handleView(pose.id + "")}
               onEdit={() => handleEdit(pose.id + "")}
-              onDelete={() => handleDelete(pose.id + "")}
+              // onDelete={() => handleDelete(pose.id + "")}
             />
           ))}
       </Box>

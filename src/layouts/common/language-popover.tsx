@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { useCallback } from "react";
 
 import MenuItem from "@mui/material/MenuItem";

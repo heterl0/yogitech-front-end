@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Stack, { StackProps } from "@mui/material/Stack";
 import { useResponsive } from "@/hooks/use-responsive";
 import Iconify from "@/components/iconify";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { varFade, MotionViewport } from "@/components/animate";
 import { useTranslate } from "@/locales";
 

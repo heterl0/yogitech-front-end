@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { m, useScroll } from "framer-motion";
+import { m, useScroll } from "motion/react";
 import { Typography, Box, Grid, IconButton, Button } from "@mui/material";
 import Image from "next/image";
 import { memo } from "react";
