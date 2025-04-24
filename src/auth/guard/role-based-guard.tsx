@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m } from "motion/react";
 
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";

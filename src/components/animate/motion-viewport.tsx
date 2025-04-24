@@ -1,4 +1,4 @@
-import { m, MotionProps } from "framer-motion";
+import { m, MotionProps } from "motion/react";
 
 import Box, { BoxProps } from "@mui/material/Box";
 

@@ -1,4 +1,4 @@
-import { m, useScroll } from "framer-motion";
+import { m, useScroll } from "motion/react";
 import { useRef, useState, useEffect, useCallback } from "react";
 
 import Box from "@mui/material/Box";

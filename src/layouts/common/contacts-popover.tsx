@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m } from "motion/react";
 
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";

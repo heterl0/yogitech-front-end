@@ -1,6 +1,6 @@
 "use client";
 
-import { useScroll } from "framer-motion";
+import { useScroll } from "motion/react";
 
 import MainLayout from "@/layouts/main";
 

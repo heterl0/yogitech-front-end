@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m } from "motion/react";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
