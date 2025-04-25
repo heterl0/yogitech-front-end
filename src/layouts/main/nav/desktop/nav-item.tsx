@@ -4,15 +4,12 @@ import { forwardRef } from "react";
 
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
-import Link, { LinkProps } from "@mui/material/Link";
 import CardActionArea from "@mui/material/CardActionArea";
 import ListItemButton from "@mui/material/ListItemButton";
-
-import { RouterLink } from "@/routes/components";
-
 import Iconify from "@/components/iconify";
 
 import { NavItemProps, NavItemStateProps } from "../types";
+import Link, { LinkProps } from "next/link";
 
 // ----------------------------------------------------------------------
 
@@ -49,20 +46,14 @@ export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
 
     if (externalLink) {
       return (
-        <Link
-          href={path}
-          target="_blank"
-          rel="noopener"
-          color="inherit"
-          underline="none"
-        >
+        <Link href={path} target="_blank" rel="noopener" color="inherit">
           {renderContent}
         </Link>
       );
     }
 
     return (
-      <Link component={RouterLink} href={path} color="inherit" underline="none">
+      <Link href={path} color="inherit">
         {renderContent}
       </Link>
     );
@@ -153,21 +144,12 @@ const StyledNavItem = styled(ListItemButton, {
 // ----------------------------------------------------------------------
 
 type NavItemDashboardProps = LinkProps & {
-  path: string;
+  href: string;
 };
 
-export function NavItemDashboard({
-  path,
-  sx,
-  ...other
-}: NavItemDashboardProps) {
+export function NavItemDashboard({ href }: NavItemDashboardProps) {
   return (
-    <Link
-      component={RouterLink}
-      href={path}
-      sx={{ width: 1, height: 1 }}
-      {...other}
-    >
+    <Link href={href}>
       <CardActionArea
         sx={{
           height: 1,
@@ -176,7 +158,6 @@ export function NavItemDashboard({
           color: "text.disabled",
           bgcolor: "background.neutral",
           px: { md: 3, lg: 10 },
-          ...sx,
         }}
       >
         <m.div

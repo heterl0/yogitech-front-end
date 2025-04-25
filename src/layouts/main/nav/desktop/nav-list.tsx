@@ -134,7 +134,7 @@ function NavSubList({ data, subheader, sx, ...other }: NavSubListProps) {
 
       {data.map((item) =>
         dashboard ? (
-          <NavItemDashboard key={item.title} path={item.path} />
+          <NavItemDashboard href={item.path} key={item.title} />
         ) : (
           <NavItem
             key={item.title}
