@@ -19,9 +19,11 @@ import { useTranslate } from "@/locales";
 export default function HomePricing() {
   const mdUp = useResponsive("up", "md");
 
-  const [currentTab, setCurrentTab] = useState("Standard");
-
   const { t } = useTranslate();
+
+  const [currentTab, setCurrentTab] = useState(
+    t("home.pricing.yogiTechPlan.free")
+  );
 
   const handleChangeTab = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {

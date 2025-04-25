@@ -300,7 +300,6 @@ export default function HomeHero() {
               height={500}
               loading="lazy"
               quality={75}
-              priority={false}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
             />
           </m.div>
@@ -332,7 +331,6 @@ export default function HomeHero() {
               height={500}
               loading="lazy"
               quality={75}
-              priority={false}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
             />
           </m.div>
@@ -357,7 +355,6 @@ export default function HomeHero() {
               height={500}
               loading="lazy"
               quality={75}
-              priority={false}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
             />
           </m.div>
