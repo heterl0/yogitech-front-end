@@ -1,5 +1,6 @@
 import { m, useScroll } from "motion/react";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useMemo } from "react";
+import Image from "next/image";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -143,6 +144,9 @@ export default function HomeHero() {
 
   const { t } = useTranslation();
 
+  const opacity = useMemo(() => 1 - percent / 100, [percent]);
+  const hide = useMemo(() => percent > 120, [percent]);
+
   const getScroll = useCallback(() => {
     let heroHeight = 0;
 
@@ -160,17 +164,6 @@ export default function HomeHero() {
   useEffect(() => {
     getScroll();
   }, [getScroll]);
-
-  const transition = {
-    repeatType: "loop",
-    ease: "linear",
-    duration: 60 * 4,
-    repeat: Infinity,
-  } as const;
-
-  const opacity = 1 - percent / 100;
-
-  const hide = percent > 120;
 
   const renderDescription = (
     <Stack
@@ -238,85 +231,140 @@ export default function HomeHero() {
     </Stack>
   );
 
-  const renderSlides = (
-    <Stack
-      direction="row"
-      alignItems="flex-start"
-      sx={{
-        height: "150%",
-        position: "absolute",
-        opacity: opacity > 0 ? opacity : 0,
-        transform: `skew(${-16 - percent / 24}deg, ${4 - percent / 16}deg)`,
-        ...(theme.direction === "rtl" && {
-          transform: `skew(${16 + percent / 24}deg, ${4 + percent / 16}deg)`,
-        }),
-      }}
-    >
+  const renderSlides = useMemo(
+    () => (
       <Stack
-        component={m.div}
-        variants={varFade().in}
+        direction="row"
+        alignItems="flex-start"
         sx={{
-          width: 344,
-          position: "relative",
+          height: "150%",
+          position: "absolute",
+          opacity: opacity > 0 ? opacity : 0,
+          transform: `skew(${-16 - percent / 24}deg, ${4 - percent / 16}deg)`,
+          ...(theme.direction === "rtl" && {
+            transform: `skew(${16 + percent / 24}deg, ${4 + percent / 16}deg)`,
+          }),
         }}
       >
-        <Box
-          component={m.img}
-          animate={{ y: ["0%", "100%"] }}
-          transition={transition}
-          alt={"Yogitech Hero"}
-          src={
-            lightMode
-              ? `/assets/images/home/hero/light_1.png`
-              : `/assets/images/home/hero/dark_1.png`
-          }
-          sx={{ position: "absolute", mt: -5 }}
-        />
-        <Box
-          component={m.img}
-          animate={{ y: ["-100%", "0%"] }}
-          transition={transition}
-          alt={"Yogitech Hero"}
-          src={
-            lightMode
-              ? `/assets/images/home/hero/light_1.png`
-              : `/assets/images/home/hero/dark_1.png`
-          }
-          sx={{ position: "absolute" }}
-        />
-      </Stack>
+        <Stack
+          component={m.div}
+          variants={varFade().in}
+          sx={{
+            width: 344,
+            position: "relative",
+          }}
+        >
+          <m.div
+            animate={{ y: ["0%", "100%"] }}
+            transition={{
+              repeatType: "loop" as const,
+              ease: "linear",
+              duration: 60 * 4,
+              repeat: Infinity,
+            }}
+            style={{ position: "absolute", marginTop: -20 }}
+          >
+            <Image
+              alt="Yogitech Hero"
+              src={
+                lightMode
+                  ? `/assets/images/home/hero/light_1.png`
+                  : `/assets/images/home/hero/dark_1.png`
+              }
+              width={344}
+              height={500}
+              loading="eager"
+              quality={75}
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
+            />
+          </m.div>
+          <m.div
+            animate={{ y: ["-100%", "0%"] }}
+            transition={{
+              repeatType: "loop" as const,
+              ease: "linear",
+              duration: 60 * 4,
+              repeat: Infinity,
+            }}
+            style={{ position: "absolute" }}
+          >
+            <Image
+              alt="Yogitech Hero"
+              src={
+                lightMode
+                  ? `/assets/images/home/hero/light_1.png`
+                  : `/assets/images/home/hero/dark_1.png`
+              }
+              width={344}
+              height={500}
+              loading="lazy"
+              quality={75}
+              priority={false}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
+            />
+          </m.div>
+        </Stack>
 
-      <Stack
-        component={m.div}
-        variants={varFade().in}
-        sx={{ width: 720, position: "relative", ml: -5 }}
-      >
-        <Box
-          component={m.img}
-          animate={{ y: ["100%", "0%"] }}
-          transition={transition}
-          alt={"Yogitech Hero"}
-          src={
-            lightMode
-              ? `/assets/images/home/hero/light_2.png`
-              : `/assets/images/home/hero/dark_2.png`
-          }
-          sx={{ position: "absolute", mt: -5 }}
-        />
-        <Box
-          component={m.img}
-          animate={{ y: ["0%", "-100%"] }}
-          transition={transition}
-          alt={"Yogitech Hero"}
-          src={
-            lightMode
-              ? `/assets/images/home/hero/light_2.png`
-              : `/assets/images/home/hero/dark_2.png`
-          }
-          sx={{ position: "absolute" }}
-        />
+        <Stack
+          component={m.div}
+          variants={varFade().in}
+          sx={{ width: 720, position: "relative", ml: -5 }}
+        >
+          <m.div
+            animate={{ y: ["100%", "0%"] }}
+            transition={{
+              repeatType: "loop" as const,
+              ease: "linear",
+              duration: 60 * 4,
+              repeat: Infinity,
+            }}
+            style={{ position: "absolute", marginTop: -20 }}
+          >
+            <Image
+              alt="Yogitech Hero"
+              src={
+                lightMode
+                  ? `/assets/images/home/hero/light_2.png`
+                  : `/assets/images/home/hero/dark_2.png`
+              }
+              width={720}
+              height={500}
+              loading="lazy"
+              quality={75}
+              priority={false}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+            />
+          </m.div>
+          <m.div
+            animate={{ y: ["0%", "-100%"] }}
+            transition={{
+              repeatType: "loop" as const,
+              ease: "linear",
+              duration: 60 * 4,
+              repeat: Infinity,
+            }}
+            style={{ position: "absolute" }}
+          >
+            <Image
+              alt="Yogitech Hero"
+              src={
+                lightMode
+                  ? `/assets/images/home/hero/light_2.png`
+                  : `/assets/images/home/hero/dark_2.png`
+              }
+              width={720}
+              height={500}
+              loading="lazy"
+              quality={75}
+              priority={false}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+            />
+          </m.div>
+        </Stack>
       </Stack>
-    </Stack>
+    ),
+    [lightMode, opacity, percent, theme.direction]
   );
 
   const renderPolygons = (
