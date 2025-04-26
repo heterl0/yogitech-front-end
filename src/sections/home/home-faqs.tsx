@@ -5,13 +5,13 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Box,
   Stack,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { m } from "motion/react";
 import { useTranslate } from "@/locales";
 import { varFade } from "@/components/animate";
+import Image from "next/image";
 
 export default function HomeFAQ() {
   const { t } = useTranslate();
@@ -93,7 +93,7 @@ export default function HomeFAQ() {
           ))}
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box
+          {/* <Box
             sx={{
               height: "100%",
               minHeight: "400px",
@@ -102,6 +102,15 @@ export default function HomeFAQ() {
               backgroundPosition: "center",
               borderRadius: 2,
             }}
+          /> */}
+          <Image
+            src="/banner-2.png"
+            alt="FAQ Image"
+            width={600}
+            height={400}
+            loading="lazy"
+            quality={75}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
           />
         </Grid>
       </Grid>
