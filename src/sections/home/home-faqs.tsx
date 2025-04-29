@@ -45,6 +45,7 @@ export default function HomeFAQ() {
             component="div"
             variant="overline"
             sx={{ mb: 2, color: "text.disabled" }}
+            className="!text-gray-500"
           >
             {t("home.faq.overline")}
           </Typography>
