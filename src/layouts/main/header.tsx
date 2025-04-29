@@ -104,9 +104,11 @@ function Header({ isBlurFromStart = false }: Props) {
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
           >
-            <Button variant="contained" color="primary">
-              <Link href={paths.download}>{t("header.download")}</Link>
-            </Button>
+            <Link href={paths.download}>
+              <Button variant="contained" color="primary">
+                {t("header.download")}
+              </Button>
+            </Link>
 
             {!mdUp && <NavMobile data={navConfig()} />}
           </Stack>

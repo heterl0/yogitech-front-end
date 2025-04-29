@@ -106,7 +106,11 @@ export default function HomeMinimal() {
                 sx={{ mx: "auto", width: 48, height: 48 }}
               />
 
-              <Typography variant="h5" sx={{ mt: 8, mb: 2 }}>
+              <Typography
+                variant="h3"
+                sx={{ mt: 8, mb: 2 }}
+                className="!text-xl !font-semibold"
+              >
                 {card.title}
               </Typography>
 

@@ -190,7 +190,9 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
         </Typography>
 
         <Box sx={{ position: "relative" }}>
-          <Typography variant="h4">{license}</Typography>
+          <Typography variant="h3" className="!text-2xl !font-semibold">
+            {license}
+          </Typography>
           <Box
             sx={{
               left: 0,

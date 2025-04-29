@@ -35,6 +35,8 @@ export default function LanguagePopover() {
         whileHover="hover"
         variants={varHover(1.05)}
         onClick={popover.onOpen}
+        aria-label="Language"
+        role="button"
         sx={{
           width: 40,
           height: 40,

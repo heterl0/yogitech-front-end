@@ -100,22 +100,14 @@ export default function Footer() {
               </h3>
               <ul className="space-y-2">
                 {list.children.map((link) => (
-                  <li
-                    key={link.name}
-                    className={cn(
-                      "text-sm transition-colors",
-                      isDark
-                        ? "text-gray-400 hover:text-[#eee]"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
+                  <li key={link.name}>
                     <Link
                       href={link.href}
                       className={cn(
                         "text-sm transition-colors",
                         isDark
                           ? "text-gray-400 hover:text-[#eee]"
-                          : "text-muted-foreground hover:text-foreground"
+                          : "!text-[#4b799b] hover:!text-[#3b607d]"
                       )}
                     >
                       {link.name}
