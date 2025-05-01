@@ -38,7 +38,7 @@ export default function HomePricing() {
         <Typography
           component="div"
           variant="overline"
-          sx={{ mb: 2, color: "text.disabled" }}
+          sx={{ mb: 2, color: "#6b737b" }}
         >
           {t("home.pricing.plans")}
         </Typography>
@@ -184,7 +184,7 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
         <Typography
           variant="overline"
           component="div"
-          sx={{ color: "text.disabled" }}
+          sx={{ color: "#6b737b" }}
         >
           {t("home.pricing.yogiTechPlan.plan")}
         </Typography>
@@ -233,7 +233,7 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
               direction="row"
               alignItems="center"
               sx={{
-                ...(disabled && { color: "text.disabled" }),
+                ...(disabled && { color: "#6b737b" }),
               }}
               key={option}
             >
