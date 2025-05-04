@@ -273,7 +273,6 @@ export default function HomeHero() {
               }
               width={344}
               height={500}
-              loading="eager"
               quality={75}
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
@@ -298,7 +297,6 @@ export default function HomeHero() {
               }
               width={344}
               height={500}
-              loading="lazy"
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
             />
@@ -329,7 +327,6 @@ export default function HomeHero() {
               }
               width={720}
               height={500}
-              loading="lazy"
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
             />
@@ -353,7 +350,6 @@ export default function HomeHero() {
               }
               width={720}
               height={500}
-              loading="lazy"
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
             />
