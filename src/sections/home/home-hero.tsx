@@ -268,12 +268,11 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_1.png`
+                  ? `/assets/images/home/hero/light_1.webp`
                   : `/assets/images/home/hero/dark_1.png`
               }
               width={344}
               height={500}
-              loading="eager"
               quality={75}
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
@@ -293,12 +292,11 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_1.png`
+                  ? `/assets/images/home/hero/light_1.webp`
                   : `/assets/images/home/hero/dark_1.png`
               }
               width={344}
               height={500}
-              loading="lazy"
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
             />
@@ -324,12 +322,11 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_2.png`
+                  ? `/assets/images/home/hero/light_2.webp`
                   : `/assets/images/home/hero/dark_2.png`
               }
               width={720}
               height={500}
-              loading="lazy"
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
             />
@@ -348,12 +345,11 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_2.png`
+                  ? `/assets/images/home/hero/light_2.webp`
                   : `/assets/images/home/hero/dark_2.png`
               }
               width={720}
               height={500}
-              loading="lazy"
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
             />

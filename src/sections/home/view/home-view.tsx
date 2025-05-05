@@ -3,12 +3,8 @@
 import { useScroll } from "motion/react";
 
 import Box from "@mui/material/Box";
-// import { styled } from "@mui/material/styles";
-
 import MainLayout from "@/layouts/main";
-
 import ScrollProgress from "@/components/scroll-progress";
-
 import HomeHero from "../home-hero";
 import HomeMinimal from "../home-minimal";
 import HomePricing from "../home-pricing";

@@ -104,15 +104,18 @@ export default function HomeFAQ() {
               borderRadius: 2,
             }}
           /> */}
-          <Image
-            src="/banner-2.png"
-            alt="FAQ Image"
-            width={600}
-            height={400}
-            loading="lazy"
-            quality={75}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-          />
+          <div className="flex flex-row justify-center">
+            <Image
+              src="/banner-2.png"
+              alt="FAQ Image"
+              width={600}
+              height={400}
+              priority={false}
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+              className="rounded-lg shadow-lg"
+            />
+          </div>
         </Grid>
       </Grid>
     </Container>
