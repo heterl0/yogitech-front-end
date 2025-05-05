@@ -268,7 +268,7 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_1.png`
+                  ? `/assets/images/home/hero/light_1.webp`
                   : `/assets/images/home/hero/dark_1.png`
               }
               width={344}
@@ -292,7 +292,7 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_1.png`
+                  ? `/assets/images/home/hero/light_1.webp`
                   : `/assets/images/home/hero/dark_1.png`
               }
               width={344}
@@ -322,7 +322,7 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_2.png`
+                  ? `/assets/images/home/hero/light_2.webp`
                   : `/assets/images/home/hero/dark_2.png`
               }
               width={720}
@@ -345,7 +345,7 @@ export default function HomeHero() {
               alt="Yogitech Hero"
               src={
                 lightMode
-                  ? `/assets/images/home/hero/light_2.png`
+                  ? `/assets/images/home/hero/light_2.webp`
                   : `/assets/images/home/hero/dark_2.png`
               }
               width={720}
