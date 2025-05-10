@@ -9,7 +9,6 @@ import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { paths } from "@/routes/paths";
 import { useOffSetTop } from "@/hooks/use-off-set-top";
-import { useResponsive } from "@/hooks/use-responsive";
 import { bgBlur } from "@/theme/css";
 import Logo from "@/components/logo";
 import NavDesktop from "./nav/desktop";
@@ -31,7 +30,6 @@ type Props = {
 function Header({ isBlurFromStart = false }: Props) {
   const theme = useTheme();
   const { t } = useTranslate();
-  const mdUp = useResponsive("up", "md");
   const pathname = usePathname();
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
   const isDark = pathname === paths.about;
@@ -92,7 +90,9 @@ function Header({ isBlurFromStart = false }: Props) {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {mdUp && <NavDesktop data={navConfig()} />}
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <NavDesktop data={navConfig()} />
+          </Box>
           <Stack
             alignItems="center"
             direction={{ xs: "row", md: "row-reverse" }}
@@ -110,7 +110,9 @@ function Header({ isBlurFromStart = false }: Props) {
               </Button>
             </Link>
 
-            {!mdUp && <NavMobile data={navConfig()} />}
+            <Box sx={{ display: { xs: "block", md: "none" } }}>
+              <NavMobile data={navConfig()} />
+            </Box>
           </Stack>
         </Container>
       </Toolbar>

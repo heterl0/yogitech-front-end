@@ -1,7 +1,8 @@
+"use client";
+
 import { m, useScroll } from "motion/react";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -9,15 +10,11 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import { alpha, styled, useTheme } from "@mui/material/styles";
-
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
-
 import { useResponsive } from "@/hooks/use-responsive";
-
 import { HEADER } from "@/layouts/config-layout";
 import { bgBlur, bgGradient, textGradient } from "@/theme/css";
-
 import Iconify from "@/components/iconify";
 import { varFade, MotionContainer } from "@/components/animate";
 import { useTranslation } from "react-i18next";
@@ -276,6 +273,7 @@ export default function HomeHero() {
               quality={75}
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
+              loading="eager"
             />
           </m.div>
           <m.div
