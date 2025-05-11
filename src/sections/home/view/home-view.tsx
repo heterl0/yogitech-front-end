@@ -9,13 +9,13 @@ import HomeMinimal from "../home-minimal";
 import dynamic from "next/dynamic";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const HomeFAQ = dynamic(() => import("../home-faqs"), { 
-  ssr: false, 
-  loading: () => <CircularProgress /> 
+const HomeFAQ = dynamic(() => import("../home-faqs"), {
+  ssr: false,
+  loading: () => <CircularProgress />,
 });
-const HomePricing = dynamic(() => import("../home-pricing"), { 
-  ssr: false, 
-  loading: () => <CircularProgress /> 
+const HomePricing = dynamic(() => import("../home-pricing"), {
+  ssr: false,
+  loading: () => <CircularProgress />,
 });
 
 export default function HomeView() {
