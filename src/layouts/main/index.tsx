@@ -6,7 +6,10 @@ import Footer from "./footer";
 import { paths } from "@/routes/paths";
 import dynamic from "next/dynamic";
 
-const Header = dynamic(() => import("./header"), { ssr: false });
+const Header = dynamic(() => import("./header"), { 
+  ssr: false, 
+  loading: () => <div>Loading Header...</div>, 
+});
 
 // ----------------------------------------------------------------------
 
