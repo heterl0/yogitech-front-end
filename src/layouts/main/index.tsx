@@ -5,10 +5,25 @@ import { usePathname } from "next/navigation";
 import Footer from "./footer";
 import { paths } from "@/routes/paths";
 import dynamic from "next/dynamic";
+import Skeleton from "@mui/material/Skeleton";
+import { HEADER } from "../config-layout";
 
-const Header = dynamic(() => import("./header"), { 
-  ssr: false, 
-  loading: () => <div>Loading Header...</div>, 
+const Header = dynamic(() => import("./header"), {
+  ssr: false,
+  loading: () => (
+    <Box sx={{ width: "100%" }}>
+      <Skeleton
+        variant="rectangular"
+        sx={{
+          width: "100%",
+          height: {
+            xs: HEADER.H_MOBILE,
+            md: HEADER.H_DESKTOP,
+          },
+        }}
+      />
+    </Box>
+  ),
 });
 
 // ----------------------------------------------------------------------
