@@ -1,10 +1,15 @@
+"use client";
+
 import Box from "@mui/material/Box";
-
 import { usePathname } from "next/navigation";
-
 import Footer from "./footer";
-import Header from "./header";
 import { paths } from "@/routes/paths";
+import dynamic from "next/dynamic";
+
+const Header = dynamic(() => import("./header"), { 
+  ssr: false, 
+  loading: () => <div>Loading Header...</div>, 
+});
 
 // ----------------------------------------------------------------------
 
