@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Nunito_Sans, Lora } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/theme";
-import { LocalizationProvider } from "@/locales";
+// import { LocalizationProvider } from "@/locales";
 import { SettingsProvider } from "@/components/settings";
 import ProgressBar from "@/components/progress-bar";
 import { MotionLazy } from "@/components/animate/motion-lazy";
@@ -12,6 +12,14 @@ import { AuthProvider } from "@/auth/context/jwt";
 import SnackbarProvider from "@/components/snackbar/snackbar-provider";
 import Script from "next/script";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import dynamic from "next/dynamic";
+
+const LocalizationProvider = dynamic(
+  () => import("@/locales/localization-provider").then((mod) => mod.default),
+  {
+    ssr: false,
+  }
+);
 
 export const nunitoSans = Nunito_Sans({
   weight: ["300", "400", "500", "600", "700"],
