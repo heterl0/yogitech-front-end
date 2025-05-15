@@ -137,8 +137,6 @@ export default function HomeHero() {
 
   const [percent, setPercent] = useState(0);
 
-  const lightMode = theme.palette.mode === "light";
-
   const { t } = useTranslation();
 
   const opacity = useMemo(() => 1 - percent / 100, [percent]);
@@ -263,17 +261,14 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src={
-                lightMode
-                  ? `/assets/images/home/hero/light_1.webp`
-                  : `/assets/images/home/hero/dark_1.png`
-              }
+              src="/assets/images/home/hero/light_1.webp"
               width={344}
               height={500}
               quality={75}
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
               loading="eager"
+              className="h-full w-full object-cover"
             />
           </m.div>
           <m.div
@@ -288,15 +283,12 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src={
-                lightMode
-                  ? `/assets/images/home/hero/light_1.webp`
-                  : `/assets/images/home/hero/dark_1.png`
-              }
+              src="/assets/images/home/hero/light_1.webp"
               width={344}
               height={500}
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
+              className="h-full w-full object-cover"
             />
           </m.div>
         </Stack>
@@ -318,15 +310,12 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src={
-                lightMode
-                  ? `/assets/images/home/hero/light_2.webp`
-                  : `/assets/images/home/hero/dark_2.png`
-              }
+              src="/assets/images/home/hero/light_2.webp"
               width={720}
               height={500}
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+              className="h-full w-full object-cover"
             />
           </m.div>
           <m.div
@@ -341,21 +330,18 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src={
-                lightMode
-                  ? `/assets/images/home/hero/light_2.webp`
-                  : `/assets/images/home/hero/dark_2.png`
-              }
+              src="/assets/images/home/hero/light_2.webp"
               width={720}
               height={500}
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+              className="h-full w-full object-cover"
             />
           </m.div>
         </Stack>
       </Stack>
     ),
-    [lightMode, opacity, percent, theme.direction]
+    [opacity, percent, theme.direction]
   );
 
   const renderPolygons = (
