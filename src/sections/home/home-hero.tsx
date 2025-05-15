@@ -261,7 +261,7 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src="/assets/images/home/hero/light_1.webp"
+              src="https://storage.yogitech.me/images/light_1.webp"
               width={344}
               height={500}
               quality={75}
@@ -283,7 +283,7 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src="/assets/images/home/hero/light_1.webp"
+              src="https://storage.yogitech.me/images/light_1.webp"
               width={344}
               height={500}
               quality={75}
@@ -310,7 +310,7 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src="/assets/images/home/hero/light_2.webp"
+              src="https://storage.yogitech.me/images/light_2.webp"
               width={720}
               height={500}
               quality={75}
@@ -330,7 +330,7 @@ export default function HomeHero() {
           >
             <Image
               alt="Yogitech Hero"
-              src="/assets/images/home/hero/light_2.webp"
+              src="https://storage.yogitech.me/images/light_2.webp"
               width={720}
               height={500}
               quality={75}

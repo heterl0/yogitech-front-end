@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "YogiTech: Mentor Platform",
     description:
       "Welcome to YogiTech, the ultimate mentor platform to connect with experts and enhance your skills.",
-    images: [`${process.env.HOST_WEB_DOMAIN}/og-image.jpg`],
+    images: [`${process.env.HOST_WEB_DOMAIN}/og-image.png`],
   },
   icons: [
     { rel: "icon", url: `${process.env.HOST_WEB_DOMAIN}/icon.png` },

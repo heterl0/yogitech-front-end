@@ -14,16 +14,13 @@ import Script from "next/script";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import dynamic from "next/dynamic";
 
-const LocalizationProvider = dynamic(
-  () => import("@/locales/localization-provider").then((mod) => mod.default),
-  {
-    ssr: false,
-  }
+const LocalizationProvider = dynamic(() =>
+  import("@/locales/localization-provider").then((mod) => mod.default)
 );
 
 export const nunitoSans = Nunito_Sans({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
+  weight: ["400", "500"],
+  subsets: ["latin", "vietnamese"],
   display: "swap",
   variable: "--font-nunito-sans",
   fallback: [
@@ -51,8 +48,8 @@ export const nunitoSans = Nunito_Sans({
 });
 
 export const lora = Lora({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
+  weight: ["600", "700"],
+  subsets: ["latin", "vietnamese"],
   display: "swap",
   variable: "--font-lora",
   fallback: [
