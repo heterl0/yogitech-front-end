@@ -32,6 +32,7 @@ export default function AppFeaturedBlog({ list, ...other }: Props) {
   const carousel = useCarousel({
     speed: 800,
     autoplay: true,
+
     ...CarouselDots({
       sx: {
         top: 16,
@@ -43,23 +44,47 @@ export default function AppFeaturedBlog({ list, ...other }: Props) {
   });
 
   return (
-    <Card {...other}>
-      <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
-        {list.map((app, index) => (
-          <CarouselItem
-            key={app.id}
-            item={app}
-            active={index === carousel.currentIndex}
-          />
-        ))}
-      </Carousel>
-
-      <CarouselArrows
-        onNext={carousel.onNext}
-        onPrev={carousel.onPrev}
-        sx={{ top: 8, right: 8, position: "absolute", color: "common.white" }}
+    <>
+      <link
+        rel="preload"
+        as="style"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
       />
-    </Card>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+      />
+      <link
+        rel="preload"
+        as="style"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+      />
+      <Card {...other} className="lg:h-full">
+        <Carousel
+          ref={carousel.carouselRef}
+          {...carousel.carouselSettings}
+          className="lg:h-full"
+        >
+          {list.map((app, index) => (
+            <CarouselItem
+              key={app.id}
+              item={app}
+              active={index === carousel.currentIndex}
+            />
+          ))}
+        </Carousel>
+
+        <CarouselArrows
+          onNext={carousel.onNext}
+          onPrev={carousel.onPrev}
+          sx={{ top: 8, right: 8, position: "absolute", color: "common.white" }}
+        />
+      </Card>
+    </>
   );
 }
 
@@ -80,7 +105,7 @@ function CarouselItem({ item, active }: CarouselItemProps) {
       src={image_url}
       width={600}
       height={400}
-      className="aspect-video h-full object-cover"
+      className="h-full w-full object-cover"
     />
   );
 
@@ -97,6 +122,7 @@ function CarouselItem({ item, active }: CarouselItemProps) {
           position: "absolute",
           color: "common.white",
         }}
+        className=""
       >
         <m.div variants={varFade().inRight}>
           <Typography variant="overline" sx={{ color: "primary.light" }}>

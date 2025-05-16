@@ -465,6 +465,14 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .slick-list,
+  .slick-slide,
+  .slick-track {
+    height: 100%;
+  }
+}
+
 /* scrollbar */
 @import "simplebar-react/dist/simplebar.min.css";
 

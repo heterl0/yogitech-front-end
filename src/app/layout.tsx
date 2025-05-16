@@ -1,21 +1,20 @@
 import "@/global.css";
-
-import type { Metadata } from "next";
-import { Nunito_Sans, Lora } from "next/font/google";
-import "./globals.css";
 import ThemeProvider from "@/theme";
-// import { LocalizationProvider } from "@/locales";
-import { SettingsProvider } from "@/components/settings";
 import ProgressBar from "@/components/progress-bar";
-import { MotionLazy } from "@/components/animate/motion-lazy";
-import { AuthProvider } from "@/auth/context/jwt";
 import SnackbarProvider from "@/components/snackbar/snackbar-provider";
 import Script from "next/script";
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import dynamic from "next/dynamic";
+import { Nunito_Sans, Lora } from "next/font/google";
+import { SettingsProvider } from "@/components/settings";
+import { MotionLazy } from "@/components/animate/motion-lazy";
+import { AuthProvider } from "@/auth/context/jwt";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
-const LocalizationProvider = dynamic(() =>
-  import("@/locales/localization-provider").then((mod) => mod.default)
+const LocalizationProvider = dynamic(
+  () => import("@/locales/localization-provider").then((mod) => mod.default),
+  {
+    ssr: false,
+  }
 );
 
 export const nunitoSans = Nunito_Sans({
@@ -75,12 +74,6 @@ export const viewport = {
   userScalable: true,
 };
 
-export const metadata: Metadata = {
-  title: "YogiTech: Mentor Platform",
-  description:
-    "Welcome to YogiTech, the ultimate mentor platform to connect with experts and enhance your skills.",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -131,24 +124,6 @@ export default function RootLayout({
             </Script>
           </>
         )}
-        <link
-          rel="preload"
-          as="style"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-        />
-        <link
-          rel="preload"
-          as="style"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-        />
       </body>
     </html>
   );
