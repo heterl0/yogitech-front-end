@@ -1,7 +1,6 @@
 "use client";
 
 import { useScroll } from "motion/react";
-import Box from "@mui/material/Box";
 import MainLayout from "@/layouts/main";
 import ScrollProgress from "@/components/scroll-progress";
 import HomeHero from "../home-hero";
@@ -26,17 +25,11 @@ export default function HomeView() {
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
       <HomeHero />
-      <Box
-        sx={{
-          overflow: "hidden",
-          position: "relative",
-          bgcolor: "background.default",
-        }}
-      >
+      <div className="bg-white-main relative overflow-hidden">
         <HomeMinimal />
         <HomePricing />
         <HomeFAQ />
-      </Box>
+      </div>
     </MainLayout>
   );
 }

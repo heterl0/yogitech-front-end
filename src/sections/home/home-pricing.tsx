@@ -1,5 +1,6 @@
-import { useState, useCallback } from "react";
+"use client";
 
+import { useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";

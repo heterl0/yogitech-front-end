@@ -3,7 +3,6 @@
 import { m, useScroll } from "motion/react";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -17,7 +16,7 @@ import { HEADER } from "@/layouts/config-layout";
 import { bgBlur, bgGradient, textGradient } from "@/theme/css";
 import Iconify from "@/components/iconify";
 import { varFade, MotionContainer } from "@/components/animate";
-import { useTranslation } from "react-i18next";
+import { useTranslate } from "@/locales";
 
 // ----------------------------------------------------------------------
 
@@ -54,7 +53,6 @@ const StyledTextGradient = styled(m.h1)(({ theme }) => ({
   ),
   padding: 0,
   // marginTop: 8,
-  lineHeight: 1,
   fontWeight: 900,
   // marginBottom: 24,
   letterSpacing: 8,
@@ -62,8 +60,12 @@ const StyledTextGradient = styled(m.h1)(({ theme }) => ({
   backgroundSize: "400%",
   fontSize: `${64 / 16}rem`,
   fontFamily: theme.typography.fontSecondaryFamily,
+  [theme.breakpoints.up("xs")]: {
+    lineHeight: "5.5rem",
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: `${96 / 16}rem`,
+    lineHeight: "8rem",
   },
 }));
 
@@ -137,7 +139,7 @@ export default function HomeHero() {
 
   const [percent, setPercent] = useState(0);
 
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   const opacity = useMemo(() => 1 - percent / 100, [percent]);
   const hide = useMemo(() => percent > 120, [percent]);
@@ -188,7 +190,6 @@ export default function HomeHero() {
 
       <m.div variants={varFade().in}>
         <StyledTextGradient
-          className="leading-[5.5rem]! md:leading-[8rem]!"
           animate={{ backgroundPosition: "200% center" }}
           transition={{
             repeatType: "reverse",
@@ -265,9 +266,7 @@ export default function HomeHero() {
               width={344}
               height={500}
               quality={75}
-              priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
-              loading="eager"
               className="h-full w-full object-cover"
             />
           </m.div>
@@ -391,7 +390,7 @@ export default function HomeHero() {
 
       {mdUp && renderPolygons}
 
-      <Box sx={{ height: { md: "100vh" } }} />
+      <div className="md:h-screen" />
     </>
   );
 }
