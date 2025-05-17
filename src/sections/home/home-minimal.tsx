@@ -21,7 +21,7 @@ export default function HomeMinimal() {
   const CARDS = useMemo(
     () => [
       {
-        icon: " /assets/icons/home/ic_make_brand.svg",
+        icon: "/assets/icons/home/ic_make_brand.svg",
         title: t("home.minimal.card1.title"),
         description: t("home.minimal.card1.description"),
       },
