@@ -1,14 +1,20 @@
-import "@/global.css";
+import "./globals.css";
 import ThemeProvider from "@/theme";
 import ProgressBar from "@/components/progress-bar";
 import SnackbarProvider from "@/components/snackbar/snackbar-provider";
-import Script from "next/script";
 import dynamic from "next/dynamic";
 import { Nunito_Sans, Lora } from "next/font/google";
 import { SettingsProvider } from "@/components/settings";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { AuthProvider } from "@/auth/context/jwt";
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
+
+const GoogleThirdParties = dynamic(
+  () => import("@/components/google-third-parties/google-third-parties"),
+  {
+    ssr: false,
+  }
+);
 
 const LocalizationProvider = dynamic(
   () => import("@/locales/localization-provider").then((mod) => mod.default),
@@ -107,14 +113,13 @@ export default function RootLayout({
         </AuthProvider>
         {process.env.NODE_ENV === "production" && (
           <>
-            <GoogleAnalytics gaId="G-686MPCS14D" />
-            <GoogleTagManager gtmId="GTM-P43FRWB7" />
-            <Script
+            <GoogleThirdParties />
+            {/* <Script
               async
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3767915082225357"
               strategy="afterInteractive"
               crossOrigin="anonymous"
-            />
+            /> */}
             <Script id="clarity-script" strategy="afterInteractive">
               {`(function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

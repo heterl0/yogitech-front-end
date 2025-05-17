@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "YogiTech",
     short_name: "YogiTech",
-    description: "A Progressive Web App built with Next.js",
+    description: "Yogitech: Mentor Platform",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

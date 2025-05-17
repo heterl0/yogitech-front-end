@@ -1,12 +1,12 @@
-import {
-  Container,
-  Grid,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Stack,
-} from "@mui/material";
+"use client";
+
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
 import { m } from "motion/react";
 import { useTranslate } from "@/locales";
@@ -110,7 +110,6 @@ export default function HomeFAQ() {
               alt="FAQ Image"
               width={600}
               height={400}
-              priority={false}
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
               className="rounded-lg shadow-lg"
