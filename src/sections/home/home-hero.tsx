@@ -227,8 +227,11 @@ export default function HomeHero() {
     </Stack>
   );
 
-  const renderSlides = useMemo(
-    () => (
+  const renderSlides = useMemo(() => {
+    // Don't render anything on mobile
+    if (!mdUp) return null;
+
+    return (
       <Stack
         direction="row"
         alignItems="flex-start"
@@ -268,6 +271,8 @@ export default function HomeHero() {
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
               className="h-full w-full object-cover"
+              loading="lazy"
+              priority={false}
             />
           </m.div>
           <m.div
@@ -288,6 +293,8 @@ export default function HomeHero() {
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
               className="h-full w-full object-cover"
+              loading="lazy"
+              priority={false}
             />
           </m.div>
         </Stack>
@@ -315,6 +322,8 @@ export default function HomeHero() {
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
               className="h-full w-full object-cover"
+              loading="lazy"
+              priority={false}
             />
           </m.div>
           <m.div
@@ -335,26 +344,31 @@ export default function HomeHero() {
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
               className="h-full w-full object-cover"
+              loading="lazy"
+              priority={false}
             />
           </m.div>
         </Stack>
       </Stack>
-    ),
-    [opacity, percent, theme.direction]
-  );
+    );
+  }, [opacity, percent, theme.direction, mdUp]);
 
-  const renderPolygons = (
-    <>
-      <StyledPolygon />
-      <StyledPolygon anchor="right" opacity={0.48} />
-      <StyledPolygon
-        anchor="right"
-        opacity={0.48}
-        sx={{ height: 48, zIndex: 10 }}
-      />
-      <StyledPolygon anchor="right" sx={{ zIndex: 11, height: 24 }} />
-    </>
-  );
+  const renderPolygons = useMemo(() => {
+    if (!mdUp) return null;
+
+    return (
+      <>
+        <StyledPolygon />
+        <StyledPolygon anchor="right" opacity={0.48} />
+        <StyledPolygon
+          anchor="right"
+          opacity={0.48}
+          sx={{ height: 48, zIndex: 10 }}
+        />
+        <StyledPolygon anchor="right" sx={{ zIndex: 11, height: 24 }} />
+      </>
+    );
+  }, []);
 
   const renderEllipses = (
     <>

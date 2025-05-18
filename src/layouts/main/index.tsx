@@ -17,7 +17,7 @@ const Header = dynamic(() => import("./header"), {
         sx={{
           width: "100%",
           height: {
-            xs: HEADER.H_MOBILE,
+            xs: 0,
             md: HEADER.H_DESKTOP,
           },
         }}

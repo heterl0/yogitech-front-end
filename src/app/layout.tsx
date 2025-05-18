@@ -8,6 +8,7 @@ import { SettingsProvider } from "@/components/settings";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { AuthProvider } from "@/auth/context/jwt";
 import Script from "next/script";
+import { cn } from "@/utils/cn";
 
 const GoogleThirdParties = dynamic(
   () => import("@/components/google-third-parties/google-third-parties"),
@@ -73,21 +74,14 @@ export const lora = Lora({
   ],
 });
 
-export const viewport = {
-  themeColor: "#000000",
-  width: "device-width",
-  initialScale: 1,
-  userScalable: true,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${nunitoSans.variable} ${lora.variable}`}>
-      <body className={nunitoSans.className}>
+    <html lang="en" className={cn(nunitoSans.variable, lora.variable)}>
+      <body>
         <AuthProvider>
           <LocalizationProvider>
             <SettingsProvider
