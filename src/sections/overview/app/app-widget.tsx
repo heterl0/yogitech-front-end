@@ -1,5 +1,3 @@
-import { ApexOptions } from "apexcharts";
-
 import { useTheme } from "@mui/material/styles";
 import ListItemText from "@mui/material/ListItemText";
 import Stack, { StackProps } from "@mui/material/Stack";
@@ -10,6 +8,7 @@ import { ColorSchema } from "@/theme/palette";
 
 import Iconify from "@/components/iconify";
 import Chart, { useChart } from "@/components/chart";
+import { ApexOptions } from "apexcharts";
 
 // ----------------------------------------------------------------------
 
