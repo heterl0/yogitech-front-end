@@ -271,8 +271,7 @@ export default function HomeHero() {
               quality={75}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
               className="h-full w-full object-cover"
-              loading="lazy"
-              priority={false}
+              priority
             />
           </m.div>
           <m.div
