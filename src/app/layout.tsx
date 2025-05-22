@@ -11,10 +11,7 @@ import Script from "next/script";
 import { cn } from "@/utils/cn";
 
 const GoogleThirdParties = dynamic(
-  () => import("@/components/google-third-parties/google-third-parties"),
-  {
-    ssr: false,
-  }
+  () => import("@/components/google-third-parties/google-third-parties")
 );
 
 const LocalizationProvider = dynamic(

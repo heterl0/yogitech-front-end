@@ -11,12 +11,12 @@ import Typography from "@mui/material/Typography";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
-import { useResponsive } from "@/hooks/use-responsive";
 import { HEADER } from "@/layouts/config-layout";
 import { bgBlur, bgGradient, textGradient } from "@/theme/css";
 import Iconify from "@/components/iconify";
 import { varFade, MotionContainer } from "@/components/animate";
 import { useTranslate } from "@/locales";
+import { useMediaQuery } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -129,16 +129,11 @@ const StyledPolygon = styled("div")<StyledPolygonProps>(
 // ----------------------------------------------------------------------
 
 export default function HomeHero() {
-  const mdUp = useResponsive("up", "md");
-
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const theme = useTheme();
-
   const heroRef = useRef<HTMLDivElement | null>(null);
-
   const { scrollY } = useScroll();
-
   const [percent, setPercent] = useState(0);
-
   const { t } = useTranslate();
 
   const opacity = useMemo(() => 1 - percent / 100, [percent]);
@@ -229,7 +224,7 @@ export default function HomeHero() {
 
   const renderSlides = useMemo(() => {
     // Don't render anything on mobile
-    if (!mdUp) return null;
+    if (!isDesktop) return null;
 
     return (
       <Stack
@@ -266,10 +261,9 @@ export default function HomeHero() {
             <Image
               alt="Yogitech Hero"
               src="https://storage.yogitech.me/images/light_1.webp"
-              width={344}
-              height={500}
+              width="304"
+              height="1892"
               quality={75}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
               className="h-full w-full object-cover"
               priority
             />
@@ -287,13 +281,10 @@ export default function HomeHero() {
             <Image
               alt="Yogitech Hero"
               src="https://storage.yogitech.me/images/light_1.webp"
-              width={344}
-              height={500}
+              width="304"
+              height="1892"
               quality={75}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 344px"
               className="h-full w-full object-cover"
-              loading="lazy"
-              priority={false}
             />
           </m.div>
         </Stack>
@@ -316,13 +307,10 @@ export default function HomeHero() {
             <Image
               alt="Yogitech Hero"
               src="https://storage.yogitech.me/images/light_2.webp"
-              width={720}
-              height={500}
+              width="563"
+              height="1316"
               quality={75}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
               className="h-full w-full object-cover"
-              loading="lazy"
-              priority={false}
             />
           </m.div>
           <m.div
@@ -338,22 +326,19 @@ export default function HomeHero() {
             <Image
               alt="Yogitech Hero"
               src="https://storage.yogitech.me/images/light_2.webp"
-              width={720}
-              height={500}
+              width="563"
+              height="1316"
               quality={75}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
               className="h-full w-full object-cover"
-              loading="lazy"
-              priority={false}
             />
           </m.div>
         </Stack>
       </Stack>
     );
-  }, [opacity, percent, theme.direction, mdUp]);
+  }, [opacity, percent, theme.direction, isDesktop]);
 
   const renderPolygons = useMemo(() => {
-    if (!mdUp) return null;
+    if (!isDesktop) return null;
 
     return (
       <>
@@ -371,7 +356,7 @@ export default function HomeHero() {
 
   const renderEllipses = (
     <>
-      {mdUp && <StyledEllipseTop />}
+      {isDesktop && <StyledEllipseTop />}
       <StyledEllipseBottom />
     </>
   );
@@ -393,7 +378,7 @@ export default function HomeHero() {
                 {renderDescription}
               </Grid>
 
-              {mdUp && <Grid md={6}>{renderSlides}</Grid>}
+              {isDesktop && <Grid md={6}>{renderSlides}</Grid>}
             </Grid>
           </Container>
 
@@ -401,7 +386,7 @@ export default function HomeHero() {
         </StyledWrapper>
       </StyledRoot>
 
-      {mdUp && renderPolygons}
+      {isDesktop && renderPolygons}
 
       <div className="md:h-screen" />
     </>
