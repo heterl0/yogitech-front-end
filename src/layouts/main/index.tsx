@@ -9,7 +9,6 @@ import Skeleton from "@mui/material/Skeleton";
 import { HEADER } from "../config-layout";
 
 const Header = dynamic(() => import("./header"), {
-  ssr: false,
   loading: () => (
     <Box sx={{ width: "100%" }}>
       <Skeleton
