@@ -47,6 +47,12 @@ const StyledWrapper = styled("div")(({ theme }) => ({
   },
 }));
 
+const MobileStyledRoot = styled("div")(() => ({
+  height: "100vh",
+  overflow: "hidden",
+  position: "relative",
+}));
+
 const StyledTextGradient = styled(m.h1)(({ theme }) => ({
   ...textGradient(
     `300deg, ${theme.palette.primary.main} 0%, ${theme.palette.warning.main} 25%, ${theme.palette.primary.main} 50%, ${theme.palette.warning.main} 75%, ${theme.palette.primary.main} 100%`
@@ -138,7 +144,6 @@ export default function HomeHero() {
 
   const opacity = useMemo(() => 1 - percent / 100, [percent]);
   const hide = useMemo(() => percent > 120, [percent]);
-
   const getScroll = useCallback(() => {
     let heroHeight = 0;
 
@@ -164,8 +169,11 @@ export default function HomeHero() {
       gap={2}
       sx={{
         height: 1,
+        position: "relative",
+        zIndex: 10,
         mx: "auto",
         maxWidth: 480,
+        padding: "1rem",
         opacity: opacity > 0 ? opacity : 0,
         mt: {
           md: `-${HEADER.H_DESKTOP + percent * 2.5}px`,
@@ -363,28 +371,51 @@ export default function HomeHero() {
 
   return (
     <>
-      <StyledRoot
-        ref={heroRef}
-        sx={{
-          ...(hide && {
-            opacity: 0,
-          }),
-        }}
-      >
-        <StyledWrapper>
-          <Container component={MotionContainer} sx={{ height: 1 }}>
-            <Grid container columnSpacing={{ md: 10 }} sx={{ height: 1 }}>
-              <Grid xs={12} md={6}>
-                {renderDescription}
+      {isDesktop ? (
+        <StyledRoot
+          ref={heroRef}
+          sx={{
+            ...(hide && {
+              opacity: 0,
+            }),
+          }}
+        >
+          <StyledWrapper>
+            <Container component={MotionContainer} sx={{ height: 1 }}>
+              <Grid container columnSpacing={{ md: 10 }} sx={{ height: 1 }}>
+                <Grid xs={12} md={6}>
+                  {renderDescription}
+                </Grid>
+
+                {isDesktop && <Grid md={6}>{renderSlides}</Grid>}
               </Grid>
+            </Container>
 
-              {isDesktop && <Grid md={6}>{renderSlides}</Grid>}
-            </Grid>
-          </Container>
-
-          {renderEllipses}
-        </StyledWrapper>
-      </StyledRoot>
+            {renderEllipses}
+          </StyledWrapper>
+        </StyledRoot>
+      ) : (
+        <MobileStyledRoot
+          ref={heroRef}
+          sx={{
+            ...(hide && {
+              opacity: 0,
+            }),
+          }}
+        >
+          <Image
+            src="/assets/background/overlay_3.jpg"
+            alt="Hero Background"
+            width={425}
+            height={795}
+            quality={25}
+            priority
+            sizes="(max-width: 1024px) 100vw"
+            className="absolute inset-0 z-0 h-full w-full object-cover opacity-25 blur-2xl"
+          />
+          {renderDescription}
+        </MobileStyledRoot>
+      )}
 
       {isDesktop && renderPolygons}
 
