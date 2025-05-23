@@ -144,7 +144,6 @@ export default function HomeHero() {
 
   const opacity = useMemo(() => 1 - percent / 100, [percent]);
   const hide = useMemo(() => percent > 120, [percent]);
-
   const getScroll = useCallback(() => {
     let heroHeight = 0;
 
@@ -170,8 +169,11 @@ export default function HomeHero() {
       gap={2}
       sx={{
         height: 1,
+        position: "relative",
+        zIndex: 10,
         mx: "auto",
         maxWidth: 480,
+        padding: "1rem",
         opacity: opacity > 0 ? opacity : 0,
         mt: {
           md: `-${HEADER.H_DESKTOP + percent * 2.5}px`,
@@ -393,14 +395,23 @@ export default function HomeHero() {
           </StyledWrapper>
         </StyledRoot>
       ) : (
-        <MobileStyledRoot>
+        <MobileStyledRoot
+          ref={heroRef}
+          sx={{
+            ...(hide && {
+              opacity: 0,
+            }),
+          }}
+        >
           <Image
             src="/assets/background/overlay_3.jpg"
             alt="Hero Background"
-            width={304}
-            height={1892}
-            quality={75}
-            className="absolute inset-0 h-full w-full object-cover"
+            width={425}
+            height={795}
+            quality={25}
+            priority
+            sizes="(max-width: 1024px) 100vw"
+            className="absolute inset-0 z-0 h-full w-full object-cover opacity-25 blur-2xl"
           />
           {renderDescription}
         </MobileStyledRoot>
