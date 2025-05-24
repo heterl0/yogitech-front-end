@@ -1,8 +1,6 @@
 import useSWR from "swr";
 import { useMemo } from "react";
-
 import { fetcher, endpoints } from "@/utils/axios";
-
 import { IPost } from "@/types/blog";
 
 // ----------------------------------------------------------------------

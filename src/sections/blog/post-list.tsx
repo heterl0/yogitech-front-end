@@ -1,3 +1,5 @@
+"use client";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Unstable_Grid2";

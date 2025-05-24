@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
@@ -7,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { alpha, styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
-
 import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 import { useResponsive } from "@/hooks/use-responsive";
@@ -98,16 +99,6 @@ export default function PostItem({ post, index = 0 }: Props) {
     reading_time,
   } = post;
 
-  // const vote = useMemo(() => {
-  //   const result = { down: 0, up: 0 };
-  //   votes.forEach((item) => {
-  //     item.vote_value === 1
-  //       ? (result.up = result.up + 1)
-  //       : (result.down = result.down + 1);
-  //   });
-  //   return result;
-  // }, [votes]);
-
   const isFeaturePost = index === 0;
   const isLatestPost = index === 1 || index === 2;
   const isDesktopFeature = mdUp && (isFeaturePost || isLatestPost);
@@ -143,12 +134,14 @@ export default function PostItem({ post, index = 0 }: Props) {
             <Image
               alt={title}
               src={image_url}
-              fill
-              sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
-              style={{
-                objectFit: "cover",
-              }}
-              priority={index < 3}
+              className="h-full w-full object-cover"
+              priority={index === 0}
+              quality={index === 0 ? 100 : 70}
+              sizes={`(max-width: 599px) 100vw, (max-width: 899px) 50vw, ${
+                index === 0 ? "564" : "270"
+              }`}
+              width={index === 0 ? 564 : 270}
+              height={index < 3 ? 480 : 152}
             />
             <StyledOverlay />
           </StyledCardMedia>
@@ -215,11 +208,6 @@ export default function PostItem({ post, index = 0 }: Props) {
                   <Iconify icon="solar:clock-circle-bold" width={16} />
                   {reading_time} min
                 </Stack>
-
-                {/* <Stack direction="row" alignItems="center" spacing={0.5}>
-                  <Iconify icon="solar:like-bold" width={16} />
-                  {fShortenNumber(vote.up)}
-                </Stack> */}
               </Stack>
             </Stack>
           </Stack>
@@ -251,12 +239,11 @@ export default function PostItem({ post, index = 0 }: Props) {
           <Image
             alt={title}
             src={image_url}
-            fill
-            sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
-            style={{
-              objectFit: "cover",
-            }}
-            priority={index < 6}
+            sizes={`(max-width: 599px) 100vw, (max-width: 899px) 50vw, 270px`}
+            className="h-full w-full object-cover"
+            quality={70}
+            width={270}
+            height={480}
           />
 
           <StyledAvatar
@@ -304,24 +291,6 @@ export default function PostItem({ post, index = 0 }: Props) {
                 />
                 {reading_time} min
               </Stack>
-
-              {/* <Stack direction="row" alignItems="center" spacing={0.5}>
-                <Iconify
-                  icon="solar:like-bold"
-                  width={16}
-                  sx={{ color: "success.main" }}
-                />
-                {fShortenNumber(vote.up)}
-              </Stack> */}
-
-              {/* <Stack direction="row" alignItems="center" spacing={0.5}>
-                <Iconify
-                  icon="solar:dislike-bold"
-                  width={16}
-                  sx={{ color: "error.main" }}
-                />
-                {fShortenNumber(vote.down)}
-              </Stack> */}
             </Stack>
           </Stack>
 
