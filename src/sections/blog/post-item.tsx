@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { alpha, styled } from "@mui/material/styles";
@@ -58,23 +57,23 @@ const StyledInfo = styled("div")(({ theme }) => ({
   },
 }));
 
-const StyledAvatar = styled(Avatar)(({ theme }) => ({
-  zIndex: 9,
-  width: 40,
-  height: 40,
-  position: "absolute",
-  left: theme.spacing(3),
-  top: theme.spacing(3),
-  border: `2px solid ${theme.palette.common.white}`,
-  boxShadow: theme.shadows[2],
-  backgroundColor: theme.palette.background.paper,
-  [theme.breakpoints.down("sm")]: {
-    width: 36,
-    height: 36,
-    left: theme.spacing(2),
-    top: theme.spacing(2),
-  },
-}));
+// const StyledAvatar = styled(Avatar)(({ theme }) => ({
+//   zIndex: 9,
+//   width: 40,
+//   height: 40,
+//   position: "absolute",
+//   left: theme.spacing(3),
+//   top: theme.spacing(3),
+//   border: `2px solid ${theme.palette.common.white}`,
+//   boxShadow: theme.shadows[2],
+//   backgroundColor: theme.palette.background.paper,
+//   [theme.breakpoints.down("sm")]: {
+//     width: 36,
+//     height: 36,
+//     left: theme.spacing(2),
+//     top: theme.spacing(2),
+//   },
+// }));
 
 // ----------------------------------------------------------------------
 
@@ -147,10 +146,10 @@ export default function PostItem({ post, index = 0 }: Props) {
           </StyledCardMedia>
         </Link>
 
-        <StyledAvatar
+        {/* <StyledAvatar
           alt={authorName}
           src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
-        />
+        /> */}
 
         <StyledInfo>
           <Stack spacing={1}>
@@ -235,21 +234,22 @@ export default function PostItem({ post, index = 0 }: Props) {
         color="inherit"
         underline="none"
       >
-        <StyledCardMedia sx={{ pt: "56.25%", position: "relative" }}>
+        <StyledCardMedia sx={{ position: "relative" }}>
           <Image
             alt={title}
             src={image_url}
             sizes={`(max-width: 599px) 100vw, (max-width: 899px) 50vw, 270px`}
-            className="h-full w-full object-cover"
+            className="h-40 w-full object-cover"
             quality={70}
             width={270}
-            height={480}
+            height={152}
+            priority={index === 0}
           />
 
-          <StyledAvatar
+          {/* <StyledAvatar
             alt={authorName}
             src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
-          />
+          /> */}
         </StyledCardMedia>
       </Link>
 

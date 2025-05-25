@@ -1,4 +1,5 @@
 import { PostListHomeView } from "@/sections/blog/view";
+import axiosInstance, { endpoints } from "@/utils/axios";
 import { Metadata } from "next";
 
 // ----------------------------------------------------------------------
@@ -30,5 +31,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  return <PostListHomeView />;
+  const { data: posts } = await axiosInstance.get(endpoints.post.list);
+  return <PostListHomeView posts={posts} />;
 }
