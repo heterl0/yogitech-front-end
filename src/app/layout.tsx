@@ -2,24 +2,14 @@ import "./globals.css";
 import ThemeProvider from "@/theme";
 import ProgressBar from "@/components/progress-bar";
 import SnackbarProvider from "@/components/snackbar/snackbar-provider";
-import dynamic from "next/dynamic";
 import { Nunito_Sans, Lora } from "next/font/google";
 import { SettingsProvider } from "@/components/settings";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { AuthProvider } from "@/auth/context/jwt";
 import Script from "next/script";
 import { cn } from "@/utils/cn";
-
-const GoogleThirdParties = dynamic(
-  () => import("@/components/google-third-parties/google-third-parties")
-);
-
-const LocalizationProvider = dynamic(
-  () => import("@/locales/localization-provider").then((mod) => mod.default),
-  {
-    ssr: false,
-  }
-);
+import GoogleThirdParties from "@/components/google-third-parties/google-third-parties";
+import { LocalizationProvider } from "@/locales";
 
 export const nunitoSans = Nunito_Sans({
   weight: ["400", "500"],

@@ -93,7 +93,7 @@ export default function ExerciseItem({ exercise, onEdit }: Props) {
         {renderPrice}
         <Image
           alt={title}
-          src={image_url || "/assets/background/overlay_3.jpg"}
+          src={image_url || "/assets/background/overlay_3.webp"}
           width={320}
           height={164}
           className="aspect-video w-full rounded-sm bg-cover"
