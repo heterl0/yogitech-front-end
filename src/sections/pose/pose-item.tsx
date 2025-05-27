@@ -116,7 +116,7 @@ export default function PoseItem({ pose, onEdit }: Props) {
         </Tooltip>
       </IconButton>
     ),
-    [onEdit, t]
+    [t]
   );
 
   const renderInfo = useMemo(() => {
