@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import { useDebounce } from "@/hooks/use-debounce";
 
 import { POST_SORT_OPTIONS } from "@/_mock";
-import { useGetPosts, useSearchPosts } from "@/api/blog";
+import { useSearchPosts } from "@/api/blog";
 
 import { useSettingsContext } from "@/components/settings";
 
@@ -24,8 +24,11 @@ import MainLayout from "@/layouts/main";
 import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
+interface PostListHomeViewProps {
+  posts: IPost[];
+}
 
-export default function PostListHomeView() {
+export default function PostListHomeView({ posts }: PostListHomeViewProps) {
   const settings = useSettingsContext();
   const { t } = useTranslation();
 
@@ -34,8 +37,6 @@ export default function PostListHomeView() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const debouncedQuery = useDebounce(searchQuery);
-
-  const { posts, postsLoading } = useGetPosts();
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
@@ -90,7 +91,7 @@ export default function PostListHomeView() {
           />
         </Stack>
 
-        <PostList posts={dataFiltered} loading={postsLoading} />
+        <PostList posts={dataFiltered} />
       </Container>
     </MainLayout>
   );

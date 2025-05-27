@@ -92,7 +92,7 @@ export default function AuthModernLayout() {
     <Stack flexGrow={1} sx={{ position: "relative" }}>
       <Box
         sx={{
-          backgroundImage: `url("/assets/background/overlay_3.jpg")`,
+          backgroundImage: `url("/assets/background/overlay_3.webp")`,
           top: 16,
           left: 16,
           objectFit: "cover",

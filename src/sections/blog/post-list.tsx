@@ -1,14 +1,11 @@
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+"use client";
+
 import Grid from "@mui/material/Unstable_Grid2";
-
-import Iconify from "@/components/iconify";
-
 import { IPost } from "@/types/blog";
-import { useTranslation } from "react-i18next";
 import PostItem from "./post-item";
 import { PostItemSkeleton } from "./post-skeleton";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +16,6 @@ type Props = {
 };
 
 export default function PostList({ posts, loading, disabledIndex }: Props) {
-  const { t } = useTranslation();
   const renderSkeleton = (
     <>
       {[...Array(16)].map((_, index) => (
@@ -30,8 +26,22 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
     </>
   );
 
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
+
   const [page, setPage] = useState(1);
   const itemsPerPage = 4;
+
+  const handleLoadMore = useCallback(() => {
+    setPage((prev) => prev + 1);
+  }, []);
+
+  useEffect(() => {
+    if (inView) {
+      handleLoadMore();
+    }
+  }, [inView, handleLoadMore]);
 
   const renderList = (
     <>
@@ -55,24 +65,25 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
       </Grid>
 
       {posts.length > 11 + (page - 1) * itemsPerPage && (
-        <Stack
-          alignItems="center"
-          sx={{
-            mt: 8,
-            mb: { xs: 10, md: 15 },
-          }}
-        >
-          <Button
-            size="large"
-            variant="outlined"
-            startIcon={
-              <Iconify icon="svg-spinners:12-dots-scale-rotate" width={24} />
-            }
-            onClick={() => setPage(page + 1)}
-          >
-            {t("blogPage.postListHorizontal.loadMore")}
-          </Button>
-        </Stack>
+        // <Stack
+        //   alignItems="center"
+        //   sx={{
+        //     mt: 8,
+        //     mb: { xs: 10, md: 15 },
+        //   }}
+        // >
+        //   <Button
+        //     size="large"
+        //     variant="outlined"
+        //     startIcon={
+        //       <Iconify icon="svg-spinners:12-dots-scale-rotate" width={24} />
+        //     }
+        //     onClick={() => setPage(page + 1)}
+        //   >
+        //     {t("blogPage.postListHorizontal.loadMore")}
+        //   </Button>
+        // </Stack>
+        <div ref={ref} />
       )}
     </>
   );

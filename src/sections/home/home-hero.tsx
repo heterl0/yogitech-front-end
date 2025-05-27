@@ -26,7 +26,7 @@ const StyledRoot = styled("div")(({ theme }) => ({
       theme.palette.background.default,
       theme.palette.mode === "light" ? 0.9 : 0.94
     ),
-    imgUrl: "/assets/background/overlay_3.jpg",
+    imgUrl: "/assets/background/overlay_3.webp",
   }),
   width: "100%",
   height: "100vh",
@@ -45,12 +45,6 @@ const StyledWrapper = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     marginTop: HEADER.H_DESKTOP_OFFSET,
   },
-}));
-
-const MobileStyledRoot = styled("div")(() => ({
-  height: "100vh",
-  overflow: "hidden",
-  position: "relative",
 }));
 
 const StyledTextGradient = styled(m.h1)(({ theme }) => ({
@@ -205,11 +199,19 @@ export default function HomeHero() {
         </StyledTextGradient>
       </m.div>
 
-      <m.div variants={varFade().in}>
+      <m.div variants={varFade().in} className="hidden lg:block">
         <Typography variant="body2" sx={{ textAlign: "center" }}>
           {t("home.hero.description")}
         </Typography>
       </m.div>
+
+      <Typography
+        variant="body2"
+        sx={{ textAlign: "center" }}
+        className="lg:hidden"
+      >
+        {t("home.hero.description")}
+      </Typography>
 
       <m.div variants={varFade().in}>
         <Stack spacing={1.5} direction={{ xs: "column-reverse", sm: "row" }}>
@@ -230,137 +232,128 @@ export default function HomeHero() {
     </Stack>
   );
 
-  const renderSlides = useMemo(() => {
-    // Don't render anything on mobile
-    if (!isDesktop) return null;
-
-    return (
+  const renderSlides = (
+    <Stack
+      direction="row"
+      alignItems="flex-start"
+      sx={{
+        height: "150%",
+        position: "absolute",
+        opacity: opacity > 0 ? opacity : 0,
+        transform: `skew(${-16 - percent / 24}deg, ${4 - percent / 16}deg)`,
+        ...(theme.direction === "rtl" && {
+          transform: `skew(${16 + percent / 24}deg, ${4 + percent / 16}deg)`,
+        }),
+      }}
+    >
       <Stack
-        direction="row"
-        alignItems="flex-start"
+        component={m.div}
+        variants={varFade().in}
         sx={{
-          height: "150%",
-          position: "absolute",
-          opacity: opacity > 0 ? opacity : 0,
-          transform: `skew(${-16 - percent / 24}deg, ${4 - percent / 16}deg)`,
-          ...(theme.direction === "rtl" && {
-            transform: `skew(${16 + percent / 24}deg, ${4 + percent / 16}deg)`,
-          }),
+          width: 344,
+          position: "relative",
         }}
       >
-        <Stack
-          component={m.div}
-          variants={varFade().in}
-          sx={{
-            width: 344,
-            position: "relative",
+        <m.div
+          animate={{ y: ["0%", "100%"] }}
+          transition={{
+            repeatType: "loop" as const,
+            ease: "linear",
+            duration: 60 * 4,
+            repeat: Infinity,
           }}
+          style={{ position: "absolute", marginTop: -20 }}
         >
-          <m.div
-            animate={{ y: ["0%", "100%"] }}
-            transition={{
-              repeatType: "loop" as const,
-              ease: "linear",
-              duration: 60 * 4,
-              repeat: Infinity,
-            }}
-            style={{ position: "absolute", marginTop: -20 }}
-          >
-            <Image
-              alt="Yogitech Hero"
-              src="https://storage.yogitech.me/images/light_1.webp"
-              width="304"
-              height="1892"
-              quality={75}
-              className="h-full w-full object-cover"
-              priority
-            />
-          </m.div>
-          <m.div
-            animate={{ y: ["-100%", "0%"] }}
-            transition={{
-              repeatType: "loop" as const,
-              ease: "linear",
-              duration: 60 * 4,
-              repeat: Infinity,
-            }}
-            style={{ position: "absolute" }}
-          >
-            <Image
-              alt="Yogitech Hero"
-              src="https://storage.yogitech.me/images/light_1.webp"
-              width="304"
-              height="1892"
-              quality={75}
-              className="h-full w-full object-cover"
-            />
-          </m.div>
-        </Stack>
-
-        <Stack
-          component={m.div}
-          variants={varFade().in}
-          sx={{ width: 720, position: "relative", ml: -5 }}
+          <Image
+            alt="Yogitech Hero"
+            src="https://storage.yogitech.me/images/light_1.webp"
+            width="304"
+            height="1892"
+            quality={75}
+            className="hidden h-full w-full object-cover lg:block"
+            priority
+          />
+        </m.div>
+        <m.div
+          animate={{ y: ["-100%", "0%"] }}
+          transition={{
+            repeatType: "loop" as const,
+            ease: "linear",
+            duration: 60 * 4,
+            repeat: Infinity,
+          }}
+          style={{ position: "absolute" }}
         >
-          <m.div
-            animate={{ y: ["100%", "0%"] }}
-            transition={{
-              repeatType: "loop" as const,
-              ease: "linear",
-              duration: 60 * 4,
-              repeat: Infinity,
-            }}
-            style={{ position: "absolute", marginTop: -20 }}
-          >
-            <Image
-              alt="Yogitech Hero"
-              src="https://storage.yogitech.me/images/light_2.webp"
-              width="563"
-              height="1316"
-              quality={75}
-              className="h-full w-full object-cover"
-            />
-          </m.div>
-          <m.div
-            animate={{ y: ["0%", "-100%"] }}
-            transition={{
-              repeatType: "loop" as const,
-              ease: "linear",
-              duration: 60 * 4,
-              repeat: Infinity,
-            }}
-            style={{ position: "absolute" }}
-          >
-            <Image
-              alt="Yogitech Hero"
-              src="https://storage.yogitech.me/images/light_2.webp"
-              width="563"
-              height="1316"
-              quality={75}
-              className="h-full w-full object-cover"
-            />
-          </m.div>
-        </Stack>
+          <Image
+            alt="Yogitech Hero"
+            src="https://storage.yogitech.me/images/light_1.webp"
+            width="304"
+            height="1892"
+            quality={75}
+            className="hidden h-full w-full object-cover lg:block"
+          />
+        </m.div>
       </Stack>
-    );
-  }, [opacity, percent, theme.direction, isDesktop]);
 
-  const renderPolygons = useMemo(() => {
-    if (!isDesktop) return null;
+      <Stack
+        component={m.div}
+        variants={varFade().in}
+        sx={{ width: 720, position: "relative", ml: -5 }}
+      >
+        <m.div
+          animate={{ y: ["100%", "0%"] }}
+          transition={{
+            repeatType: "loop" as const,
+            ease: "linear",
+            duration: 60 * 4,
+            repeat: Infinity,
+          }}
+          style={{ position: "absolute", marginTop: -20 }}
+        >
+          <Image
+            alt="Yogitech Hero"
+            src="https://storage.yogitech.me/images/light_2.webp"
+            width="563"
+            height="1316"
+            quality={75}
+            className="hidden h-full w-full object-cover lg:block"
+          />
+        </m.div>
+        <m.div
+          animate={{ y: ["0%", "-100%"] }}
+          transition={{
+            repeatType: "loop" as const,
+            ease: "linear",
+            duration: 60 * 4,
+            repeat: Infinity,
+          }}
+          style={{ position: "absolute" }}
+        >
+          <Image
+            alt="Yogitech Hero"
+            src="https://storage.yogitech.me/images/light_2.webp"
+            width="563"
+            height="1316"
+            quality={75}
+            className="hidden h-full w-full object-cover lg:block"
+          />
+        </m.div>
+      </Stack>
+    </Stack>
+  );
 
-    return (
-      <>
-        <StyledPolygon />
-        <StyledPolygon anchor="right" opacity={0.48} />
-        <StyledPolygon
-          anchor="right"
-          opacity={0.48}
-          sx={{ height: 48, zIndex: 10 }}
-        />
-        <StyledPolygon anchor="right" sx={{ zIndex: 11, height: 24 }} />
-      </>
-    );
-  }, []);
+  const renderPolygons = (
+    <>
+      <StyledPolygon />
+      <StyledPolygon anchor="right" opacity={0.48} />
+      <StyledPolygon
+        anchor="right"
+        opacity={0.48}
+        sx={{ height: 48, zIndex: 10 }}
+      />
+      <StyledPolygon anchor="right" sx={{ zIndex: 11, height: 24 }} />
+    </>
+  );
 
   const renderEllipses = (
     <>
@@ -371,51 +364,30 @@ export default function HomeHero() {
 
   return (
     <>
-      {isDesktop ? (
-        <StyledRoot
-          ref={heroRef}
-          sx={{
-            ...(hide && {
-              opacity: 0,
-            }),
-          }}
-        >
-          <StyledWrapper>
-            <Container component={MotionContainer} sx={{ height: 1 }}>
-              <Grid container columnSpacing={{ md: 10 }} sx={{ height: 1 }}>
-                <Grid xs={12} md={6}>
-                  {renderDescription}
-                </Grid>
-
-                {isDesktop && <Grid md={6}>{renderSlides}</Grid>}
+      <StyledRoot
+        ref={heroRef}
+        sx={{
+          ...(hide && {
+            opacity: 0,
+          }),
+        }}
+      >
+        <StyledWrapper>
+          <Container component={MotionContainer} sx={{ height: 1 }}>
+            <Grid container columnSpacing={{ md: 10 }} sx={{ height: 1 }}>
+              <Grid xs={12} md={6}>
+                {renderDescription}
               </Grid>
-            </Container>
 
-            {renderEllipses}
-          </StyledWrapper>
-        </StyledRoot>
-      ) : (
-        <MobileStyledRoot
-          ref={heroRef}
-          sx={{
-            ...(hide && {
-              opacity: 0,
-            }),
-          }}
-        >
-          <Image
-            src="/assets/background/overlay_3.jpg"
-            alt="Hero Background"
-            width={425}
-            height={795}
-            quality={25}
-            priority
-            sizes="(max-width: 1024px) 100vw"
-            className="absolute inset-0 z-0 h-full w-full object-cover opacity-25 blur-2xl"
-          />
-          {renderDescription}
-        </MobileStyledRoot>
-      )}
+              <Grid md={6} className="!hidden lg:!block">
+                {renderSlides}
+              </Grid>
+            </Grid>
+          </Container>
+
+          {renderEllipses}
+        </StyledWrapper>
+      </StyledRoot>
 
       {isDesktop && renderPolygons}
 
