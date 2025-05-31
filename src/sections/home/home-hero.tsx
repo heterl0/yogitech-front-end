@@ -265,12 +265,12 @@ export default function HomeHero() {
           style={{ position: "absolute", marginTop: -20 }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 1"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
             quality={75}
-            className="hidden h-full w-full object-cover lg:block"
+            className="h-full w-full object-cover"
             priority
           />
         </m.div>
@@ -285,12 +285,12 @@ export default function HomeHero() {
           style={{ position: "absolute" }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 2"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
             quality={75}
-            className="hidden h-full w-full object-cover lg:block"
+            className="h-full w-full object-cover"
           />
         </m.div>
       </Stack>
@@ -311,12 +311,12 @@ export default function HomeHero() {
           style={{ position: "absolute", marginTop: -20 }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 3"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
             quality={75}
-            className="hidden h-full w-full object-cover lg:block"
+            className="h-full w-full object-cover"
           />
         </m.div>
         <m.div
@@ -330,12 +330,12 @@ export default function HomeHero() {
           style={{ position: "absolute" }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 4"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
             quality={75}
-            className="hidden h-full w-full object-cover lg:block"
+            className="h-full w-full object-cover"
           />
         </m.div>
       </Stack>
@@ -379,9 +379,7 @@ export default function HomeHero() {
                 {renderDescription}
               </Grid>
 
-              <Grid md={6} className="!hidden lg:!block">
-                {renderSlides}
-              </Grid>
+              {isDesktop && <Grid md={6}>{renderSlides}</Grid>}
             </Grid>
           </Container>
 
