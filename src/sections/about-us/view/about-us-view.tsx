@@ -35,7 +35,7 @@ function AboutUsView() {
     },
     {
       name: t("aboutUs.members.tran.name"),
-      image: "https://storage.zenaiyoga.comom/images/member/tran-1.png",
+      image: "https://storage.zenaiyoga.com/images/member/tran-1.png",
       position: t("aboutUs.members.tran.position"),
       description: t("aboutUs.members.tran.description"),
       socials: {
@@ -46,7 +46,7 @@ function AboutUsView() {
     },
     {
       name: t("aboutUs.members.duy.name"),
-      image: "https://storage.zenaiyoga.comom/images/member/duy-1.png",
+      image: "https://storage.zenaiyoga.com/images/member/duy-1.png",
       position: t("aboutUs.members.duy.position"),
       description: t("aboutUs.members.duy.description"),
       socials: {
@@ -57,7 +57,7 @@ function AboutUsView() {
     },
     {
       name: t("aboutUs.members.kiet.name"),
-      image: "https://storage.zenaiyoga.comom/images/member/kiet-1.png",
+      image: "https://storage.zenaiyoga.com/images/member/kiet-1.png",
       position: t("aboutUs.members.kiet.position"),
       description: t("aboutUs.members.kiet.description"),
       socials: {
@@ -68,7 +68,7 @@ function AboutUsView() {
     },
     {
       name: t("aboutUs.members.loc.name"),
-      image: "https://storage.zenaiyoga.comom/images/member/loc-1.png",
+      image: "https://storage.zenaiyoga.com/images/member/loc-1.png",
       position: t("aboutUs.members.loc.position"),
       description: t("aboutUs.members.loc.description"),
       socials: {
@@ -102,7 +102,7 @@ function AboutUsView() {
             className="relative h-[40vh] overflow-visible md:h-[85vh]"
           >
             <Image
-              src="https://storage.zenaiyoga.comom/images/banner.png"
+              src="https://storage.zenaiyoga.com/images/banner.png"
               alt="Zenaiyoga App Interface"
               width={1920}
               height={1080}
@@ -192,7 +192,7 @@ function AboutUsView() {
                       className="overflow-hidden rounded-lg bg-white/5 p-2 backdrop-blur-xs"
                     >
                       <Image
-                        src="https://storage.zenaiyoga.comom/images/banner.png?height=400&width=600"
+                        src="https://storage.zenaiyoga.com/images/banner.png?height=400&width=600"
                         alt="Yoga Practice"
                         width={600}
                         height={400}

@@ -168,7 +168,7 @@
     "supportEmail": "support@zenaiyoga.com",
     "rights": "© All rights reserved",
     "madeBy": "Made by",
-    "website": "www.zenaiyoga.comom",
+    "website": "www.zenaiyoga.com",
     "description": "Zenaiyogaa is a platform that connects you with experts to enhance your skills.",
     "copyright": "© {{year}} Zenaiyogaa. All rights reserved."
   },
@@ -1115,7 +1115,7 @@
       },
       "contactInformation": {
         "title": "Contact Information",
-        "content": "If you have any questions about these Terms, contact us at: 📧 Email: support@zenaiyoga.comom"
+        "content": "If you have any questions about these Terms, contact us at: 📧 Email: support@zenaiyoga.com"
       }
     }
   },
@@ -1158,7 +1158,7 @@
       },
       "contactUs": {
         "title": "Contact Us",
-        "content": "If you have questions or concerns about this Privacy Policy, please contact us at: 📧 Email: support@zenaiyoga.comom"
+        "content": "If you have questions or concerns about this Privacy Policy, please contact us at: 📧 Email: support@zenaiyoga.com"
       }
     }
   },
