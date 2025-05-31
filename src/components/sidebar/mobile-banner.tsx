@@ -40,7 +40,7 @@ export default function MobileBanner() {
         <div className="flex items-center gap-2">
           <Box
             component="img"
-            src="/logo/logo_signle_2.svg?height=60&width=60"
+            src="/logo/logo.svg?height=60&width=60"
             alt="App Icon"
             sx={{ width: 60, height: 60, borderRadius: 1 }}
           />

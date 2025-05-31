@@ -121,7 +121,7 @@ function AboutUsView() {
                 <Box className="mb-8 flex items-center justify-start gap-8">
                   <div className="rounded-xl bg-white/5 p-4 backdrop-blur-xs">
                     <Image
-                      src="/logo/Yogi.png"
+                      src="/logo/logo.png"
                       alt="Zenaiyogaa Logo"
                       width={100}
                       height={100}
