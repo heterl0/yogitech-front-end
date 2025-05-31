@@ -262,14 +262,13 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute", marginTop: -20 }}
+          style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
             alt="Yogitech Hero 1"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
-            quality={75}
             className="h-full w-full object-cover"
             priority
           />
@@ -282,14 +281,13 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute" }}
+          style={{ position: "absolute", width: "100%" }}
         >
           <Image
             alt="Yogitech Hero 2"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
-            quality={75}
             className="h-full w-full object-cover"
           />
         </m.div>
@@ -308,14 +306,13 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute", marginTop: -20 }}
+          style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
             alt="Yogitech Hero 3"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
-            quality={75}
             className="h-full w-full object-cover"
           />
         </m.div>
@@ -327,14 +324,13 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute" }}
+          style={{ position: "absolute", width: "100%" }}
         >
           <Image
             alt="Yogitech Hero 4"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
-            quality={75}
             className="h-full w-full object-cover"
           />
         </m.div>
