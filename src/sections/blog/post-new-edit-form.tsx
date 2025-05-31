@@ -251,7 +251,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
     }
 
     const prompt = `Write an SEO-keyword meta upto 5 keywords for a blog post with the title: "${title}". 
-    The meta keywords must include: "YogiTech", "Yoga Mobile App", separate each keyword with a comma.
+    The meta keywords must include: "Zenaiyoga", "Yoga Mobile App", separate each keyword with a comma.
     Return only the content`;
 
     await generateWithAI("keywords", prompt, `${title}`);
@@ -407,7 +407,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
               onBlur={() => {
                 const titleValue = getValues("title");
                 if (!getValues("seoTitle")) {
-                  setValue("seoTitle", titleValue + " | YogiTech");
+                  setValue("seoTitle", titleValue + " | Zenaiyogaa");
                 }
                 if (!getValues("seoKeywords")) {
                   generateSeoKeywords(titleValue);

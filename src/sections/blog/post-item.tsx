@@ -146,11 +146,6 @@ export default function PostItem({ post, index = 0 }: Props) {
           </StyledCardMedia>
         </Link>
 
-        {/* <StyledAvatar
-          alt={authorName}
-          src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
-        /> */}
-
         <StyledInfo>
           <Stack spacing={1}>
             <Typography variant="caption" sx={{ opacity: 0.72 }}>
@@ -245,11 +240,6 @@ export default function PostItem({ post, index = 0 }: Props) {
             height={152}
             priority={index === 0}
           />
-
-          {/* <StyledAvatar
-            alt={authorName}
-            src={owner.profile?.avatar_url || "/logo/logo_signle_2.svg"}
-          /> */}
         </StyledCardMedia>
       </Link>
 

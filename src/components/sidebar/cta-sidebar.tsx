@@ -37,7 +37,6 @@ export default function CtaSidebar() {
         >
           <Box
             component="img"
-            // src="/logo/logo_signle_2.svg?height=200&width=260"
             src="/banner-2-ads.png"
             alt="App Screenshot"
             sx={{ width: "100%", height: 200, objectFit: "cover" }}
@@ -56,7 +55,7 @@ export default function CtaSidebar() {
               <Button
                 fullWidth
                 variant="contained"
-                href="https://storage.yogitech.me/files/yogitech-beta-v1_0.1.apk"
+                href="https://storage.zenaiyoga.com/files/zenaiyoga-beta-v1_0.1.apk"
                 startIcon={<Iconify icon="ri:google-play-fill" />}
               >
                 {t("ctaSidebar.googlePlay")}

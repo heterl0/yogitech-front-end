@@ -40,7 +40,7 @@ export default function MobileBanner() {
         <div className="flex items-center gap-2">
           <Box
             component="img"
-            src="/logo/logo_signle_2.svg?height=60&width=60"
+            src="/logo/logo.svg?height=60&width=60"
             alt="App Icon"
             sx={{ width: 60, height: 60, borderRadius: 1 }}
           />
@@ -63,7 +63,7 @@ export default function MobileBanner() {
           className="flex-none"
           variant="contained"
           size="small"
-          href="https://storage.yogitech.me/files/yogitech-beta-v1_0.1.apk"
+          href="https://storage.zenaiyoga.com/files/zenaiyoga-beta-v1_0.1.apk"
           startIcon={<Iconify icon="eva:download-fill" />}
         >
           {t("mobileBanner.getButton")}

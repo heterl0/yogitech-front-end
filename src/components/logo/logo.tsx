@@ -15,24 +15,6 @@ export interface LogoProps extends BoxProps {
 
 const Logo = forwardRef<HTMLDivElement, LogoProps>(
   ({ disabledLink = false, sx, ...other }, ref) => {
-    // const theme = useTheme();
-
-    // const PRIMARY_LIGHT = theme.palette.primary.light;
-
-    // const PRIMARY_MAIN = theme.palette.primary.main;
-
-    // const PRIMARY_DARK = theme.palette.primary.dark;
-
-    // OR using local (public folder)
-    // -------------------------------------------------------
-    // const logo = (
-    //   <Box
-    //     component="img"
-    //     src="/logo/logo_single.svg" => your path
-    //     sx={{ width: 40, height: 40, cursor: 'pointer', ...sx }}
-    //   />
-    // );
-
     const logo = (
       <Box
         ref={ref}
@@ -41,6 +23,8 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
           width: 40,
           height: 40,
           display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
           ...sx,
         }}
         {...other}
@@ -48,44 +32,65 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
         <svg
           width="100%"
           height="100%"
-          viewBox="0 0 512 512"
+          viewBox="0 0 1024 1024"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M56 231C56 120.543 145.543 31 256 31C269.807 31 281 42.1929 281 56C281 69.8071 269.807 81 256 81C173.157 81 106 148.157 106 231C106 313.842 173.157 381 256 381C330.325 381 392.024 326.943 403.926 256H393.5C379.693 256 368.5 244.807 368.5 231C368.5 217.193 379.693 206 393.5 206H431C444.807 206 456 217.193 456 231C456 332.99 379.658 417.15 281 429.452V449.75C281 463.557 269.807 474.75 256 474.75C242.193 474.75 231 463.557 231 449.75V429.452C132.342 417.15 56 332.99 56 231Z"
-            fill="url(#paint0_linear_1154_24549)"
+            d="M512 170.667C434.411 170.667 359.137 197.101 298.584 245.613C238.031 294.125 195.812 361.82 178.887 437.54C161.961 513.261 171.339 592.489 205.473 662.166C239.608 731.843 296.462 787.812 366.667 820.848C436.872 853.883 516.237 862.015 591.683 843.902C667.128 825.789 734.151 782.513 781.706 721.206C829.261 659.898 854.51 584.218 853.291 506.639C852.072 429.059 824.459 354.209 775.002 294.426"
+            stroke="url(#paint0_linear_2297_1913)"
+            strokeWidth="24"
+            strokeLinecap="round"
           />
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M256 318.5C304.325 318.5 343.5 279.325 343.5 231C343.5 182.675 304.325 143.5 256 143.5C207.675 143.5 168.5 182.675 168.5 231C168.5 279.325 207.675 318.5 256 318.5ZM256 268.5C276.711 268.5 293.5 251.711 293.5 231C293.5 210.289 276.711 193.5 256 193.5C235.289 193.5 218.5 210.289 218.5 231C218.5 251.711 235.289 268.5 256 268.5Z"
-            fill="url(#paint1_linear_1154_24549)"
+          <circle
+            cx="512"
+            cy="512"
+            r="113.778"
+            fill="url(#paint1_linear_2297_1913)"
+          />
+          <circle
+            cx="512"
+            cy="512"
+            r="145.704"
+            stroke="url(#paint2_linear_2297_1913)"
+            strokeWidth="12"
           />
           <defs>
             <linearGradient
-              id="paint0_linear_1154_24549"
-              x1="56"
-              y1="31"
-              x2="553.869"
-              y2="230.459"
+              id="paint0_linear_2297_1913"
+              x1="170.667"
+              y1="853.333"
+              x2="536.632"
+              y2="29.9106"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#3BE2B0" />
               <stop offset="0.5" stopColor="#4095D0" />
-              <stop offset="1" stopColor="#5986CC" />
+              <stop offset="1" stopColor="#1C46F2" />
             </linearGradient>
             <linearGradient
-              id="paint1_linear_1154_24549"
-              x1="56"
-              y1="31"
-              x2="553.869"
-              y2="230.459"
+              id="paint1_linear_2297_1913"
+              x1="398.222"
+              y1="398.222"
+              x2="672.696"
+              y2="520.211"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#3BE2B0" />
               <stop offset="0.5" stopColor="#4095D0" />
-              <stop offset="1" stopColor="#5986CC" />
+              <stop offset="1" stopColor="#1C46F2" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_2297_1913"
+              x1="360.296"
+              y1="360.296"
+              x2="726.262"
+              y2="522.948"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#3BE2B0" />
+              <stop offset="0.5" stopColor="#4095D0" />
+              <stop offset="1" stopColor="#1C46F2" />
             </linearGradient>
           </defs>
         </svg>
@@ -101,7 +106,7 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
         component={RouterLink}
         href="/"
         sx={{ display: "contents" }}
-        aria-label="YogiTech Logo"
+        aria-label="Zenaiyoga Logo"
       >
         {logo}
       </Link>

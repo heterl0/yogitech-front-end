@@ -195,7 +195,7 @@ export default function HomeHero() {
             repeat: Infinity,
           }}
         >
-          YogiTech
+          Zenaiyoga
         </StyledTextGradient>
       </m.div>
 
@@ -266,7 +266,7 @@ export default function HomeHero() {
         >
           <Image
             alt="Yogitech Hero"
-            src="https://storage.yogitech.me/images/light_1.webp"
+            src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
             quality={75}
@@ -286,7 +286,7 @@ export default function HomeHero() {
         >
           <Image
             alt="Yogitech Hero"
-            src="https://storage.yogitech.me/images/light_1.webp"
+            src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
             quality={75}
@@ -312,7 +312,7 @@ export default function HomeHero() {
         >
           <Image
             alt="Yogitech Hero"
-            src="https://storage.yogitech.me/images/light_2.webp"
+            src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
             quality={75}
@@ -331,7 +331,7 @@ export default function HomeHero() {
         >
           <Image
             alt="Yogitech Hero"
-            src="https://storage.yogitech.me/images/light_2.webp"
+            src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
             quality={75}

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /dashboard
 Disallow: /auth/jwt/login
 
-Sitemap: https://www.yogitech.me/sitemap.xml
+Sitemap: https://www.zenaiyoga.com/sitemap.xml

@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "storage.yogitech.me",
+        hostname: "storage.zenaiyoga.com",
         port: "",
         pathname: "/**",
       },

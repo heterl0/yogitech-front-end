@@ -61,7 +61,7 @@ export default function DownloadAdvertisement() {
               size="large"
               variant="contained"
               rel="noopener"
-              href="https://storage.yogitech.me/files/yogitech-beta-v1_0.1.apk"
+              href="https://storage.zenaiyoga.com/files/zenaiyoga-beta-v1_0.1.apk"
               sx={{
                 color: "grey.800",
                 bgcolor: "common.white",

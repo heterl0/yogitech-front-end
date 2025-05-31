@@ -20,23 +20,15 @@ export const generatePostJsonLd = (post: IPost) => {
     },
     publisher: {
       "@type": "Organization",
-      name: "YourSiteName", // Replace with your site name
+      name: "Zenaiyoga", // Replace with your site name
       logo: {
         "@type": "ImageObject",
-        url: "https://yourwebsite.com/logo.png", // Replace with your site logo
+        url: "https://www.zenaiyoga.com/logo/logo.png", // Replace with your site logo
       },
     },
     articleBody: post.content,
     wordCount: post.content.split(" ").length,
     commentCount: post.votes.length,
-    // aggregateRating: {
-    //   "@type": "AggregateRating",
-    //   ratingValue: (
-    //     post.votes.reduce((sum, vote) => sum + vote.vote_value, 0) /
-    //       post.votes.length || 0
-    //   ).toFixed(1),
-    //   reviewCount: post.votes.length,
-    // },
     interactionStatistic: {
       "@type": "InteractionCounter",
       interactionType: "https://schema.org/ViewAction",

@@ -67,23 +67,23 @@
   "home": {
     "hero": {
       "subtitle": "Nền tảng hướng dẫn Yoga",
-      "description": "Khám phá YogiTech, ứng dụng yoga hàng đầu được thiết kế cho mọi trình độ. Trải nghiệm sự tiện lợi của các buổi tập yoga cá nhân mọi lúc, mọi nơi và bắt đầu hành trình của bạn hướng tới sức khỏe và sự dẻo dai tốt hơn ngay hôm nay!",
+      "description": "Khám phá Zenaiyoga, ứng dụng yoga hàng đầu được thiết kế cho mọi trình độ. Trải nghiệm sự tiện lợi của các buổi tập yoga cá nhân mọi lúc, mọi nơi và bắt đầu hành trình của bạn hướng tới sức khỏe và sự dẻo dai tốt hơn ngay hôm nay!",
       "download": "Tải xuống"
     },
     "minimal": {
-      "description1": "YogiTech",
+      "description1": "Zenaiyogaa",
       "description2": "giúp bạn điều gì?",
       "card1": {
         "title": "Nâng Cao Hiệu Suất",
-        "description": "Khám phá cách YogiTech tối ưu hóa quá trình luyện tập và giúp bạn đạt được tiềm năng tối đa."
+        "description": "Khám phá cách Zenaiyogaa tối ưu hóa quá trình luyện tập và giúp bạn đạt được tiềm năng tối đa."
       },
       "card2": {
         "title": "Sức Khỏe và Sức Mạnh",
-        "description": "Trải nghiệm sự cân bằng và sức mạnh thông qua các giải pháp công nghệ sức khỏe của YogiTech."
+        "description": "Trải nghiệm sự cân bằng và sức mạnh thông qua các giải pháp công nghệ sức khỏe của Zenaiyogaa."
       },
       "card3": {
         "title": "Cộng Đồng Kết Nối",
-        "description": "Tham gia vào một cộng đồng sôi động và kết nối với YogiTech."
+        "description": "Tham gia vào một cộng đồng sôi động và kết nối với Zenaiyogaa."
       }
     },
     "pricing": {
@@ -105,9 +105,9 @@
     "faq": {
       "overline": "Câu hỏi thường gặp",
       "title": "Các câu hỏi thường gặp",
-      "description": "Xem những câu hỏi phổ biến nhất về YogiTech.",
-      "question1": "YogiTech là gì?",
-      "answer1": "YogiTech là trợ lý yoga sử dụng AI cung cấp phản hồi thời gian thực.",
+      "description": "Xem những câu hỏi phổ biến nhất về Zenaiyogaa.",
+      "question1": "Zenaiyogaa là gì?",
+      "answer1": "Zenaiyogaa là trợ lý yoga sử dụng AI cung cấp phản hồi thời gian thực.",
       "question2": "Làm thế nào để sử dụng ứng dụng?",
       "answer2": "Tải ứng dụng từ cửa hàng và bắt đầu tập luyện.",
       "question3": "Nó có miễn phí không?",
@@ -120,13 +120,13 @@
   },
   "aboutUs": {
     "title": "Về Chúng Tôi",
-    "whatIsYogiTech": "YogiTech là gì?",
+    "whatIsYogiTech": "Zenaiyogaa là gì?",
     "appType": "Ứng dụng di động",
     "year": "2024",
     "description": "Chúng tôi phát triển ứng dụng Yoga AI cung cấp phản hồi thời gian thực cho các tư thế của bạn, hỗ trợ cả tiếng Anh và tiếng Việt.",
     "overviewTitle": "Tổng Quan",
     "overviewButton": "Tìm hiểu thêm",
-    "overviewDescription": "YogiTech là nền tảng yoga sử dụng AI giúp bạn tập luyện an toàn và hiệu quả với phản hồi thời gian thực.",
+    "overviewDescription": "Zenaiyogaa là nền tảng yoga sử dụng AI giúp bạn tập luyện an toàn và hiệu quả với phản hồi thời gian thực.",
     "teamTitle": "Đội Ngũ Của Chúng Tôi",
     "members": {
       "hieu": {
@@ -157,7 +157,7 @@
     }
   },
   "footer": {
-    "yogitech": "YogiTech",
+    "zenaiyoga": "Zenaiyogaa",
     "about": "Về chúng tôi",
     "contact": "Liên hệ",
     "faqs": "Câu hỏi",
@@ -165,12 +165,12 @@
     "terms": "Điều khoản và Điều kiện",
     "privacy": "Chính sách bảo mật",
     "contactHeader": "Liên hệ",
-    "supportEmail": "support@yogitech.me",
+    "supportEmail": "support@zenaiyoga.com",
     "rights": "© Đã bảo lưu mọi quyền",
     "madeBy": "Được tạo bởi",
-    "website": "www.yogitech.me",
-    "description": "YogiTech là nền tảng kết nối bạn với các chuyên gia để nâng cao kỹ năng.",
-    "copyright": "© {{year}} YogiTech. Đã bảo lưu mọi quyền."
+    "website": "www.zenaiyoga.com",
+    "description": "Zenaiyogaa là nền tảng kết nối bạn với các chuyên gia để nâng cao kỹ năng.",
+    "copyright": "© {{year}} Zenaiyogaa. Đã bảo lưu mọi quyền."
   },
   "download": {
     "getApp": "Tải ứng dụng về!",
@@ -885,7 +885,7 @@
     "Advanced": "Advanced"
   },
   "login": {
-    "title": "Đăng nhập vào YogiTech",
+    "title": "Đăng nhập vào Zenaiyogaa",
     "newUser": "Người dùng mới?",
     "createAccount": "Tạo tài khoản",
     "emailLabel": "Địa chỉ email",
@@ -944,7 +944,7 @@
   },
   "activateView": {
     "activate": "Kích hoạt",
-    "welcome": "Chào mừng đến với YogiTech",
+    "welcome": "Chào mừng đến với Zenaiyogaa",
     "confirmEmail": "Xin lỗi vì sự phiền hà, chúng tôi chỉ muốn xác nhận đây là email thực của bạn để đảm bảo an ninh.",
     "activationSuccess": "Kích hoạt thành công!",
     "redirectHomepage": "Chúng tôi sẽ chuyển hướng bạn đến trang chủ.",
@@ -1062,11 +1062,11 @@
   "termsAndConditions": {
     "title": "Điều khoản và Điều kiện",
     "effectiveDate": "Ngày hiệu lực: 20 Tháng 2, 2024",
-    "footerText": "Bằng cách sử dụng YogiTech, bạn đồng ý với Điều khoản và Điều kiện này.",
+    "footerText": "Bằng cách sử dụng Zenaiyogaa, bạn đồng ý với Điều khoản và Điều kiện này.",
     "sections": {
       "introduction": {
         "title": "Giới thiệu",
-        "content": "Chào mừng bạn đến với YogiTech: Nền tảng Mentor (\"YogiTech,\" \"chúng tôi\" hoặc \"của chúng tôi\"). Các Điều khoản và Điều kiện này điều chỉnh việc bạn sử dụng trang web và ứng dụng di động của chúng tôi. Bằng cách sử dụng dịch vụ, bạn đồng ý tuân thủ các Điều khoản. Nếu bạn không đồng ý, vui lòng không sử dụng YogiTech."
+        "content": "Chào mừng bạn đến với Zenaiyogaa: Nền tảng Mentor (Zenaiyogaga,\" \"chúng tôi\" hoặc \"của chúng tôi\"). Các Điều khoản và Điều kiện này điều chỉnh việc bạn sử dụng trang web và ứng dụng di động của chúng tôi. Bằng cách sử dụng dịch vụ, bạn đồng ý tuân thủ các Điều khoản. Nếu bạn không đồng ý, vui lòng không sử dụnZenaiyogaoga."
       },
       "userEligibility": {
         "title": "Điều kiện Người dùng",
@@ -1078,7 +1078,7 @@
         "content1": "Lạm dụng nền tảng cho các hoạt động bất hợp pháp hoặc gây hại.",
         "content2": "Phân tích ngược hoặc cố gắng tấn công ứng dụng.",
         "content3": "Vi phạm quyền sở hữu trí tuệ (ví dụ: sao chép nội dung mà không được phép).",
-        "note": "Bạn đồng ý chỉ sử dụng YogiTech cho các mục đích hợp pháp. Các hoạt động bị cấm bao gồm:"
+        "note": "Bạn đồng ý chỉ sử dụng Zenaiyogaa cho các mục đích hợp pháp. Các hoạt động bị cấm bao gồm:"
       },
       "userAccountsData": {
         "title": "Tài khoản & Dữ liệu Người dùng",
@@ -1088,21 +1088,21 @@
       },
       "paymentSubscription": {
         "title": "Thanh toán & Đăng ký",
-        "content": "Nếu YogiTech cung cấp các tính năng hoặc gói đăng ký cao cấp, việc thanh toán sẽ được xử lý qua các nhà cung cấp bên thứ ba. Chính sách hoàn tiền sẽ được thông báo riêng nếu có."
+        "content": "Nếu Zenaiyogaa cung cấp các tính năng hoặc gói đăng ký cao cấp, việc thanh toán sẽ được xử lý qua các nhà cung cấp bên thứ ba. Chính sách hoàn tiền sẽ được thông báo riêng nếu có."
       },
       "dataCollectionPrivacy": {
         "title": "Thu thập & Quyền riêng tư Dữ liệu",
         "content1": "Chúng tôi thu thập và xử lý dữ liệu người dùng như đã nêu trong Chính sách Quyền riêng tư.",
-        "content2": "Bằng cách sử dụng YogiTech, bạn đồng ý với các hoạt động dữ liệu của chúng tôi, bao gồm việc sử dụng cookie, phân tích, và camera để theo dõi tư thế yoga.",
+        "content2": "Bằng cách sử dụng Zenaiyogaa, bạn đồng ý với các hoạt động dữ liệu của chúng tôi, bao gồm việc sử dụng cookie, phân tích, và camera để theo dõi tư thế yoga.",
         "note": ""
       },
       "thirdPartyServices": {
         "title": "Dịch vụ Bên Thứ ba",
-        "content": "YogiTech tích hợp các dịch vụ của bên thứ ba như Google Analytics, Microsoft Clarity, và CookiesYes. Điều khoản của họ sẽ áp dụng cho bất kỳ dữ liệu nào họ xử lý."
+        "content": "Zenaiyogaa tích hợp các dịch vụ của bên thứ ba như Google Analytics, Microsoft Clarity, và CookiesYes. Điều khoản của họ sẽ áp dụng cho bất kỳ dữ liệu nào họ xử lý."
       },
       "limitationOfLiability": {
         "title": "Giới hạn Trách nhiệm",
-        "content1": "YogiTech được cung cấp “nguyên trạng” mà không có cam kết đảm bảo tính chính xác hoặc không gián đoạn.",
+        "content1": "Zenaiyogaa được cung cấp “nguyên trạng” mà không có cam kết đảm bảo tính chính xác hoặc không gián đoạn.",
         "content2": "Chúng tôi không chịu trách nhiệm cho bất kỳ thương tích, thiệt hại hoặc tổn thất nào do việc sử dụng nền tảng của chúng tôi. Người dùng tự chịu rủi ro khi luyện tập yoga."
       },
       "terminationOfService": {
@@ -1115,7 +1115,7 @@
       },
       "contactInformation": {
         "title": "Thông tin Liên hệ",
-        "content": "Nếu bạn có bất kỳ câu hỏi nào về các Điều khoản này, vui lòng liên hệ qua: 📧 Email: support@yogitech.me"
+        "content": "Nếu bạn có bất kỳ câu hỏi nào về các Điều khoản này, vui lòng liên hệ qua: 📧 Email: support@zenaiyoga.com"
       }
     }
   },
@@ -1125,7 +1125,7 @@
     "sections": {
       "introduction": {
         "title": "Giới thiệu",
-        "content": "Chào mừng bạn đến với YogiTech: Nền tảng Mentor (\"YogiTech,\" \"chúng tôi,\" hoặc \"của chúng tôi\"). Chúng tôi trân trọng sự riêng tư của bạn và cam kết bảo vệ thông tin cá nhân. Chính sách Quyền riêng tư này giải thích cách chúng tôi thu thập, sử dụng, và bảo vệ dữ liệu của bạn khi bạn sử dụng trang web và ứng dụng di động."
+        "content": "Chào mừng bạn đến với Zenaiyogaa: Nền tảng Mentor (Zenaiyogaga,\" \"chúng tôi,\" hoặc \"của chúng tôi\"). Chúng tôi trân trọng sự riêng tư của bạn và cam kết bảo vệ thông tin cá nhân. Chính sách Quyền riêng tư này giải thích cách chúng tôi thu thập, sử dụng, và bảo vệ dữ liệu của bạn khi bạn sử dụng trang web và ứng dụng di động."
       },
       "informationWeCollect": {
         "title": "Thông tin Chúng tôi Thu thập",
@@ -1158,7 +1158,7 @@
       },
       "contactUs": {
         "title": "Liên hệ với Chúng tôi",
-        "content": "Nếu bạn có câu hỏi hoặc băn khoăn về Chính sách Quyền riêng tư này, vui lòng liên hệ với chúng tôi qua: 📧 Email: support@yogitech.me"
+        "content": "Nếu bạn có câu hỏi hoặc băn khoăn về Chính sách Quyền riêng tư này, vui lòng liên hệ với chúng tôi qua: 📧 Email: support@zenaiyoga.com"
       }
     }
   },

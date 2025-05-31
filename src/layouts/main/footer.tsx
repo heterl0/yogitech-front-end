@@ -19,7 +19,7 @@ export default function Footer() {
 
   const LINKS = [
     {
-      headline: t("footer.yogitech"),
+      headline: t("footer.zenaiyoga"),
       children: [
         { name: t("footer.about"), href: paths.about },
         { name: t("footer.contact"), href: paths.contact },

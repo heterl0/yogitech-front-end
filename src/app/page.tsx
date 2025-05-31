@@ -3,32 +3,32 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.HOST_WEB_DOMAIN}/`),
-  title: "YogiTech: Mentor Platform",
+  title: "Zenaiyoga: Mentor Platform",
   description:
-    "Welcome to YogiTech, the ultimate mentor platform to connect with experts and enhance your skills.",
+    "Welcome to Zenaiyogaa, the ultimate mentor platform to connect with experts and enhance your skills.",
   keywords: "Yogitech, Yogi, Yoga",
   robots: "follow, index",
   openGraph: {
-    title: "YogiTech: Mentor Platform",
+    title: "Zenaiyogaa: Mentor Platform",
     description:
-      "Welcome to YogiTech, the ultimate mentor platform to connect with experts and enhance your skills.",
+      "Welcome to Zenaiyogaa, the ultimate mentor platform to connect with experts and enhance your skills.",
     url: `${process.env.HOST_WEB_DOMAIN}/`,
-    siteName: "YogiTech",
+    siteName: "Zenaiyogaa",
     type: "website",
     images: [
       {
         url: `${process.env.HOST_WEB_DOMAIN}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "YogiTech: Mentor Platform",
+        alt: "Zenaiyogaa: Mentor Platform",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "YogiTech: Mentor Platform",
+    title: "Zenaiyogaa: Mentor Platform",
     description:
-      "Welcome to YogiTech, the ultimate mentor platform to connect with experts and enhance your skills.",
+      "Welcome to Zenaiyogaa, the ultimate mentor platform to connect with experts and enhance your skills.",
     images: [`${process.env.HOST_WEB_DOMAIN}/og-image.png`],
   },
   icons: [

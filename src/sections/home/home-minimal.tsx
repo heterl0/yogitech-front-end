@@ -59,7 +59,7 @@ export default function HomeMinimal() {
             variant="overline"
             sx={{ color: "text.disabled" }}
           >
-            YogiTech
+            Zenaiyoga
           </Typography>
         </m.div>
 
