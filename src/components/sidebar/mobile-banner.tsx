@@ -63,7 +63,7 @@ export default function MobileBanner() {
           className="flex-none"
           variant="contained"
           size="small"
-          href="https://storage.yogitech.me/files/yogitech-beta-v1_0.1.apk"
+          href="https://storage.zenaiyoga.com/files/zenaiyoga-beta-v1_0.1.apk"
           startIcon={<Iconify icon="eva:download-fill" />}
         >
           {t("mobileBanner.getButton")}

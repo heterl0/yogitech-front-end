@@ -106,7 +106,7 @@ export default function HomeFAQ() {
           /> */}
           <div className="flex flex-row justify-center">
             <Image
-              src="https://storage.yogitech.me/images/banner-2.png"
+              src="https://storage.zenaiyoga.com/images/banner-2.png"
               alt="FAQ Image"
               width={600}
               height={400}

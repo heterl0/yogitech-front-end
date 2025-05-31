@@ -67,23 +67,23 @@
   "home": {
     "hero": {
       "subtitle": "Yoga Mentor Platform",
-      "description": "Explore YogiTech, the premier yoga app designed for all skill levels. Experience the convenience of personalized yoga sessions anytime, anywhere, and start your journey towards better health and flexibility today!",
+      "description": "Explore Zenaiyoga, the premier yoga app designed for all skill levels. Experience the convenience of personalized yoga sessions anytime, anywhere, and start your journey towards better health and flexibility today!",
       "download": "Download"
     },
     "minimal": {
-      "description1": "What YogiTech ",
+      "description1": "What Zenaiyogaa ",
       "description2": "helps you?",
       "card1": {
         "title": "Enhanced Performance",
-        "description": "Explore how YogiTech optimizes your training process and helps you achieve maximum potential."
+        "description": "Explore how Zenaiyogaa optimizes your training process and helps you achieve maximum potential."
       },
       "card2": {
         "title": "Health and Strength",
-        "description": "Experience balance and strength through YogiTech's health technology solutions."
+        "description": "Experience balance and strength through Zenaiyogaa's health technology solutions."
       },
       "card3": {
         "title": "Connected Community",
-        "description": "Engage in a vibrant, connected community with YogiTech."
+        "description": "Engage in a vibrant, connected community with Zenaiyogaa."
       }
     },
     "pricing": {
@@ -105,9 +105,9 @@
     "faq": {
       "overline": "Frequency Asked Questions",
       "title": "Frequently Asked Questions",
-      "description": "Check out our most common questions about YogiTech.",
-      "question1": "What is YogiTech?",
-      "answer1": "YogiTech is an AI-powered yoga mentor that gives real-time pose feedback.",
+      "description": "Check out our most common questions about Zenaiyogaa.",
+      "question1": "What is Zenaiyogaa?",
+      "answer1": "Zenaiyogaa is an AI-powered yoga mentor that gives real-time pose feedback.",
       "question2": "How do I use the app?",
       "answer2": "Download it from the app store and start practicing.",
       "question3": "Is it free?",
@@ -120,13 +120,13 @@
   },
   "aboutUs": {
     "title": "About Us",
-    "whatIsYogiTech": "What is YogiTech?",
+    "whatIsYogiTech": "What is Zenaiyogaa?",
     "appType": "Mobile App",
     "year": "2024",
     "description": "We developed an AI Yoga app that provides real-time feedback on your poses, supporting both English and Vietnamese.",
     "overviewTitle": "Overview",
     "overviewButton": "Check out features!",
-    "overviewDescription": "YogiTech is an AI-powered yoga platform that gives real-time feedback to help you practice safely and effectively.",
+    "overviewDescription": "Zenaiyogaa is an AI-powered yoga platform that gives real-time feedback to help you practice safely and effectively.",
     "teamTitle": "Our Team",
     "members": {
       "hieu": {
@@ -157,7 +157,7 @@
     }
   },
   "footer": {
-    "yogitech": "YogiTech",
+    "zenaiyoga": "Zenaiyogaa",
     "about": "About us",
     "contact": "Contact us",
     "faqs": "FAQs",
@@ -165,12 +165,12 @@
     "terms": "Terms and Conditions",
     "privacy": "Privacy Policy",
     "contactHeader": "Contact",
-    "supportEmail": "support@yogitech.me",
+    "supportEmail": "support@zenaiyoga.com",
     "rights": "© All rights reserved",
     "madeBy": "Made by",
-    "website": "www.yogitech.me",
-    "description": "YogiTech is a platform that connects you with experts to enhance your skills.",
-    "copyright": "© {{year}} YogiTech. All rights reserved."
+    "website": "www.zenaiyoga.comom",
+    "description": "Zenaiyogaa is a platform that connects you with experts to enhance your skills.",
+    "copyright": "© {{year}} Zenaiyogaa. All rights reserved."
   },
   "download": {
     "getApp": "Get our app!",
@@ -880,7 +880,7 @@
     "unableToLogout": "Unable to logout!"
   },
   "login": {
-    "title": "Sign in to YogiTech",
+    "title": "Sign in to Zenaiyogaa",
     "newUser": "New user?",
     "createAccount": "Create an account",
     "emailLabel": "Email address",
@@ -939,7 +939,7 @@
   },
   "activateView": {
     "activate": "Activate",
-    "welcome": "Welcome to YogiTech",
+    "welcome": "Welcome to Zenaiyogaa",
     "confirmEmail": "Sorry for the bother, we just want to confirm that this is your real email to ensure your security.",
     "activationSuccess": "Activation Successfully!",
     "redirectHomepage": "We will redirect you to the homepage.",
@@ -1063,11 +1063,11 @@
   "termsAndConditions": {
     "title": "Terms and Conditions",
     "effectiveDate": "Effective Date: February 20, 2024",
-    "footerText": "By using YogiTech, you agree to these Terms and Conditions.",
+    "footerText": "By using Zenaiyogaa, you agree to these Terms and Conditions.",
     "sections": {
       "introduction": {
         "title": "Introduction",
-        "content": "Welcome to YogiTech: Mentor Platform (\"YogiTech,\" \"we,\" \"our,\" or \"us\"). These Terms and Conditions govern your use of our website and mobile application. By using our services, you agree to comply with these Terms. If you do not agree, please do not use YogiTech."
+        "content": "Welcome to Zenaiyogaa: Mentor Platform (Zenaiyogaga,\" \"we,\" \"our,\" or \"us\"). These Terms and Conditions govern your use of our website and mobile application. By using our services, you agree to comply with these Terms. If you do not agree, please do not usZenaiyogaoga."
       },
       "userEligibility": {
         "title": "User Eligibility",
@@ -1079,7 +1079,7 @@
         "content1": "Misusing the platform for illegal or harmful activities.",
         "content2": "Reverse engineering or attempting to hack the application.",
         "content3": "Violating intellectual property rights (e.g., copying content without permission).",
-        "note": "You agree to use YogiTech only for lawful purposes. Prohibited activities include:"
+        "note": "You agree to use Zenaiyogaa only for lawful purposes. Prohibited activities include:"
       },
       "userAccountsData": {
         "title": "User Accounts & Data",
@@ -1089,20 +1089,20 @@
       },
       "paymentSubscription": {
         "title": "Payment & Subscription",
-        "content": "If YogiTech offers premium features or subscriptions, payments will be handled through third-party providers. Refund policies will be provided separately if applicable."
+        "content": "If Zenaiyogaa offers premium features or subscriptions, payments will be handled through third-party providers. Refund policies will be provided separately if applicable."
       },
       "dataCollectionPrivacy": {
         "title": "Data Collection & Privacy",
         "content1": "We collect and process user data as described in our Privacy Policy.",
-        "content2": "By using YogiTech, you consent to our data practices, including the use of cookies, analytics, and camera tracking for yoga pose analysis."
+        "content2": "By using Zenaiyogaa, you consent to our data practices, including the use of cookies, analytics, and camera tracking for yoga pose analysis."
       },
       "thirdPartyServices": {
         "title": "Third-Party Services",
-        "content": "YogiTech integrates third-party services like Google Analytics, Microsoft Clarity, and CookiesYes. Their terms apply to any data they process."
+        "content": "Zenaiyogaa integrates third-party services like Google Analytics, Microsoft Clarity, and CookiesYes. Their terms apply to any data they process."
       },
       "limitationOfLiability": {
         "title": "Limitation of Liability",
-        "content1": "YogiTech is provided \"as is\" without guarantees of accuracy or uninterrupted service.",
+        "content1": "Zenaiyogaa is provided \"as is\" without guarantees of accuracy or uninterrupted service.",
         "content2": "We are not liable for injuries, damages, or losses caused by using our platform. Users practice yoga at their own risk."
       },
       "terminationOfService": {
@@ -1115,7 +1115,7 @@
       },
       "contactInformation": {
         "title": "Contact Information",
-        "content": "If you have any questions about these Terms, contact us at: 📧 Email: support@yogitech.me"
+        "content": "If you have any questions about these Terms, contact us at: 📧 Email: support@zenaiyoga.comom"
       }
     }
   },
@@ -1125,7 +1125,7 @@
     "sections": {
       "introduction": {
         "title": "Introduction",
-        "content": "Welcome to YogiTech: Mentor Platform (\"YogiTech,\" \"we,\" \"our,\" or \"us\"). We value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and protect your data when you use our website and mobile application."
+        "content": "Welcome to Zenaiyogaa: Mentor Platform (Zenaiyogaga,\" \"we,\" \"our,\" or \"us\"). We value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and protect your data when you use our website and mobile application."
       },
       "informationWeCollect": {
         "title": "Information We Collect",
@@ -1158,7 +1158,7 @@
       },
       "contactUs": {
         "title": "Contact Us",
-        "content": "If you have questions or concerns about this Privacy Policy, please contact us at: 📧 Email: support@yogitech.me"
+        "content": "If you have questions or concerns about this Privacy Policy, please contact us at: 📧 Email: support@zenaiyoga.comom"
       }
     }
   },

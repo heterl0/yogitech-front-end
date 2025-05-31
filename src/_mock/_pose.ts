@@ -3,7 +3,7 @@ export const mockPose = [
     pose_id: 1,
     pose_name: "Warrior II",
     pose_image:
-      "https://storage.yogitech.me/9b1a2ee7-94da-4cbb-999d-f5e983afbecd.jpg",
+      "https://storage.zenaiyoga.com/9b1a2ee7-94da-4cbb-999d-f5e983afbecd.jpg",
     pose_keypoints: [
       {
         x: 0.4768695533275604,
