@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       post.seo_keywords ??
       "Yogitech, Yoga blog, AI yoga, yoga tips, wellness, yoga techniques",
     openGraph: {
-      title: post.seo_title ?? "Blog - Zenaiyogaa",
+      title: post.seo_title ?? "Blog - Zenaiyoga",
       description:
         post.seo_description ??
         "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",
@@ -89,7 +89,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: post.seo_title ?? "Blog - Zenaiyogaa",
+      title: post.seo_title ?? "Blog - Zenaiyoga",
       description:
         post.seo_description &&
         "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",

@@ -75,7 +75,7 @@ export default function Footer() {
           : "bg-background border-grey-300"
       )}
     >
-      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Logo className="mb-4 h-8 w-auto" />

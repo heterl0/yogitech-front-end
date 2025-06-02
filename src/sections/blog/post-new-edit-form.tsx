@@ -407,7 +407,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
               onBlur={() => {
                 const titleValue = getValues("title");
                 if (!getValues("seoTitle")) {
-                  setValue("seoTitle", titleValue + " | Zenaiyogaa");
+                  setValue("seoTitle", titleValue + " | Zenaiyoga");
                 }
                 if (!getValues("seoKeywords")) {
                   generateSeoKeywords(titleValue);
