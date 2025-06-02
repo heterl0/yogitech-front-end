@@ -37,31 +37,30 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M512 170.667C434.411 170.667 359.137 197.101 298.584 245.613C238.031 294.125 195.812 361.82 178.887 437.54C161.961 513.261 171.339 592.489 205.473 662.166C239.608 731.843 296.462 787.812 366.667 820.848C436.872 853.883 516.237 862.015 591.683 843.902C667.128 825.789 734.151 782.513 781.706 721.206C829.261 659.898 854.51 584.218 853.291 506.639C852.072 429.059 824.459 354.209 775.002 294.426"
-            stroke="url(#paint0_linear_2297_1913)"
-            strokeWidth="24"
-            strokeLinecap="round"
+            d="M470.5 858.42L465.245 857.763C280.776 834.679 138 676.747 138 485.333C138 278.022 305.465 110 512 110C534.901 110 553.5 128.635 553.5 151.667C553.5 174.699 534.901 193.333 512 193.333C351.265 193.333 221 324.086 221 485.333C221 646.58 351.265 777.333 512 777.333C656.213 777.333 775.89 672.082 798.978 533.989L800.146 527H773.25C750.349 527 731.75 508.365 731.75 485.333C731.75 462.301 750.349 443.667 773.25 443.667H844.5C867.401 443.667 886 462.301 886 485.333C886 676.747 743.223 834.679 558.755 857.763L553.5 858.42V902.417C553.5 925.449 534.901 944.083 512 944.083C489.099 944.083 470.5 925.449 470.5 902.417V858.42Z"
+            stroke="url(#paint0_linear_2315_2243)"
+            strokeWidth="12"
           />
           <circle
             cx="512"
-            cy="512"
+            cy="486"
             r="113.778"
-            fill="url(#paint1_linear_2297_1913)"
+            fill="url(#paint1_linear_2315_2243)"
           />
           <circle
             cx="512"
-            cy="512"
-            r="145.704"
-            stroke="url(#paint2_linear_2297_1913)"
+            cy="484"
+            r="154"
+            stroke="url(#paint2_linear_2315_2243)"
             strokeWidth="12"
           />
           <defs>
             <linearGradient
-              id="paint0_linear_2297_1913"
-              x1="170.667"
-              y1="853.333"
-              x2="536.632"
-              y2="29.9106"
+              id="paint0_linear_2315_2243"
+              x1="132"
+              y1="104"
+              x2="1078.87"
+              y2="482.013"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#3BE2B0" />
@@ -69,11 +68,11 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
               <stop offset="1" stopColor="#1C46F2" />
             </linearGradient>
             <linearGradient
-              id="paint1_linear_2297_1913"
+              id="paint1_linear_2315_2243"
               x1="398.222"
-              y1="398.222"
+              y1="372.222"
               x2="672.696"
-              y2="520.211"
+              y2="494.211"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#3BE2B0" />
@@ -81,11 +80,11 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
               <stop offset="1" stopColor="#1C46F2" />
             </linearGradient>
             <linearGradient
-              id="paint2_linear_2297_1913"
-              x1="360.296"
-              y1="360.296"
-              x2="726.262"
-              y2="522.948"
+              id="paint2_linear_2315_2243"
+              x1="352"
+              y1="324"
+              x2="737.979"
+              y2="495.546"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#3BE2B0" />

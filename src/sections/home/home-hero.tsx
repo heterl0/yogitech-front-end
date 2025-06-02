@@ -55,17 +55,18 @@ const StyledTextGradient = styled(m.h1)(({ theme }) => ({
   // marginTop: 8,
   fontWeight: 900,
   // marginBottom: 24,
-  letterSpacing: 8,
   textAlign: "center",
   backgroundSize: "400%",
   fontSize: `${64 / 16}rem`,
   fontFamily: theme.typography.fontSecondaryFamily,
   [theme.breakpoints.up("xs")]: {
     lineHeight: "5.5rem",
+    letterSpacing: 2,
   },
   [theme.breakpoints.up("md")]: {
     fontSize: `${96 / 16}rem`,
     lineHeight: "8rem",
+    letterSpacing: 8,
   },
 }));
 
@@ -74,11 +75,15 @@ const StyledEllipseTop = styled("div")(({ theme }) => ({
   width: 480,
   right: -80,
   height: 480,
+  display: "none",
   borderRadius: "50%",
   position: "absolute",
   filter: "blur(100px)",
   WebkitFilter: "blur(100px)",
   backgroundColor: alpha(theme.palette.primary.darker, 0.12),
+  [theme.breakpoints.up("md")]: {
+    display: "block",
+  },
 }));
 
 const StyledEllipseBottom = styled("div")(({ theme }) => ({
@@ -105,6 +110,7 @@ const StyledPolygon = styled("div")<StyledPolygonProps>(
       color: theme.palette.background.default,
     }),
     zIndex: 9,
+    display: "none",
     bottom: 0,
     height: 80,
     width: "50%",
@@ -123,6 +129,9 @@ const StyledPolygon = styled("div")<StyledPolygonProps>(
         transform: "scaleX(1)",
       }),
     }),
+    [theme.breakpoints.up("md")]: {
+      display: "block",
+    },
   })
 );
 
@@ -232,6 +241,7 @@ export default function HomeHero() {
     </Stack>
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const renderSlides = (
     <Stack
       direction="row"
@@ -262,16 +272,15 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute", marginTop: -20 }}
+          style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 1"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
-            quality={75}
-            className="hidden h-full w-full object-cover lg:block"
-            priority
+            className="h-full w-full object-cover"
+            priority={isDesktop}
           />
         </m.div>
         <m.div
@@ -282,15 +291,14 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute" }}
+          style={{ position: "absolute", width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 2"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
-            quality={75}
-            className="hidden h-full w-full object-cover lg:block"
+            className="h-full w-full object-cover"
           />
         </m.div>
       </Stack>
@@ -308,15 +316,14 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute", marginTop: -20 }}
+          style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 3"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
-            quality={75}
-            className="hidden h-full w-full object-cover lg:block"
+            className="h-full w-full object-cover"
           />
         </m.div>
         <m.div
@@ -327,15 +334,14 @@ export default function HomeHero() {
             duration: 60 * 4,
             repeat: Infinity,
           }}
-          style={{ position: "absolute" }}
+          style={{ position: "absolute", width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero"
+            alt="Yogitech Hero 4"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
-            quality={75}
-            className="hidden h-full w-full object-cover lg:block"
+            className="h-full w-full object-cover"
           />
         </m.div>
       </Stack>
@@ -357,7 +363,7 @@ export default function HomeHero() {
 
   const renderEllipses = (
     <>
-      {isDesktop && <StyledEllipseTop />}
+      <StyledEllipseTop />
       <StyledEllipseBottom />
     </>
   );
@@ -379,7 +385,15 @@ export default function HomeHero() {
                 {renderDescription}
               </Grid>
 
-              <Grid md={6} className="!hidden lg:!block">
+              <Grid
+                sx={{
+                  display: {
+                    xs: "none",
+                    md: "block",
+                  },
+                }}
+                md={6}
+              >
                 {renderSlides}
               </Grid>
             </Grid>
@@ -389,7 +403,7 @@ export default function HomeHero() {
         </StyledWrapper>
       </StyledRoot>
 
-      {isDesktop && renderPolygons}
+      {renderPolygons}
 
       <div className="md:h-screen" />
     </>
