@@ -5,21 +5,21 @@ export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.HOST_WEB_DOMAIN}/`),
   title: "Features - Zenaiyoga",
   description:
-    "Welcome to Zenaiyogaa, the AI-driven yoga app designed to help you perfect your poses with real-time feedback.",
+    "Welcome to Zenaiyoga, the AI-driven yoga app designed to help you perfect your poses with real-time feedback.",
   keywords: "Yogitech, Yogi, Yoga, features, mentor, ai, yoga ai",
   openGraph: {
-    title: "Features - Zenaiyogaa",
+    title: "Features - Zenaiyoga",
     description:
-      "Welcome to Zenaiyogaa, the AI-driven yoga app designed to help you perfect your poses with real-time feedback.",
+      "Welcome to Zenaiyoga, the AI-driven yoga app designed to help you perfect your poses with real-time feedback.",
     url: "${process.env.HOST_WEB_DOMAIN}/about-us/",
     type: "website",
     images: [{ url: `${process.env.HOST_WEB_DOMAIN}/banner-2.png` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Features - Zenaiyogaa",
+    title: "Features - Zenaiyoga",
     description:
-      "Welcome to Zenaiyogaa, the AI-driven yoga app designed to help you perfect your poses with real-time feedback.",
+      "Welcome to Zenaiyoga, the AI-driven yoga app designed to help you perfect your poses with real-time feedback.",
     images: [`${process.env.HOST_WEB_DOMAIN}/banner-2.png"`],
   },
   alternates: {

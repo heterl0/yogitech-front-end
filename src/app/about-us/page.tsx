@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "We created an AI Yoga app that gives real-time feedback on poses using your phone’s camera. It supports English and Vietnamese, helping users improve techniques and avoid injuries.",
   keywords: "Yogitech, Yogi, Yoga, about us, mentor, ai, yoga ai",
   openGraph: {
-    title: "About us - Zenaiyogaa",
+    title: "About us - Zenaiyoga",
     description:
       "We created an AI Yoga app that gives real-time feedback on poses using your phone’s camera. It supports English and Vietnamese, helping users improve techniques and avoid injuries.",
     url: `${process.env.HOST_WEB_DOMAIN}/about-us/`,
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About us - Zenaiyogaa",
+    title: "About us - Zenaiyoga",
     description:
       "We created an AI Yoga app that gives real-time feedback on poses using your phone’s camera. It supports English and Vietnamese, helping users improve techniques and avoid injuries.",
     images: [`${process.env.HOST_WEB_DOMAIN}/banner.png`],
