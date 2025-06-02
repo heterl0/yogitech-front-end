@@ -75,11 +75,15 @@ const StyledEllipseTop = styled("div")(({ theme }) => ({
   width: 480,
   right: -80,
   height: 480,
+  display: "none",
   borderRadius: "50%",
   position: "absolute",
   filter: "blur(100px)",
   WebkitFilter: "blur(100px)",
   backgroundColor: alpha(theme.palette.primary.darker, 0.12),
+  [theme.breakpoints.up("md")]: {
+    display: "block",
+  },
 }));
 
 const StyledEllipseBottom = styled("div")(({ theme }) => ({
@@ -106,6 +110,7 @@ const StyledPolygon = styled("div")<StyledPolygonProps>(
       color: theme.palette.background.default,
     }),
     zIndex: 9,
+    display: "none",
     bottom: 0,
     height: 80,
     width: "50%",
@@ -124,6 +129,9 @@ const StyledPolygon = styled("div")<StyledPolygonProps>(
         transform: "scaleX(1)",
       }),
     }),
+    [theme.breakpoints.up("md")]: {
+      display: "block",
+    },
   })
 );
 
@@ -233,6 +241,7 @@ export default function HomeHero() {
     </Stack>
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const renderSlides = (
     <Stack
       direction="row"
@@ -271,7 +280,7 @@ export default function HomeHero() {
             width="304"
             height="1892"
             className="h-full w-full object-cover"
-            priority
+            priority={isDesktop}
           />
         </m.div>
         <m.div
@@ -354,7 +363,7 @@ export default function HomeHero() {
 
   const renderEllipses = (
     <>
-      {isDesktop && <StyledEllipseTop />}
+      <StyledEllipseTop />
       <StyledEllipseBottom />
     </>
   );
@@ -376,7 +385,17 @@ export default function HomeHero() {
                 {renderDescription}
               </Grid>
 
-              {isDesktop && <Grid md={6}>{renderSlides}</Grid>}
+              <Grid
+                sx={{
+                  display: {
+                    xs: "none",
+                    md: "block",
+                  },
+                }}
+                md={6}
+              >
+                {renderSlides}
+              </Grid>
             </Grid>
           </Container>
 
@@ -384,7 +403,7 @@ export default function HomeHero() {
         </StyledWrapper>
       </StyledRoot>
 
-      {isDesktop && renderPolygons}
+      {renderPolygons}
 
       <div className="md:h-screen" />
     </>
