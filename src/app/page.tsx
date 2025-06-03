@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Zenaiyoga: Mentor Platform",
   description:
     "Welcome to Zenaiyoga, the ultimate mentor platform to connect with experts and enhance your skills.",
-  keywords: "Yogitech, Yogi, Yoga",
+  keywords: "Zenaiyoga, Yogi, Yoga",
   robots: "follow, index",
   openGraph: {
     title: "Zenaiyoga: Mentor Platform",

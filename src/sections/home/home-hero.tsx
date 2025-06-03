@@ -275,7 +275,7 @@ export default function HomeHero() {
           style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 1"
+            alt="Zenaiyoga Hero 1"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
@@ -294,7 +294,7 @@ export default function HomeHero() {
           style={{ position: "absolute", width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 2"
+            alt="Zenaiyoga Hero 2"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
@@ -319,7 +319,7 @@ export default function HomeHero() {
           style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 3"
+            alt="Zenaiyoga Hero 3"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
@@ -337,7 +337,7 @@ export default function HomeHero() {
           style={{ position: "absolute", width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 4"
+            alt="Zenaiyoga Hero 4"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"

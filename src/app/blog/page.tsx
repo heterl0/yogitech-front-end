@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",
   keywords:
-    "Yogitech, Yoga blog, AI yoga, yoga tips, wellness, yoga techniques",
+    "Zenaiyoga, Yoga blog, AI yoga, yoga tips, wellness, yoga techniques",
   openGraph: {
     title: "Blog - Zenaiyoga",
     description:

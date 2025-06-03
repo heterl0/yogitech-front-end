@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Terms and Conditions - Zenaiyoga",
   description:
     "These Terms and Conditions outline the rules and guidelines for using Zenaiyoga's services.",
-  keywords: "Yogitech, terms and conditions, user agreement, Zenaiyoga",
+  keywords: "Zenaiyoga, terms and conditions, user agreement, Zenaiyoga",
   openGraph: {
     title: "Terms and Conditions - Zenaiyoga",
     description:

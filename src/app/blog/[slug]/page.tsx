@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",
     keywords:
       post.seo_keywords ??
-      "Yogitech, Yoga blog, AI yoga, yoga tips, wellness, yoga techniques",
+      "Zenaiyoga, Yoga blog, AI yoga, yoga tips, wellness, yoga techniques",
     openGraph: {
       title: post.seo_title ?? "Blog - Zenaiyoga",
       description:
