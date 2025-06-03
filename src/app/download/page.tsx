@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Download the Zenaiyoga app to connect with experts and enhance your skills.",
   keywords:
-    "Yogitech, Yogi, Yoga, mentor, ai, yoga ai, download, Zenaiyoga app,Zenaiyogaga download",
+    "Zenaiyoga, Yogi, Yoga, mentor, ai, yoga ai, download, Zenaiyoga app,Zenaiyogaga download",
   openGraph: {
     title: "Download - Zenaiyoga",
     description:

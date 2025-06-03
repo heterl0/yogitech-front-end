@@ -214,13 +214,9 @@ export default function HomeHero() {
         </Typography>
       </m.div>
 
-      <Typography
-        variant="body2"
-        sx={{ textAlign: "center" }}
-        className="lg:hidden"
-      >
+      <span className="text-center text-sm font-normal text-gray-500 lg:hidden">
         {t("home.hero.description")}
-      </Typography>
+      </span>
 
       <m.div variants={varFade().in}>
         <Stack spacing={1.5} direction={{ xs: "column-reverse", sm: "row" }}>
@@ -275,7 +271,7 @@ export default function HomeHero() {
           style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 1"
+            alt="Zenaiyoga Hero 1"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
@@ -294,7 +290,7 @@ export default function HomeHero() {
           style={{ position: "absolute", width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 2"
+            alt="Zenaiyoga Hero 2"
             src="https://storage.zenaiyoga.com/images/light_1.webp"
             width="304"
             height="1892"
@@ -319,7 +315,7 @@ export default function HomeHero() {
           style={{ position: "absolute", marginTop: -20, width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 3"
+            alt="Zenaiyoga Hero 3"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"
@@ -337,7 +333,7 @@ export default function HomeHero() {
           style={{ position: "absolute", width: "100%" }}
         >
           <Image
-            alt="Yogitech Hero 4"
+            alt="Zenaiyoga Hero 4"
             src="https://storage.zenaiyoga.com/images/light_2.webp"
             width="563"
             height="1316"

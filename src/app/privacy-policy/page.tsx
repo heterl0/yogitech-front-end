@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy - Zenaiyoga",
   description:
     "Our Privacy Policy explains how Zenaiyoga collects, uses, and protects your personal information.",
-  keywords: "Yogitech, privacy policy, data protection, Zenaiyoga",
+  keywords: "Zenaiyoga, privacy policy, data protection, Zenaiyoga",
   openGraph: {
     title: "Privacy Policy - Zenaiyoga",
     description:
