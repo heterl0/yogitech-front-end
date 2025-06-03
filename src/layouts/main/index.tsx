@@ -2,7 +2,7 @@
 
 import Box from "@mui/material/Box";
 import { usePathname } from "next/navigation";
-import Footer from "./footer";
+// import Footer from "./footer";
 import { paths } from "@/routes/paths";
 import dynamic from "next/dynamic";
 import Skeleton from "@mui/material/Skeleton";
@@ -23,6 +23,11 @@ const Header = dynamic(() => import("./header"), {
       />
     </Box>
   ),
+});
+
+const Footer = dynamic(() => import("./footer"), {
+  loading: () => <div />,
+  ssr: false,
 });
 
 // ----------------------------------------------------------------------

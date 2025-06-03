@@ -214,13 +214,9 @@ export default function HomeHero() {
         </Typography>
       </m.div>
 
-      <Typography
-        variant="body2"
-        sx={{ textAlign: "center" }}
-        className="lg:hidden"
-      >
+      <span className="text-center text-sm font-normal text-gray-500 lg:hidden">
         {t("home.hero.description")}
-      </Typography>
+      </span>
 
       <m.div variants={varFade().in}>
         <Stack spacing={1.5} direction={{ xs: "column-reverse", sm: "row" }}>

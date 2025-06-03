@@ -11,17 +11,20 @@ const HomeFAQ = dynamic(() => import("../home-faqs"), {
   loading: () => (
     <div className="bg-white-main flex h-screen w-screen items-center justify-center" />
   ),
+  ssr: false,
 });
 const HomePricing = dynamic(() => import("../home-pricing"), {
   loading: () => (
     <div className="bg-white-main flex h-screen w-screen items-center justify-center" />
   ),
+  ssr: false,
 });
 
 const HomeMinimal = dynamic(() => import("../home-minimal"), {
   loading: () => (
     <div className="bg-white-main flex h-screen w-screen items-center justify-center" />
   ),
+  ssr: false,
 });
 
 function HomeView() {
