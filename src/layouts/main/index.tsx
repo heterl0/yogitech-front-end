@@ -30,12 +30,20 @@ const Footer = dynamic(() => import("./footer"), {
 type Props = {
   children: React.ReactNode;
   isBlurFromStart?: boolean;
+  isDisableOffsetBlur?: boolean;
 };
 
-export default function MainLayout({ children, isBlurFromStart }: Props) {
+export default function MainLayout({
+  children,
+  isBlurFromStart,
+  isDisableOffsetBlur,
+}: Props) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
-      <Header isBlurFromStart={isBlurFromStart} />
+      <Header
+        isBlurFromStart={isBlurFromStart}
+        isDisableOffsetBlur={isDisableOffsetBlur}
+      />
 
       <Box
         component="main"

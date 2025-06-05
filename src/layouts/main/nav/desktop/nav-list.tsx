@@ -15,14 +15,14 @@ import { paper } from "@/theme/css";
 import { HEADER } from "../../../config-layout";
 import { NavItem, NavItemDashboard } from "./nav-item";
 import { NavListProps, NavSubListProps } from "../types";
-import { paths } from "@/routes/paths";
+// import { paths } from "@/routes/paths";
 
 // ----------------------------------------------------------------------
 
 export default function NavList({ data }: NavListProps) {
   const theme = useTheme();
 
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   const active = useActiveLink(data.path, !!data.children);
 
@@ -32,8 +32,7 @@ export default function NavList({ data }: NavListProps) {
     if (openMenu) {
       handleCloseMenu();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, []);
 
   const handleOpenMenu = useCallback(() => {
     if (data.children) {
@@ -59,7 +58,7 @@ export default function NavList({ data }: NavListProps) {
         externalLink={data.path.includes("http")}
         //
         active={active}
-        sx={pathname === paths.about && !active ? { color: "white" } : {}}
+        // sx={pathname === paths.about && !active ? { color: "white" } : {}}
       />
 
       {!!data.children && openMenu && (
