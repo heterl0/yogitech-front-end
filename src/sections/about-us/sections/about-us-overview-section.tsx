@@ -8,8 +8,8 @@ import { memo } from "react";
 const AboutUsOverviewSection = () => {
   return (
     <div className="bg-white-main">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-20 px-4 py-24 md:grid-cols-2 lg:py-32">
-        <div className="grid min-h-96 grid-cols-2 gap-6">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-20 px-4 py-20 md:grid-cols-2 md:py-24 lg:py-32">
+        <div className="hidden min-h-96 grid-cols-2 gap-6 md:grid">
           <div className="flex w-full flex-row items-center overflow-hidden rounded-3xl">
             <Image
               src="/assets/about-us/overview-1.png"
@@ -29,17 +29,25 @@ const AboutUsOverviewSection = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col items-center gap-10 md:items-start">
           <Typography variant="h2">Overview</Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" className="text-center md:text-left">
             Zenaiyoga is an AI-powered yoga platform that gives real-time
             feedback to help you practice safely and effectively.
           </Typography>
-          <div className="flex flex-row gap-10">
-            <Button variant="contained" size="large">
+          <div className="flex flex-row gap-6 md:gap-10">
+            <Button
+              variant="contained"
+              size="large"
+              className="!min-w-40 md:!w-auto"
+            >
               More info
             </Button>
-            <Button variant="outlined" size="large">
+            <Button
+              variant="outlined"
+              size="large"
+              className="!min-w-40 md:!w-auto"
+            >
               Get the app
             </Button>
           </div>
