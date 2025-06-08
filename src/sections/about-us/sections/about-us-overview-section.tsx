@@ -8,8 +8,8 @@ import { memo } from "react";
 const AboutUsOverviewSection = () => {
   return (
     <div className="bg-white-main">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-20 px-4 py-20 md:grid-cols-2 md:py-24 lg:py-32">
-        <div className="hidden min-h-96 grid-cols-2 gap-6 md:grid">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-20 md:grid-cols-2 md:py-24 lg:gap-20 lg:py-32">
+        <div className="hidden min-h-64 grid-cols-2 gap-6 md:grid lg:min-h-96">
           <div className="flex w-full flex-row items-center overflow-hidden rounded-3xl">
             <Image
               src="/assets/about-us/overview-1.png"
@@ -35,7 +35,7 @@ const AboutUsOverviewSection = () => {
             Zenaiyoga is an AI-powered yoga platform that gives real-time
             feedback to help you practice safely and effectively.
           </Typography>
-          <div className="flex flex-row gap-6 md:gap-10">
+          <div className="flex flex-row gap-6 lg:gap-10">
             <Button
               variant="contained"
               size="large"
