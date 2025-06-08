@@ -407,6 +407,9 @@
   --full-height-without-header-mobile: calc(100vh - 64px);
   --full-height-without-header-desktop: calc(100vh - 80px);
 
+  --black-filter: brightness(0) saturate(100%) invert(97%) sepia(16%)
+    saturate(605%) hue-rotate(174deg) brightness(91%) contrast(89%) blur(8px);
+
   @keyframes blob {
     0% {
       transform: translate(0px, 0px) scale(1);

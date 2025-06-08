@@ -1,10 +1,6 @@
 "use client";
 
-import Carousel, {
-  CarouselArrows,
-  CarouselDots,
-  useCarousel,
-} from "@/components/carousel";
+import Carousel, { CarouselArrows, useCarousel } from "@/components/carousel";
 import Iconify from "@/components/iconify";
 import { useTranslate } from "@/locales";
 import { IconButton } from "@mui/material";
@@ -28,20 +24,11 @@ const AboutUsOurTeamSection = () => {
 
   const carousel = useCarousel({
     speed: 1000,
-    autoplay: true,
-    autoplaySpeed: 3000,
+    // autoplay: true,
+    // autoplaySpeed: 5000,
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 1,
-
-    ...CarouselDots({
-      sx: {
-        top: 16,
-        left: 16,
-        position: "absolute",
-        color: "primary.light",
-      },
-    }),
   });
 
   const MEMBERS = [
@@ -104,8 +91,8 @@ const AboutUsOurTeamSection = () => {
 
   return (
     <div className="bg-white-main">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-20 md:py-24 lg:gap-20 lg:py-32">
-        <div className="flex flex-col items-center gap-6">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-4 py-20 md:py-24 lg:gap-20 lg:py-32">
+        <div className="flex max-w-2xl flex-col items-center gap-6 text-center">
           <Typography variant="overline">Our Team</Typography>
           <Typography variant="h2">Our Team</Typography>
           <Typography variant="body1">
@@ -114,12 +101,8 @@ const AboutUsOurTeamSection = () => {
             documentation.
           </Typography>
         </div>
-        <div className="">
-          <Carousel
-            ref={carousel.carouselRef}
-            {...carousel.carouselSettings}
-            className=""
-          >
+        <div className="relative w-full">
+          <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
             {MEMBERS.map((member, index) => (
               <CarouselItem key={index} item={member} />
             ))}
@@ -129,10 +112,23 @@ const AboutUsOurTeamSection = () => {
             onNext={carousel.onNext}
             onPrev={carousel.onPrev}
             sx={{
-              top: 8,
-              right: 8,
               position: "absolute",
-              color: "common.white",
+              width: "100%",
+              height: "auto",
+              top: "40%",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "0 16px",
+              "& .MuiIconButton-root": {
+                color: "common.white",
+                backgroundColor: "var(--color-grey-900)",
+                "&:hover": {
+                  color: "common.white",
+                  backgroundColor: "var(--color-grey-600)",
+                },
+                transition: "all 0.3s ease",
+              },
             }}
           />
         </div>
@@ -153,34 +149,44 @@ function CarouselItem({ item }: CarouselItemProps) {
   const { image, name, position, socials } = item;
 
   const renderImg = (
-    <Image
-      alt={name}
-      src={image}
-      width={254}
-      height={254}
-      className="aspect-square w-full rounded-md object-cover"
-    />
+    <div className="relative w-full overflow-hidden rounded-xl bg-gray-50">
+      <Image
+        alt={name}
+        src={image}
+        width={254}
+        height={254}
+        className="absolute inset-0 z-0 aspect-square w-full -translate-x-3 translate-y-3 rounded-md object-cover blur-sm filter-(--black-filter) will-change-auto"
+      />
+      <Image
+        alt={name}
+        src={image}
+        width={254}
+        height={254}
+        className="relative z-20 aspect-square w-full rounded-md object-cover"
+      />
+    </div>
   );
 
   return (
-    <div className="flex flex-col items-center rounded-2xl px-2 shadow">
+    <div className="group mx-3 my-1 flex flex-col items-center rounded-2xl px-2 shadow">
       <div className="flex h-24 flex-col items-center justify-center gap-1">
         <Typography variant="subtitle1" className="text-wrap">
           {name}
         </Typography>
-        <Typography variant="body2" className="text-wrap">
+        <Typography variant="body2" className="text-center text-wrap">
           {position}
         </Typography>
       </div>
-      <div className="flex flex-col items-center gap-2">{renderImg}</div>
+      <div className="flex w-full flex-col items-center gap-2">{renderImg}</div>
+
       <div className="flex h-16 flex-row items-center justify-center gap-2">
-        <IconButton className="!size-9" href={socials.linkedin}>
+        <IconButton className="!size-9 !text-blue-500" href={socials.linkedin}>
           <Iconify icon="mdi:linkedin" />
         </IconButton>
-        <IconButton className="!size-9" href={socials.facebook}>
+        <IconButton className="!size-9 !text-blue-500" href={socials.facebook}>
           <Iconify icon="mdi:facebook" />
         </IconButton>
-        <IconButton className="!size-9" href={socials.github}>
+        <IconButton className="!size-9 !text-gray-500" href={socials.github}>
           <Iconify icon="mdi:github" />
         </IconButton>
       </div>
