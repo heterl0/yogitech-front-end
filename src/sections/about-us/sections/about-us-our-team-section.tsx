@@ -3,7 +3,7 @@
 import Carousel, { CarouselArrows, useCarousel } from "@/components/carousel";
 import Iconify from "@/components/iconify";
 import { useTranslate } from "@/locales";
-import { IconButton } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 
@@ -22,12 +22,15 @@ type Member = {
 const AboutUsOurTeamSection = () => {
   const { t } = useTranslate();
 
+  const isMobile = useMediaQuery("(max-width: 766.9px)");
+  const isTablet = useMediaQuery("(max-width: 1023.9px)");
+
   const carousel = useCarousel({
     speed: 1000,
     // autoplay: true,
     // autoplaySpeed: 5000,
     infinite: true,
-    slidesToShow: 4,
+    slidesToShow: isMobile ? 1 : isTablet ? 2 : 4,
     slidesToScroll: 1,
   });
 
@@ -153,16 +156,18 @@ function CarouselItem({ item }: CarouselItemProps) {
       <Image
         alt={name}
         src={image}
-        width={254}
-        height={254}
+        width={272}
+        height={272}
+        quality={25}
         className="absolute inset-0 z-0 aspect-square w-full -translate-x-3 translate-y-3 rounded-md object-cover blur-sm filter-(--black-filter) will-change-auto"
       />
       <Image
         alt={name}
         src={image}
-        width={254}
-        height={254}
+        width={272}
+        height={272}
         className="relative z-20 aspect-square w-full rounded-md object-cover"
+        sizes="(max-width: 766.9px) 100vw, (max-width: 1023.9px) 50vw, 25vw"
       />
     </div>
   );
