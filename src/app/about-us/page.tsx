@@ -1,4 +1,4 @@
-import AboutUsView from "@/sections/about-us/view/about-us-view";
+import AboutUsViewV2 from "@/sections/about-us/view/about-us-view-v2";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -28,5 +28,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <AboutUsView />;
+  return <AboutUsViewV2 />;
 }

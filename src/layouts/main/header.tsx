@@ -19,20 +19,26 @@ import LanguagePopover from "../common/language-popover";
 import NavMobile from "./nav/mobile";
 import Link from "next/link";
 import { memo } from "react";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 
 // ----------------------------------------------------------------------
 
 type Props = {
   isBlurFromStart?: boolean;
+  isDisableOffsetBlur?: boolean;
 };
 
-function Header({ isBlurFromStart = false }: Props) {
+function Header({
+  isBlurFromStart = false,
+  isDisableOffsetBlur = false,
+}: Props) {
   const theme = useTheme();
   const { t } = useTranslate();
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
-  const isDark = pathname === paths.about;
+  // const isDark = pathname === paths.about;
+  const isDark = false;
+
   return (
     <AppBar>
       <Toolbar
@@ -42,19 +48,23 @@ function Header({ isBlurFromStart = false }: Props) {
             xs: HEADER.H_MOBILE,
             md: HEADER.H_DESKTOP,
           },
-          transition: theme.transitions.create(["height"], {
+          transition: theme.transitions.create(["height", "color", "opacity"], {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
           }),
-          ...((offsetTop || isBlurFromStart) && {
+          ...((offsetTop || isDisableOffsetBlur || isBlurFromStart) && {
             ...bgBlur({
               color: isDark
                 ? "rgba(0, 0, 0) !important"
                 : theme.palette.background.default,
-              opacity: isDark ? 0.4 : undefined,
+              opacity: isDark ? 0.4 : 1,
             }),
             height: {
-              md: HEADER.H_DESKTOP_OFFSET,
+              md: isDisableOffsetBlur
+                ? offsetTop
+                  ? HEADER.H_DESKTOP_OFFSET
+                  : HEADER.H_DESKTOP
+                : HEADER.H_DESKTOP_OFFSET,
               xs: HEADER.H_MOBILE,
             },
           }),

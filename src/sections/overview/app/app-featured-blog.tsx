@@ -45,24 +45,6 @@ export default function AppFeaturedBlog({ list, ...other }: Props) {
 
   return (
     <>
-      <link
-        rel="preload"
-        as="style"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="preload"
-        as="style"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
       <Card {...other} className="lg:h-full">
         <Carousel
           ref={carousel.carouselRef}
