@@ -15,7 +15,7 @@ import { paper } from "@/theme/css";
 import { HEADER } from "../../../config-layout";
 import { NavItem, NavItemDashboard } from "./nav-item";
 import { NavListProps, NavSubListProps } from "../types";
-// import { paths } from "@/routes/paths";
+// (Line removed)
 
 // ----------------------------------------------------------------------
 
