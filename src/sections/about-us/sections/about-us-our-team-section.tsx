@@ -1,9 +1,12 @@
 "use client";
 
+import { MotionViewport, varFade } from "@/components/animate";
 import Carousel, { CarouselArrows, useCarousel } from "@/components/carousel";
 import Iconify from "@/components/iconify";
 import { useTranslate } from "@/locales";
-import { IconButton, useMediaQuery } from "@mui/material";
+import { m } from "motion/react";
+import IconButton from "@mui/material/IconButton";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 
@@ -21,14 +24,12 @@ type Member = {
 
 const AboutUsOurTeamSection = () => {
   const { t } = useTranslate();
-
   const isMobile = useMediaQuery("(max-width: 766.9px)");
   const isTablet = useMediaQuery("(max-width: 1023.9px)");
-
   const carousel = useCarousel({
     speed: 1000,
-    // autoplay: true,
-    // autoplaySpeed: 5000,
+    autoplay: true,
+    autoplaySpeed: 5000,
     infinite: true,
     slidesToShow: isMobile ? 1 : isTablet ? 2 : 4,
     slidesToScroll: 1,
@@ -93,18 +94,24 @@ const AboutUsOurTeamSection = () => {
   ];
 
   return (
-    <div className="bg-white-main">
+    <MotionViewport className="bg-white-main">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-4 py-20 md:py-24 lg:gap-20 lg:py-32">
         <div className="flex max-w-2xl flex-col items-center gap-6 text-center">
-          <Typography variant="overline">Our Team</Typography>
-          <Typography variant="h2">Our Team</Typography>
-          <Typography variant="body1">
-            Zenaiyoga will provide you support if you have any problems, our
-            support team will reply within a day and we also have detailed
-            documentation.
-          </Typography>
+          <m.div variants={varFade().inUp}>
+            <Typography variant="overline">Our Team</Typography>
+          </m.div>
+          <m.div variants={varFade().inDown}>
+            <Typography variant="h2">Our Team</Typography>
+          </m.div>
+          <m.div variants={varFade().inUp}>
+            <Typography variant="body1">
+              Zenaiyoga will provide you support if you have any problems, our
+              support team will reply within a day and we also have detailed
+              documentation.
+            </Typography>
+          </m.div>
         </div>
-        <div className="relative w-full">
+        <m.div variants={varFade().inUp} className="relative w-full">
           <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
             {MEMBERS.map((member, index) => (
               <CarouselItem key={index} item={member} />
@@ -134,9 +141,9 @@ const AboutUsOurTeamSection = () => {
               },
             }}
           />
-        </div>
+        </m.div>
       </div>
-    </div>
+    </MotionViewport>
   );
 };
 
