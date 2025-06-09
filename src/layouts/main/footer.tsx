@@ -104,7 +104,7 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       className={cn(
-                        "text-sm transition-colors",
+                        "line-clamp-2 text-sm transition-colors",
                         isDark
                           ? "text-gray-400 hover:text-[#eee]"
                           : "!text-[#4b799b] hover:!text-[#3b607d]"

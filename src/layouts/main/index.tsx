@@ -1,9 +1,4 @@
-"use client";
-
 import Box from "@mui/material/Box";
-import { usePathname } from "next/navigation";
-// import Footer from "./footer";
-import { paths } from "@/routes/paths";
 import dynamic from "next/dynamic";
 import Skeleton from "@mui/material/Skeleton";
 import { HEADER } from "../config-layout";
@@ -35,26 +30,28 @@ const Footer = dynamic(() => import("./footer"), {
 type Props = {
   children: React.ReactNode;
   isBlurFromStart?: boolean;
+  isDisableOffsetBlur?: boolean;
 };
 
-export default function MainLayout({ children, isBlurFromStart }: Props) {
-  const pathname = usePathname();
-
-  const homePage = pathname === "/";
-
-  const aboutPage = pathname === paths.about;
-
+export default function MainLayout({
+  children,
+  isBlurFromStart,
+  isDisableOffsetBlur,
+}: Props) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
-      <Header isBlurFromStart={isBlurFromStart} />
+      <Header
+        isBlurFromStart={isBlurFromStart}
+        isDisableOffsetBlur={isDisableOffsetBlur}
+      />
 
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          ...(!(homePage || aboutPage) && {
+          ...{
             pt: { xs: 8, md: 10 },
-          }),
+          },
         }}
       >
         {children}

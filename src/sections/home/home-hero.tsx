@@ -401,7 +401,7 @@ export default function HomeHero() {
 
       {renderPolygons}
 
-      <div className="md:h-screen" />
+      <div className="min-h-[var(--full-height-without-header-mobile)] lg:min-h-[var(--full-height-without-header-desktop)]" />
     </>
   );
 }
