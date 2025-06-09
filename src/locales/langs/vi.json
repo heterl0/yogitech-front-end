@@ -119,6 +119,20 @@
     }
   },
   "aboutUs": {
+    "about": "Về",
+    "us": "Chúng tôi",
+    "overview": {
+      "title": "Tổng quan",
+      "description": "Zenaiyoga là nền tảng yoga được tạo bởi AI, cung cấp phản hồi thời gian thực để giúp bạn tập luyện an toàn và hiệu quả.",
+      "button": {
+        "moreInfo": "Thêm thông tin",
+        "getTheApp": "Tải ứng dụng"
+      }
+    },
+    "ourTeam": {
+      "title": "Đội ngũ",
+      "description": "Zenaiyoga sẽ cung cấp hỗ trợ nếu bạn có bất kỳ vấn đề nào, đội ngũ hỗ trợ của chúng tôi sẽ trả lời trong vòng một ngày và chúng tôi cũng có tài liệu chi tiết."
+    },
     "title": "Về Chúng Tôi",
     "whatIsYogiTech": "Zenaiyoga là gì?",
     "appType": "Ứng dụng di động",

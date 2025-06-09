@@ -98,16 +98,16 @@ const AboutUsOurTeamSection = () => {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-4 py-20 md:py-24 lg:gap-20 lg:py-32">
         <div className="flex max-w-2xl flex-col items-center gap-6 text-center">
           <m.div variants={varFade().inUp}>
-            <Typography variant="overline">Our Team</Typography>
+            <Typography variant="overline">
+              {t("aboutUs.ourTeam.title")}
+            </Typography>
           </m.div>
           <m.div variants={varFade().inDown}>
-            <Typography variant="h2">Our Team</Typography>
+            <Typography variant="h2">{t("aboutUs.ourTeam.title")}</Typography>
           </m.div>
           <m.div variants={varFade().inUp}>
             <Typography variant="body1">
-              Zenaiyoga will provide you support if you have any problems, our
-              support team will reply within a day and we also have detailed
-              documentation.
+              {t("aboutUs.ourTeam.description")}
             </Typography>
           </m.div>
         </div>

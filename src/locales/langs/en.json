@@ -119,6 +119,20 @@
     }
   },
   "aboutUs": {
+    "about": "About",
+    "us": "Us",
+    "overview": {
+      "title": "Overview",
+      "description": "Zenaiyoga is an AI-powered yoga platform that gives real-time feedback to help you practice safely and effectively.",
+      "button": {
+        "moreInfo": "More info",
+        "getTheApp": "Get the app"
+      }
+    },
+    "ourTeam": {
+      "title": "Our Team",
+      "description": "Zenaiyoga will provide you support if you have any problems, our support team will reply within a day and we also have detailed documentation."
+    },
     "title": "About Us",
     "whatIsYogiTech": "What is Zenaiyoga?",
     "appType": "Mobile App",
