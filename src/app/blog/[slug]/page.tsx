@@ -44,8 +44,9 @@ export default async function Page({ params }: Props) {
  * Will remove in Next.js v15
  */
 // const dynamic = CONFIG.isStaticExport ? "auto" : "force-dynamic";
-const dynamic = "force-dynamic";
-export { dynamic };
+const dynamic = "auto";
+const revalidate = 60 * 60 * 24;
+export { dynamic, revalidate };
 
 /**
  * [2] Static exports
@@ -93,7 +94,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: post.seo_title ?? "Blog - Zenaiyoga",
       description:
-        post.seo_description &&
+        post.seo_description ??
         "Explore the latest insights on AI-powered yoga, pose techniques, and wellness tips. Our blog covers everything from beginner basics to advanced practices, helping you enhance your yoga journey.",
       images: [
         post.image_url,
