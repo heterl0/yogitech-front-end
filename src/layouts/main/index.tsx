@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import dynamic from "next/dynamic";
 import Skeleton from "@mui/material/Skeleton";
-import { HEADER } from "../config-layout";
 
 const Header = dynamic(() => import("./header"), {
   loading: () => (
@@ -12,7 +11,7 @@ const Header = dynamic(() => import("./header"), {
           width: "100%",
           height: {
             xs: 0,
-            md: HEADER.H_DESKTOP,
+            md: 0,
           },
         }}
       />

@@ -18,7 +18,9 @@ export default async function Page({ params }: Props) {
 
   const post = res.data;
 
-  const resList = await axiosInstance.get<IPost[]>(endpoints.post.list);
+  const resList = (await axiosInstance.get<IPost[]>(endpoints.post.list)).data
+    .filter((post) => post.slug !== slug)
+    .slice(0, 4);
 
   return (
     <>
@@ -29,7 +31,7 @@ export default async function Page({ params }: Props) {
         }}
         id="json-ld-post"
       />
-      <PostDetailsHomeView post={post} latestPosts={resList.data} />
+      <PostDetailsHomeView post={post} latestPosts={resList} />
     </>
   );
 }
