@@ -91,7 +91,17 @@ export function PostItemSkeleton({
 export function PostDetailsSkeleton({ ...other }: StackProps) {
   return (
     <Stack {...other}>
-      <Skeleton variant="rectangular" sx={{ height: 480 }} />
+      <Skeleton
+        variant="rectangular"
+        sx={{
+          height: {
+            xs: 320,
+            sm: 480,
+            md: 560,
+            lg: 640,
+          },
+        }}
+      />
 
       <Stack sx={{ width: 1, maxWidth: 720, mx: "auto" }}>
         <Stack spacing={1} sx={{ my: 8 }}>

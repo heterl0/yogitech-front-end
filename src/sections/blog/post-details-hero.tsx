@@ -10,9 +10,9 @@ import Fade from "@mui/material/Fade";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { fDate } from "@/utils/format-time";
-import { bgGradient } from "@/theme/css";
 import { IPostHero } from "@/types/blog";
 import { useLocales } from "@/locales";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -35,15 +35,11 @@ export default function PostDetailsHero({
 
   return (
     <Box
+      aria-label={title}
       sx={{
         position: "relative",
         height: { xs: "auto", sm: 480, md: 560, lg: 640 },
         overflow: "hidden",
-        ...bgGradient({
-          imgUrl: coverUrl,
-          startColor: `${alpha(theme.palette.grey[900], 0.76)} 0%`,
-          endColor: `${alpha(theme.palette.grey[900], 0.76)} 100%`,
-        }),
         display: "flex",
         alignItems: "center",
         "&::before": {
@@ -58,6 +54,19 @@ export default function PostDetailsHero({
         },
       }}
     >
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent to-gray-900/85">
+        <Image
+          src={coverUrl}
+          alt={title}
+          className="h-full w-full object-cover"
+          width={1920}
+          height={1080}
+          priority
+          quality={100}
+          sizes="100vw"
+        />
+      </div>
+
       <Container
         sx={{
           height: 1,

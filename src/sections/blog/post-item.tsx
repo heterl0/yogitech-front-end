@@ -188,9 +188,9 @@ export default function PostItem({ post, index = 0 }: Props) {
               spacing={1.5}
               sx={{ pt: 1 }}
             >
-              <Typography variant="caption" sx={{ opacity: 0.72 }}>
+              {/* <Typography variant="caption" sx={{ opacity: 0.72 }}>
                 By {authorName}
-              </Typography>
+              </Typography> */}
 
               <Stack direction="row" spacing={1.5}>
                 <Stack direction="row" alignItems="center" spacing={0.5}>
@@ -258,7 +258,7 @@ export default function PostItem({ post, index = 0 }: Props) {
                 fontSize: "0.75rem",
                 fontWeight: "medium",
                 bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
-                color: "primary.main",
+                color: "var(--color-primary-500)",
                 ":hover": { bgcolor: "primary.light" },
               }}
             />
@@ -290,7 +290,12 @@ export default function PostItem({ post, index = 0 }: Props) {
             color="inherit"
             underline="hover"
           >
-            <TextMaxLine variant="subtitle1" line={2} persistent>
+            <TextMaxLine
+              variant="body1"
+              className="!text-black-main !text-lg !font-medium"
+              line={2}
+              persistent
+            >
               {title}
             </TextMaxLine>
           </Link>
@@ -309,7 +314,7 @@ export default function PostItem({ post, index = 0 }: Props) {
             direction="row"
             alignItems="center"
             spacing={0.75}
-            sx={{ typography: "body2", color: "text.disabled" }}
+            sx={{ typography: "body2", color: "var(--color-gray-500)" }}
           >
             <Iconify icon="solar:user-circle-bold" width={16} />
             {authorName}

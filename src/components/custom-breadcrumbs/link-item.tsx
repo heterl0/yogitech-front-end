@@ -23,7 +23,7 @@ export default function BreadcrumbsLink({ link, activeLast, disabled }: Props) {
       !activeLast && {
         cursor: "default",
         pointerEvents: "none",
-        color: "text.disabled",
+        color: "var(--color-gray-500)",
       }),
   };
 

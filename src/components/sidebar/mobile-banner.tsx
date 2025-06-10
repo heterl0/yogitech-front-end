@@ -32,6 +32,7 @@ export default function MobileBanner() {
         <IconButton
           size="small"
           onClick={() => setIsOpen(false)}
+          aria-label="Close"
           sx={{ position: "absolute", top: 6, right: 6 }}
         >
           <Iconify icon="eva:close-fill" width={20} />
@@ -46,7 +47,11 @@ export default function MobileBanner() {
           />
 
           <div className="flex w-full max-w-40 flex-col gap-1">
-            <Typography variant="subtitle2" noWrap>
+            <Typography
+              variant="body1"
+              className="!text-black-main !text-sm !font-medium"
+              noWrap
+            >
               {t("mobileBanner.downloadApp")}
             </Typography>
             <Typography

@@ -25,7 +25,10 @@ export default function AdsSidebar() {
       <Stack spacing={2}>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Iconify icon="solar:ads-bold" width={24} />
-          <Typography variant="subtitle1">
+          <Typography
+            variant="body1"
+            className="!text-black-main !text-sm !font-medium"
+          >
             {t("adsSidebar.sponsored")}
           </Typography>
         </Stack>
