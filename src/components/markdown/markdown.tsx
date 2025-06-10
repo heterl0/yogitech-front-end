@@ -40,6 +40,7 @@ const components = {
         height={props.height ?? 628}
         width={props.width ?? 940}
         className="rounded-xl"
+        sizes="(max-width: 900px) 100vw, (max-width: 1600px) 50vw, 940px"
         {...props}
       />
     </div>
