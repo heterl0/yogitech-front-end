@@ -3,7 +3,6 @@
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Markdown from "@/components/markdown";
 import CustomBreadcrumbs from "@/components/custom-breadcrumbs";
@@ -76,9 +75,9 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
           }}
         >
           <Stack sx={{ maxWidth: 1200, mx: "auto" }}>
-            <Typography variant="subtitle1" sx={{ mb: 5 }}>
+            <p className="mb-5 text-base font-medium text-gray-500">
               {post.description}
-            </Typography>
+            </p>
 
             <Markdown>{post.content}</Markdown>
 
@@ -112,9 +111,7 @@ export default function PostDetailsHomeView({ post, latestPosts }: Props) {
 
   const renderLatestPosts = (
     <>
-      <Typography variant="h4" sx={{ mb: 5 }}>
-        Recent Posts
-      </Typography>
+      <p className="mb-5 text-2xl font-semibold">Recent Posts</p>
 
       <PostList
         posts={latestPosts.slice(latestPosts.length - 4)}

@@ -201,6 +201,10 @@ const StyledMarkdown = styled("div")(({ theme }) => {
         },
       },
     },
+
+    a: {
+      color: `var(--color-primary-500) !important`,
+    },
   };
 });
 

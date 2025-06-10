@@ -35,6 +35,7 @@ export default function PostDetailsHero({
 
   return (
     <Box
+      aria-label={title}
       sx={{
         position: "relative",
         height: { xs: "auto", sm: 480, md: 560, lg: 640 },

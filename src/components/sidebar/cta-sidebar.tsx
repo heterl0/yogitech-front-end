@@ -25,7 +25,12 @@ export default function CtaSidebar() {
       }}
     >
       <Stack spacing={3} sx={{ pb: 2 }}>
-        <Typography variant="h6">{t("ctaSidebar.downloadApp")}</Typography>
+        <Typography
+          variant="body1"
+          className="!text-black-main !text-sm !font-medium"
+        >
+          {t("ctaSidebar.downloadApp")}
+        </Typography>
 
         <Box
           sx={{
