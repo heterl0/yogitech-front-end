@@ -182,23 +182,31 @@ function CarouselItem({ item }: CarouselItemProps) {
   return (
     <div className="group mx-3 my-1 flex flex-col items-center rounded-2xl px-2 shadow">
       <div className="flex h-24 flex-col items-center justify-center gap-1">
-        <Typography variant="subtitle1" className="text-wrap">
-          {name}
-        </Typography>
-        <Typography variant="body2" className="text-center text-wrap">
-          {position}
-        </Typography>
+        <p className="text-lg font-bold text-wrap">{name}</p>
+        <p className="text-center text-sm text-wrap">{position}</p>
       </div>
       <div className="flex w-full flex-col items-center gap-2">{renderImg}</div>
 
       <div className="flex h-16 flex-row items-center justify-center gap-2">
-        <IconButton className="!size-9 !text-blue-500" href={socials.linkedin}>
+        <IconButton
+          aria-label={`${name} LinkedIn`}
+          className="!size-9 !text-blue-500"
+          href={socials.linkedin}
+        >
           <Iconify icon="mdi:linkedin" />
         </IconButton>
-        <IconButton className="!size-9 !text-blue-500" href={socials.facebook}>
+        <IconButton
+          aria-label={`${name} Facebook`}
+          className="!size-9 !text-blue-500"
+          href={socials.facebook}
+        >
           <Iconify icon="mdi:facebook" />
         </IconButton>
-        <IconButton className="!size-9 !text-gray-500" href={socials.github}>
+        <IconButton
+          aria-label={`${name} GitHub`}
+          className="!size-9 !text-gray-500"
+          href={socials.github}
+        >
           <Iconify icon="mdi:github" />
         </IconButton>
       </div>

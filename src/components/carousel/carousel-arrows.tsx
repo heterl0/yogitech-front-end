@@ -91,6 +91,7 @@ export default function CarouselArrows({
               left: 16,
               ...leftButtonProps?.sx,
             }}
+            aria-label="Previous"
           >
             <LeftIcon icon={icon} isRTL={isRTL} />
           </StyledIconButton>
@@ -109,6 +110,7 @@ export default function CarouselArrows({
               right: 16,
               ...rightButtonProps?.sx,
             }}
+            aria-label="Next"
           >
             <RightIcon icon={icon} isRTL={isRTL} />
           </StyledIconButton>
@@ -130,6 +132,7 @@ export default function CarouselArrows({
         shape={shape}
         onClick={onPrev}
         {...leftButtonProps}
+        aria-label="Previous"
       >
         <LeftIcon icon={icon} isRTL={isRTL} />
       </StyledIconButton>
@@ -139,6 +142,7 @@ export default function CarouselArrows({
         shape={shape}
         onClick={onNext}
         {...rightButtonProps}
+        aria-label="Next"
       >
         <RightIcon icon={icon} isRTL={isRTL} />
       </StyledIconButton>

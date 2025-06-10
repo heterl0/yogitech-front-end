@@ -56,6 +56,7 @@ const AboutUsOverviewSection = () => {
               variant="contained"
               size="large"
               className="!min-w-40 md:!w-auto"
+              aria-label={t("aboutUs.overview.button.moreInfo")}
             >
               {t("aboutUs.overview.button.moreInfo")}
             </Button>
@@ -63,6 +64,7 @@ const AboutUsOverviewSection = () => {
               variant="outlined"
               size="large"
               className="!min-w-40 md:!w-auto"
+              aria-label={t("aboutUs.overview.button.getTheApp")}
             >
               {t("aboutUs.overview.button.getTheApp")}
             </Button>
