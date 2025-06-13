@@ -150,6 +150,7 @@ export default function PostDetailsHero({
                 <Avatar
                   alt={authorName}
                   src={author.profile?.avatar_url || ""}
+                  sizes="64px"
                   sx={{
                     width: { xs: 48, md: 64 },
                     height: { xs: 48, md: 64 },
@@ -162,11 +163,11 @@ export default function PostDetailsHero({
                   sx={{ color: "common.white" }}
                   primary={authorName}
                   secondary={
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                      <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                        {fDate(createdAt, currentLang.adapterLocale)}
-                      </Typography>
-                    </Stack>
+                    // <Stack direction="row" alignItems="center" spacing={1}>
+                    <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                      {fDate(createdAt, currentLang.adapterLocale)}
+                    </Typography>
+                    // </Stack>
                   }
                   primaryTypographyProps={{
                     typography: "subtitle1",
