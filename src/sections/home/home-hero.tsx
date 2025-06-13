@@ -254,7 +254,6 @@ export default function HomeHero() {
     >
       <Stack
         component={m.div}
-        variants={varFade().in}
         sx={{
           width: 344,
           position: "relative",
@@ -301,7 +300,6 @@ export default function HomeHero() {
 
       <Stack
         component={m.div}
-        variants={varFade().in}
         sx={{ width: 720, position: "relative", ml: -5 }}
       >
         <m.div
