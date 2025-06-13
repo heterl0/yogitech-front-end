@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "Features - Zenaiyoga",
     description:
       "Welcome to Zenaiyoga, the AI-driven yoga app designed to help you perfect your poses with real-time feedback.",
-    url: "${process.env.HOST_WEB_DOMAIN}/about-us/",
+    url: `${process.env.HOST_WEB_DOMAIN}/about-us/`,
     type: "website",
     images: [{ url: `${process.env.HOST_WEB_DOMAIN}/banner-2.png` }],
   },

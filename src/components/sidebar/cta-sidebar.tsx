@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import Iconify from "@/components/iconify";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 export default function CtaSidebar() {
   const theme = useTheme();
@@ -40,11 +41,12 @@ export default function CtaSidebar() {
             overflow: "hidden",
           }}
         >
-          <Box
-            component="img"
+          <Image
             src="/banner-2-ads.png"
             alt="App Screenshot"
-            sx={{ width: "100%", height: 200, objectFit: "cover" }}
+            width={300}
+            height={200}
+            className="h-full w-full object-cover"
           />
 
           <Stack spacing={2} sx={{ p: 2 }}>

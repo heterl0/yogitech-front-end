@@ -82,7 +82,7 @@ type Props = {
   index?: number;
 };
 
-export default function PostItem({ post, index = 0 }: Props) {
+export default function PostItem({ post, index }: Props) {
   const mdUp = useResponsive("up", "md");
   const smUp = useResponsive("up", "sm");
   const { currentLang } = useLocales();
