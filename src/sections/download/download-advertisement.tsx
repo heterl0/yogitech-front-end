@@ -80,6 +80,30 @@ export default function DownloadAdvertisement() {
               {t("download.android")}
             </Button>
           </m.div>
+          <m.div variants={varFade().inRight}>
+            <Button
+              id="download-android"
+              color="inherit"
+              size="large"
+              target="_blank"
+              variant="contained"
+              rel="noopener"
+              href="https://play.google.com/store/apps/details?id=com.yogitech.yogi_application"
+              sx={{
+                color: "grey.800",
+                bgcolor: "common.white",
+                ":hover": {
+                  bgcolor: "common.white",
+                },
+              }}
+              startIcon={
+                <Iconify icon="mdi:google-play" width={24} sx={{ mr: 0 }} />
+              }
+            >
+              Play Store
+            </Button>
+          </m.div>
+
           <m.div variants={varFade().inRight} className="flex items-center">
             <span className="text-sm font-bold md:text-xl">
               👈

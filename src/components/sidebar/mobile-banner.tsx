@@ -68,8 +68,9 @@ export default function MobileBanner() {
           className="flex-none"
           variant="contained"
           size="small"
-          href="https://storage.zenaiyoga.com/files/zenaiyoga-beta-v1_0.1.apk"
-          startIcon={<Iconify icon="eva:download-fill" />}
+          target="_blank"
+          href="https://play.google.com/store/apps/details?id=com.yogitech.yogi_application"
+          startIcon={<Iconify icon="ri:google-play-fill" />}
         >
           {t("mobileBanner.getButton")}
         </Button>

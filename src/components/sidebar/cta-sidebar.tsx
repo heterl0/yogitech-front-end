@@ -62,7 +62,8 @@ export default function CtaSidebar() {
               <Button
                 fullWidth
                 variant="contained"
-                href="https://storage.zenaiyoga.com/files/zenaiyoga-beta-v1_0.1.apk"
+                target="_blank"
+                href="https://play.google.com/store/apps/details?id=com.yogitech.yogi_application"
                 startIcon={<Iconify icon="ri:google-play-fill" />}
               >
                 {t("ctaSidebar.googlePlay")}
