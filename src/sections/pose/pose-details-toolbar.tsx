@@ -10,11 +10,13 @@ import { useTranslation } from "react-i18next";
 type Props = StackProps & {
   backLink: string;
   editLink: string;
+  handleDelete: () => void;
 };
 
 export default function PoseDetailsToolbar({
   backLink,
   editLink,
+  handleDelete,
   sx,
   ...other
 }: Props) {
@@ -40,6 +42,13 @@ export default function PoseDetailsToolbar({
         </Button>
 
         <Box sx={{ flexGrow: 1 }} />
+
+        <Button
+          onClick={handleDelete}
+          startIcon={<Iconify icon="solar:trash-bin-trash-bold" width={16} />}
+        >
+          {t("posePage.poseDetailsToolbar.delete")}
+        </Button>
 
         <Button
           component={RouterLink}
