@@ -2,6 +2,7 @@ import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 
 import Header from "../main/header";
+import { MotionLazy } from "@/components/animate/motion-lazy";
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +12,7 @@ type Props = {
 
 export default function CompactLayout({ children }: Props) {
   return (
-    <>
+    <MotionLazy>
       <Header />
 
       <Container component="main">
@@ -28,6 +29,6 @@ export default function CompactLayout({ children }: Props) {
           {children}
         </Stack>
       </Container>
-    </>
+    </MotionLazy>
   );
 }

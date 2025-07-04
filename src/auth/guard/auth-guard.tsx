@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
-
 import { SplashScreen } from "@/components/loading-screen";
-
 import { useAuthContext } from "../hooks";
+import { MotionLazy } from "@/components/animate/motion-lazy";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +20,11 @@ type Props = {
 export default function AuthGuard({ children }: Props) {
   const { loading } = useAuthContext();
 
-  return <>{loading ? <SplashScreen /> : <Container>{children}</Container>}</>;
+  return (
+    <MotionLazy>
+      {loading ? <SplashScreen /> : <Container>{children}</Container>}
+    </MotionLazy>
+  );
 }
 
 // ----------------------------------------------------------------------
@@ -52,7 +54,6 @@ function Container({ children }: Props) {
 
   useEffect(() => {
     check();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!checked) {
