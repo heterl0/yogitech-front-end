@@ -1,5 +1,7 @@
 // ----------------------------------------------------------------------
 
+import { Easing } from "motion/react";
+
 type EaseType =
   | "linear"
   | "easeIn"
@@ -12,7 +14,7 @@ type EaseType =
   | "backOut"
   | "backInOut"
   | "anticipate"
-  | number[];
+  | Easing;
 
 export type VariantsType = {
   distance?: number;
