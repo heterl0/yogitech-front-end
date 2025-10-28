@@ -50,15 +50,11 @@ export default function NavList({ data }: NavListProps) {
         open={openMenu}
         onMouseEnter={handleOpenMenu}
         onMouseLeave={handleCloseMenu}
-        //
         title={data.title}
         path={data.path}
-        //
         hasChild={!!data.children}
         externalLink={data.path.includes("http")}
-        //
         active={active}
-        // sx={pathname === paths.about && !active ? { color: "white" } : {}}
       />
 
       {!!data.children && openMenu && (

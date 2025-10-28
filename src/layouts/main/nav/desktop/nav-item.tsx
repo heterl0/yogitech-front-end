@@ -1,13 +1,12 @@
 /* eslint-disable react/display-name */
+
 import { m } from "motion/react";
 import { forwardRef } from "react";
-
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import CardActionArea from "@mui/material/CardActionArea";
 import ListItemButton from "@mui/material/ListItemButton";
 import Iconify from "@/components/iconify";
-
 import { NavItemProps, NavItemStateProps } from "../types";
 import Link, { LinkProps } from "next/link";
 
@@ -22,6 +21,7 @@ export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
       <StyledNavItem
         disableRipple
         disableTouchRipple
+        tabIndex={-1}
         ref={ref}
         open={open}
         active={active}
