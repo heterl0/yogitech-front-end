@@ -45,9 +45,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment
 
-I depoloy this project on [Vercel](https://vercel.com/), current only to host the landing page. because my back-end has been down, so we not use dashboard parts, but you can see [demo here](https://youtu.be/y0Hh2Zelv5w?si=LkPJ7W8RmV91PX8u&t=773):
+We deploy this project on [Vercel](https://vercel.com/), currently only to host the landing page. because my back-end has been down, so we have not used dashboard parts, but you can see [demo here](https://youtu.be/y0Hh2Zelv5w?si=LkPJ7W8RmV91PX8u&t=773):
 
-My project Live at [https//:www.zenaiyoga.com](https//:www.zenaiyoga.com).
+Our project Live at [https//:www.zenaiyoga.com](https//:www.zenaiyoga.com).
 
 ![Homepage](https://www.zenaiyoga.com/og-image.png) _Landing Page Zenaiyoga: Yoga Mentor Platform_
 

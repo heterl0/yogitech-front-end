@@ -56,11 +56,13 @@ export default function LanguagePopover() {
         onClose={popover.onClose}
         sx={{ width: 160 }}
       >
-        {allLangs.map((option) => (
+        {allLangs.map((option, idx) => (
           <MenuItem
             key={option.value}
             selected={option.value === currentLang.value}
             onClick={() => handleChangeLang(option.value)}
+            tabIndex={0}
+            autoFocus={idx === 0}
           >
             <Iconify
               icon={option.icon}
