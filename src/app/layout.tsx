@@ -4,7 +4,6 @@ import ProgressBar from "@/components/progress-bar";
 import SnackbarProvider from "@/components/snackbar/snackbar-provider";
 import { Readex_Pro } from "next/font/google";
 import { SettingsProvider } from "@/components/settings";
-import { MotionLazy } from "@/components/animate/motion-lazy";
 import { AuthProvider } from "@/auth/context/jwt";
 import Script from "next/script";
 import GoogleThirdParties from "@/components/google-third-parties/google-third-parties";
@@ -60,12 +59,10 @@ export default function RootLayout({
               }}
             >
               <ThemeProvider>
-                <MotionLazy>
-                  <SnackbarProvider>
-                    <ProgressBar />
-                    {children}
-                  </SnackbarProvider>
-                </MotionLazy>
+                <SnackbarProvider>
+                  <ProgressBar />
+                  {children}
+                </SnackbarProvider>
               </ThemeProvider>
             </SettingsProvider>
           </LocalizationProvider>

@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import dynamic from "next/dynamic";
 import Skeleton from "@mui/material/Skeleton";
+import { MotionLazy } from "@/components/animate/motion-lazy";
 
 const Header = dynamic(() => import("./header"), {
   loading: () => (
@@ -38,25 +39,27 @@ export default function MainLayout({
   isDisableOffsetBlur,
 }: Props) {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
-      <Header
-        isBlurFromStart={isBlurFromStart}
-        isDisableOffsetBlur={isDisableOffsetBlur}
-      />
+    <MotionLazy>
+      <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
+        <Header
+          isBlurFromStart={isBlurFromStart}
+          isDisableOffsetBlur={isDisableOffsetBlur}
+        />
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          ...{
-            pt: { xs: 8, md: 10 },
-          },
-        }}
-      >
-        {children}
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            ...{
+              pt: { xs: 8, md: 10 },
+            },
+          }}
+        >
+          {children}
+        </Box>
+
+        <Footer />
       </Box>
-
-      <Footer />
-    </Box>
+    </MotionLazy>
   );
 }

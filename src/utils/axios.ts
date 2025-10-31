@@ -28,6 +28,16 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
 
 // ----------------------------------------------------------------------
 
+export const deleter = async (args: string | [string, AxiosRequestConfig]) => {
+  const [url, config] = Array.isArray(args) ? args : [args];
+
+  const res = await axiosInstance.delete(url, { ...config });
+
+  return res.data;
+};
+
+// ----------------------------------------------------------------------
+
 export const endpoints = {
   api: {
     v1: {
