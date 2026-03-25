@@ -37,7 +37,7 @@
     "mapbox-gl": "3.3.0",
     "motion": "12.18.1",
     "mui-one-time-password-input": "2.0.2",
-    "next": "14.2.30",
+    "next": "14.2.35",
     "notistack": "3.0.1",
     "nprogress": "0.2.0",
     "prettier-plugin-tailwindcss": "0.6.11",
